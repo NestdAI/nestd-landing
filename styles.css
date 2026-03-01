@@ -346,7 +346,7 @@ body {
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transition: opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1);
 }
 .fade-in.visible {
   opacity: 1;
@@ -368,7 +368,7 @@ body {
 .fade-in-scale {
   opacity: 0;
   transform: scale(.85);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transition: opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1);
 }
 .fade-in-scale.visible {
   opacity: 1;
@@ -379,7 +379,7 @@ body {
 .fade-in-left {
   opacity: 0;
   transform: translateX(-40px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transition: opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1);
 }
 .fade-in-left.visible {
   opacity: 1;
@@ -390,7 +390,7 @@ body {
 .fade-in-right {
   opacity: 0;
   transform: translateX(40px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transition: opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1);
 }
 .fade-in-right.visible {
   opacity: 1;
