@@ -27,14 +27,18 @@ body {
 }
 
 /* ── Floating Buttons ── */
-.floating-buttons {
+.floating-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.floating-right {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 100;
-  display: flex;
-  gap: 10px;
-  align-items: center;
 }
 
 .theme-toggle {
