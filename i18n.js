@@ -1,7 +1,7 @@
 const translations = {
   nl: {
     cta: 'Early Access →',
-    heroTitle: 'Vind je droomhuurwoning.<br><em>Laat AI de rest doen.</em>',
+    heroTitle: 'Vind je droomwoning.<br><em>Laat AI de rest doen.</em>',
     heroSub: 'Nestd is je persoonlijke AI-assistent voor huurwoningen. Vindt huurwoningen, reageert automatisch, en stuurt matches via WhatsApp.',
     emailPlaceholder: 'je@email.nl',
     submitBtn: 'Schrijf je in',
