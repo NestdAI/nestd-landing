@@ -13,8 +13,11 @@
 <body>
 
   <!-- Floating buttons -->
-  <a href="#waitlist-bottom" class="floating-cta floating-left">Early Access →</a>
-  <button class="theme-toggle floating-right" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+  <a href="#waitlist-bottom" class="floating-cta floating-left" data-i18n="cta">Early Access →</a>
+  <div class="floating-right-group">
+    <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">EN</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+  </div>
 
   <!-- Hero -->
   <section class="hero">
@@ -22,16 +25,15 @@
       <div class="hero-logo fade-in-scale">
         <img src="logo.png" alt="Nestd" class="hero-logo-img">
       </div>
-      <h1 class="hero-title fade-in">
-        Vind je droomwoning.<br>
-        <em>Laat AI de rest doen.</em>
+      <h1 class="hero-title fade-in" data-i18n-html="heroTitle">
+        Vind je droomwoning.<br><em>Laat AI de rest doen.</em>
       </h1>
-      <p class="hero-sub fade-in">
+      <p class="hero-sub fade-in" data-i18n="heroSub">
         Nestd is je persoonlijke AI-woonassistent. Vindt woningen, reageert automatisch, en stuurt matches via WhatsApp.
       </p>
       <form class="waitlist-form fade-in" id="waitlist-hero">
-        <input type="email" placeholder="je@email.nl" required>
-        <button type="submit">Schrijf je in</button>
+        <input type="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+        <button type="submit" data-i18n="submitBtn">Schrijf je in</button>
       </form>
       <p class="form-msg" id="msg-hero"></p>
     </div>
@@ -40,28 +42,28 @@
   <!-- Features -->
   <section class="features">
     <div class="container">
-      <div class="section-label fade-in">Wat Nestd voor je doet</div>
+      <div class="section-label fade-in" data-i18n="featuresLabel">Wat Nestd voor je doet</div>
 
       <div class="feature-grid">
         <div class="feature-card fade-in">
           <div class="feature-icon">🔍</div>
-          <h3>Slimmer zoeken</h3>
-          <p>AI leert je voorkeuren en matcht woningen die écht bij je passen. Niet 100 irrelevante hits, maar de 5 die er toe doen.</p>
+          <h3 data-i18n="f1Title">Slimmer zoeken</h3>
+          <p data-i18n="f1Desc">AI leert je voorkeuren en matcht woningen die écht bij je passen. Niet 100 irrelevante hits, maar de 5 die er toe doen.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon">⚡</div>
-          <h3>Automatisch reageren</h3>
-          <p>Geen eindeloos formulieren invullen. Nestd reageert automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
+          <h3 data-i18n="f2Title">Automatisch reageren</h3>
+          <p data-i18n="f2Desc">Geen eindeloos formulieren invullen. Nestd reageert automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon">💬</div>
-          <h3>WhatsApp alerts</h3>
-          <p>Nieuwe match? Direct een bericht op WhatsApp. Geen app openen, geen email checken. Het komt naar jou.</p>
+          <h3 data-i18n="f3Title">WhatsApp alerts</h3>
+          <p data-i18n="f3Desc">Nieuwe match? Direct een bericht op WhatsApp. Geen app openen, geen email checken. Het komt naar jou.</p>
         </div>
         <div class="feature-card fade-in">
           <div class="feature-icon">🤖</div>
-          <h3>AI Woonassistent</h3>
-          <p>Chat met je persoonlijke assistent. Stel vragen, pas voorkeuren aan, krijg advies. 24/7 beschikbaar.</p>
+          <h3 data-i18n="f4Title">AI Woonassistent</h3>
+          <p data-i18n="f4Desc">Chat met je persoonlijke assistent. Stel vragen, pas voorkeuren aan, krijg advies. 24/7 beschikbaar.</p>
         </div>
       </div>
     </div>
@@ -70,29 +72,29 @@
   <!-- How it works -->
   <section class="how-it-works">
     <div class="container">
-      <div class="section-label fade-in">Hoe het werkt</div>
-      <h2 class="section-title fade-in">Vier stappen naar<br><em>je nieuwe thuis.</em></h2>
+      <div class="section-label fade-in" data-i18n="howLabel">Hoe het werkt</div>
+      <h2 class="section-title fade-in" data-i18n-html="howTitle">Vier stappen naar<br><em>je nieuwe thuis.</em></h2>
 
       <div class="steps">
         <div class="step fade-in">
           <div class="step-num">01</div>
-          <h3>Maak een profiel aan</h3>
-          <p>Via onze AI-chat. Vertel wat je zoekt — budget, locatie, wensen. In een paar minuten klaar.</p>
+          <h3 data-i18n="s1Title">Maak een profiel aan</h3>
+          <p data-i18n="s1Desc">Via onze AI-chat. Vertel wat je zoekt — budget, locatie, wensen. In een paar minuten klaar.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">02</div>
-          <h3>AI matcht woningen</h3>
-          <p>Op basis van jouw wensen. Geen eindeloos scrollen — alleen woningen die er toe doen.</p>
+          <h3 data-i18n="s2Title">AI matcht woningen</h3>
+          <p data-i18n="s2Desc">Op basis van jouw wensen. Geen eindeloos scrollen — alleen woningen die er toe doen.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">03</div>
-          <h3>Kies je favorieten</h3>
-          <p>Wij reageren automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
+          <h3 data-i18n="s3Title">Kies je favorieten</h3>
+          <p data-i18n="s3Desc">Wij reageren automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">04</div>
-          <h3>Ontvang updates</h3>
-          <p>Via WhatsApp. Nieuwe matches, statusupdates, alles direct op je telefoon.</p>
+          <h3 data-i18n="s4Title">Ontvang updates</h3>
+          <p data-i18n="s4Desc">Via WhatsApp. Nieuwe matches, statusupdates, alles direct op je telefoon.</p>
         </div>
       </div>
     </div>
@@ -101,14 +103,14 @@
   <!-- Bottom waitlist -->
   <section class="waitlist-bottom" id="waitlist-bottom">
     <div class="container">
-      <h2 class="section-title fade-in"><em>Nestd is in ontwikkeling.</em></h2>
-      <p class="waitlist-sub fade-in">Schrijf je in voor early access.</p>
+      <h2 class="section-title fade-in" data-i18n-html="waitlistTitle"><em>Nestd is in ontwikkeling.</em></h2>
+      <p class="waitlist-sub fade-in" data-i18n="waitlistSub">Schrijf je in voor early access.</p>
       <form class="waitlist-form fade-in" id="waitlist-footer">
-        <input type="email" placeholder="je@email.nl" required>
-        <button type="submit">Schrijf je in</button>
+        <input type="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+        <button type="submit" data-i18n="submitBtn">Schrijf je in</button>
       </form>
       <p class="form-msg" id="msg-footer"></p>
-      <p class="waitlist-note fade-in">Geen spam. Alleen een bericht wanneer we live gaan.</p>
+      <p class="waitlist-note fade-in" data-i18n="waitlistNote">Geen spam. Alleen een bericht wanneer we live gaan.</p>
     </div>
   </section>
 
@@ -120,6 +122,7 @@
     </div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

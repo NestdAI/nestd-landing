@@ -28,8 +28,9 @@ async function handleWaitlist(e) {
   const email = input.value.trim();
   if (!email) return;
 
+  const t = translations[currentLang];
   btn.disabled = true;
-  btn.textContent = 'Even geduld...';
+  btn.textContent = t.submitLoading;
   msgEl.textContent = '';
   msgEl.className = 'form-msg';
 
@@ -40,15 +41,15 @@ async function handleWaitlist(e) {
       body: JSON.stringify({ email })
     });
     if (!res.ok) throw new Error();
-    msgEl.textContent = '🎉 Je staat op de lijst! We houden je op de hoogte.';
+    msgEl.textContent = t.successMsg;
     msgEl.className = 'form-msg success';
     input.value = '';
   } catch {
-    msgEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
+    msgEl.textContent = t.errorMsg;
     msgEl.className = 'form-msg error';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Schrijf je in';
+    btn.textContent = t.submitBtn;
   }
 }
 
