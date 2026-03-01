@@ -76,8 +76,8 @@ body {
 }
 
 .floating-cta:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+  background: rgba(255,56,92,.7);
+  transform: scale(1.05);
 }
 
 .hero-logo {
