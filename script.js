@@ -1,8 +1,22 @@
+// Theme toggle
+const toggle = document.getElementById('theme-toggle');
+const saved = localStorage.getItem('nestd-theme');
+if (saved === 'light') {
+  document.body.classList.add('light');
+  toggle.textContent = '🌙';
+}
+toggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  toggle.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('nestd-theme', isLight ? 'light' : 'dark');
+});
+
 // Scroll fade-in
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .fade-in-scale, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
 // Waitlist form handler
 async function handleWaitlist(e) {
