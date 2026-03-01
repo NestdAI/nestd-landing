@@ -300,6 +300,11 @@ body {
   align-items: center;
 }
 
+.footer-logo-img {
+  height: 28px;
+  width: auto;
+}
+
 .footer-text {
   font-size: 0.8rem;
   color: #444;
