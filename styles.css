@@ -55,6 +55,23 @@ body {
   letter-spacing: -0.02em;
 }
 
+.logo-img {
+  height: 36px;
+  width: auto;
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.hero-logo-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 18px;
+}
+
 .nav-cta {
   font-size: 0.875rem;
   color: var(--gray);
