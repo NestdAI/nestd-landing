@@ -26,12 +26,38 @@ body {
   padding: 0 24px;
 }
 
-/* ── Floating CTA ── */
-.floating-cta {
+/* ── Floating Buttons ── */
+.floating-buttons {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 100;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,.15);
+  transform: scale(1.05);
+}
+
+.floating-cta {
   padding: 10px 24px;
   background: var(--primary);
   color: white;
@@ -333,4 +359,119 @@ body {
 @media (max-width: 480px) {
   .steps { grid-template-columns: 1fr; }
   .feature-card { padding: 28px 20px; }
+}
+
+/* ── Light Mode ── */
+body.light {
+  color: #1a1a1a;
+  background: #FFFFFF;
+}
+
+body.light .theme-toggle {
+  border-color: rgba(0,0,0,.15);
+  background: rgba(0,0,0,.06);
+}
+body.light .theme-toggle:hover {
+  background: rgba(0,0,0,.1);
+}
+
+body.light .hero {
+  background: #FFFFFF;
+}
+
+body.light .hero::before {
+  background: radial-gradient(ellipse, rgba(255,56,92,.1) 0%, transparent 70%);
+}
+
+body.light .hero-title {
+  color: #1a1a1a;
+}
+
+body.light .hero-sub {
+  color: #666;
+}
+
+/* Logo stays white on light bg — add dark pill behind it */
+body.light .hero-logo-img {
+  box-shadow: 0 4px 24px rgba(0,0,0,.1);
+}
+
+body.light .waitlist-form input {
+  border-color: rgba(0,0,0,.15);
+  background: rgba(0,0,0,.04);
+  color: #1a1a1a;
+}
+body.light .waitlist-form input::placeholder { color: #999; }
+body.light .waitlist-form input:focus { border-color: var(--primary); }
+
+body.light .features {
+  background: #F7F7F7;
+  border-top-color: rgba(0,0,0,.06);
+}
+
+body.light .feature-card {
+  border-color: rgba(0,0,0,.08);
+  background: #FFFFFF;
+}
+body.light .feature-card:hover {
+  border-color: rgba(255,56,92,.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,.06);
+}
+
+body.light .feature-card h3 {
+  color: #1a1a1a;
+}
+
+body.light .feature-card p {
+  color: #666;
+}
+
+body.light .how-it-works {
+  background: #FFFFFF;
+}
+
+body.light .step h3 {
+  color: #1a1a1a;
+}
+
+body.light .step p {
+  color: #666;
+}
+
+body.light .step-num {
+  color: rgba(255,56,92,.2);
+}
+
+body.light .section-title {
+  color: #1a1a1a;
+}
+
+body.light .waitlist-bottom {
+  background: #F7F7F7;
+  border-top-color: rgba(0,0,0,.06);
+}
+
+body.light .waitlist-sub {
+  color: #666;
+}
+
+body.light .waitlist-note {
+  color: #999;
+}
+
+body.light .footer {
+  border-top-color: rgba(0,0,0,.06);
+}
+
+body.light .footer-text {
+  color: #999;
+}
+
+/* Footer logo: invert to dark on light bg */
+body.light .footer-logo-img {
+  filter: brightness(0.2);
+}
+
+body.light .floating-cta {
+  box-shadow: 0 2px 12px rgba(255,56,92,.3);
 }
