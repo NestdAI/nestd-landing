@@ -538,9 +538,11 @@ body.light .footer-text {
   color: #999;
 }
 
-/* Footer logo: invert to dark on light bg */
+/* Footer logo: keep original colors, add subtle bg like hero */
 body.light .footer-logo-img {
-  filter: brightness(0.2);
+  background: rgba(255,56,92,.08);
+  border-radius: 10px;
+  padding: 4px;
 }
 
 body.light .floating-cta {
