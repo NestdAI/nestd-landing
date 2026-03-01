@@ -63,7 +63,9 @@ body {
 
 .floating-cta {
   padding: 10px 24px;
-  background: var(--primary);
+  background: rgba(255,56,92,.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
   font-family: var(--font-body);
   font-size: 0.875rem;
