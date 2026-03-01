@@ -73,9 +73,7 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
-  font-size: 0.7rem;
-  font-weight: 600;
-  font-family: var(--font-body);
+  font-size: 1.1rem;
   color: var(--light);
   display: flex;
   align-items: center;

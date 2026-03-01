@@ -95,7 +95,7 @@ function applyLang(lang) {
 
   // Update lang toggle button
   const langBtn = document.getElementById('lang-toggle');
-  if (langBtn) langBtn.textContent = lang === 'nl' ? 'EN' : 'NL';
+  if (langBtn) langBtn.textContent = lang === 'nl' ? '🇬🇧' : '🇳🇱';
 
   localStorage.setItem('nestd-lang', lang);
 }
