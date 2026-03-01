@@ -255,7 +255,7 @@ body {
 }
 
 .feature-card {
-  padding: 40px 32px;
+  padding: 24px 24px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.08);
   background: rgba(255,255,255,.03);
@@ -267,8 +267,8 @@ body {
 }
 
 .feature-icon {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 1.75rem;
+  margin-bottom: 12px;
 }
 
 .feature-card h3 {
