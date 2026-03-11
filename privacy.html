@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nestd — Privacybeleid</title>
+  <meta name="description" content="Privacybeleid van Nestd. Lees hoe wij omgaan met je persoonsgegevens.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .privacy-page {
+      padding: 120px 24px 80px;
+      background: var(--dark);
+      min-height: 100vh;
+    }
+    .privacy-content {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .privacy-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .privacy-content h1 em {
+      font-style: italic;
+      color: var(--primary);
+    }
+    .privacy-date {
+      color: var(--gray);
+      font-size: 0.875rem;
+      margin-bottom: 48px;
+    }
+    .privacy-content h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+    .privacy-content p,
+    .privacy-content li {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .privacy-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 16px;
+    }
+    .privacy-content li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .privacy-content li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .privacy-content a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .privacy-content a:hover {
+      opacity: .8;
+    }
+    .privacy-content strong {
+      color: var(--light);
+      font-weight: 600;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--light); }
+
+    /* Light mode overrides */
+    body.light .privacy-page { background: #FFFFFF; }
+    body.light .privacy-content h1 { color: #1a1a1a; }
+    body.light .privacy-content strong { color: #1a1a1a; }
+    body.light .privacy-content p,
+    body.light .privacy-content li { color: #666; }
+    body.light .privacy-date { color: #999; }
+    body.light .back-link { color: #666; }
+    body.light .back-link:hover { color: #1a1a1a; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating buttons -->
+  <div class="floating-right-group">
+    <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+  </div>
+
+  <section class="privacy-page">
+    <div class="privacy-content">
+      <a href="/" class="back-link" data-i18n="privacyBack">← Terug naar home</a>
+
+      <h1 data-i18n-html="privacyTitle">Privacy<em>beleid</em></h1>
+      <p class="privacy-date" data-i18n="privacyDate">Laatst bijgewerkt: 11 maart 2026</p>
+
+      <p data-i18n="privacyIntro">Nestd ("wij", "ons") is een dienst van Muba B.V., gevestigd in Nederland. Wij respecteren je privacy en verwerken persoonsgegevens in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG/GDPR). Dit beleid legt uit welke gegevens wij verzamelen, waarom, en wat je rechten zijn.</p>
+
+      <h2 data-i18n="privacyS1Title">1. Welke gegevens verzamelen wij?</h2>
+      <p data-i18n="privacyS1Intro">Wij verzamelen de volgende persoonsgegevens:</p>
+      <ul>
+        <li data-i18n-html="privacyS1a"><strong>E-mailadres</strong> — wanneer je je aanmeldt voor de waitlist of een account aanmaakt.</li>
+        <li data-i18n-html="privacyS1b"><strong>Telefoonnummer</strong> — voor verificatie via WhatsApp (OTP) en het versturen van notificaties.</li>
+        <li data-i18n-html="privacyS1c"><strong>Woonvoorkeuren</strong> — stad, budget, gewenste oppervlakte, aantal kamers en andere zoekcriteria.</li>
+      </ul>
+
+      <h2 data-i18n="privacyS2Title">2. Waarom verwerken wij deze gegevens?</h2>
+      <ul>
+        <li data-i18n-html="privacyS2a"><strong>Dienstverlening</strong> — om huurwoningen te matchen aan je voorkeuren en automatisch te reageren.</li>
+        <li data-i18n-html="privacyS2b"><strong>Notificaties</strong> — om je via WhatsApp op de hoogte te houden van nieuwe matches.</li>
+        <li data-i18n-html="privacyS2c"><strong>Waitlist</strong> — om je te informeren wanneer Nestd beschikbaar is.</li>
+        <li data-i18n-html="privacyS2d"><strong>Verbetering</strong> — om onze dienst en AI-matching te verbeteren.</li>
+      </ul>
+      <p data-i18n="privacyS2Legal">De wettelijke grondslag voor verwerking is je <strong>toestemming</strong> (aanmelding) en ons <strong>gerechtvaardigd belang</strong> (verbetering van de dienst).</p>
+
+      <h2 data-i18n="privacyS3Title">3. Delen met derden</h2>
+      <p data-i18n="privacyS3Text">Wij delen je gegevens alleen met dienstverleners die nodig zijn voor de werking van Nestd:</p>
+      <ul>
+        <li data-i18n-html="privacyS3a"><strong>Supabase</strong> (EU) — database en authenticatie.</li>
+        <li data-i18n-html="privacyS3b"><strong>Meta (WhatsApp Cloud API)</strong> — voor het versturen van WhatsApp-berichten.</li>
+      </ul>
+      <p data-i18n="privacyS3Extra">Wij verkopen je gegevens nooit aan derden.</p>
+
+      <h2 data-i18n="privacyS4Title">4. Woninggegevens</h2>
+      <p data-i18n="privacyS4Text">Nestd verzamelt publiek beschikbare huurwoningadvertenties van platforms zoals Pararius. Dit betreft geen persoonsgegevens maar openbare woninginformatie.</p>
+
+      <h2 data-i18n="privacyS5Title">5. Bewaartermijn</h2>
+      <p data-i18n="privacyS5Text">Wij bewaren je persoonsgegevens zolang je een actief account hebt of op de waitlist staat. Wanneer je je uitschrijft of je account verwijdert, verwijderen wij je gegevens binnen 30 dagen, tenzij wettelijk anders vereist.</p>
+
+      <h2 data-i18n="privacyS6Title">6. Beveiliging</h2>
+      <p data-i18n="privacyS6Text">Wij nemen passende technische en organisatorische maatregelen om je gegevens te beschermen, waaronder versleutelde verbindingen (TLS), beveiligde databases en beperkte toegang tot persoonsgegevens.</p>
+
+      <h2 data-i18n="privacyS7Title">7. Jouw rechten</h2>
+      <p data-i18n="privacyS7Intro">Onder de AVG heb je de volgende rechten:</p>
+      <ul>
+        <li data-i18n-html="privacyS7a"><strong>Inzage</strong> — je mag opvragen welke gegevens wij van je hebben.</li>
+        <li data-i18n-html="privacyS7b"><strong>Rectificatie</strong> — je kunt onjuiste gegevens laten corrigeren.</li>
+        <li data-i18n-html="privacyS7c"><strong>Verwijdering</strong> — je kunt vragen om verwijdering van je gegevens.</li>
+        <li data-i18n-html="privacyS7d"><strong>Beperking</strong> — je kunt de verwerking laten beperken.</li>
+        <li data-i18n-html="privacyS7e"><strong>Overdraagbaarheid</strong> — je kunt je gegevens in een gangbaar formaat ontvangen.</li>
+        <li data-i18n-html="privacyS7f"><strong>Bezwaar</strong> — je kunt bezwaar maken tegen verwerking op basis van gerechtvaardigd belang.</li>
+      </ul>
+      <p data-i18n-html="privacyS7Contact">Neem voor het uitoefenen van je rechten contact op via <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>.</p>
+
+      <h2 data-i18n="privacyS8Title">8. Cookies</h2>
+      <p data-i18n="privacyS8Text">Nestd gebruikt alleen functionele opslag (localStorage) voor taalvoorkeur en thema. Wij gebruiken geen tracking cookies of analytics van derden.</p>
+
+      <h2 data-i18n="privacyS9Title">9. Klachten</h2>
+      <p data-i18n-html="privacyS9Text">Heb je een klacht over hoe wij met je gegevens omgaan? Neem dan contact met ons op via <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>. Je hebt ook het recht een klacht in te dienen bij de <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener">Autoriteit Persoonsgegevens</a>.</p>
+
+      <h2 data-i18n="privacyS10Title">10. Contact</h2>
+      <p data-i18n-html="privacyS10Text">Muba B.V.<br>E-mail: <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a><br>Website: <a href="https://nestd.nl">nestd.nl</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img src="logo.png" alt="Nestd" class="footer-logo-img">
+      <span class="footer-text">© 2026 Nestd. Amsterdam.</span>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
