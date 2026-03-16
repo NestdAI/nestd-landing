@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="dark" lang="nl">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Features | Nestd — Jouw AI Woonassistent</title>
+  <meta name="description" content="Ontdek hoe Nestd AI-matching, WhatsApp alerts en automatisch reageren combineert om jouw droomwoning te vinden.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF385C',
+            dark: '#0a0a0a',
+            surface: '#121212',
+            'surface-light': '#1e1e1e',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0a;
+      color: #ffffff;
+    }
+    .text-gradient {
+      background: linear-gradient(to right, #ffffff, #FF385C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .feature-card-hover:hover {
+      border-color: #FF385C;
+      transform: translateY(-4px);
+      transition: all 0.3s ease;
+    }
+    .glow-effect {
+      box-shadow: 0 0 20px rgba(255, 56, 92, 0.15);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-50 bg-dark/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="/" class="flex items-center gap-3">
+      <img src="logo.png" alt="Nestd" class="w-8 h-8 rounded-custom">
+      <span class="text-xl font-bold tracking-tight">Nestd</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+      <a class="hover:text-primary transition-colors" href="/">Home</a>
+      <a class="text-white" href="/features.html">Features</a>
+      <a class="hover:text-primary transition-colors" href="/pricing.html">Prijzen</a>
+      <a class="hover:text-primary transition-colors" href="/about.html">Over ons</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="/pricing.html" class="px-5 py-2 text-sm font-semibold border border-white/10 rounded-custom hover:bg-white/5 transition-colors">Inloggen</a>
+      <a href="/pricing.html" class="px-5 py-2 text-sm font-semibold bg-primary rounded-custom hover:bg-opacity-90 transition-all">Download App</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="relative pt-20 pb-16 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto text-center relative z-10">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+      Gebouwd voor <br/>
+      <span class="text-gradient">Slimmer Zoeken</span>
+    </h1>
+    <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+      Nestd combineert AI-matching, instant WhatsApp alerts en automatisch reageren. Zodat jij alleen woningen ziet die écht bij je passen.
+    </p>
+  </div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+</header>
+
+<!-- AI Matching Section -->
+<section class="py-24 px-6 bg-surface" id="matching">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+        AI Matching
+      </div>
+      <h2 class="text-4xl font-bold mb-6">Twee-score Matching<br/>&amp; Persoonlijke Uitleg</h2>
+      <p class="text-gray-400 mb-8 leading-relaxed">
+        Nestd matcht niet op basis van simpele filters. Ons twee-score systeem combineert harde criteria (budget, stad, kamers) met AI-semantische analyse die je stijl, sfeer en levensstijl begrijpt — inclusief een uitleg waarom een woning bij je past.
+      </p>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="text-gray-300">Harde filters: budget, stad, kamers, oppervlakte — 100% match of niets.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="text-gray-300">AI-semantische score: vergelijkt jouw stijlprofiel met foto's en beschrijving van de woning.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="text-gray-300">Persoonlijke uitleg in het Nederlands: "Moderne keuken past bij je smaak, maar geen aparte werkkamer."</span>
+        </li>
+      </ul>
+    </div>
+    <!-- Mock Matching Dashboard -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-primary/20 rounded-custom blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+      <div class="relative bg-dark border border-white/10 rounded-custom p-6 glow-effect">
+        <div class="flex items-center justify-between mb-6">
+          <div class="text-sm font-semibold text-gray-400">Match Overview</div>
+          <div class="flex gap-2">
+            <div class="h-2 w-2 rounded-full bg-red-500"></div>
+            <div class="h-2 w-2 rounded-full bg-yellow-500"></div>
+            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+          </div>
+        </div>
+        <!-- Mock match cards -->
+        <div class="space-y-3 mb-6">
+          <div class="bg-surface-light border border-white/5 rounded-custom p-4 flex justify-between items-center">
+            <div>
+              <div class="text-sm font-semibold">Appartement Grote Gracht</div>
+              <div class="text-xs text-gray-500">Maastricht · €1.150/mnd · 65m²</div>
+            </div>
+            <div class="text-primary font-bold text-lg">92%</div>
+          </div>
+          <div class="bg-surface-light border border-white/5 rounded-custom p-4 flex justify-between items-center">
+            <div>
+              <div class="text-sm font-semibold">Studio Wyck</div>
+              <div class="text-xs text-gray-500">Maastricht · €875/mnd · 42m²</div>
+            </div>
+            <div class="text-primary font-bold text-lg">87%</div>
+          </div>
+          <div class="bg-surface-light border border-white/5 rounded-custom p-4 flex justify-between items-center">
+            <div>
+              <div class="text-sm font-semibold">Huis Randwyck</div>
+              <div class="text-xs text-gray-500">Maastricht · €1.350/mnd · 85m²</div>
+            </div>
+            <div class="text-primary/70 font-bold text-lg">74%</div>
+          </div>
+        </div>
+        <!-- Mock explanation -->
+        <div class="bg-surface-light border border-primary/20 rounded-custom p-4">
+          <div class="text-xs text-primary font-semibold mb-2">AI Uitleg</div>
+          <div class="text-xs text-gray-400">"Modern interieur en eiken vloeren passen bij je smaak. Minpunt: geen aparte werkkamer en stijl is wat klinischer dan je voorkeur."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp & Notifications Section -->
+<section class="py-24 px-6 bg-dark" id="notifications">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-16 items-center">
+    <div class="lg:w-1/2">
+      <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+        Instant Alerts
+      </div>
+      <h2 class="text-4xl font-bold mb-6 text-white">WhatsApp Notificaties</h2>
+      <p class="text-gray-400 mb-8 leading-relaxed">
+        Nieuwe match? Direct een bericht op WhatsApp. Geen app openen, geen email checken. Nestd stuurt je de woningen die er toe doen — direct naar je telefoon. Gratis en onbeperkt voor iedereen.
+      </p>
+      <div class="grid grid-cols-2 gap-6">
+        <div class="p-4 bg-surface rounded-custom border border-white/5">
+          <h4 class="text-primary font-semibold mb-2">Instant Matches</h4>
+          <p class="text-sm text-gray-500">Nieuwe woning gevonden? Binnen seconden een WhatsApp bericht met alle details.</p>
+        </div>
+        <div class="p-4 bg-surface rounded-custom border border-white/5">
+          <h4 class="text-primary font-semibold mb-2">Duo Zoeken</h4>
+          <p class="text-sm text-gray-500">Zoek samen met je partner. Swipe op woningen en krijg een melding bij een Duo Match.</p>
+        </div>
+      </div>
+    </div>
+    <!-- WhatsApp Chat Mockup -->
+    <div class="lg:w-1/2 w-full">
+      <div class="relative border border-white/10 rounded-custom bg-surface overflow-hidden">
+        <!-- Chat header -->
+        <div class="bg-[#075E54] px-4 py-3 flex items-center gap-3">
+          <img src="logo.png" alt="Nestd" class="w-8 h-8 rounded-full">
+          <div>
+            <div class="text-sm font-semibold text-white">Nestd</div>
+            <div class="text-xs text-green-200">online</div>
+          </div>
+        </div>
+        <!-- Chat messages -->
+        <div class="p-4 space-y-3 bg-[#0B141A] min-h-[320px]">
+          <div class="flex justify-start">
+            <div class="bg-[#1F2C34] rounded-lg rounded-tl-none px-4 py-2 max-w-[80%]">
+              <p class="text-sm text-gray-200">🏠 <strong>Nieuwe match!</strong></p>
+              <p class="text-sm text-gray-300 mt-1">Appartement Grote Gracht<br/>Maastricht · €1.150/mnd · 65m²<br/>2 kamers · Gemeubileerd</p>
+              <p class="text-sm text-primary mt-2 font-semibold">92% match</p>
+              <p class="text-[10px] text-gray-500 mt-1 text-right">14:32</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-[#1F2C34] rounded-lg rounded-tl-none px-4 py-2 max-w-[80%]">
+              <p class="text-sm text-gray-200">🎉 <strong>Duo Match!</strong></p>
+              <p class="text-sm text-gray-300 mt-1">Studio Wyck — jullie hebben allebei geliked!</p>
+              <p class="text-[10px] text-gray-500 mt-1 text-right">15:07</p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <div class="bg-[#005C4B] rounded-lg rounded-tr-none px-4 py-2 max-w-[80%]">
+              <p class="text-sm text-gray-200">Top! Reageer op de eerste 🚀</p>
+              <p class="text-[10px] text-gray-400 mt-1 text-right">15:08 ✓✓</p>
+            </div>
+          </div>
+          <div class="flex justify-start">
+            <div class="bg-[#1F2C34] rounded-lg rounded-tl-none px-4 py-2 max-w-[80%]">
+              <p class="text-sm text-gray-200">✅ Reactie verstuurd naar Pararius met je documenten en motivatiebrief!</p>
+              <p class="text-[10px] text-gray-500 mt-1 text-right">15:08</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Auto-React & Documents Section -->
+<section class="py-24 px-6 bg-surface" id="automation">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+        Automatisering
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Alles Automatisch Geregeld</h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        Van documenten uploaden tot automatisch reageren op woningen. Nestd regelt het zodat jij je kunt focussen op bezichtigingen plannen.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Card 1: Auto-React -->
+      <div class="p-8 bg-dark border border-white/5 rounded-custom feature-card-hover">
+        <div class="w-12 h-12 bg-primary/10 rounded-custom flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Auto-Reageren</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Eén tap op "Reageer!" en Nestd vult automatisch het formulier in op het platform — met jouw documenten en een AI-gegenereerde motivatiebrief. Geen handmatig invullen meer.
+        </p>
+      </div>
+      <!-- Card 2: Document Processing -->
+      <div class="p-8 bg-dark border border-white/5 rounded-custom feature-card-hover">
+        <div class="w-12 h-12 bg-primary/10 rounded-custom flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Slimme Documenten</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Upload je ID, loonstrookjes en arbeidscontract. Nestd's AI herkent automatisch BSN-nummers en redigeert ze voor je privacy. Veilig opgeslagen, klaar voor reacties.
+        </p>
+      </div>
+      <!-- Card 3: Visual Inspiration -->
+      <div class="p-8 bg-dark border border-white/5 rounded-custom feature-card-hover">
+        <div class="w-12 h-12 bg-primary/10 rounded-custom flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Visuele Inspiratie</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Upload foto's van interieurs die je mooi vindt. Onze AI analyseert stijl, sfeer en kleuren om je matches te verbeteren. Geen enkele concurrent biedt dit.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-24 px-6 border-t border-white/10">
+  <div class="max-w-5xl mx-auto bg-primary rounded-custom p-12 text-center relative overflow-hidden">
+    <div class="relative z-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Klaar om je droomwoning te vinden?</h2>
+      <p class="text-white/80 mb-10 max-w-xl mx-auto">Download de app en laat AI het zware werk doen. Matching, alerts en reageren — alles in één app.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/pricing.html" class="px-8 py-4 bg-white text-primary font-bold rounded-custom hover:bg-gray-100 transition-all inline-block">Download Gratis</a>
+        <a href="/about.html#contact" class="px-8 py-4 bg-dark text-white font-bold rounded-custom hover:bg-black transition-all inline-block">Neem Contact Op</a>
+      </div>
+    </div>
+    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+    <div class="absolute -top-10 -right-10 w-40 h-40 bg-black/10 rounded-full blur-2xl"></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 px-6 border-t border-white/5 bg-dark">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+    <div>
+      <h5 class="text-white font-semibold mb-6">Product</h5>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-primary" href="/features.html">Features</a></li>
+        <li><a class="hover:text-primary" href="/pricing.html">Prijzen</a></li>
+        <li><a class="hover:text-primary" href="/about.html">Over Nestd</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold mb-6">Support</h5>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-primary" href="/about.html#contact">Contact</a></li>
+        <li><a class="hover:text-primary" href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold mb-6">Juridisch</h5>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-primary" href="/privacy.html">Privacybeleid</a></li>
+        <li><a class="hover:text-primary" href="#">Algemene Voorwaarden</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold mb-6">Sociaal</h5>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-primary" href="#">Instagram</a></li>
+        <li><a class="hover:text-primary" href="#">LinkedIn</a></li>
+        <li><a class="hover:text-primary" href="#">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-2">
+      <img src="logo.png" alt="Nestd" class="w-6 h-6 rounded">
+      <span class="text-gray-400 text-sm">&copy; 2026 Nestd. Amsterdam.</span>
+    </div>
+    <div class="flex gap-6 text-xs text-gray-500">
+      <a href="/privacy.html">Privacybeleid</a>
+      <a href="#">Algemene Voorwaarden</a>
+      <a href="#">Cookiebeleid</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
