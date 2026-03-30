@@ -25,10 +25,10 @@
       </a>
 
       <ul class="navbar-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/features.html">Features</a></li>
-        <li><a href="/pricing.html" class="active">Prijzen</a></li>
-        <li><a href="/about.html">Over ons</a></li>
+        <li><a href="/" data-i18n="nav_home">Home</a></li>
+        <li><a href="/features.html" data-i18n="nav_features">Features</a></li>
+        <li><a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a></li>
+        <li><a href="/about.html" data-i18n="nav_about">Over ons</a></li>
       </ul>
 
       <div class="navbar-right">
@@ -45,17 +45,17 @@
 
   <!-- Mobile menu -->
   <div class="navbar-mobile" id="mobile-menu">
-    <a href="/">Home</a>
-    <a href="/features.html">Features</a>
-    <a href="/pricing.html" class="active">Prijzen</a>
-    <a href="/about.html">Over ons</a>
+    <a href="/" data-i18n="nav_home">Home</a>
+    <a href="/features.html" data-i18n="nav_features">Features</a>
+    <a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a>
+    <a href="/about.html" data-i18n="nav_about">Over ons</a>
   </div>
 
   <!-- Page Header -->
   <header class="page-header">
-    <div class="section-label">Prijzen</div>
-    <h1 class="page-header-title">Bijna Alles is <em>Gratis</em></h1>
-    <p class="page-header-sub">Nestd gelooft dat woningzoeken geen premium product moet zijn. Alleen een paar krachtige features zitten achter het Pro-abonnement.</p>
+    <div class="section-label" data-i18n="price_label">Prijzen</div>
+    <h1 class="page-header-title" data-i18n-html="price_title">Bijna Alles is <em>Gratis</em></h1>
+    <p class="page-header-sub" data-i18n="price_sub">Nestd gelooft dat woningzoeken geen premium product moet zijn. Alleen een paar krachtige features zitten achter het Pro-abonnement.</p>
   </header>
 
   <!-- Pricing Cards -->
@@ -65,91 +65,91 @@
 
         <!-- Free Plan -->
         <div class="pricing-card">
-          <h2>Gratis</h2>
-          <p class="pricing-desc">Alles wat je nodig hebt om je droomwoning te vinden.</p>
+          <h2 data-i18n="price_free_name">Gratis</h2>
+          <p class="pricing-desc" data-i18n="price_free_desc">Alles wat je nodig hebt om je droomwoning te vinden.</p>
           <div class="pricing-price">
-            <span class="amount">&euro;0</span>
-            <span class="period">/maand</span>
+            <span class="amount" data-i18n="price_free_amount">&euro;0</span>
+            <span class="period" data-i18n="price_free_period">/maand</span>
           </div>
           <ul class="pricing-features">
-            <li><span class="check">✓</span> AI-matching</li>
-            <li><span class="check">✓</span> Onbeperkt WhatsApp alerts</li>
-            <li><span class="check">✓</span> Woningen browsen &amp; opslaan</li>
-            <li><span class="check">✓</span> Push notificaties</li>
+            <li><span class="check">✓</span> <span data-i18n="price_free_f1">AI-matching</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_free_f2">Onbeperkt WhatsApp alerts</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_free_f3">Woningen browsen &amp; opslaan</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_free_f4">Push notificaties</span></li>
           </ul>
-          <a href="#" class="pricing-btn outline">Download Gratis</a>
+          <a href="#" class="pricing-btn outline" data-i18n="price_free_btn">Download Gratis</a>
         </div>
 
         <!-- Pro Plan -->
         <div class="pricing-card featured">
-          <span class="pricing-badge">Populairst</span>
-          <h2>Pro</h2>
-          <p class="pricing-desc">Je persoonlijke AI-zoekpartner. Laat Nestd alles regelen.</p>
+          <span class="pricing-badge" data-i18n="price_pro_badge">Populairst</span>
+          <h2 data-i18n="price_pro_name">Pro</h2>
+          <p class="pricing-desc" data-i18n="price_pro_desc">Je persoonlijke AI-zoekpartner. Laat Nestd alles regelen.</p>
           <div class="pricing-price">
-            <span class="amount">&euro;19,95</span>
-            <span class="period">/maand</span>
+            <span class="amount" data-i18n="price_pro_amount">&euro;19,95</span>
+            <span class="period" data-i18n="price_pro_period">/maand</span>
           </div>
           <ul class="pricing-features">
-            <li><span class="check">✓</span> Alles van Gratis</li>
-            <li><span class="check">✓</span> <strong>AI agent</strong> &mdash; ook bestuurbaar via WhatsApp</li>
-            <li><span class="check">✓</span> <strong>Duo Zoeken</strong> &mdash; zoek samen met je partner</li>
-            <li><span class="check">✓</span> AI matching met uitleg</li>
-            <li><span class="check">✓</span> Visueel stijlprofiel</li>
-            <li><span class="check">✓</span> AI chat</li>
-            <li><span class="check">✓</span> Voorrang bij support</li>
+            <li><span class="check">✓</span> <span data-i18n="price_pro_f1">Alles van Gratis</span></li>
+            <li><span class="check">✓</span> <span data-i18n-html="price_pro_f2"><strong>AI agent</strong> &mdash; ook bestuurbaar via WhatsApp</span></li>
+            <li><span class="check">✓</span> <span data-i18n-html="price_pro_f3"><strong>Duo Zoeken</strong> &mdash; zoek samen met je partner</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_pro_f4">AI matching met uitleg</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_pro_f5">Visueel stijlprofiel</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_pro_f6">AI chat</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price_pro_f7">Voorrang bij support</span></li>
           </ul>
-          <a href="#" class="pricing-btn primary">Start met Pro</a>
+          <a href="#" class="pricing-btn primary" data-i18n="price_pro_btn">Start met Pro</a>
         </div>
 
       </div>
 
       <!-- Comparison Table -->
       <div class="compare-table">
-        <h3>Vergelijk Features</h3>
+        <h3 data-i18n="price_compare_title">Vergelijk Features</h3>
         <div class="compare-table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Feature</th>
-                <th>Gratis</th>
-                <th class="accent">Pro</th>
+                <th data-i18n="price_compare_feature">Feature</th>
+                <th data-i18n="price_compare_free">Gratis</th>
+                <th class="accent" data-i18n="price_compare_pro">Pro</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>AI Matching</td>
-                <td>Harde filters</td>
-                <td class="accent">Harde + AI matching (met uitleg)</td>
+                <td data-i18n="price_compare_r1_feat">AI Matching</td>
+                <td data-i18n="price_compare_r1_free">Harde filters</td>
+                <td class="accent" data-i18n="price_compare_r1_pro">Harde + AI matching (met uitleg)</td>
               </tr>
               <tr>
-                <td>WhatsApp Alerts</td>
-                <td>Onbeperkt</td>
-                <td>Onbeperkt</td>
+                <td data-i18n="price_compare_r2_feat">WhatsApp Alerts</td>
+                <td data-i18n="price_compare_r2_free">Onbeperkt</td>
+                <td data-i18n="price_compare_r2_pro">Onbeperkt</td>
               </tr>
               <tr>
-                <td>AI Agent (ook via WhatsApp)</td>
+                <td data-i18n="price_compare_r3_feat">AI Agent (ook via WhatsApp)</td>
                 <td class="muted">&mdash;</td>
-                <td class="accent">Volledige conversatie</td>
+                <td class="accent" data-i18n="price_compare_r3_pro">Volledige conversatie</td>
               </tr>
               <tr>
-                <td>AI Chat</td>
+                <td data-i18n="price_compare_r4_feat">AI Chat</td>
                 <td class="muted">&mdash;</td>
-                <td class="accent">Onbeperkt</td>
+                <td class="accent" data-i18n="price_compare_r4_pro">Onbeperkt</td>
               </tr>
               <tr>
-                <td>Duo Zoeken</td>
+                <td data-i18n="price_compare_r5_feat">Duo Zoeken</td>
                 <td class="muted">&mdash;</td>
-                <td class="accent">Inclusief</td>
+                <td class="accent" data-i18n="price_compare_r5_pro">Inclusief</td>
               </tr>
               <tr>
-                <td>Visuele Inspiratie</td>
+                <td data-i18n="price_compare_r6_feat">Visuele Inspiratie</td>
                 <td class="muted">&mdash;</td>
-                <td>Foto's uploaden → betere matches</td>
+                <td data-i18n="price_compare_r6_pro">Foto's uploaden → betere matches</td>
               </tr>
               <tr>
-                <td>Push &amp; WhatsApp Notificaties</td>
-                <td>Inclusief</td>
-                <td>Inclusief</td>
+                <td data-i18n="price_compare_r7_feat">Push &amp; WhatsApp Notificaties</td>
+                <td data-i18n="price_compare_r7_free">Inclusief</td>
+                <td data-i18n="price_compare_r7_pro">Inclusief</td>
               </tr>
             </tbody>
           </table>
@@ -158,55 +158,55 @@
 
       <!-- FAQ -->
       <div class="faq-section" id="faq">
-        <h3>Veelgestelde Vragen</h3>
+        <h3 data-i18n="price_faq_title">Veelgestelde Vragen</h3>
 
         <div class="faq-item">
           <button class="faq-toggle" aria-expanded="false">
-            <h4>Kan ik op elk moment upgraden of downgraden?</h4>
+            <h4 data-i18n="price_faq1_q">Kan ik op elk moment upgraden of downgraden?</h4>
             <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Ja, je kunt op elk moment wisselen tussen Gratis en Pro via de app. Bij upgraden krijg je direct toegang tot alle Pro-features.</p>
+            <p data-i18n="price_faq1_a">Ja, je kunt op elk moment wisselen tussen Gratis en Pro via de app. Bij upgraden krijg je direct toegang tot alle Pro-features.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-toggle" aria-expanded="false">
-            <h4>Hoe betaal ik voor Pro?</h4>
+            <h4 data-i18n="price_faq2_q">Hoe betaal ik voor Pro?</h4>
             <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Je betaalt via in-app purchases in de App Store (iOS) of Google Play (Android). Veilig, eenvoudig en je kunt op elk moment opzeggen via je telefooninstellingen.</p>
+            <p data-i18n="price_faq2_a">Je betaalt via in-app purchases in de App Store (iOS) of Google Play (Android). Veilig, eenvoudig en je kunt op elk moment opzeggen via je telefooninstellingen.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-toggle" aria-expanded="false">
-            <h4>Zijn WhatsApp alerts echt gratis en onbeperkt?</h4>
+            <h4 data-i18n="price_faq3_q">Zijn WhatsApp alerts echt gratis en onbeperkt?</h4>
             <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Ja! WhatsApp alerts (notificaties over nieuwe matches) zijn gratis voor iedereen. De AI-agent (volledige conversatie via WhatsApp) is een Pro-feature.</p>
+            <p data-i18n="price_faq3_a">Ja! WhatsApp alerts (notificaties over nieuwe matches) zijn gratis voor iedereen. De AI-agent (volledige conversatie via WhatsApp) is een Pro-feature.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-toggle" aria-expanded="false">
-            <h4>Wat is het verschil tussen WhatsApp alerts en de AI-agent?</h4>
+            <h4 data-i18n="price_faq4_q">Wat is het verschil tussen WhatsApp alerts en de AI-agent?</h4>
             <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Alerts zijn eenrichtingsberichten: "Nieuwe match gevonden!". De AI-agent is een volledige chatpartner op WhatsApp: je kunt reageren, filters aanpassen, vragen stellen en je zoektocht besturen.</p>
+            <p data-i18n="price_faq4_a">Alerts zijn eenrichtingsberichten: "Nieuwe match gevonden!". De AI-agent is een volledige chatpartner op WhatsApp: je kunt reageren, filters aanpassen, vragen stellen en je zoektocht besturen.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-toggle" aria-expanded="false">
-            <h4>Kan ik mijn account verwijderen?</h4>
+            <h4 data-i18n="price_faq5_q">Kan ik mijn account verwijderen?</h4>
             <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Absoluut. Via Instellingen → "Verwijder account" worden al je gegevens permanent verwijderd. GDPR-compliant, geen vragen.</p>
+            <p data-i18n="price_faq5_a">Absoluut. Via Instellingen → "Verwijder account" worden al je gegevens permanent verwijderd. GDPR-compliant, geen vragen.</p>
           </div>
         </div>
       </div>
@@ -222,36 +222,36 @@
             <img src="logo.png" alt="Nestd">
             <span>Nestd</span>
           </a>
-          <p>Jouw AI woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
+          <p data-i18n="footer_desc_pricing">Jouw AI woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
         </div>
         <div>
-          <h5>Product</h5>
+          <h5 data-i18n="footer_product">Product</h5>
           <ul>
-            <li><a href="/features.html">Features</a></li>
-            <li><a href="/pricing.html">Prijzen</a></li>
+            <li><a href="/features.html" data-i18n="footer_features">Features</a></li>
+            <li><a href="/pricing.html" data-i18n="footer_pricing">Prijzen</a></li>
           </ul>
         </div>
         <div>
-          <h5>Bedrijf</h5>
+          <h5 data-i18n="footer_company">Bedrijf</h5>
           <ul>
-            <li><a href="/about.html">Over ons</a></li>
-            <li><a href="/about.html#contact">Contact</a></li>
+            <li><a href="/about.html" data-i18n="footer_about">Over ons</a></li>
+            <li><a href="/about.html#contact" data-i18n="footer_contact">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h5>Juridisch</h5>
+          <h5 data-i18n="footer_legal">Juridisch</h5>
           <ul>
-            <li><a href="/privacy.html">Privacybeleid</a></li>
-            <li><a href="#">Algemene Voorwaarden</a></li>
-            <li><a href="#">Cookiebeleid</a></li>
+            <li><a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a></li>
+            <li><a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a></li>
+            <li><a href="#" data-i18n="footer_cookies">Cookiebeleid</a></li>
           </ul>
         </div>
       </div>
       <div class="page-footer-bottom">
         <span>&copy; 2026 Nestd. Amsterdam.</span>
         <div class="page-footer-bottom-links">
-          <a href="/privacy.html">Privacybeleid</a>
-          <a href="#">Voorwaarden</a>
+          <a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a>
+          <a href="#" data-i18n="footer_terms">Voorwaarden</a>
         </div>
       </div>
     </div>
