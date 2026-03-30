@@ -53,5 +53,7 @@ async function handleWaitlist(e) {
   }
 }
 
-document.getElementById('waitlist-hero').addEventListener('submit', handleWaitlist);
-document.getElementById('waitlist-footer').addEventListener('submit', handleWaitlist);
+const heroForm = document.getElementById('waitlist-hero');
+const footerForm = document.getElementById('waitlist-footer');
+if (heroForm) heroForm.addEventListener('submit', handleWaitlist);
+if (footerForm) footerForm.addEventListener('submit', handleWaitlist);

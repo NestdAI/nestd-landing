@@ -8,6 +8,11 @@
   --gray: #888;
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
+  --surface: rgba(255,255,255,.03);
+  --border: rgba(255,255,255,.08);
+  --border-light: rgba(255,255,255,.06);
+  --radius: 16px;
+  --radius-sm: 12px;
 }
 
 html { scroll-behavior: smooth; }
