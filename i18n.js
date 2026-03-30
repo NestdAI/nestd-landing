@@ -603,6 +603,9 @@ function applyLang(lang) {
   if (langBtn) langBtn.textContent = lang === 'nl' ? '🇬🇧' : '🇳🇱';
 
   localStorage.setItem('nestd-lang', lang);
+
+  // Remove loading cloak (prevents FOUC)
+  document.documentElement.classList.remove('i18n-loading');
 }
 
 // Initialize
