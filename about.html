@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pages.css">
   <style>
-    /* Contact form inputs */
     .contact-field {
       width: 100%;
       padding: 12px 14px;
@@ -31,49 +30,21 @@
     .contact-field::placeholder { color: #555; }
     .contact-field:focus { border-color: var(--primary); }
     textarea.contact-field { resize: vertical; min-height: 110px; }
-
-    .contact-label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.6);
-      margin-bottom: 8px;
-    }
-
+    .contact-label { display: block; font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,.6); margin-bottom: 8px; }
     .contact-field-group { margin-bottom: 20px; }
-
     .contact-submit {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
+      width: 100%; padding: 14px; border-radius: 12px; border: none;
+      background: var(--primary); color: #fff; font-family: var(--font-body);
+      font-size: 0.95rem; font-weight: 600; cursor: pointer;
       transition: opacity .2s, transform .15s;
     }
     .contact-submit:hover { opacity: .9; transform: translateY(-1px); }
     .contact-submit:active { transform: translateY(0); }
     .contact-submit:disabled { opacity: .5; cursor: not-allowed; }
-
-    .contact-msg {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 0.875rem;
-      min-height: 1.2em;
-    }
+    .contact-msg { text-align: center; margin-top: 12px; font-size: 0.875rem; min-height: 1.2em; }
     .contact-msg.success { color: #34d399; }
     .contact-msg.error { color: var(--primary); }
-
-    /* Light mode overrides for contact fields */
-    body.light .contact-field {
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.04);
-      color: #1a1a1a;
-    }
+    body.light .contact-field { border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.04); color: #1a1a1a; }
     body.light .contact-field::placeholder { color: #aaa; }
     body.light .contact-label { color: #555; }
   </style>
@@ -96,7 +67,6 @@
       </ul>
 
       <div class="navbar-right">
-        <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
         <button class="navbar-hamburger" id="hamburger" aria-label="Menu">
           <span></span>
@@ -156,8 +126,8 @@
               <div class="label">Doelgroep leeftijd</div>
             </div>
             <div class="stats-visual-item">
-              <div class="num" style="color:var(--primary);">€0</div>
-              <div class="label">Zoeken is gratis</div>
+              <div class="num" style="color:var(--primary);">24/7</div>
+              <div class="label">AI zoekt voor jou</div>
             </div>
           </div>
         </div>
@@ -166,21 +136,14 @@
         <div class="fade-in-right">
           <h3 class="feature-detail-title">Gebouwd uit frustratie</h3>
           <p class="feature-detail-desc">
-            Nestd is ontstaan uit eigen ervaring met de Nederlandse woningmarkt. Eindeloos scrollen op Pararius, dezelfde formulieren invullen, te laat reageren omdat je de listing miste. We wisten dat het beter kon.
+            Nestd is ontstaan uit eigen ervaring met de Nederlandse woningmarkt. Eindeloos scrollen op woningplatformen, dezelfde formulieren invullen, te laat reageren omdat je de listing miste. We wisten dat het beter kon.
           </p>
           <p class="feature-detail-desc">
-            Onze AI-first aanpak draait het zoekproces om: in plaats van jij die zoekt, zoekt Nestd voor jou. AI leert je voorkeuren, matcht woningen op stijl en sfeer (niet alleen prijs en kamers), en reageert automatisch met jouw documenten.
+            Daarnaast zagen we dat bestaande platforms extreem veel geld vragen voor basis functionaliteit. Wij geloven dat woningzoeken toegankelijk en betaalbaar moet zijn — en dat AI het zware werk kan doen.
           </p>
-          <div style="display:flex;gap:24px;padding-top:8px;flex-wrap:wrap;">
-            <div class="accent-border">
-              <span class="big">AI-First</span>
-              <span class="sub">Gebouwd rond Claude &amp; GPT</span>
-            </div>
-            <div class="accent-border">
-              <span class="big">Maastricht</span>
-              <span class="sub">Gestart, NL-breed gepland</span>
-            </div>
-          </div>
+          <p class="feature-detail-desc">
+            Onze AI-first aanpak draait het zoekproces om: in plaats van jij die zoekt, zoekt Nestd voor jou. AI leert je voorkeuren en matcht woningen op stijl en sfeer — niet alleen prijs en kamers.
+          </p>
         </div>
       </div>
     </div>
@@ -197,19 +160,19 @@
           <p>Geen enkele concurrent matcht op stijl, sfeer en visuele inspiratie.</p>
         </div>
         <div class="diff-card fade-in">
-          <div class="diff-emoji">🚀</div>
-          <h4>Auto-Reageren</h4>
-          <p>Browser automation vult formulieren in met jouw documenten en motivatiebrief.</p>
+          <div class="diff-emoji">👥</div>
+          <h4>Duo Zoeken</h4>
+          <p>Zoek samen met je partner. Swipe allebei en krijg een melding bij een Duo Match.</p>
         </div>
         <div class="diff-card fade-in">
           <div class="diff-emoji">💬</div>
           <h4>WhatsApp AI</h4>
-          <p>Chat met je woonassistent via WhatsApp. Pas filters aan, reageer, stel vragen.</p>
+          <p>Chat met je woonassistent via WhatsApp. Pas filters aan, stel vragen — altijd bereikbaar.</p>
         </div>
         <div class="diff-card fade-in">
-          <div class="diff-emoji">🔒</div>
-          <h4>BSN Bescherming</h4>
-          <p>AI detecteert en redigeert automatisch BSN-nummers uit je documenten.</p>
+          <div class="diff-emoji">🧠</div>
+          <h4>AI Chat</h4>
+          <p>Je échte zoekpartner. Bespreek zoekcriteria, deel stijlvoorkeuren en krijg persoonlijk advies.</p>
         </div>
       </div>
     </div>
@@ -227,7 +190,7 @@
           <div class="persona-emoji">👩‍💼</div>
           <h4>Lisa, 24</h4>
           <div class="persona-role">Young Professional</div>
-          <p>Budget €900–€1.200, zoekt in Maastricht. Wil geen tijd verspillen aan eindeloos scrollen — laat AI het werk doen en reageer automatisch.</p>
+          <p>Budget €900–€1.200, zoekt in de stad. Wil geen tijd verspillen aan eindeloos scrollen — laat AI het werk doen.</p>
         </div>
         <div class="persona-card fade-in">
           <div class="persona-emoji">👨‍💻</div>
@@ -239,7 +202,7 @@
           <div class="persona-emoji">👩‍🎓</div>
           <h4>Sophie, 20</h4>
           <div class="persona-role">Student</div>
-          <p>Budget €400–€600, prijsgevoelig. Gebruikt de gratis versie: AI-matching, WhatsApp alerts en handmatig reageren. Geen abonnement nodig.</p>
+          <p>Budget €400–€600, prijsgevoelig. Gebruikt de gratis versie: AI-matching en WhatsApp alerts. Geen abonnement nodig.</p>
         </div>
       </div>
     </div>
@@ -361,7 +324,7 @@
   </footer>
 
   <script>
-    // Contact form — posts to Supabase edge function
+    // Contact form
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('contact-submit');
@@ -369,14 +332,11 @@
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
-
       if (!name || !email || !message) return;
-
       btn.disabled = true;
       btn.textContent = 'Even geduld...';
       msg.textContent = '';
       msg.className = 'contact-msg';
-
       try {
         const res = await fetch('https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/contact-form', {
           method: 'POST',
@@ -403,8 +363,6 @@
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
     });
-
-    // Close mobile menu on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');

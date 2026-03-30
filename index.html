@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nestd — Jouw AI Woonassistent</title>
-  <meta name="description" content="Nestd vindt je droomhuurwoning met AI. Automatisch reageren, WhatsApp alerts, en een persoonlijke woonassistent.">
+  <meta name="description" content="Nestd vindt je droomhuurwoning met AI. WhatsApp alerts en een persoonlijke woonassistent.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -12,14 +12,42 @@
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
 </head>
 <body>
 
-  <!-- Floating buttons -->
-  <a href="#waitlist-bottom" class="floating-cta floating-left" data-i18n="cta">Early Access →</a>
-  <div class="floating-right-group">
-    <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+  <!-- Navbar -->
+  <nav class="navbar navbar-home">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-brand">
+        <img src="logo.png" alt="Nestd">
+        <span>Nestd</span>
+      </a>
+
+      <ul class="navbar-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/features.html">Features</a></li>
+        <li><a href="/pricing.html">Prijzen</a></li>
+        <li><a href="/about.html">Over ons</a></li>
+      </ul>
+
+      <div class="navbar-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+        <button class="navbar-hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar-mobile" id="mobile-menu">
+    <a href="/" class="active">Home</a>
+    <a href="/features.html">Features</a>
+    <a href="/pricing.html">Prijzen</a>
+    <a href="/about.html">Over ons</a>
   </div>
 
   <!-- Hero -->
@@ -32,7 +60,7 @@
         Vind je droomwoning.<br><em>Laat AI de rest doen.</em>
       </h1>
       <p class="hero-sub fade-in" data-i18n="heroSub">
-        Nestd is je persoonlijke AI-woonassistent. Vindt woningen, reageert automatisch, en stuurt matches via WhatsApp.
+        Nestd is je persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.
       </p>
       <form class="waitlist-form fade-in" id="waitlist-hero">
         <input type="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
@@ -53,16 +81,16 @@
           <p data-i18n="f1Desc">AI leert je voorkeuren en matcht woningen die écht bij je passen. Niet 100 irrelevante hits, maar de 5 die er toe doen.</p>
         </div>
         <div class="feature-card fade-in">
-          <h3 data-i18n="f2Title">Automatisch reageren</h3>
-          <p data-i18n="f2Desc">Geen eindeloos formulieren invullen. Nestd reageert automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
-        </div>
-        <div class="feature-card fade-in">
           <h3 data-i18n="f3Title">WhatsApp alerts</h3>
           <p data-i18n="f3Desc">Nieuwe match? Direct een bericht op WhatsApp. Geen app openen, geen email checken. Het komt naar jou.</p>
         </div>
         <div class="feature-card fade-in">
           <h3 data-i18n="f4Title">AI Woonassistent</h3>
           <p data-i18n="f4Desc">Chat met je persoonlijke assistent. Stel vragen, pas voorkeuren aan, krijg advies. 24/7 beschikbaar.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <h3 data-i18n="f5Title">Duo Zoeken</h3>
+          <p data-i18n="f5Desc">Zoek samen met je partner. Swipe op woningen en krijg een melding bij een Duo Match.</p>
         </div>
       </div>
     </div>
@@ -87,8 +115,8 @@
         </div>
         <div class="step fade-in">
           <div class="step-num">03</div>
-          <h3 data-i18n="s3Title">Kies je favorieten</h3>
-          <p data-i18n="s3Desc">Wij reageren automatisch met jouw documenten en een gepersonaliseerde motivatiebrief.</p>
+          <h3 data-i18n="s3Title">Bekijk je matches</h3>
+          <p data-i18n="s3Desc">Bespreek je matches met de AI-assistent. Pas je zoekcriteria aan, deel stijlvoorkeuren of stel vragen.</p>
         </div>
         <div class="step fade-in">
           <div class="step-num">04</div>
@@ -114,14 +142,67 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner fade-in">
-      <img src="logo.png" alt="Nestd" class="footer-logo-img">
-      <span class="footer-text">© 2026 Nestd. Amsterdam. · <a href="/privacy.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15)" data-i18n="privacyLink">Privacybeleid</a></span>
+  <footer class="page-footer">
+    <div class="page-footer-inner">
+      <div class="page-footer-grid">
+        <div class="page-footer-brand">
+          <a href="/" class="navbar-brand" style="display:inline-flex;margin-bottom:0">
+            <img src="logo.png" alt="Nestd">
+            <span>Nestd</span>
+          </a>
+          <p>Jouw persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
+        </div>
+        <div>
+          <h5>Product</h5>
+          <ul>
+            <li><a href="/features.html">Features</a></li>
+            <li><a href="/pricing.html">Prijzen</a></li>
+            <li><a href="/about.html">Over Nestd</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Support</h5>
+          <ul>
+            <li><a href="/about.html#contact">Contact</a></li>
+            <li><a href="/pricing.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Juridisch</h5>
+          <ul>
+            <li><a href="/privacy.html">Privacybeleid</a></li>
+            <li><a href="#">Algemene Voorwaarden</a></li>
+            <li><a href="#">Cookiebeleid</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="page-footer-bottom">
+        <span>&copy; 2026 Nestd. Amsterdam.</span>
+        <div class="page-footer-bottom-links">
+          <a href="/privacy.html">Privacybeleid</a>
+          <a href="#">Algemene Voorwaarden</a>
+          <a href="#">Cookiebeleid</a>
+        </div>
+      </div>
     </div>
   </footer>
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>
