@@ -137,16 +137,14 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
       const direction = cards[index].action;
 
       // Reset card state for entrance
-      cardEl.style.transition = 'none';
-      cardEl.style.transform = 'translateY(30px)';
       cardEl.classList.remove('swiping-left', 'swiping-right', 'show-nope', 'show-like');
-      cardEl.classList.add('active');
+      cardEl.removeAttribute('style');
+      cardEl.classList.add('active', 'entering');
 
-      // Animate in
+      // Animate in via CSS class
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          cardEl.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-          cardEl.style.transform = 'translateY(0)';
+          cardEl.classList.remove('entering');
         });
       });
 
@@ -171,7 +169,7 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
             cardEl.classList.remove('active');
             currentIndex++;
             showCard(currentIndex);
-          }, 600);
+          }, 700);
         }, 700);
       }, 2000);
     }
