@@ -38,6 +38,23 @@ const translations = {
     waitlistSub: 'Schrijf je in voor early access.',
     waitlistNote: 'Geen spam. Alleen een bericht wanneer we live gaan.',
 
+    // WhatsApp typing
+    wa_typing: 'aan het typen',
+
+    // Testimonials
+    testimonials_label: 'Wat onze gebruikers zeggen',
+    testimonials_title: 'Echte verhalen van<br><em>echte zoekers.</em>',
+    testimonial_1_quote: '"Ik zat al maanden op Funda te refreshen. Nestd stuurde me binnen 3 dagen een appartement dat perfect was. Ik kon het niet geloven."',
+    testimonial_1_name: 'Daan, 26',
+    testimonial_2_quote: '"We zochten een gedeeld appartement maar hadden allebei andere smaak. Nestd\'s AI vond iets wat voor ons allebei werkte. Bizar goed."',
+    testimonial_2_name: 'Youssef & Tim, 25',
+    testimonial_3_quote: '"Ik had geen zin meer in woningzoeken. Mijn vriendin overtuigde me om Nestd te proberen. Twee weken later hadden we de sleutel."',
+    testimonial_3_name: 'Emma, 23',
+    testimonial_4_quote: '"Mijn vriendin en ik zochten samen, maar we hadden nooit tijd om tegelijk te kijken. Met Duo Zoeken swipeten we gewoon apart en kregen we een melding als we allebei iets mooi vonden."',
+    testimonial_4_name: 'Priya, 24',
+    testimonial_5_quote: '"De WhatsApp alerts zijn een gamechanger. Ik kreeg een bericht terwijl ik op werk zat en kon meteen reageren. Binnen een uur had ik een bezichtiging."',
+    testimonial_5_name: 'Sara, 27',
+
     // Privacy
     privacyLink: 'Privacybeleid',
     privacyBack: '← Terug naar home',
@@ -316,6 +333,23 @@ const translations = {
     waitlistTitle: '<em>Nestd is under development.</em>',
     waitlistSub: 'Sign up for early access.',
     waitlistNote: 'No spam. Just a message when we go live.',
+
+    // WhatsApp typing
+    wa_typing: 'typing',
+
+    // Testimonials
+    testimonials_label: 'What our users say',
+    testimonials_title: 'Real stories from<br><em>real searchers.</em>',
+    testimonial_1_quote: '"I\'d been refreshing Funda for months. Nestd sent me a perfect apartment within 3 days. I couldn\'t believe it."',
+    testimonial_1_name: 'Daan, 26',
+    testimonial_2_quote: '"We were looking for a shared apartment but had totally different taste. Nestd\'s AI found something that worked for both of us. Insanely good."',
+    testimonial_2_name: 'Youssef & Tim, 25',
+    testimonial_3_quote: '"I was done with house hunting. My friend convinced me to try Nestd. Two weeks later we had the keys."',
+    testimonial_3_name: 'Emma, 23',
+    testimonial_4_quote: '"My girlfriend and I were searching together but never had time to look at the same time. With Duo Search we just swiped separately and got a notification when we both liked something."',
+    testimonial_4_name: 'Priya, 24',
+    testimonial_5_quote: '"The WhatsApp alerts are a game changer. I got a message while at work and could respond immediately. Within an hour I had a viewing."',
+    testimonial_5_name: 'Sara, 27',
 
     // Privacy
     privacyLink: 'Privacy Policy',
