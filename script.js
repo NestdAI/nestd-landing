@@ -128,8 +128,8 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
         setTimeout(() => {
           overlay.classList.remove('show');
           running = false;
-          cycleTimer = setTimeout(runCycle, 1500);
-        }, 3000);
+          cycleTimer = setTimeout(runCycle, 800);
+        }, 2000);
         return;
       }
 
@@ -148,7 +148,7 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
         });
       });
 
-      // After 2 sec: show stamp then swipe off
+      // After 1 sec: show stamp then swipe off
       setTimeout(() => {
         if (direction === 'left') {
           cardEl.classList.add('show-nope');
@@ -169,9 +169,9 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
             cardEl.classList.remove('active');
             currentIndex++;
             showCard(currentIndex);
-          }, 700);
-        }, 700);
-      }, 2000);
+          }, 450);
+        }, 400);
+      }, 1000);
     }
 
     showCard(0);
