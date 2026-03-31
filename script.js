@@ -68,8 +68,8 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
   if (!stack) return;
 
   const cards = [
-    { title: 'Loft Jordaan', sub: 'Centrum · €1.250/mnd', match: 91, img: 'images/property-1.jpg', action: 'right' },
     { title: 'Studio De Pijp', sub: 'Zuid · €925/mnd', match: 84, img: 'images/property-2.jpg', action: 'left' },
+    { title: 'Loft Jordaan', sub: 'Centrum · €1.250/mnd', match: 91, img: 'images/property-1.jpg', action: 'right' },
     { title: 'Appartement Oost', sub: 'Oost · €1.075/mnd', match: 88, img: 'images/property-3.jpg', action: 'right' },
   ];
 
@@ -115,38 +115,42 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
     overlay.classList.remove('show');
 
     const cardEls = cards.map(c => createCard(c));
-    // Reverse order so first card is on top
-    for (let i = cardEls.length - 1; i >= 0; i--) {
-      const el = cardEls[i];
-      el.style.zIndex = cards.length - i;
-      if (i > 0) {
-        el.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 8}px)`;
-      }
-      stack.appendChild(el);
-    }
+    cardEls.forEach(el => stack.appendChild(el));
 
     const nopeBtn = stack.closest('.swipe-phone').querySelector('.swipe-nope');
     const likeBtn = stack.closest('.swipe-phone').querySelector('.swipe-like');
 
-    function swipeNext() {
-      if (currentIndex >= cards.length) {
+    function showCard(index) {
+      if (index >= cards.length) {
         // Show duo match overlay
         overlay.classList.add('show');
         spawnConfetti();
         setTimeout(() => {
           overlay.classList.remove('show');
           running = false;
-          // Auto-loop after pause
           cycleTimer = setTimeout(runCycle, 1500);
-        }, 2500);
+        }, 3000);
         return;
       }
 
-      const data = cards[currentIndex];
-      const cardEl = cardEls[currentIndex];
-      const direction = data.action;
+      const cardEl = cardEls[index];
+      const direction = cards[index].action;
 
-      // Step 1: Show stamp
+      // Reset card state for entrance
+      cardEl.style.transition = 'none';
+      cardEl.style.transform = 'translateY(30px)';
+      cardEl.classList.remove('swiping-left', 'swiping-right', 'show-nope', 'show-like');
+      cardEl.classList.add('active');
+
+      // Animate in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cardEl.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+          cardEl.style.transform = 'translateY(0)';
+        });
+      });
+
+      // After 2 sec: show stamp then swipe off
       setTimeout(() => {
         if (direction === 'left') {
           cardEl.classList.add('show-nope');
@@ -156,29 +160,23 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
           likeBtn.classList.add('active');
         }
 
-        // Step 2: Fly card off
+        // Fly off after stamp shows
         setTimeout(() => {
           cardEl.classList.add(direction === 'left' ? 'swiping-left' : 'swiping-right');
           nopeBtn.classList.remove('active');
           likeBtn.classList.remove('active');
 
-          // Promote remaining cards
-          for (let j = currentIndex + 1; j < cardEls.length; j++) {
-            const offset = j - currentIndex - 1;
-            cardEls[j].style.transition = 'transform 0.4s ease';
-            cardEls[j].style.transform = offset === 0
-              ? 'scale(1) translateY(0)'
-              : `scale(${1 - offset * 0.05}) translateY(${offset * 8}px)`;
-          }
-
-          currentIndex++;
-          setTimeout(swipeNext, 1000);
+          // After card flies off, hide it and show next
+          setTimeout(() => {
+            cardEl.classList.remove('active');
+            currentIndex++;
+            showCard(currentIndex);
+          }, 600);
         }, 700);
-      }, 600);
+      }, 2000);
     }
 
-    // Start first swipe after a brief pause
-    setTimeout(swipeNext, 1000);
+    showCard(0);
   }
 
   // Start when visible, pause when not
