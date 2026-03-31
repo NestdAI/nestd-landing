@@ -68,19 +68,19 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
   if (!stack) return;
 
   const cards = [
-    { title: 'Loft Jordaan', sub: 'Centrum · €1.250/mnd', match: 91, emoji: '🏠', action: 'right' },
-    { title: 'Studio De Pijp', sub: 'Zuid · €925/mnd', match: 84, emoji: '🏢', action: 'left' },
-    { title: 'Appartement Oost', sub: 'Oost · €1.075/mnd', match: 88, emoji: '🏡', action: 'right' }, // duo match card
+    { title: 'Loft Jordaan', sub: 'Centrum · €1.250/mnd', match: 91, img: 'images/property-1.jpg', action: 'right' },
+    { title: 'Studio De Pijp', sub: 'Zuid · €925/mnd', match: 84, img: 'images/property-2.jpg', action: 'left' },
+    { title: 'Appartement Oost', sub: 'Oost · €1.075/mnd', match: 88, img: 'images/property-3.jpg', action: 'right' },
   ];
 
-  let currentIndex = 0;
+  let cycleTimer = null;
   let running = false;
 
   function createCard(data) {
     const card = document.createElement('div');
     card.className = 'swipe-card';
     card.innerHTML = `
-      <div class="swipe-card-photo">${data.emoji}</div>
+      <div class="swipe-card-photo"><img src="${data.img}" alt="${data.title}" /></div>
       <div class="swipe-card-info">
         <div class="swipe-card-title">${data.title}</div>
         <div class="swipe-card-sub">${data.sub}</div>
@@ -95,7 +95,7 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
   function spawnConfetti() {
     confettiEl.innerHTML = '';
     const colors = ['#FF385C', '#FFD700', '#00D4AA', '#7C3AED', '#FF6B35', '#fff'];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
       const piece = document.createElement('div');
       piece.className = 'confetti-piece';
       piece.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -110,40 +110,44 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
   function runCycle() {
     if (running) return;
     running = true;
-    currentIndex = 0;
+    let currentIndex = 0;
     stack.innerHTML = '';
+    overlay.classList.remove('show');
 
-    // Place all cards in stack (last on top visually)
     const cardEls = cards.map(c => createCard(c));
-    cardEls.forEach((el, i) => {
+    // Reverse order so first card is on top
+    for (let i = cardEls.length - 1; i >= 0; i--) {
+      const el = cardEls[i];
       el.style.zIndex = cards.length - i;
-      if (i > 0) el.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 8}px)`;
+      if (i > 0) {
+        el.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 8}px)`;
+      }
       stack.appendChild(el);
-    });
+    }
+
+    const nopeBtn = stack.closest('.swipe-phone').querySelector('.swipe-nope');
+    const likeBtn = stack.closest('.swipe-phone').querySelector('.swipe-like');
 
     function swipeNext() {
       if (currentIndex >= cards.length) {
-        // Show duo match
+        // Show duo match overlay
         overlay.classList.add('show');
         spawnConfetti();
         setTimeout(() => {
           overlay.classList.remove('show');
-          setTimeout(() => {
-            running = false;
-            runCycle();
-          }, 600);
-        }, 2000);
+          running = false;
+          // Auto-loop after pause
+          cycleTimer = setTimeout(runCycle, 1500);
+        }, 2500);
         return;
       }
 
       const data = cards[currentIndex];
       const cardEl = cardEls[currentIndex];
       const direction = data.action;
-      const nopeBtn = document.querySelector('.swipe-nope');
-      const likeBtn = document.querySelector('.swipe-like');
 
+      // Step 1: Show stamp
       setTimeout(() => {
-        // Show stamp
         if (direction === 'left') {
           cardEl.classList.add('show-nope');
           nopeBtn.classList.add('active');
@@ -152,33 +156,108 @@ if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
           likeBtn.classList.add('active');
         }
 
+        // Step 2: Fly card off
         setTimeout(() => {
-          // Swipe away
           cardEl.classList.add(direction === 'left' ? 'swiping-left' : 'swiping-right');
           nopeBtn.classList.remove('active');
           likeBtn.classList.remove('active');
 
-          // Move remaining cards up
+          // Promote remaining cards
           for (let j = currentIndex + 1; j < cardEls.length; j++) {
             const offset = j - currentIndex - 1;
-            cardEls[j].style.transform = `scale(${1 - offset * 0.05}) translateY(${offset * 8}px)`;
             cardEls[j].style.transition = 'transform 0.4s ease';
+            cardEls[j].style.transform = offset === 0
+              ? 'scale(1) translateY(0)'
+              : `scale(${1 - offset * 0.05}) translateY(${offset * 8}px)`;
           }
 
           currentIndex++;
-          setTimeout(swipeNext, 800);
-        }, 600);
-      }, 400);
+          setTimeout(swipeNext, 1000);
+        }, 700);
+      }, 600);
     }
 
-    setTimeout(swipeNext, 800);
+    // Start first swipe after a brief pause
+    setTimeout(swipeNext, 1000);
   }
 
-  // Start when visible
+  // Start when visible, pause when not
   const swipeObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting && !running) runCycle();
+      if (e.isIntersecting && !running) {
+        runCycle();
+      } else if (!e.isIntersecting) {
+        clearTimeout(cycleTimer);
+        running = false;
+      }
     });
   }, { threshold: 0.3 });
   swipeObserver.observe(stack.closest('.swipe-demo'));
+})();
+
+// ═══════════════════════════════════════
+// Testimonial Carousel
+// ═══════════════════════════════════════
+(function initTestimonialCarousel() {
+  const track = document.querySelector('.testimonial-track');
+  if (!track) return;
+
+  const slides = Array.from(track.children);
+  const prevBtn = document.querySelector('.testimonial-prev');
+  const nextBtn = document.querySelector('.testimonial-next');
+  const dotsContainer = document.querySelector('.testimonial-dots');
+  let current = 0;
+  let autoTimer = null;
+  let startX = 0;
+  let isDragging = false;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Testimonial ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    current = ((index % slides.length) + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.testimonial-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    resetAuto();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  // Touch/swipe support
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? next() : prev();
+    }
+  });
+
+  // Auto-advance
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 5000);
+  }
+  resetAuto();
+
+  // Pause on hover
+  const section = track.closest('.testimonials-section');
+  section.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  section.addEventListener('mouseleave', resetAuto);
 })();
