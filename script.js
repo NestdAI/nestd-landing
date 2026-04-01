@@ -140,17 +140,32 @@ if (waMock) {
 
   function activateStep(idx) {
     if (idx === currentStep) return;
+    const prevStep = currentStep;
     currentStep = idx;
 
-    stepItems.forEach(s => s.classList.remove('step-active'));
-    stepItems[idx]?.classList.add('step-active');
+    // Sequential fade: old step fades out FIRST, then new step fades in
+    const fadeOutDuration = 350; // ms — matches CSS transition
 
-    stepAnims.forEach(a => { a.classList.remove('active'); resetAnimElements(a); });
-    const animEl = document.querySelector(`.step-anim[data-step="${idx}"]`);
-    if (animEl) {
-      animEl.classList.add('active');
-      animateStep(idx);
+    // Fade out old step
+    if (prevStep >= 0) {
+      stepItems[prevStep]?.classList.remove('step-active');
+      const oldAnim = document.querySelector(`.step-anim[data-step="${prevStep}"]`);
+      if (oldAnim) oldAnim.classList.remove('active');
     }
+
+    // After old step has fully faded out, fade in new step
+    const delay = prevStep >= 0 ? fadeOutDuration : 0;
+    setTimeout(() => {
+      // Reset all anims (cleanup)
+      stepAnims.forEach(a => { resetAnimElements(a); });
+
+      stepItems[idx]?.classList.add('step-active');
+      const animEl = document.querySelector(`.step-anim[data-step="${idx}"]`);
+      if (animEl) {
+        animEl.classList.add('active');
+        animateStep(idx);
+      }
+    }, delay);
   }
 
   // Activate first step

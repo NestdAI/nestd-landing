@@ -12,6 +12,17 @@
   padding: 0 24px;
   transition: transform 0.35s ease, opacity 0.35s ease;
 }
+
+.navbar.navbar-transparent {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: none;
+}
+
+.navbar.navbar-transparent .navbar-inner {
+  justify-content: flex-end;
+}
 .navbar.navbar-hidden {
   transform: translateY(-100%);
   opacity: 0;
@@ -84,7 +95,7 @@ body.light .navbar-brand span {
 
 /* Hamburger */
 .navbar-hamburger {
-  display: none;
+  display: flex;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -1154,6 +1165,11 @@ body.light .navbar-brand span {
 body.light .navbar {
   background: rgba(255,255,255,.8);
   border-bottom-color: rgba(0,0,0,.06);
+}
+
+body.light .navbar.navbar-transparent {
+  background: transparent;
+  border-bottom: none;
 }
 
 body.light .navbar-brand { color: #1a1a1a; }

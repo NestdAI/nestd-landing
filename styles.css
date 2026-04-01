@@ -561,7 +561,7 @@ body.light .cta-badges-section {
   justify-content: center;
   border-bottom: 1px solid rgba(255,255,255,.06);
   opacity: 0.35;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
   transform: translateY(8px);
 }
 
@@ -670,7 +670,7 @@ body.light .phone-screen {
   inset: 0;
   opacity: 0;
   transform: scale(0.95) translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
   padding: 44px 16px 16px;
 }
