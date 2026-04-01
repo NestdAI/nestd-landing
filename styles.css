@@ -1004,7 +1004,7 @@ body.light .notif-bubble-text { color: #1a1a1a; }
     position: sticky;
     top: 80px;
     height: auto;
-    padding: 32px 0;
+    padding: 12px 0;
     z-index: 10;
     order: 1;
     background: #111; /* match .how-it-works background */
@@ -1039,13 +1039,15 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-text-sticky {
     position: sticky;
-    top: 420px; /* below the sticky phone */
+    top: 390px; /* below the smaller sticky phone: 80px + 12px padding + 280px phone + 12px padding + ~6px gap */
     height: 180px; /* fixed height for text area */
     min-height: auto;
   }
   .phone-mockup {
-    width: 240px;
-    height: 430px;
+    width: 160px;
+    height: 280px;
+    border-radius: 24px;
+    padding: 8px;
   }
 }
 
