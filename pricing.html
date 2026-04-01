@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Prijzen | Nestd — Jouw AI Woonassistent</title>
   <meta name="description" content="Nestd is bijna volledig gratis. Alleen de WhatsApp AI-agent en Duo Zoeken zijn Pro. Bekijk onze prijzen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,22 +17,19 @@
   <script>if(localStorage.getItem("nestd-lang")!=="nl")document.documentElement.classList.add("i18n-loading")</script>
 </head>
 <body>
+  <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
 
   <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar navbar-transparent">
     <div class="navbar-inner">
       <a href="/" class="navbar-brand">
         <img src="logo.png" alt="Nestd">
-        <span>Nestd</span>
       </a>
-
-      <ul class="navbar-links">
-        <li><a href="/" data-i18n="nav_home">Home</a></li>
-        <li><a href="/features.html" data-i18n="nav_features">Features</a></li>
-        <li><a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a></li>
-        <li><a href="/about.html" data-i18n="nav_about">Over ons</a></li>
-      </ul>
-
+      <div class="navbar-links">
+        <a href="/" data-i18n="nav_home">Home</a>
+        <a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a>
+        <a href="/about.html" data-i18n="nav_about">Over ons</a>
+      </div>
       <div class="navbar-right">
         <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
@@ -48,7 +45,6 @@
   <!-- Mobile menu -->
   <div class="navbar-mobile" id="mobile-menu">
     <a href="/" data-i18n="nav_home">Home</a>
-    <a href="/features.html" data-i18n="nav_features">Features</a>
     <a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
   </div>
@@ -229,7 +225,6 @@
         <div>
           <h5 data-i18n="footer_product">Product</h5>
           <ul>
-            <li><a href="/features.html" data-i18n="footer_features">Features</a></li>
             <li><a href="/pricing.html" data-i18n="footer_pricing">Prijzen</a></li>
           </ul>
         </div>
