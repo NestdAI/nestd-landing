@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Nestd — Privacybeleid</title>
   <meta name="description" content="Privacybeleid van Nestd. Lees hoe wij omgaan met je persoonsgegevens.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,8 +101,11 @@
     body.light .back-link { color: #666; }
     body.light .back-link:hover { color: #1a1a1a; }
   </style>
+  <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
+  <script>if(localStorage.getItem("nestd-lang")!=="nl")document.documentElement.classList.add("i18n-loading")</script>
 </head>
 <body>
+  <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
 
   <!-- Floating buttons -->
   <div class="floating-right-group">
@@ -129,7 +132,7 @@
 
       <h2 data-i18n="privacyS2Title">2. Waarom verwerken wij deze gegevens?</h2>
       <ul>
-        <li data-i18n-html="privacyS2a"><strong>Dienstverlening</strong> — om huurwoningen te matchen aan je voorkeuren en automatisch te reageren.</li>
+        <li data-i18n-html="privacyS2a"><strong>Dienstverlening</strong> — om huurwoningen te matchen aan je voorkeuren.</li>
         <li data-i18n-html="privacyS2b"><strong>Notificaties</strong> — om je via WhatsApp op de hoogte te houden van nieuwe matches.</li>
         <li data-i18n-html="privacyS2c"><strong>Waitlist</strong> — om je te informeren wanneer Nestd beschikbaar is.</li>
         <li data-i18n-html="privacyS2d"><strong>Verbetering</strong> — om onze dienst en AI-matching te verbeteren.</li>
@@ -145,7 +148,7 @@
       <p data-i18n="privacyS3Extra">Wij verkopen je gegevens nooit aan derden.</p>
 
       <h2 data-i18n="privacyS4Title">4. Woninggegevens</h2>
-      <p data-i18n="privacyS4Text">Nestd verzamelt publiek beschikbare huurwoningadvertenties van platforms zoals Pararius. Dit betreft geen persoonsgegevens maar openbare woninginformatie.</p>
+      <p data-i18n="privacyS4Text">Nestd verzamelt publiek beschikbare huurwoningadvertenties van diverse woningplatformen. Dit betreft geen persoonsgegevens maar openbare woninginformatie.</p>
 
       <h2 data-i18n="privacyS5Title">5. Bewaartermijn</h2>
       <p data-i18n="privacyS5Text">Wij bewaren je persoonsgegevens zolang je een actief account hebt of op de waitlist staat. Wanneer je je uitschrijft of je account verwijdert, verwijderen wij je gegevens binnen 30 dagen, tenzij wettelijk anders vereist.</p>
