@@ -22,11 +22,11 @@ body {
   color: var(--light);
   background: var(--dark);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .container {
@@ -977,16 +977,17 @@ body.light .notif-bubble-text { color: #1a1a1a; }
     gap: 0;
   }
   .steps-anim-col {
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 2;
     order: 1;
   }
   .steps-anim-sticky {
-    position: relative;
+    position: sticky;
     top: 0;
     height: auto;
     padding: 32px 0;
+    z-index: 2;
+    background: var(--dark);
   }
   .steps-text-col {
     order: 2;
