@@ -27,16 +27,19 @@
 @media (max-width: 768px) {
   .navbar,
   .navbar.navbar-transparent {
+    position: absolute !important;
     background: none !important;
+    background-color: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
     border: none !important;
     border-bottom: none !important;
+    width: 100%;
   }
   .navbar .navbar-brand { display: none; }
   .navbar .navbar-links { display: none; }
-  .navbar .navbar-inner { justify-content: flex-end; }
+  .navbar .navbar-inner { justify-content: flex-end; height: auto; padding: 8px 0; }
 }
 .navbar.navbar-hidden {
   transform: translateY(-100%);
