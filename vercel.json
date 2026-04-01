@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/listing/:id", "destination": "/listing/index.html" }
+  ]
+}
