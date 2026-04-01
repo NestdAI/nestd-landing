@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>View Listing — Nestd</title>
+  <meta name="description" content="Open this listing in the Nestd app.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      text-align: center;
+      max-width: 420px;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #a0a0a0;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { transform: scale(1.02); }
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.12);
+      width: 100%;
+    }
+    .stores {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stores img { height: 44px; }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .redirect-msg { color: #a0a0a0; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/logo.png" alt="Nestd" class="logo">
+    <div id="redirecting">
+      <div class="spinner"></div>
+      <p class="redirect-msg">Opening in Nestd app…</p>
+    </div>
+    <div id="fallback" style="display:none">
+      <h1>View this listing</h1>
+      <p class="subtitle">This listing is available in the Nestd app — your AI-powered home finder.</p>
+      <a id="open-app" href="#" class="btn btn-primary">Open in Nestd</a>
+      <a href="/" class="btn btn-secondary">Learn more about Nestd</a>
+      <div class="stores">
+        <a href="https://apps.apple.com/app/nestd/id6740091498" target="_blank">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+        </a>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      // Extract listing ID from path: /listing/<id>
+      var parts = window.location.pathname.split('/');
+      var listingId = parts[parts.indexOf('listing') + 1] || '';
+      var appUrl = 'https://nestd.nl/listing/' + listingId;
+
+      // Set the CTA link
+      document.getElementById('open-app').href = appUrl;
+
+      // Try to open the app via universal link, show fallback after timeout
+      var fallbackTimer = setTimeout(function() {
+        document.getElementById('redirecting').style.display = 'none';
+        document.getElementById('fallback').style.display = 'block';
+      }, 2500);
+
+      // If the page becomes hidden (app opened), clear fallback
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) clearTimeout(fallbackTimer);
+      });
+
+      // Attempt redirect
+      window.location.href = appUrl;
+    })();
+  </script>
+</body>
+</html>
