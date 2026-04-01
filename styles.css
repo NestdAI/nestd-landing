@@ -1390,6 +1390,11 @@ body.light .testimonial-arrow:hover {
   color: #fff;
 }
 
+/* Nav row (mobile: arrows + dots inline) */
+.testimonial-nav-row {
+  display: contents; /* desktop: acts as if not there */
+}
+
 /* Dots */
 .testimonial-dots {
   display: flex;
@@ -1433,15 +1438,30 @@ body.light .testimonial-dot.active {
   .testimonial-body {
     padding: 24px 20px;
   }
-  .testimonial-prev { left: 8px; }
-  .testimonial-next { right: 8px; }
+  /* Move arrows below viewport on mobile */
+  .testimonial-carousel {
+    margin-top: 40px;
+  }
+  .testimonial-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
   .testimonial-arrow {
+    position: static;
+    transform: none;
     width: 36px;
     height: 36px;
     font-size: 1.3rem;
+    flex-shrink: 0;
   }
-  .testimonial-carousel {
-    margin-top: 40px;
+  .testimonial-arrow:hover {
+    transform: scale(1.1);
+  }
+  .testimonial-dots {
+    margin-top: 0;
   }
 }
 

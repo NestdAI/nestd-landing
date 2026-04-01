@@ -339,17 +339,48 @@ if (waMock) {
   if (prevBtn) prevBtn.addEventListener('click', prev);
   if (nextBtn) nextBtn.addEventListener('click', next);
 
+  // Move arrows into nav-row on mobile
+  const navRow = document.querySelector('.testimonial-nav-row');
+  function arrangeNav() {
+    if (!navRow || !prevBtn || !nextBtn) return;
+    if (window.innerWidth <= 768) {
+      navRow.insertBefore(prevBtn, navRow.firstChild);
+      navRow.appendChild(nextBtn);
+    } else {
+      // Move arrows back to carousel root (before/after viewport)
+      const viewport = track.closest('.testimonial-viewport');
+      const carousel = viewport.parentElement;
+      carousel.insertBefore(prevBtn, viewport);
+      viewport.after(nextBtn);
+    }
+  }
+  arrangeNav();
+  window.addEventListener('resize', arrangeNav);
+
   // Touch/swipe support
+  let currentX = 0;
   track.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
+    currentX = startX;
     isDragging = true;
+    track.style.transition = 'none';
+  }, { passive: true });
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    const diff = startX - currentX;
+    const offset = -(current * 100) - (diff / track.offsetWidth * 100);
+    track.style.transform = `translateX(${offset}%)`;
   }, { passive: true });
   track.addEventListener('touchend', (e) => {
     if (!isDragging) return;
     isDragging = false;
-    const diff = startX - e.changedTouches[0].clientX;
+    track.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1)';
+    const diff = startX - currentX;
     if (Math.abs(diff) > 50) {
       diff > 0 ? next() : prev();
+    } else {
+      goTo(current); // snap back
     }
   });
 
