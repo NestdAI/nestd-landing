@@ -152,6 +152,24 @@ if (waMock) {
   // Activate first step
   activateStep(0);
 
+  const isMobile = () => window.innerWidth <= 768;
+
+  // Mobile: scroll-position based fade transitions
+  function handleMobileScroll() {
+    const textCol = document.querySelector('.steps-text-col');
+    if (!textCol) return;
+    const rect = textCol.getBoundingClientRect();
+    const scrollHeight = textCol.offsetHeight;
+    const scrolled = -rect.top; // how far we've scrolled into the section
+    const stepCount = stepItems.length;
+    const stepHeight = scrollHeight / stepCount;
+
+    let idx = Math.floor(scrolled / stepHeight);
+    idx = Math.max(0, Math.min(stepCount - 1, idx));
+    activateStep(idx);
+  }
+
+  // Desktop: IntersectionObserver
   const stepObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -161,7 +179,20 @@ if (waMock) {
     });
   }, { threshold: 0.15, rootMargin: '-35% 0px -35% 0px' });
 
-  stepItems.forEach(item => stepObserver.observe(item));
+  function setupObservers() {
+    if (isMobile()) {
+      // Disconnect IO, use scroll
+      stepObserver.disconnect();
+      window.addEventListener('scroll', handleMobileScroll, { passive: true });
+      handleMobileScroll();
+    } else {
+      window.removeEventListener('scroll', handleMobileScroll);
+      stepItems.forEach(item => stepObserver.observe(item));
+    }
+  }
+
+  setupObservers();
+  window.addEventListener('resize', setupObservers);
 })();
 
 // Waitlist forms removed — app is live

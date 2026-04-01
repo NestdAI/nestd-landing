@@ -549,6 +549,10 @@ body.light .cta-badges-section {
   gap: 0;
 }
 
+.steps-text-sticky {
+  /* no-op on desktop */
+}
+
 .step-item {
   padding: 48px 0;
   min-height: 60vh;
@@ -998,7 +1002,7 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-anim-sticky {
     position: sticky;
-    top: 0;
+    top: 80px;
     height: auto;
     padding: 32px 0;
     z-index: 10;
@@ -1010,10 +1014,37 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-text-col {
     order: 2;
+    position: relative;
+    height: 400vh; /* scroll space for 4 steps */
   }
   .step-item {
-    padding: 32px 0;
-    min-height: 60vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 32px 16px;
+    min-height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    /* Center vertically in viewport-ish area */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .step-item.step-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .steps-text-sticky {
+    position: sticky;
+    top: 35vh;
+    transform: translateY(-50%);
+    height: auto;
+    min-height: 150px;
+    /* relative positioning for absolute step-items */
+    position: sticky;
   }
   .phone-mockup {
     width: 240px;
