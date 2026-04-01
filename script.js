@@ -1,16 +1,36 @@
-// Theme toggle
+// Theme toggle with prefers-color-scheme support
 const toggle = document.getElementById('theme-toggle');
 const saved = localStorage.getItem('nestd-theme');
-if (saved === 'light') {
-  document.body.classList.add('light');
-  toggle.textContent = '🌙';
+
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  document.body.classList.toggle('light', isLight);
+  if (toggle) toggle.textContent = isLight ? '🌙' : '☀️';
 }
-toggle.addEventListener('click', () => {
-  document.body.classList.toggle('light');
-  const isLight = document.body.classList.contains('light');
-  toggle.textContent = isLight ? '🌙' : '☀️';
-  localStorage.setItem('nestd-theme', isLight ? 'light' : 'dark');
-});
+
+// Determine initial theme: saved preference > system preference > dark
+if (saved) {
+  applyTheme(saved);
+} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  applyTheme('light');
+}
+
+// Listen for system theme changes (only if user hasn't set a preference)
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('nestd-theme')) {
+      applyTheme(e.matches ? 'light' : 'dark');
+    }
+  });
+}
+
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    const isLight = !document.body.classList.contains('light');
+    applyTheme(isLight ? 'light' : 'dark');
+    localStorage.setItem('nestd-theme', isLight ? 'light' : 'dark');
+  });
+}
 
 // Scroll fade-in
 const observer = new IntersectionObserver((entries) => {
@@ -59,45 +79,7 @@ if (waMock) {
   stepItems.forEach(item => stepObserver.observe(item));
 })();
 
-// Waitlist form handler
-async function handleWaitlist(e) {
-  e.preventDefault();
-  const form = e.target;
-  const input = form.querySelector('input');
-  const btn = form.querySelector('button');
-  const msgEl = form.nextElementSibling;
-  const email = input.value.trim();
-  if (!email) return;
-
-  const t = translations[currentLang];
-  btn.disabled = true;
-  btn.textContent = t.submitLoading;
-  msgEl.textContent = '';
-  msgEl.className = 'form-msg';
-
-  try {
-    const res = await fetch('https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
-    });
-    if (!res.ok) throw new Error();
-    msgEl.textContent = t.successMsg;
-    msgEl.className = 'form-msg success';
-    input.value = '';
-  } catch {
-    msgEl.textContent = t.errorMsg;
-    msgEl.className = 'form-msg error';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = t.submitBtn;
-  }
-}
-
-const heroForm = document.getElementById('waitlist-hero');
-const footerForm = document.getElementById('waitlist-footer');
-if (heroForm) heroForm.addEventListener('submit', handleWaitlist);
-if (footerForm) footerForm.addEventListener('submit', handleWaitlist);
+// Waitlist forms removed — app is live
 
 // ═══════════════════════════════════════
 // Swipe Animation (Duo Zoeken)

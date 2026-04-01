@@ -37,6 +37,8 @@ const translations = {
     waitlistTitle: '<em>Nestd is in ontwikkeling.</em>',
     waitlistSub: 'Schrijf je in voor early access.',
     waitlistNote: 'Geen spam. Alleen een bericht wanneer we live gaan.',
+    ctaBottomTitle: '<em>Download Nestd.</em>',
+    ctaBottomSub: 'Beschikbaar op iOS en binnenkort op Android.',
 
     // WhatsApp typing
     wa_typing: 'aan het typen',
@@ -335,6 +337,8 @@ const translations = {
     waitlistTitle: '<em>Nestd is under development.</em>',
     waitlistSub: 'Sign up for early access.',
     waitlistNote: 'No spam. Just a message when we go live.',
+    ctaBottomTitle: '<em>Download Nestd.</em>',
+    ctaBottomSub: 'Available on iOS and coming soon to Android.',
 
     // WhatsApp typing
     wa_typing: 'typing',
