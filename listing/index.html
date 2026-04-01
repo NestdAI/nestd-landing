@@ -112,12 +112,12 @@
       // Extract listing ID from path: /listing/<id>
       var parts = window.location.pathname.split('/');
       var listingId = parts[parts.indexOf('listing') + 1] || '';
-      var appUrl = 'https://nestd.nl/listing/' + listingId;
+      var deepLink = 'nestd://listing/' + listingId;
 
-      // Set the CTA link
-      document.getElementById('open-app').href = appUrl;
+      // Set the CTA link to custom scheme
+      document.getElementById('open-app').href = deepLink;
 
-      // Try to open the app via universal link, show fallback after timeout
+      // Show fallback after timeout (app didn't open)
       var fallbackTimer = setTimeout(function() {
         document.getElementById('redirecting').style.display = 'none';
         document.getElementById('fallback').style.display = 'block';
@@ -128,8 +128,8 @@
         if (document.hidden) clearTimeout(fallbackTimer);
       });
 
-      // Attempt redirect
-      window.location.href = appUrl;
+      // Attempt to open app via custom scheme (won't cause redirect loop)
+      window.location.href = deepLink;
     })();
   </script>
 </body>
