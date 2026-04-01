@@ -1002,7 +1002,7 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-anim-sticky {
     position: sticky;
-    top: 80px;
+    top: 12px; /* header hidden on mobile in this section */
     height: auto;
     padding: 12px 0;
     z-index: 10;
@@ -1039,13 +1039,13 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-text-sticky {
     position: sticky;
-    top: 390px; /* below the smaller sticky phone: 80px + 12px padding + 280px phone + 12px padding + ~6px gap */
+    top: 384px; /* header hidden on mobile: 12px top + 12px padding + 340px phone + 20px gap */
     height: 180px; /* fixed height for text area */
     min-height: auto;
   }
   .phone-mockup {
-    width: 160px;
-    height: 280px;
+    width: 180px;
+    height: 340px;
     border-radius: 24px;
     padding: 8px;
   }

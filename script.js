@@ -437,3 +437,21 @@ if (waMock) {
   section.addEventListener('mouseenter', () => clearInterval(autoTimer));
   section.addEventListener('mouseleave', resetAuto);
 })();
+
+// Hide navbar when scrolling through "Hoe het werkt" section on mobile
+(function() {
+  const howSection = document.querySelector('.how-it-works');
+  const navbar = document.querySelector('.navbar');
+  if (!howSection || !navbar) return;
+
+  const mq = window.matchMedia('(max-width: 900px)');
+
+  const obs = new IntersectionObserver((entries) => {
+    if (!mq.matches) { navbar.classList.remove('navbar-hidden'); return; }
+    entries.forEach(e => {
+      navbar.classList.toggle('navbar-hidden', e.isIntersecting);
+    });
+  }, { threshold: 0.1 });
+
+  obs.observe(howSection);
+})();

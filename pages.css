@@ -10,6 +10,12 @@
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,.06);
   padding: 0 24px;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.navbar.navbar-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navbar-inner {
