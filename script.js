@@ -52,29 +52,113 @@ if (waMock) {
   waObserver.observe(waMock);
 }
 
-// Scroll-driven "How it works" steps
+// Scroll-driven "How it works" steps with animations
 (function initStepsScroll() {
   const stepItems = document.querySelectorAll('.step-item[data-step-index]');
-  const stepImages = document.querySelectorAll('.steps-image[data-step]');
-  if (!stepItems.length || !stepImages.length) return;
+  const stepAnims = document.querySelectorAll('.step-anim[data-step]');
+  if (!stepItems.length || !stepAnims.length) return;
 
-  // Activate first step by default
-  stepItems[0].classList.add('step-active');
+  let currentStep = -1;
+  let animTimers = [];
+
+  function clearAnimTimers() {
+    animTimers.forEach(t => clearTimeout(t));
+    animTimers = [];
+  }
+
+  function resetAnimElements(animEl) {
+    animEl.querySelectorAll('.anim-visible').forEach(el => el.classList.remove('anim-visible'));
+    animEl.querySelectorAll('.anim-checked').forEach(el => el.classList.remove('anim-checked'));
+    animEl.querySelectorAll('.typing-text').forEach(el => el.textContent = '');
+  }
+
+  function typeText(el, text, cb) {
+    let i = 0;
+    function next() {
+      if (i <= text.length) {
+        el.textContent = text.slice(0, i);
+        i++;
+        const timer = setTimeout(next, 35 + Math.random() * 25);
+        animTimers.push(timer);
+      } else if (cb) cb();
+    }
+    next();
+  }
+
+  function animateStep(idx) {
+    clearAnimTimers();
+    const animEl = document.querySelector(`.step-anim[data-step="${idx}"]`);
+    if (!animEl) return;
+    resetAnimElements(animEl);
+
+    if (idx === 0) {
+      // Profile creation: sequential field typing
+      const fields = animEl.querySelectorAll('.anim-field');
+      const btn = animEl.querySelector('.anim-profile-btn');
+      let fieldIdx = 0;
+      function animField() {
+        if (fieldIdx >= fields.length) {
+          if (btn) { const t = setTimeout(() => btn.classList.add('anim-visible'), 200); animTimers.push(t); }
+          return;
+        }
+        const f = fields[fieldIdx];
+        const t1 = setTimeout(() => {
+          f.classList.add('anim-visible');
+          const typingEl = f.querySelector('.typing-text');
+          const text = typingEl?.dataset.text || '';
+          const t2 = setTimeout(() => {
+            typeText(typingEl, text, () => {
+              const t3 = setTimeout(() => {
+                f.classList.add('anim-checked');
+                fieldIdx++;
+                const t4 = setTimeout(animField, 200);
+                animTimers.push(t4);
+              }, 300);
+              animTimers.push(t3);
+            });
+          }, 200);
+          animTimers.push(t2);
+        }, fieldIdx === 0 ? 300 : 100);
+        animTimers.push(t1);
+      }
+      animField();
+    } else {
+      // Cards/bubbles: staggered entrance
+      const items = animEl.querySelectorAll('[data-delay]');
+      items.forEach(item => {
+        const delay = parseInt(item.dataset.delay) || 0;
+        const t = setTimeout(() => item.classList.add('anim-visible'), 300 + delay * 350);
+        animTimers.push(t);
+      });
+    }
+  }
+
+  function activateStep(idx) {
+    if (idx === currentStep) return;
+    currentStep = idx;
+
+    stepItems.forEach(s => s.classList.remove('step-active'));
+    stepItems[idx]?.classList.add('step-active');
+
+    stepAnims.forEach(a => { a.classList.remove('active'); resetAnimElements(a); });
+    const animEl = document.querySelector(`.step-anim[data-step="${idx}"]`);
+    if (animEl) {
+      animEl.classList.add('active');
+      animateStep(idx);
+    }
+  }
+
+  // Activate first step
+  activateStep(0);
 
   const stepObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        const idx = e.target.dataset.stepIndex;
-        // Activate step text
-        stepItems.forEach(s => s.classList.remove('step-active'));
-        e.target.classList.add('step-active');
-        // Crossfade image
-        stepImages.forEach(img => img.classList.remove('active'));
-        const target = document.querySelector(`.steps-image[data-step="${idx}"]`);
-        if (target) target.classList.add('active');
+        const idx = parseInt(e.target.dataset.stepIndex);
+        activateStep(idx);
       }
     });
-  }, { threshold: 0.6, rootMargin: '-20% 0px -20% 0px' });
+  }, { threshold: 0.5, rootMargin: '-20% 0px -20% 0px' });
 
   stepItems.forEach(item => stepObserver.observe(item));
 })();
