@@ -536,8 +536,11 @@ body.light .cta-badges-section {
 .steps-scroll-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  gap: 48px;
   margin-top: 64px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .steps-text-col {
@@ -548,7 +551,7 @@ body.light .cta-badges-section {
 
 .step-item {
   padding: 48px 0;
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -620,12 +623,12 @@ body.light .step-item {
   background: #1a1a1a;
   border-radius: 36px;
   padding: 12px;
-  box-shadow: 0 25px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06);
 }
 
 body.light .phone-mockup {
   background: #f0f0f0;
-  box-shadow: 0 25px 60px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.06);
 }
 
 .phone-notch {
