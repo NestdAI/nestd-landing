@@ -180,11 +180,11 @@ if (waMock) {
     const rect = textCol.getBoundingClientRect();
     const scrollHeight = textCol.offsetHeight;
     const scrolled = -rect.top; // how far we've scrolled into the section
-    const stepCount = stepItems.length;
-    const stepHeight = scrollHeight / stepCount;
+    const maxScroll = scrollHeight - window.innerHeight;
+    const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
 
-    let idx = Math.floor(scrolled / stepHeight);
-    idx = Math.max(0, Math.min(stepCount - 1, idx));
+    // Exact 4 equal parts — each step gets 25% of scroll distance
+    let idx = Math.min(3, Math.floor(progress * 4));
     activateStep(idx);
   }
 
