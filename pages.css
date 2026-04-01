@@ -5,25 +5,38 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-bottom: none !important;
   padding: 0 24px;
   transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.navbar.navbar-transparent {
-  background: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-bottom: none !important;
+/* Desktop: solid navbar */
+@media (min-width: 769px) {
+  .navbar,
+  .navbar.navbar-transparent {
+    background: rgba(18, 18, 18, 0.85) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+  }
+  .navbar .navbar-hamburger { display: none; }
+  .navbar .navbar-links { display: flex; }
 }
 
-.navbar.navbar-transparent .navbar-inner {
-  justify-content: flex-end;
+/* Mobile: transparent, floating buttons */
+@media (max-width: 768px) {
+  .navbar,
+  .navbar.navbar-transparent {
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+  .navbar .navbar-brand { display: none; }
+  .navbar .navbar-links { display: none; }
+  .navbar .navbar-inner { justify-content: flex-end; }
 }
 .navbar.navbar-hidden {
   transform: translateY(-100%);
@@ -1164,18 +1177,27 @@ body.light .navbar-brand span {
 }
 
 /* ── Light Mode ── */
-body.light .navbar {
-  background: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-bottom: none !important;
+@media (min-width: 769px) {
+  body.light .navbar,
+  body.light .navbar.navbar-transparent {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+  }
 }
 
-body.light .navbar.navbar-transparent {
-  background: none !important;
-  border-bottom: none !important;
+@media (max-width: 768px) {
+  body.light .navbar,
+  body.light .navbar.navbar-transparent {
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
 }
 
 body.light .navbar-brand { color: #1a1a1a; }
