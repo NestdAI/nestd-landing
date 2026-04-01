@@ -1,120 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>View Listing — Nestd</title>
-  <meta name="description" content="Open this listing in the Nestd app.">
+  <title>Bekijk woning — Nestd</title>
+  <meta name="description" content="Open deze woning in de Nestd app.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0a0a0a;
       color: #f5f5f5;
-      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
     }
+
     .container {
       text-align: center;
-      max-width: 420px;
+      max-width: 380px;
+      width: 100%;
     }
+
+    /* Logo */
     .logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      margin-bottom: 1.5rem;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      color: #a0a0a0;
-      font-size: 0.95rem;
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
       margin-bottom: 2rem;
-      line-height: 1.5;
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
     }
+
+    /* Spinner state */
+    .spinner-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: rgba(99, 102, 241, 0.8);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .redirect-msg {
+      color: #888;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Fallback content */
+    .fallback { display: none; }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Buttons */
     .btn {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      border-radius: 12px;
-      font-size: 1rem;
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 14px;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      transition: transform 0.15s, opacity 0.15s;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       cursor: pointer;
       border: none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover { transform: scale(1.02); }
+    .btn:active { transform: scale(0.97); }
+
     .btn-primary {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      background: linear-gradient(135deg, #E8416F, #E8416F);
       color: #fff;
-      margin-bottom: 1rem;
-      width: 100%;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 4px 20px rgba(232, 65, 111, 0.3);
     }
+    .btn-primary:active {
+      box-shadow: 0 2px 10px rgba(232, 65, 111, 0.2);
+    }
+
     .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      color: #f5f5f5;
-      border: 1px solid rgba(255,255,255,0.12);
-      width: 100%;
+      background: rgba(255,255,255,0.06);
+      color: #ccc;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 0.75rem;
     }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      color: #555;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* Store badges */
     .stores {
-      margin-top: 2rem;
       display: flex;
       gap: 0.75rem;
       justify-content: center;
-      flex-wrap: wrap;
     }
-    .stores img { height: 44px; }
-    .spinner {
-      width: 24px; height: 24px;
-      border: 3px solid rgba(255,255,255,0.2);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 1rem;
+    .stores a {
+      display: block;
+      transition: transform 0.15s ease;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .redirect-msg { color: #a0a0a0; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .stores a:active { transform: scale(0.95); }
+    .stores img {
+      height: 44px;
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 3rem;
+      color: #444;
+      font-size: 0.75rem;
+    }
+    .footer a {
+      color: #666;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="/logo.png" alt="Nestd" class="logo">
-    <div id="redirecting">
+
+    <!-- Redirect spinner -->
+    <div id="redirecting" class="spinner-wrap">
       <div class="spinner"></div>
-      <p class="redirect-msg">Opening in Nestd app…</p>
+      <p class="redirect-msg" data-i18n="redirecting">Openen in Nestd…</p>
     </div>
-    <div id="fallback" style="display:none">
-      <h1>View this listing</h1>
-      <p class="subtitle">This listing is available in the Nestd app — your AI-powered home finder.</p>
-      <a id="open-app" href="#" class="btn btn-primary">Open in Nestd</a>
-      <a href="/" class="btn btn-secondary">Learn more about Nestd</a>
+
+    <!-- Fallback content -->
+    <div id="fallback" class="fallback">
+      <h1 data-i18n="title">Bekijk deze woning</h1>
+      <p class="subtitle" data-i18n="subtitle">Deze woning is beschikbaar in de Nestd app — jouw AI-woningzoeker.</p>
+
+      <a id="open-app" href="#" class="btn btn-primary" data-i18n="openApp">Open in Nestd</a>
+      <a href="/" class="btn btn-secondary" data-i18n="learnMore">Meer over Nestd</a>
+
+      <div class="divider" data-i18n="noApp">Nog geen app?</div>
+
       <div class="stores">
         <a href="https://apps.apple.com/app/nestd/id6740091498" target="_blank">
           <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
         </a>
       </div>
     </div>
+
+    <p class="footer"><a href="/">nestd.nl</a></p>
   </div>
+
   <script>
     (function() {
+      // i18n
+      var translations = {
+        nl: {
+          redirecting: 'Openen in Nestd…',
+          title: 'Bekijk deze woning',
+          subtitle: 'Deze woning is beschikbaar in de Nestd app — jouw AI-woningzoeker.',
+          openApp: 'Open in Nestd',
+          learnMore: 'Meer over Nestd',
+          noApp: 'Nog geen app?'
+        },
+        en: {
+          redirecting: 'Opening in Nestd…',
+          title: 'View this listing',
+          subtitle: 'This listing is available in the Nestd app — your AI-powered home finder.',
+          openApp: 'Open in Nestd',
+          learnMore: 'Learn more about Nestd',
+          noApp: "Don't have the app?"
+        }
+      };
+
+      var lang = (navigator.language || 'nl').slice(0, 2);
+      var t = translations[lang] || translations.nl;
+
+      // Apply translations
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      document.documentElement.lang = lang === 'en' ? 'en' : 'nl';
+
       // Extract listing ID from path: /listing/<id>
       var parts = window.location.pathname.split('/');
       var listingId = parts[parts.indexOf('listing') + 1] || '';
       var deepLink = 'nestd://listing/' + listingId;
 
-      // Set the CTA link to custom scheme
+      // Set the CTA link
       document.getElementById('open-app').href = deepLink;
 
       // Show fallback after timeout (app didn't open)
@@ -128,7 +240,7 @@
         if (document.hidden) clearTimeout(fallbackTimer);
       });
 
-      // Attempt to open app via custom scheme (won't cause redirect loop)
+      // Attempt to open app via custom scheme
       window.location.href = deepLink;
     })();
   </script>
