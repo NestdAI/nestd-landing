@@ -1,5 +1,5 @@
 /* ── Reset & Base ── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
 
 :root {
   --primary: #FF385C;
@@ -1294,6 +1294,7 @@ body.light .testimonial-viewport {
   display: flex;
   transition: transform 0.5s cubic-bezier(.4,0,.2,1);
   will-change: transform;
+  touch-action: pan-y pinch-zoom;
 }
 
 .testimonial-slide {

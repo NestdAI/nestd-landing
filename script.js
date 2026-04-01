@@ -364,14 +364,19 @@ if (waMock) {
     currentX = startX;
     isDragging = true;
     track.style.transition = 'none';
+    clearInterval(autoTimer);
   }, { passive: true });
   track.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     currentX = e.touches[0].clientX;
     const diff = startX - currentX;
+    // Prevent vertical scroll when swiping horizontally
+    if (Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
     const offset = -(current * 100) - (diff / track.offsetWidth * 100);
     track.style.transform = `translateX(${offset}%)`;
-  }, { passive: true });
+  }, { passive: false });
   track.addEventListener('touchend', (e) => {
     if (!isDragging) return;
     isDragging = false;
@@ -382,6 +387,7 @@ if (waMock) {
     } else {
       goTo(current); // snap back
     }
+    resetAuto();
   });
 
   // Auto-advance
