@@ -8,11 +8,12 @@ function applyTheme(theme) {
   if (toggle) toggle.textContent = isLight ? '🌙' : '☀️';
 }
 
-// Determine initial theme: saved preference > system preference > dark
+// Initial theme is set by blocking <script> in <body> to prevent FOUC.
+// Only sync the toggle icon here.
 if (saved) {
-  applyTheme(saved);
+  if (toggle) toggle.textContent = saved === 'light' ? '🌙' : '☀️';
 } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-  applyTheme('light');
+  if (toggle) toggle.textContent = '🌙';
 }
 
 // Listen for system theme changes (only if user hasn't set a preference)
