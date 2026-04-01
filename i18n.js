@@ -54,6 +54,8 @@ const translations = {
     testimonial_4_name: 'Priya, 24',
     testimonial_5_quote: '"De WhatsApp alerts zijn een gamechanger. Ik kreeg een bericht terwijl ik op werk zat en kon meteen reageren. Binnen een uur had ik een bezichtiging."',
     testimonial_5_name: 'Sara, 27',
+    testimonial_6_quote: '"Als expat koppel was het bijna onmogelijk om een huurwoning te vinden. De WhatsApp AI-agent hielp ons door het hele proces. Echt een gamechanger."',
+    testimonial_6_name: 'Raj & Daan, 29',
 
     // Privacy
     privacyLink: 'Privacybeleid',
@@ -350,6 +352,8 @@ const translations = {
     testimonial_4_name: 'Priya, 24',
     testimonial_5_quote: '"The WhatsApp alerts are a game changer. I got a message while at work and could respond immediately. Within an hour I had a viewing."',
     testimonial_5_name: 'Sara, 27',
+    testimonial_6_quote: '"As an expat couple, it was nearly impossible to find a rental. The WhatsApp AI agent guided us through the entire process. A real game changer."',
+    testimonial_6_name: 'Raj & Daan, 29',
 
     // Privacy
     privacyLink: 'Privacy Policy',
