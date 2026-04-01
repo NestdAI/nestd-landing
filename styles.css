@@ -1039,12 +1039,9 @@ body.light .notif-bubble-text { color: #1a1a1a; }
   }
   .steps-text-sticky {
     position: sticky;
-    top: 35vh;
-    transform: translateY(-50%);
-    height: auto;
-    min-height: 150px;
-    /* relative positioning for absolute step-items */
-    position: sticky;
+    top: 420px; /* below the sticky phone */
+    height: 180px; /* fixed height for text area */
+    min-height: auto;
   }
   .phone-mockup {
     width: 240px;

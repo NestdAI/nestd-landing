@@ -37,7 +37,11 @@ if (toggle) {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-in, .fade-in-scale, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .fade-in-scale, .fade-in-left, .fade-in-right').forEach(el => {
+  // Don't observe step-items — they use their own scroll-driven visibility system
+  if (el.classList.contains('step-item')) return;
+  observer.observe(el);
+});
 
 // WhatsApp staggered entrance on scroll
 const waMock = document.querySelector('.wa-mock');
