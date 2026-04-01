@@ -158,7 +158,7 @@ if (waMock) {
         activateStep(idx);
       }
     });
-  }, { threshold: 0.5, rootMargin: '-20% 0px -20% 0px' });
+  }, { threshold: 0.15, rootMargin: '-35% 0px -35% 0px' });
 
   stepItems.forEach(item => stepObserver.observe(item));
 })();
