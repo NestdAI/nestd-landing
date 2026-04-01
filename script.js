@@ -18,6 +18,47 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in, .fade-in-scale, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
+// WhatsApp staggered entrance on scroll
+const waMock = document.querySelector('.wa-mock');
+if (waMock) {
+  const waObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        waMock.querySelectorAll('.wa-animate').forEach(el => el.classList.add('wa-visible'));
+        waObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  waObserver.observe(waMock);
+}
+
+// Scroll-driven "How it works" steps
+(function initStepsScroll() {
+  const stepItems = document.querySelectorAll('.step-item[data-step-index]');
+  const stepImages = document.querySelectorAll('.steps-image[data-step]');
+  if (!stepItems.length || !stepImages.length) return;
+
+  // Activate first step by default
+  stepItems[0].classList.add('step-active');
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = e.target.dataset.stepIndex;
+        // Activate step text
+        stepItems.forEach(s => s.classList.remove('step-active'));
+        e.target.classList.add('step-active');
+        // Crossfade image
+        stepImages.forEach(img => img.classList.remove('active'));
+        const target = document.querySelector(`.steps-image[data-step="${idx}"]`);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.6, rootMargin: '-20% 0px -20% 0px' });
+
+  stepItems.forEach(item => stepObserver.observe(item));
+})();
+
 // Waitlist form handler
 async function handleWaitlist(e) {
   e.preventDefault();

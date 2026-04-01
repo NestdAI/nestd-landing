@@ -330,6 +330,24 @@ body.light .navbar-brand span {
   color: var(--primary);
 }
 
+.mock-item-score.mock-item-score-lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mock-item-with-photo {
+  gap: 14px;
+}
+
+.mock-item-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .mock-explanation {
   border: 1px solid rgba(255,56,92,.15);
   border-radius: 12px;
