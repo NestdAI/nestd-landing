@@ -37,7 +37,15 @@
     border-bottom: none !important;
     width: 100%;
   }
-  .navbar .navbar-brand { display: none; }
+  .navbar .navbar-brand {
+    display: flex;
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    z-index: 100;
+    background: none;
+  }
+  .navbar .navbar-brand span { display: none; }
   .navbar .navbar-links { display: none; }
   .navbar .navbar-inner { justify-content: flex-end; height: auto; padding: 8px 0; }
 }
