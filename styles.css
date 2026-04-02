@@ -528,6 +528,12 @@ body.light .cta-badges-section {
   transform: translateY(0);
 }
 
+.wa-animate.wa-fade-out {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition-delay: 0s !important;
+}
+
 /* ── Steps Scroll-Driven Animation ── */
 .steps-scroll-layout {
   display: grid;
