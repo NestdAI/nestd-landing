@@ -43,15 +43,38 @@ document.querySelectorAll('.fade-in, .fade-in-scale, .fade-in-left, .fade-in-rig
   observer.observe(el);
 });
 
-// WhatsApp staggered entrance on scroll
+// WhatsApp looping notification animation
 const waMock = document.querySelector('.wa-mock');
 if (waMock) {
+  let waLoopTimer = null;
+
+  function waAnimationLoop() {
+    const els = waMock.querySelectorAll('.wa-animate');
+    // Phase 1: fade in (staggered via CSS delays)
+    els.forEach(el => el.classList.add('wa-visible'));
+    waLoopTimer = setTimeout(() => {
+      // Phase 2: fade out all together
+      els.forEach(el => el.classList.add('wa-fade-out'));
+      waLoopTimer = setTimeout(() => {
+        // Phase 3: reset
+        els.forEach(el => { el.classList.remove('wa-visible', 'wa-fade-out'); });
+        waLoopTimer = setTimeout(waAnimationLoop, 500);
+      }, 800);
+    }, 4500);
+  }
+
+  function waStopLoop() {
+    clearTimeout(waLoopTimer);
+    waLoopTimer = null;
+    waMock.querySelectorAll('.wa-animate').forEach(el => {
+      el.classList.remove('wa-visible', 'wa-fade-out');
+    });
+  }
+
   const waObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        waMock.querySelectorAll('.wa-animate').forEach(el => el.classList.add('wa-visible'));
-        waObserver.unobserve(e.target);
-      }
+      if (e.isIntersecting) { if (!waLoopTimer) waAnimationLoop(); }
+      else { waStopLoop(); }
     });
   }, { threshold: 0.3 });
   waObserver.observe(waMock);

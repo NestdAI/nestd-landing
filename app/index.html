@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>View Listing — Nestd</title>
-  <meta name="description" content="Open this listing in the Nestd app.">
+  <title>Open Nestd — AI-Powered Home Finder</title>
+  <meta name="description" content="Open the Nestd app and find your perfect home.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
@@ -93,12 +93,12 @@
     <img src="/logo.png" alt="Nestd" class="logo">
     <div id="redirecting">
       <div class="spinner"></div>
-      <p class="redirect-msg">Opening in Nestd app…</p>
+      <p class="redirect-msg">Opening Nestd app…</p>
     </div>
     <div id="fallback" style="display:none">
-      <h1>View this listing</h1>
-      <p class="subtitle">This listing is available in the Nestd app — your AI-powered home finder.</p>
-      <a id="open-app" href="#" class="btn btn-primary">Open in Nestd</a>
+      <h1>Open Nestd</h1>
+      <p class="subtitle">View your matches, browse listings, and chat with AI in the Nestd app.</p>
+      <a id="open-app" href="https://nestd.nl/app" class="btn btn-primary">Open in Nestd</a>
       <a href="/" class="btn btn-secondary">Learn more about Nestd</a>
       <div class="stores">
         <a href="https://apps.apple.com/app/nestd/id6740091498" target="_blank">
@@ -109,10 +109,7 @@
   </div>
   <script>
     (function() {
-      // Extract listing ID from path: /listing/<id>
-      var parts = window.location.pathname.split('/');
-      var listingId = parts[parts.indexOf('listing') + 1] || '';
-      var appUrl = 'https://nestd.nl/listing/' + listingId;
+      var appUrl = 'https://nestd.nl/app';
 
       // Set the CTA link
       document.getElementById('open-app').href = appUrl;
