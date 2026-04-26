@@ -108,6 +108,65 @@
     </div>
   </div>
   <script>
+    (function initPostHogAnalytics() {
+      var POSTHOG_KEY = window.NESTD_POSTHOG_KEY || (document.querySelector('meta[name="posthog-key"]') && document.querySelector('meta[name="posthog-key"]').content) || '';
+      var POSTHOG_HOST = 'https://eu.i.posthog.com';
+      var eventQueue = [];
+      var analyticsReady = false;
+
+      function safeUrl(value) {
+        if (!value) return null;
+        try {
+          var parsed = new URL(value, window.location.origin);
+          return parsed.origin + parsed.pathname;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      window.nestdAnalytics = {
+        track: function(event, properties) {
+          var params = new URLSearchParams(window.location.search);
+          var payload = Object.assign({
+            path: window.location.pathname,
+            url: safeUrl(window.location.href),
+            referrer: safeUrl(document.referrer),
+            utm_source: params.get('utm_source'),
+            utm_medium: params.get('utm_medium'),
+            utm_campaign: params.get('utm_campaign'),
+            utm_content: params.get('utm_content'),
+            utm_term: params.get('utm_term')
+          }, properties || {});
+          if (analyticsReady && window.posthog && window.posthog.capture) {
+            window.posthog.capture(event, payload);
+            return;
+          }
+          if (POSTHOG_KEY) eventQueue.push([event, payload]);
+        }
+      };
+      if (!POSTHOG_KEY) return;
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://eu-assets.i.posthog.com/static/array.js';
+      script.onload = function() {
+        window.posthog && window.posthog.init && window.posthog.init(POSTHOG_KEY, {
+          api_host: POSTHOG_HOST,
+          defaults: '2026-01-30',
+          capture_pageview: false,
+          autocapture: false,
+          disable_session_recording: true,
+          person_profiles: 'identified_only'
+        });
+        analyticsReady = true;
+        window.nestdAnalytics.track('app_deeplink_viewed');
+        while (eventQueue.length) {
+          var queued = eventQueue.shift();
+          window.posthog && window.posthog.capture && window.posthog.capture(queued[0], queued[1]);
+        }
+      };
+      document.head.appendChild(script);
+    })();
+
     (function() {
       var appUrl = 'https://nestd.nl/app';
 
@@ -118,11 +177,15 @@
       var fallbackTimer = setTimeout(function() {
         document.getElementById('redirecting').style.display = 'none';
         document.getElementById('fallback').style.display = 'block';
+        window.nestdAnalytics && window.nestdAnalytics.track('app_deeplink_fallback_shown');
       }, 2500);
 
       // If the page becomes hidden (app opened), clear fallback
       document.addEventListener('visibilitychange', function() {
-        if (document.hidden) clearTimeout(fallbackTimer);
+        if (document.hidden) {
+          window.nestdAnalytics && window.nestdAnalytics.track('app_deeplink_opened');
+          clearTimeout(fallbackTimer);
+        }
       });
 
       // Attempt redirect

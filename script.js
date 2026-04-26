@@ -1,3 +1,71 @@
+// PostHog analytics — marketing attribution + lightweight product-interest tracking
+(function initPostHogAnalytics() {
+  const POSTHOG_KEY = window.NESTD_POSTHOG_KEY || document.querySelector('meta[name="posthog-key"]')?.content || '';
+  const POSTHOG_HOST = 'https://eu.i.posthog.com';
+  const eventQueue = [];
+  let analyticsReady = false;
+
+  function safeUrl(value) {
+    if (!value) return null;
+    try {
+      const parsed = new URL(value, window.location.origin);
+      return `${parsed.origin}${parsed.pathname}`;
+    } catch {
+      return null;
+    }
+  }
+
+  function getAttributionPayload(properties = {}) {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      path: window.location.pathname,
+      url: safeUrl(window.location.href),
+      referrer: safeUrl(document.referrer),
+      language: document.documentElement.lang || localStorage.getItem('nestd-lang') || 'nl',
+      utm_source: params.get('utm_source'),
+      utm_medium: params.get('utm_medium'),
+      utm_campaign: params.get('utm_campaign'),
+      utm_content: params.get('utm_content'),
+      utm_term: params.get('utm_term'),
+      ...properties,
+    };
+  }
+
+  window.nestdAnalytics = {
+    track(event, properties = {}) {
+      const payload = getAttributionPayload(properties);
+      if (analyticsReady && window.posthog?.capture) {
+        window.posthog.capture(event, payload);
+        return;
+      }
+      if (POSTHOG_KEY) eventQueue.push([event, payload]);
+    },
+  };
+
+  if (!POSTHOG_KEY) return;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://eu-assets.i.posthog.com/static/array.js';
+  script.onload = function () {
+    window.posthog?.init?.(POSTHOG_KEY, {
+      api_host: POSTHOG_HOST,
+      defaults: '2026-01-30',
+      capture_pageview: false,
+      autocapture: false,
+      disable_session_recording: true,
+      person_profiles: 'identified_only',
+    });
+    analyticsReady = true;
+    window.nestdAnalytics.track('page_view');
+    while (eventQueue.length) {
+      const [event, payload] = eventQueue.shift();
+      window.posthog?.capture?.(event, payload);
+    }
+  };
+  document.head.appendChild(script);
+})();
+
 // Theme toggle with prefers-color-scheme support
 const toggle = document.getElementById('theme-toggle');
 const saved = localStorage.getItem('nestd-theme');
@@ -28,8 +96,10 @@ if (window.matchMedia) {
 if (toggle) {
   toggle.addEventListener('click', () => {
     const isLight = !document.body.classList.contains('light');
-    applyTheme(isLight ? 'light' : 'dark');
-    localStorage.setItem('nestd-theme', isLight ? 'light' : 'dark');
+    const theme = isLight ? 'light' : 'dark';
+    applyTheme(theme);
+    localStorage.setItem('nestd-theme', theme);
+    window.nestdAnalytics?.track('theme_toggled', { theme });
   });
 }
 
@@ -235,6 +305,61 @@ if (waMock) {
 
   setupObservers();
   window.addEventListener('resize', setupObservers);
+})();
+
+// Track marketing CTA and navigation clicks
+(function initMarketingClickTracking() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a, button');
+    if (!link) return;
+
+    if (link.matches('.badge-link') || link.querySelector?.('.app-badge')) {
+      const href = link.getAttribute('href') || '';
+      const store = href.includes('apps.apple.com') ? 'app_store' : 'google_play';
+      window.nestdAnalytics?.track('store_badge_clicked', {
+        store,
+        label: link.textContent?.trim() || link.querySelector?.('img')?.getAttribute('alt') || null,
+        href: href ? href.split('?')[0] : null,
+        placement: link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : 'other',
+      });
+      return;
+    }
+
+    if (link.matches('.navbar a, .navbar-mobile a, .page-footer a')) {
+      window.nestdAnalytics?.track('navigation_clicked', {
+        label: link.textContent?.trim() || null,
+        href: link.getAttribute('href') || null,
+        location: link.closest('.page-footer') ? 'footer' : link.closest('.navbar-mobile') ? 'mobile_nav' : 'nav',
+      });
+    }
+  });
+})();
+
+// Track important section views once per page load
+(function initSectionViewTracking() {
+  const sections = [
+    ['#whatsapp', 'whatsapp_alerts_section_viewed'],
+    ['#matching', 'ai_matching_section_viewed'],
+    ['.duo-section', 'duo_search_section_viewed'],
+    ['.how-it-works', 'how_it_works_section_viewed'],
+    ['.pricing-section', 'pricing_section_viewed'],
+  ];
+
+  const sectionObserver = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const eventName = entry.target.dataset.analyticsEvent;
+      if (eventName) window.nestdAnalytics?.track(eventName);
+      observerInstance.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(([selector, eventName]) => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.dataset.analyticsEvent = eventName;
+      sectionObserver.observe(el);
+    });
+  });
 })();
 
 // Waitlist forms removed — app is live
