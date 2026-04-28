@@ -2,6 +2,10 @@
   "rewrites": [
     { "source": "/listing/:id", "destination": "/listing/index.html" },
     { "source": "/app", "destination": "/app/index.html" },
-    { "source": "/app/:path*", "destination": "/app/index.html" }
+    { "source": "/app/:path*", "destination": "/app/index.html" },
+    {
+      "source": "/verify",
+      "destination": "https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/verify-email"
+    }
   ]
 }
