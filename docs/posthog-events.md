@@ -46,13 +46,17 @@ Native app events are PostHog-only for now. Do **not** install Meta Pixel in the
 
 ## Website funnel events
 
-Website pages are marketing/content pages. They currently drive visitors to the app download CTAs. There is no website WhatsApp/contact conversion and no website signup/subscription flow.
+Website pages are marketing/content pages. They drive visitors to the app download CTAs and the waitlist/early-access form. There is no website WhatsApp/contact conversion and no website subscription flow.
 
 | Funnel step | PostHog event | Meta event | When | Key properties | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Page visit | `page_view` | `PageView` | Landing/public page loads | PostHog: `path`, sanitized `url`, sanitized `referrer`, UTM fields, `language` | Meta `PageView` fires regardless of PostHog key. |
-| Section/content view | `whatsapp_alerts_section_viewed`, `ai_matching_section_viewed`, `duo_search_section_viewed`, `how_it_works_section_viewed`, `pricing_section_viewed` | `ViewContent` | Key sections enter viewport once per page load | PostHog attribution props; Meta: `content_name`, `content_category=landing_section` | This is the website `ViewContent` mapping. |
-| App CTA click | `store_badge_clicked` | `ViewContent` | App Store / Google Play badge clicked | PostHog: `store`, `label`, sanitized `href`, `placement`; Meta: `content_name=app_download_cta`, `content_category=app_download`, `placement`, `store` | Not `Lead`, because no form/signup is completed on the website. |
+| Section/content view | `whatsapp_alerts_section_viewed`, `ai_matching_section_viewed`, `duo_search_section_viewed`, `how_it_works_section_viewed`, `pricing_section_viewed`, `waitlist_section_viewed` | `ViewContent` | Key sections enter viewport once per page load | PostHog attribution props; Meta: `content_name`, `content_category=landing_section` | This is the website `ViewContent` mapping. |
+| App CTA click | `store_badge_clicked` | `ViewContent` | App Store / Google Play badge clicked | PostHog: `store`, `label`, sanitized `href`, `placement`; Meta: `content_name=app_download_cta`, `content_category=app_download`, `placement`, `store` | Not `Lead`; only successful waitlist signup is a lead. |
+| Waitlist signup started | `waitlist_signup_started` | — | Visitor submits the waitlist form | `placement` only | Do not send the submitted email to analytics. |
+| Waitlist signup completed | `waitlist_signup_completed` | `Lead` | Waitlist API returns success | PostHog: `placement`; Meta: `content_name=waitlist_signup`, `content_category=website_lead`, `placement` | Fire only after backend success. No email/name/phone. |
+| Waitlist duplicate | `waitlist_signup_duplicate` | — | Waitlist API returns duplicate/already exists | `placement` only | Not a new Meta `Lead`, to avoid double-counting. |
+| Waitlist signup failed | `waitlist_signup_failed` | — | Waitlist API fails | stable `reason`, `placement` | Reason code only: `invalid_email`, `duplicate`, `network_error`, `server_error`, `unknown_error`. No raw error messages. |
 | Navigation click | `navigation_clicked` | — | Nav/footer link clicked | `label`, `href`, `location` | PostHog-only. |
 | Theme change | `theme_toggled` | — | Visitor toggles theme | `theme` | PostHog-only utility event. |
 | Deeplink page view | `app_deeplink_viewed` | `PageView` | `/app` deeplink page loads | attribution props | Public website/deeplink page, not native app event. |
@@ -65,7 +69,7 @@ Website pages are marketing/content pages. They currently drive visitors to the 
 | Meta event | Status | Why |
 | --- | --- | --- |
 | `Contact` | Not used | There is no WhatsApp/contact click conversion on the website. |
-| `Lead` | Not used on current website | No waitlist/signup form is completed on the website. Use only if a real lead form returns success. |
+| `Lead` | Used for successful waitlist signup only | Fire only after the waitlist backend returns success. Never include email, name, phone, raw URL, referrer, or preferences. |
 | `Subscribe` / `Purchase` | Not used on website | Subscription/purchase happens in the app via stores/RevenueCat. |
 
 ## App funnel events

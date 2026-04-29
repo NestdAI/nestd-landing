@@ -428,7 +428,7 @@ if (waMock) {
     if (link.matches('.badge-link') || link.querySelector?.('.app-badge')) {
       const href = link.getAttribute('href') || '';
       const store = href.includes('apps.apple.com') ? 'app_store' : 'google_play';
-      const placement = link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : 'other';
+      const placement = link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : link.closest('.waitlist-bottom') ? 'bottom' : 'other';
       window.nestdAnalytics?.track('store_badge_clicked', {
         store,
         label: link.textContent?.trim() || link.querySelector?.('img')?.getAttribute('alt') || null,
@@ -462,6 +462,7 @@ if (waMock) {
     ['.duo-section', 'duo_search_section_viewed'],
     ['.how-it-works', 'how_it_works_section_viewed'],
     ['.pricing-section', 'pricing_section_viewed'],
+    ['#waitlist-bottom', 'waitlist_section_viewed'],
   ];
 
   const sectionObserver = new IntersectionObserver((entries, observerInstance) => {
@@ -487,7 +488,99 @@ if (waMock) {
   });
 })();
 
-// Waitlist forms removed — app is live
+// Waitlist form handler — send email only to the backend; never to analytics.
+(function initWaitlistForms() {
+  const forms = document.querySelectorAll('.waitlist-form');
+  if (!forms.length) return;
+
+  const WAITLIST_ENDPOINT = 'https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/waitlist';
+
+  function copy(key, fallback) {
+    const lang = typeof currentLang !== 'undefined' ? currentLang : (document.documentElement.lang || 'nl');
+    const dictionary = typeof translations !== 'undefined' ? translations : {};
+    return dictionary?.[lang]?.[key] || fallback;
+  }
+
+  function getFailureReason(response, error) {
+    if (response?.status === 400 || response?.status === 422) return 'invalid_email';
+    if (response?.status === 409) return 'duplicate';
+    if (response?.status >= 500) return 'server_error';
+    if (error?.name === 'TypeError') return 'network_error';
+    return 'unknown_error';
+  }
+
+  function trackWaitlistFailure(reason, placement) {
+    window.nestdAnalytics?.track('waitlist_signup_failed', { reason, placement });
+  }
+
+  async function handleWaitlistSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const input = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const messageEl = form.nextElementSibling?.classList.contains('form-msg') ? form.nextElementSibling : null;
+    const email = input?.value.trim();
+    const placement = form.dataset.placement || (form.closest('.hero') ? 'hero' : 'bottom');
+
+    if (!email) return;
+
+    button.disabled = true;
+    button.textContent = copy('submitLoading', 'Even geduld...');
+    if (messageEl) {
+      messageEl.textContent = '';
+      messageEl.className = 'form-msg';
+    }
+
+    window.nestdAnalytics?.track('waitlist_signup_started', { placement });
+
+    let response = null;
+    try {
+      response = await fetch(WAITLIST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.status === 409) {
+        if (messageEl) {
+          messageEl.textContent = copy('duplicateMsg', 'Je staat al op de lijst — we houden je op de hoogte.');
+          messageEl.className = 'form-msg success';
+        }
+        form.reset();
+        window.nestdAnalytics?.track('waitlist_signup_duplicate', { placement });
+        return;
+      }
+
+      if (!response.ok) throw new Error('waitlist_request_failed');
+
+      if (messageEl) {
+        messageEl.textContent = copy('successMsg', '🎉 Je staat op de lijst! We houden je op de hoogte.');
+        messageEl.className = 'form-msg success';
+      }
+      form.reset();
+
+      window.nestdAnalytics?.track('waitlist_signup_completed', { placement });
+      window.nestdAnalytics?.trackMeta('Lead', {
+        content_name: 'waitlist_signup',
+        content_category: 'website_lead',
+        placement,
+      });
+    } catch (error) {
+      const reason = getFailureReason(response, error);
+      trackWaitlistFailure(reason, placement);
+      if (messageEl) {
+        messageEl.textContent = copy('errorMsg', 'Er ging iets mis. Probeer het later opnieuw.');
+        messageEl.className = 'form-msg error';
+      }
+    } finally {
+      button.disabled = false;
+      button.textContent = copy('submitBtn', 'Schrijf je in');
+    }
+  }
+
+  forms.forEach(form => form.addEventListener('submit', handleWaitlistSubmit));
+})();
 
 // ═══════════════════════════════════════
 // Swipe Animation (Duo Zoeken)

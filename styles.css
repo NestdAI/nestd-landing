@@ -374,6 +374,10 @@ body.light .hero-overlay {
   color: #555;
 }
 
+.waitlist-downloads {
+  margin-top: 32px;
+}
+
 /* ── Footer ── */
 .footer {
   padding: 32px 0;
