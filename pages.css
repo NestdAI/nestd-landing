@@ -27,7 +27,10 @@
 @media (max-width: 768px) {
   .navbar,
   .navbar.navbar-transparent {
-    position: absolute !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
     background: none !important;
     background-color: transparent !important;
     backdrop-filter: none !important;
@@ -39,20 +42,12 @@
   }
   .navbar .navbar-brand {
     display: flex;
-    position: fixed;
-    top: 12px;
-    left: 16px;
-    z-index: 100;
+    position: static;
     background: none;
   }
   .navbar .navbar-brand span { display: none; }
   .navbar .navbar-links { display: none; }
-  .navbar .navbar-inner { justify-content: flex-end; height: auto; padding: 8px 0; }
-}
-.navbar.navbar-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
+  .navbar .navbar-inner { height: auto; padding: 8px 0; }
 }
 
 .navbar-inner {
@@ -117,6 +112,31 @@ body.light .navbar-brand span {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.navbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(255,56,92,.25);
+  transition: transform .2s, opacity .2s, box-shadow .2s;
+}
+
+.navbar-cta:hover {
+  color: #fff;
+  opacity: .92;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(255,56,92,.32);
 }
 
 /* Hamburger */
@@ -1164,6 +1184,7 @@ body.light .navbar-brand span {
 @media (max-width: 768px) {
   .navbar-links { display: none; }
   .navbar-hamburger { display: flex; }
+  .navbar-cta { padding: 0 14px; font-size: 0.8rem; }
 
   .feature-detail {
     grid-template-columns: 1fr;
@@ -1182,6 +1203,8 @@ body.light .navbar-brand span {
 }
 
 @media (max-width: 480px) {
+  .navbar-right { gap: 6px; }
+  .navbar-cta { min-height: 38px; padding: 0 12px; font-size: 0.75rem; }
   .diff-grid { grid-template-columns: 1fr; }
   .page-footer-grid { grid-template-columns: 1fr; }
   .stats-visual-grid { grid-template-columns: 1fr; }
@@ -1215,6 +1238,7 @@ body.light .navbar-brand { color: #1a1a1a; }
 body.light .navbar-links a { color: #666; }
 body.light .navbar-links a:hover,
 body.light .navbar-links a.active { color: #1a1a1a; }
+body.light .navbar-cta { color: #fff; }
 
 body.light .navbar-hamburger {
   border-color: rgba(0,0,0,.15);
