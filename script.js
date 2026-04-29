@@ -1,9 +1,30 @@
-// PostHog analytics — marketing attribution + lightweight product-interest tracking
-(function initPostHogAnalytics() {
+// Analytics — PostHog is the source of truth; Meta Pixel is for ads optimization only.
+(function initMarketingAnalytics() {
   const POSTHOG_KEY = window.NESTD_POSTHOG_KEY || document.querySelector('meta[name="posthog-key"]')?.content || '';
   const POSTHOG_HOST = 'https://eu.i.posthog.com';
-  const eventQueue = [];
-  let analyticsReady = false;
+  const META_PIXEL_ID = window.NESTD_META_PIXEL_ID || document.querySelector('meta[name="facebook-pixel-id"]')?.content || '1435983921187208';
+  const META_STANDARD_EVENTS = new Set([
+    'AddPaymentInfo',
+    'AddToCart',
+    'AddToWishlist',
+    'CompleteRegistration',
+    'Contact',
+    'CustomizeProduct',
+    'Donate',
+    'FindLocation',
+    'InitiateCheckout',
+    'Lead',
+    'PageView',
+    'Purchase',
+    'Schedule',
+    'Search',
+    'StartTrial',
+    'SubmitApplication',
+    'Subscribe',
+    'ViewContent',
+  ]);
+  const POSTHOG_QUEUE = [];
+  let posthogReady = false;
 
   function safeUrl(value) {
     if (!value) return null;
@@ -31,16 +52,59 @@
     };
   }
 
+  function sanitizeMetaProperties(properties = {}) {
+    const allowedKeys = new Set(['content_name', 'content_category', 'placement', 'store']);
+    return Object.entries(properties).reduce((safe, [key, value]) => {
+      if (allowedKeys.has(key) && value !== undefined && value !== null && value !== '') safe[key] = value;
+      return safe;
+    }, {});
+  }
+
+  function loadMetaPixel() {
+    if (!META_PIXEL_ID || window.fbq) return;
+
+    !function(f,b,e,v,n,t,s) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = true;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  function trackMeta(event, properties = {}) {
+    if (!META_PIXEL_ID || !window.fbq) return;
+    const method = META_STANDARD_EVENTS.has(event) ? 'track' : 'trackCustom';
+    const payload = sanitizeMetaProperties(properties);
+    if (Object.keys(payload).length > 0) window.fbq(method, event, payload);
+    else window.fbq(method, event);
+  }
+
   window.nestdAnalytics = {
     track(event, properties = {}) {
       const payload = getAttributionPayload(properties);
-      if (analyticsReady && window.posthog?.capture) {
+      if (posthogReady && window.posthog?.capture) {
         window.posthog.capture(event, payload);
         return;
       }
-      if (POSTHOG_KEY) eventQueue.push([event, payload]);
+      if (POSTHOG_KEY) POSTHOG_QUEUE.push([event, payload]);
     },
+    trackMeta,
   };
+
+  loadMetaPixel();
 
   if (!POSTHOG_KEY) return;
 
@@ -56,10 +120,10 @@
       disable_session_recording: true,
       person_profiles: 'identified_only',
     });
-    analyticsReady = true;
+    posthogReady = true;
     window.nestdAnalytics.track('page_view');
-    while (eventQueue.length) {
-      const [event, payload] = eventQueue.shift();
+    while (POSTHOG_QUEUE.length) {
+      const [event, payload] = POSTHOG_QUEUE.shift();
       window.posthog?.capture?.(event, payload);
     }
   };
@@ -316,11 +380,18 @@ if (waMock) {
     if (link.matches('.badge-link') || link.querySelector?.('.app-badge')) {
       const href = link.getAttribute('href') || '';
       const store = href.includes('apps.apple.com') ? 'app_store' : 'google_play';
+      const placement = link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : 'other';
       window.nestdAnalytics?.track('store_badge_clicked', {
         store,
         label: link.textContent?.trim() || link.querySelector?.('img')?.getAttribute('alt') || null,
         href: href ? href.split('?')[0] : null,
-        placement: link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : 'other',
+        placement,
+      });
+      window.nestdAnalytics?.trackMeta('ViewContent', {
+        content_name: 'app_download_cta',
+        content_category: 'app_download',
+        placement,
+        store,
       });
       return;
     }
@@ -349,7 +420,13 @@ if (waMock) {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const eventName = entry.target.dataset.analyticsEvent;
-      if (eventName) window.nestdAnalytics?.track(eventName);
+      if (eventName) {
+        window.nestdAnalytics?.track(eventName);
+        window.nestdAnalytics?.trackMeta('ViewContent', {
+          content_name: eventName.replace('_section_viewed', ''),
+          content_category: 'landing_section',
+        });
+      }
       observerInstance.unobserve(entry.target);
     });
   }, { threshold: 0.35 });

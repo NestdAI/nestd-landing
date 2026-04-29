@@ -89,6 +89,7 @@
   </style>
 </head>
 <body>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1435983921187208&ev=PageView&noscript=1"></noscript>
   <div class="container">
     <img src="/logo.png" alt="Nestd" class="logo">
     <div id="redirecting">
@@ -108,6 +109,26 @@
     </div>
   </div>
   <script>
+    (function initMetaPixel() {
+      var META_PIXEL_ID = window.NESTD_META_PIXEL_ID || (document.querySelector('meta[name="facebook-pixel-id"]') && document.querySelector('meta[name="facebook-pixel-id"]').content) || '1435983921187208';
+      if (!META_PIXEL_ID || window.fbq) return;
+      !function(f,b,e,v,n,t,s) {
+        if (f.fbq) return;
+        n = f.fbq = function() { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = true;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = true;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', META_PIXEL_ID);
+      window.fbq('track', 'PageView');
+    })();
     (function initPostHogAnalytics() {
       var POSTHOG_KEY = window.NESTD_POSTHOG_KEY || (document.querySelector('meta[name="posthog-key"]') && document.querySelector('meta[name="posthog-key"]').content) || '';
       var POSTHOG_HOST = 'https://eu.i.posthog.com';
