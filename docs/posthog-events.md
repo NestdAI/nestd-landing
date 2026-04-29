@@ -18,7 +18,7 @@ or:
 <script>window.NESTD_POSTHOG_KEY = '[REDACTED]'</script>
 ```
 
-No PostHog key is committed to this repo.
+The PostHog project API key is configured as a client-side public project key. Never commit the PostHog personal API key.
 
 Meta Pixel is initialized centrally in `script.js` with Pixel ID `1435983921187208`. It only loads in safe public marketing/deeplink contexts (`/`, `/about.html`, `/pricing.html`, `/privacy.html`, `/app`) and is intentionally disabled on listing/product routes such as `/listing/*`, when unknown query parameters are present, or when the same-origin referrer is a listing route, because the browser can implicitly expose URL/referrer context to Meta even when event properties are sanitized. It can be overridden per deployment with:
 
