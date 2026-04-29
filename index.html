@@ -17,6 +17,7 @@
   <script>if(localStorage.getItem("nestd-lang")!=="nl")document.documentElement.classList.add("i18n-loading")</script>
 </head>
 <body>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1435983921187208&ev=PageView&noscript=1"></noscript>
   <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
 
   <!-- Navbar -->
@@ -31,6 +32,7 @@
         <a href="/about.html" data-i18n="nav_about">Over ons</a>
       </div>
       <div class="navbar-right">
+        <a href="#waitlist-bottom" class="navbar-cta" data-i18n="cta">Early Access →</a>
         <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
         <button class="navbar-hamburger" id="hamburger" aria-label="Open menu">
@@ -47,6 +49,7 @@
     <a href="/" class="active">Home</a>
     <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
+    <a href="#waitlist-bottom" data-i18n="cta">Early Access →</a>
   </div>
 
   <!-- ═══════════════════════════════════════ -->
@@ -496,7 +499,7 @@
             <div class="testimonial-slide">
               <div class="testimonial-photo"><img src="images/testimonial-1.jpg" alt="Youssef" loading="lazy"></div>
               <div class="testimonial-body">
-                <blockquote class="testimonial-quote" data-i18n="testimonial_1_quote">"Ik checkte elke dag Funda en Pararius, maar miste toch steeds woningen. Sinds Nestd krijg ik alles direct op WhatsApp en hoef ik niet meer zelf te zoeken."</blockquote>
+                <blockquote class="testimonial-quote" data-i18n="testimonial_1_quote">"Ik checkte elke dag woningsites, maar miste toch steeds woningen. Sinds Nestd krijg ik alles direct op WhatsApp en hoef ik niet meer zelf te zoeken."</blockquote>
                 <div class="testimonial-author">
                   <span class="testimonial-name" data-i18n="testimonial_1_name">Youssef, 25</span>
                   <span class="testimonial-city">Amsterdam</span>
@@ -568,9 +571,16 @@
   <!-- ═══════════════════════════════════════ -->
   <section class="waitlist-bottom" id="waitlist-bottom">
     <div class="container">
-      <h2 class="section-title fade-in" data-i18n-html="ctaBottomTitle"><em>Download Nestd.</em></h2>
-      <p class="waitlist-sub fade-in" data-i18n="ctaBottomSub">Beschikbaar op iOS en binnenkort op Android.</p>
-      <div class="app-badges fade-in" style="margin-bottom:24px">
+      <div class="section-label fade-in" data-i18n="waitlistLabel">Early access</div>
+      <h2 class="section-title fade-in" data-i18n-html="waitlistTitle"><em>Nestd is in ontwikkeling.</em></h2>
+      <p class="waitlist-sub fade-in" data-i18n="waitlistSub">Schrijf je in voor early access.</p>
+      <form class="waitlist-form fade-in" id="waitlist-footer" data-placement="bottom">
+        <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+        <button type="submit" data-i18n="submitBtn">Schrijf je in</button>
+      </form>
+      <p class="form-msg" id="msg-footer" role="status" aria-live="polite"></p>
+      <p class="waitlist-note fade-in" data-i18n="waitlistNote">Geen spam. Alleen een bericht wanneer we live gaan.</p>
+      <div class="app-badges fade-in waitlist-downloads">
         <a href="https://apps.apple.com/app/nestd/id6761392857" class="badge-link" target="_blank" rel="noopener">
           <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
         </a>

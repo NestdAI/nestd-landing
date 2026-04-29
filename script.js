@@ -1,3 +1,183 @@
+// Analytics — PostHog is the source of truth; Meta Pixel is for ads optimization only.
+(function initMarketingAnalytics() {
+  const POSTHOG_KEY = window.NESTD_POSTHOG_KEY || document.querySelector('meta[name="posthog-key"]')?.content || '';
+  const POSTHOG_HOST = 'https://eu.i.posthog.com';
+  const META_PIXEL_ID = window.NESTD_META_PIXEL_ID || document.querySelector('meta[name="facebook-pixel-id"]')?.content || '1435983921187208';
+  const META_STANDARD_EVENTS = new Set([
+    'AddPaymentInfo',
+    'AddToCart',
+    'AddToWishlist',
+    'CompleteRegistration',
+    'Contact',
+    'CustomizeProduct',
+    'Donate',
+    'FindLocation',
+    'InitiateCheckout',
+    'Lead',
+    'PageView',
+    'Purchase',
+    'Schedule',
+    'Search',
+    'StartTrial',
+    'SubmitApplication',
+    'Subscribe',
+    'ViewContent',
+  ]);
+  const POSTHOG_QUEUE = [];
+  let posthogReady = false;
+
+  // Meta Pixel may implicitly receive page URL/referrer from the browser.
+  // Keep it limited to safe public marketing/deeplink contexts and never load
+  // it on listing/product routes or when unknown query params/referrers could
+  // leak raw listing identifiers or sensitive preferences.
+  const META_SAFE_QUERY_KEYS = new Set([
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+    'fbclid',
+  ]);
+
+  function isListingPath(pathname = '') {
+    return /^\/listing(?:\/|$)/.test(pathname);
+  }
+
+  function isMetaPixelAllowedPath(pathname = window.location.pathname) {
+    const normalizedPath = pathname.replace(/\/index\.html$/, '/');
+    if (isListingPath(normalizedPath)) return false;
+    if (normalizedPath === '/' || normalizedPath === '/index.html') return true;
+    if (normalizedPath === '/about.html' || normalizedPath === '/pricing.html' || normalizedPath === '/privacy.html') return true;
+    if (normalizedPath === '/app' || normalizedPath === '/app/' || normalizedPath === '/app/index.html') return true;
+    return false;
+  }
+
+  function hasOnlyMetaSafeQueryParams(search = window.location.search) {
+    const params = new URLSearchParams(search);
+    for (const key of params.keys()) {
+      if (!META_SAFE_QUERY_KEYS.has(key)) return false;
+    }
+    return true;
+  }
+
+  function hasSensitiveReferrer(referrer = document.referrer) {
+    if (!referrer) return false;
+    try {
+      const parsed = new URL(referrer, window.location.origin);
+      return parsed.origin === window.location.origin && isListingPath(parsed.pathname);
+    } catch {
+      return true;
+    }
+  }
+
+  function isMetaPixelAllowedContext() {
+    return isMetaPixelAllowedPath() && hasOnlyMetaSafeQueryParams() && !hasSensitiveReferrer();
+  }
+
+  function safeUrl(value) {
+    if (!value) return null;
+    try {
+      const parsed = new URL(value, window.location.origin);
+      return `${parsed.origin}${parsed.pathname}`;
+    } catch {
+      return null;
+    }
+  }
+
+  function getAttributionPayload(properties = {}) {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      path: window.location.pathname,
+      url: safeUrl(window.location.href),
+      referrer: safeUrl(document.referrer),
+      language: document.documentElement.lang || localStorage.getItem('nestd-lang') || 'nl',
+      utm_source: params.get('utm_source'),
+      utm_medium: params.get('utm_medium'),
+      utm_campaign: params.get('utm_campaign'),
+      utm_content: params.get('utm_content'),
+      utm_term: params.get('utm_term'),
+      ...properties,
+    };
+  }
+
+  function sanitizeMetaProperties(properties = {}) {
+    const allowedKeys = new Set(['content_name', 'content_category', 'placement', 'store']);
+    return Object.entries(properties).reduce((safe, [key, value]) => {
+      if (allowedKeys.has(key) && value !== undefined && value !== null && value !== '') safe[key] = value;
+      return safe;
+    }, {});
+  }
+
+  function loadMetaPixel() {
+    if (!META_PIXEL_ID || window.fbq || !isMetaPixelAllowedContext()) return;
+
+    !function(f,b,e,v,n,t,s) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = true;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  function trackMeta(event, properties = {}) {
+    if (!META_PIXEL_ID || !window.fbq || !isMetaPixelAllowedContext()) return;
+    const method = META_STANDARD_EVENTS.has(event) ? 'track' : 'trackCustom';
+    const payload = sanitizeMetaProperties(properties);
+    if (Object.keys(payload).length > 0) window.fbq(method, event, payload);
+    else window.fbq(method, event);
+  }
+
+  window.nestdAnalytics = {
+    track(event, properties = {}) {
+      const payload = getAttributionPayload(properties);
+      if (posthogReady && window.posthog?.capture) {
+        window.posthog.capture(event, payload);
+        return;
+      }
+      if (POSTHOG_KEY) POSTHOG_QUEUE.push([event, payload]);
+    },
+    trackMeta,
+  };
+
+  loadMetaPixel();
+
+  if (!POSTHOG_KEY) return;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://eu-assets.i.posthog.com/static/array.js';
+  script.onload = function () {
+    window.posthog?.init?.(POSTHOG_KEY, {
+      api_host: POSTHOG_HOST,
+      defaults: '2026-01-30',
+      capture_pageview: false,
+      autocapture: false,
+      disable_session_recording: true,
+      person_profiles: 'identified_only',
+    });
+    posthogReady = true;
+    window.nestdAnalytics.track('page_view');
+    while (POSTHOG_QUEUE.length) {
+      const [event, payload] = POSTHOG_QUEUE.shift();
+      window.posthog?.capture?.(event, payload);
+    }
+  };
+  document.head.appendChild(script);
+})();
+
 // Theme toggle with prefers-color-scheme support
 const toggle = document.getElementById('theme-toggle');
 const saved = localStorage.getItem('nestd-theme');
@@ -28,8 +208,10 @@ if (window.matchMedia) {
 if (toggle) {
   toggle.addEventListener('click', () => {
     const isLight = !document.body.classList.contains('light');
-    applyTheme(isLight ? 'light' : 'dark');
-    localStorage.setItem('nestd-theme', isLight ? 'light' : 'dark');
+    const theme = isLight ? 'light' : 'dark';
+    applyTheme(theme);
+    localStorage.setItem('nestd-theme', theme);
+    window.nestdAnalytics?.track('theme_toggled', { theme });
   });
 }
 
@@ -237,7 +419,168 @@ if (waMock) {
   window.addEventListener('resize', setupObservers);
 })();
 
-// Waitlist forms removed — app is live
+// Track marketing CTA and navigation clicks
+(function initMarketingClickTracking() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a, button');
+    if (!link) return;
+
+    if (link.matches('.badge-link') || link.querySelector?.('.app-badge')) {
+      const href = link.getAttribute('href') || '';
+      const store = href.includes('apps.apple.com') ? 'app_store' : 'google_play';
+      const placement = link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : link.closest('.waitlist-bottom') ? 'bottom' : 'other';
+      window.nestdAnalytics?.track('store_badge_clicked', {
+        store,
+        label: link.textContent?.trim() || link.querySelector?.('img')?.getAttribute('alt') || null,
+        href: href ? href.split('?')[0] : null,
+        placement,
+      });
+      window.nestdAnalytics?.trackMeta('ViewContent', {
+        content_name: 'app_download_cta',
+        content_category: 'app_download',
+        placement,
+        store,
+      });
+      return;
+    }
+
+    if (link.matches('.navbar a, .navbar-mobile a, .page-footer a')) {
+      window.nestdAnalytics?.track('navigation_clicked', {
+        label: link.textContent?.trim() || null,
+        href: link.getAttribute('href') || null,
+        location: link.closest('.page-footer') ? 'footer' : link.closest('.navbar-mobile') ? 'mobile_nav' : 'nav',
+      });
+    }
+  });
+})();
+
+// Track important section views once per page load
+(function initSectionViewTracking() {
+  const sections = [
+    ['#whatsapp', 'whatsapp_alerts_section_viewed'],
+    ['#matching', 'ai_matching_section_viewed'],
+    ['.duo-section', 'duo_search_section_viewed'],
+    ['.how-it-works', 'how_it_works_section_viewed'],
+    ['.pricing-section', 'pricing_section_viewed'],
+    ['#waitlist-bottom', 'waitlist_section_viewed'],
+  ];
+
+  const sectionObserver = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const eventName = entry.target.dataset.analyticsEvent;
+      if (eventName) {
+        window.nestdAnalytics?.track(eventName);
+        window.nestdAnalytics?.trackMeta('ViewContent', {
+          content_name: eventName.replace('_section_viewed', ''),
+          content_category: 'landing_section',
+        });
+      }
+      observerInstance.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(([selector, eventName]) => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.dataset.analyticsEvent = eventName;
+      sectionObserver.observe(el);
+    });
+  });
+})();
+
+// Waitlist form handler — send email only to the backend; never to analytics.
+(function initWaitlistForms() {
+  const forms = document.querySelectorAll('.waitlist-form');
+  if (!forms.length) return;
+
+  const WAITLIST_ENDPOINT = 'https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/waitlist';
+
+  function copy(key, fallback) {
+    const lang = typeof currentLang !== 'undefined' ? currentLang : (document.documentElement.lang || 'nl');
+    const dictionary = typeof translations !== 'undefined' ? translations : {};
+    return dictionary?.[lang]?.[key] || fallback;
+  }
+
+  function getFailureReason(response, error) {
+    if (response?.status === 400 || response?.status === 422) return 'invalid_email';
+    if (response?.status === 409) return 'duplicate';
+    if (response?.status >= 500) return 'server_error';
+    if (error?.name === 'TypeError') return 'network_error';
+    return 'unknown_error';
+  }
+
+  function trackWaitlistFailure(reason, placement) {
+    window.nestdAnalytics?.track('waitlist_signup_failed', { reason, placement });
+  }
+
+  async function handleWaitlistSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const input = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const messageEl = form.nextElementSibling?.classList.contains('form-msg') ? form.nextElementSibling : null;
+    const email = input?.value.trim();
+    const placement = form.dataset.placement || (form.closest('.hero') ? 'hero' : 'bottom');
+
+    if (!email) return;
+
+    button.disabled = true;
+    button.textContent = copy('submitLoading', 'Even geduld...');
+    if (messageEl) {
+      messageEl.textContent = '';
+      messageEl.className = 'form-msg';
+    }
+
+    window.nestdAnalytics?.track('waitlist_signup_started', { placement });
+
+    let response = null;
+    try {
+      response = await fetch(WAITLIST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.status === 409) {
+        if (messageEl) {
+          messageEl.textContent = copy('duplicateMsg', 'Je staat al op de lijst — we houden je op de hoogte.');
+          messageEl.className = 'form-msg success';
+        }
+        form.reset();
+        window.nestdAnalytics?.track('waitlist_signup_duplicate', { placement });
+        return;
+      }
+
+      if (!response.ok) throw new Error('waitlist_request_failed');
+
+      if (messageEl) {
+        messageEl.textContent = copy('successMsg', '🎉 Je staat op de lijst! We houden je op de hoogte.');
+        messageEl.className = 'form-msg success';
+      }
+      form.reset();
+
+      window.nestdAnalytics?.track('waitlist_signup_completed', { placement });
+      window.nestdAnalytics?.trackMeta('Lead', {
+        content_name: 'waitlist_signup',
+        content_category: 'website_lead',
+        placement,
+      });
+    } catch (error) {
+      const reason = getFailureReason(response, error);
+      trackWaitlistFailure(reason, placement);
+      if (messageEl) {
+        messageEl.textContent = copy('errorMsg', 'Er ging iets mis. Probeer het later opnieuw.');
+        messageEl.className = 'form-msg error';
+      }
+    } finally {
+      button.disabled = false;
+      button.textContent = copy('submitBtn', 'Schrijf je in');
+    }
+  }
+
+  forms.forEach(form => form.addEventListener('submit', handleWaitlistSubmit));
+})();
 
 // ═══════════════════════════════════════
 // Swipe Animation (Duo Zoeken)
@@ -474,22 +817,4 @@ if (waMock) {
   const section = track.closest('.testimonials-section');
   section.addEventListener('mouseenter', () => clearInterval(autoTimer));
   section.addEventListener('mouseleave', resetAuto);
-})();
-
-// Hide navbar when scrolling through "Hoe het werkt" section on mobile
-(function() {
-  const howSection = document.querySelector('.how-it-works');
-  const navbar = document.querySelector('.navbar');
-  if (!howSection || !navbar) return;
-
-  const mq = window.matchMedia('(max-width: 900px)');
-
-  const obs = new IntersectionObserver((entries) => {
-    if (!mq.matches) { navbar.classList.remove('navbar-hidden'); return; }
-    entries.forEach(e => {
-      navbar.classList.toggle('navbar-hidden', e.isIntersecting);
-    });
-  }, { threshold: 0.1 });
-
-  obs.observe(howSection);
 })();
