@@ -20,7 +20,7 @@ or:
 
 No PostHog key is committed to this repo.
 
-Meta Pixel is initialized centrally in `script.js` with Pixel ID `1435983921187208`. It can be overridden per deployment with:
+Meta Pixel is initialized centrally in `script.js` with Pixel ID `1435983921187208`. It only loads in safe public marketing/deeplink contexts (`/`, `/about.html`, `/pricing.html`, `/privacy.html`, `/app`) and is intentionally disabled on listing/product routes such as `/listing/*`, when unknown query parameters are present, or when the same-origin referrer is a listing route, because the browser can implicitly expose URL/referrer context to Meta even when event properties are sanitized. It can be overridden per deployment with:
 
 ```html
 <meta name="facebook-pixel-id" content="<pixel-id>">
@@ -32,7 +32,7 @@ or:
 <script>window.NESTD_META_PIXEL_ID = '<pixel-id>'</script>
 ```
 
-A `<noscript>` PageView fallback is present on the public HTML pages for visitors without JavaScript.
+A `<noscript>` PageView fallback is present only on public marketing/deeplink HTML pages for visitors without JavaScript. It is intentionally omitted from `/listing/*`.
 
 ### App
 
@@ -56,6 +56,7 @@ Website pages are marketing/content pages. They currently drive visitors to the 
 | Navigation click | `navigation_clicked` | — | Nav/footer link clicked | `label`, `href`, `location` | PostHog-only. |
 | Theme change | `theme_toggled` | — | Visitor toggles theme | `theme` | PostHog-only utility event. |
 | Deeplink page view | `app_deeplink_viewed` | `PageView` | `/app` deeplink page loads | attribution props | Public website/deeplink page, not native app event. |
+| Listing deeplink page view | — | — | `/listing/*` deeplink page loads | — | No Meta/PostHog event: avoid leaking raw listing identifiers via browser URL/referrer context. |
 | Deeplink fallback | `app_deeplink_fallback_shown` | — | App did not open within timeout | attribution props | PostHog-only. |
 | Deeplink opened signal | `app_deeplink_opened` | — | Page becomes hidden after deeplink attempt | attribution props | Best-effort signal only. |
 
@@ -87,20 +88,32 @@ The app is the product funnel. PostHog is already installed in the native app.
 | --- | --- | --- | --- | --- |
 | Paywall viewed | `paywall_viewed` | — | `/paywall` shown | Add placement/source if known. |
 | Paywall dismissed | `paywall_dismissed` | — | Paywall closed without purchase | No raw RevenueCat payload. |
-| Purchase completed | `purchase_completed` or `subscription_started` | Later: `Purchase`/`Subscribe` through app attribution | RevenueCat purchase success | Capture plan/product category, not raw receipt. |
+| Subscription started | `subscription_started` | Later: `Subscribe` through app attribution | User starts Pro subscription flow / entitlement begins | Capture plan/product category and subscription tier only. |
+| Purchase completed | `purchase_completed` | Later: `Purchase` through app attribution | RevenueCat purchase success | Capture plan/product category, not raw payloads/receipts. |
+| Purchase failed | `purchase_failed` | — | RevenueCat purchase fails or is cancelled | Stable `reason` code only; no raw error messages. |
 | Restore completed | `restore_completed` | — | RevenueCat restore success | Boolean active entitlement only. |
-| Listing viewed | `listing_viewed` | — | Listing detail opened | Avoid raw listing IDs in analytics. |
-| Listing saved/reacted | `listing_saved` / `listing_reacted` | — | User saves/likes/rejects | Use action/type, no source-platform names. |
+| Listing viewed | `listing_viewed` | — | Listing detail opened | Avoid raw listing IDs; use coarse listing/source category only if approved. |
+| Listing saved | `listing_saved` | — | User saves listing | No raw listing IDs, addresses, or source-platform names. |
+| Listing reacted | `listing_reacted` | — | User likes/rejects/reacts | Use action/type only; no source-platform names. |
+| Application started | `application_started` | — | User starts applying/responding to listing | No raw listing IDs, addresses, or source-platform names. |
+| Chat opened | `chat_opened` | — | User opens AI chat | Context only: source/screen/subscription tier. |
 | Chat message sent | `chat_message_sent` | — | User sends message | Do not capture message text. |
+| Chat limit reached | `chat_limit_reached` | — | Free user hits chat limit | Context only: source/screen/subscription tier. |
+| Paywall triggered from chat | `paywall_triggered_from_chat` | — | Chat limit/paywall placement shown from chat | Context only; no message text. |
+| Profile preferences updated | `profile_preferences_updated` | — | User updates profile/preferences | Bucket budget/surface; city count only unless approved. |
+| Search preferences saved | `search_preferences_saved` | — | User saves search preferences | Bucket budget/surface; city count only; no full preference dumps. |
+| Platform connect started | `platform_connect_started` | — | User starts integration/connect flow | Avoid public/source platform names if against guardrails. |
+| Platform connect completed | `platform_connect_completed` | — | Connect flow succeeds | No tokens/secrets. |
+| Platform connect failed | `platform_connect_failed` | — | Connect flow fails | Stable `reason` code only; no raw errors/tokens. |
 
 ## Privacy behavior
 
 - PostHog script only loads when a key is provided via deploy config.
-- Meta Pixel loads from the public pixel ID and tracks only standard website events listed above.
+- Meta Pixel loads from the public pixel ID only in safe public marketing/deeplink contexts and tracks only standard website events listed above.
 - Automatic PostHog click autocapture and session recordings are disabled.
 - Event payloads include allow-listed UTM parameters in PostHog only.
-- `url` and `referrer` are stripped to origin + path before PostHog capture.
-- Meta event parameters are allow-listed and do not include email, phone, raw URLs, raw referrers, full preferences, listing IDs, or message content.
+- `url` and `referrer` are stripped to origin + path before PostHog capture; listing/product deeplink routes, unknown query strings, and listing referrers are not sent to Meta.
+- Meta event parameters are allow-listed and do not include email, phone, raw URLs, raw referrers, full preferences, listing IDs, or message content; Meta is not initialized on `/listing/*` or after same-origin listing referrers.
 - Events fired before the PostHog bundle loads are queued and flushed after initialization.
 
 ## UTM convention

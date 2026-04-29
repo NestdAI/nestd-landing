@@ -26,6 +26,54 @@
   const POSTHOG_QUEUE = [];
   let posthogReady = false;
 
+  // Meta Pixel may implicitly receive page URL/referrer from the browser.
+  // Keep it limited to safe public marketing/deeplink contexts and never load
+  // it on listing/product routes or when unknown query params/referrers could
+  // leak raw listing identifiers or sensitive preferences.
+  const META_SAFE_QUERY_KEYS = new Set([
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+    'fbclid',
+  ]);
+
+  function isListingPath(pathname = '') {
+    return /^\/listing(?:\/|$)/.test(pathname);
+  }
+
+  function isMetaPixelAllowedPath(pathname = window.location.pathname) {
+    const normalizedPath = pathname.replace(/\/index\.html$/, '/');
+    if (isListingPath(normalizedPath)) return false;
+    if (normalizedPath === '/' || normalizedPath === '/index.html') return true;
+    if (normalizedPath === '/about.html' || normalizedPath === '/pricing.html' || normalizedPath === '/privacy.html') return true;
+    if (normalizedPath === '/app' || normalizedPath === '/app/' || normalizedPath === '/app/index.html') return true;
+    return false;
+  }
+
+  function hasOnlyMetaSafeQueryParams(search = window.location.search) {
+    const params = new URLSearchParams(search);
+    for (const key of params.keys()) {
+      if (!META_SAFE_QUERY_KEYS.has(key)) return false;
+    }
+    return true;
+  }
+
+  function hasSensitiveReferrer(referrer = document.referrer) {
+    if (!referrer) return false;
+    try {
+      const parsed = new URL(referrer, window.location.origin);
+      return parsed.origin === window.location.origin && isListingPath(parsed.pathname);
+    } catch {
+      return true;
+    }
+  }
+
+  function isMetaPixelAllowedContext() {
+    return isMetaPixelAllowedPath() && hasOnlyMetaSafeQueryParams() && !hasSensitiveReferrer();
+  }
+
   function safeUrl(value) {
     if (!value) return null;
     try {
@@ -61,7 +109,7 @@
   }
 
   function loadMetaPixel() {
-    if (!META_PIXEL_ID || window.fbq) return;
+    if (!META_PIXEL_ID || window.fbq || !isMetaPixelAllowedContext()) return;
 
     !function(f,b,e,v,n,t,s) {
       if (f.fbq) return;
@@ -85,7 +133,7 @@
   }
 
   function trackMeta(event, properties = {}) {
-    if (!META_PIXEL_ID || !window.fbq) return;
+    if (!META_PIXEL_ID || !window.fbq || !isMetaPixelAllowedContext()) return;
     const method = META_STANDARD_EVENTS.has(event) ? 'track' : 'trackCustom';
     const payload = sanitizeMetaProperties(properties);
     if (Object.keys(payload).length > 0) window.fbq(method, event, payload);
