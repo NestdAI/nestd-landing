@@ -875,32 +875,58 @@ body.light .navbar-brand span {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  margin-top: 56px;
 }
 
 .persona-card {
-  padding: 32px 28px;
+  position: relative;
+  padding: 28px 28px 32px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03);
+  background: linear-gradient(180deg, rgba(255,56,92,.04) 0%, rgba(255,255,255,.02) 60%);
+  overflow: hidden;
+  min-height: 220px;
+  transition: border-color .3s, transform .3s;
+}
+.persona-card:hover {
+  border-color: rgba(255,56,92,.3);
+  transform: translateY(-2px);
 }
 
-.persona-emoji {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
+.persona-content {
+  position: relative;
+  z-index: 2;
+  max-width: 60%;
+}
+
+.persona-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.persona-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .persona-card h4 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .persona-role {
   color: var(--primary);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
 }
 
 .persona-card p {
@@ -908,6 +934,23 @@ body.light .navbar-brand span {
   font-size: 0.875rem;
   line-height: 1.6;
 }
+
+.persona-illustration {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  background-image: url('images/personas.png');
+  background-repeat: no-repeat;
+  /* image is 2078x757 with 3 buildings side-by-side; slice into thirds */
+  background-size: 300% auto;
+}
+
+.persona-card:nth-child(1) .persona-illustration { background-position: 0% center; }
+.persona-card:nth-child(2) .persona-illustration { background-position: 50% center; }
+.persona-card:nth-child(3) .persona-illustration { background-position: 100% center; }
 
 /* ── Contact ── */
 .contact-grid {
@@ -1130,36 +1173,97 @@ body.light .navbar-brand span {
 }
 
 /* ── 4-col differentiators ── */
+/* ── Shared section subtitle ── */
+.section-sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: clamp(0.9rem, 1.6vw, 1rem);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 16px;
+}
+
+/* ── Differentiator grid (icon glow circles) ── */
+.diff-section {
+  position: relative;
+}
+
 .diff-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 32px;
+  margin-top: 64px;
 }
 
 .diff-card {
   text-align: center;
-  padding: 28px 20px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.02);
+  padding: 0 8px;
+  background: none;
+  border: none;
 }
 
-.diff-card .diff-emoji {
-  font-size: 2rem;
-  margin-bottom: 12px;
+.diff-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(255,56,92,.18) 0%,
+    rgba(255,56,92,.06) 50%,
+    transparent 75%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.diff-icon::before {
+  content: '';
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,56,92,.35);
+  background: rgba(10,10,10,.6);
+  box-shadow: 0 0 24px rgba(255,56,92,.18), inset 0 0 12px rgba(255,56,92,.08);
+}
+
+.diff-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
 }
 
 .diff-card h4 {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 
 .diff-card p {
   color: var(--gray);
-  font-size: 0.825rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ── Section divider — subtle red glow line between sections ── */
+.section-divider {
+  margin-top: 80px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,56,92,.3) 25%,
+    rgba(255,56,92,.55) 50%,
+    rgba(255,56,92,.3) 75%,
+    transparent 100%);
+  box-shadow: 0 0 24px rgba(255,56,92,.18);
+  position: relative;
 }
 
 /* ── Border accent (for about stats section) ── */
@@ -1194,9 +1298,13 @@ body.light .navbar-brand span {
 
   .card-grid-3 { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .persona-grid { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+  .persona-card { min-height: 200px; }
+  .persona-content { max-width: 58%; }
+  .persona-illustration { width: 200px; height: 200px; }
   .contact-grid { grid-template-columns: 1fr; }
-  .diff-grid { grid-template-columns: repeat(2, 1fr); }
+  .diff-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; margin-top: 48px; }
+  .section-divider { margin-top: 56px; }
   .page-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .cta-buttons { flex-direction: column; align-items: center; }
   .mini-grid { grid-template-columns: 1fr; }
@@ -1205,7 +1313,9 @@ body.light .navbar-brand span {
 @media (max-width: 480px) {
   .navbar-right { gap: 6px; }
   .navbar-cta { min-height: 38px; padding: 0 12px; font-size: 0.75rem; }
-  .diff-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; gap: 36px; }
+  .persona-content { max-width: 60%; }
+  .persona-illustration { width: 170px; height: 170px; }
   .page-footer-grid { grid-template-columns: 1fr; }
   .stats-visual-grid { grid-template-columns: 1fr; }
 }
@@ -1321,16 +1431,21 @@ body.light .compare-table td { color: #555; border-bottom-color: rgba(0,0,0,.06)
 
 body.light .persona-card {
   border-color: rgba(0,0,0,.08);
-  background: #fff;
+  background: linear-gradient(180deg, rgba(255,56,92,.05) 0%, #ffffff 60%);
 }
+body.light .persona-card:hover { border-color: rgba(255,56,92,.3); }
 body.light .persona-card h4 { color: #1a1a1a; }
 body.light .persona-card p { color: #666; }
 
-body.light .diff-card {
-  border-color: rgba(0,0,0,.08);
-  background: #fff;
-}
+body.light .section-sub { color: #666; }
+
 body.light .diff-card h4 { color: #1a1a1a; }
+body.light .diff-card p { color: #666; }
+body.light .diff-icon::before {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(255,56,92,.45);
+  box-shadow: 0 0 24px rgba(255,56,92,.12), inset 0 0 12px rgba(255,56,92,.05);
+}
 
 body.light .contact-info h2 { color: #1a1a1a; }
 body.light .contact-form-wrap {
