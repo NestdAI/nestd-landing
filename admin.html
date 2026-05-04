@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Admin | Nestd</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+  <style>
+    body { min-height: 100vh; }
+
+    /* ── Login Screen ── */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-screen::before {
+      content: '';
+      position: absolute;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(255,56,92,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .login-card { width: 100%; max-width: 380px; position: relative; }
+    .login-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; }
+    .login-logo img { height: 48px; width: 48px; border-radius: 12px; }
+    .login-logo span {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--light);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-input::placeholder { color: #555; }
+    .form-input:focus { border-color: var(--primary); }
+
+    .form-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .15s, opacity .2s;
+      margin-top: 8px;
+    }
+    .form-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .form-btn:active { transform: translateY(0); }
+    .form-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .form-error {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--primary);
+      min-height: 1.2em;
+    }
+
+    /* ── Admin Dashboard ── */
+    .admin-screen { display: none; }
+    .admin-screen.visible { display: block; }
+
+    .admin-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(18,18,18,.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+    }
+    .admin-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-brand { display: flex; align-items: center; gap: 10px; }
+    .admin-brand img { height: 32px; width: 32px; border-radius: 8px; }
+    .admin-brand span {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+    .admin-header-right { display: flex; align-items: center; gap: 16px; }
+    .admin-email { font-size: 0.8rem; color: var(--gray); }
+
+    .btn-outline {
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--light);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.15);
+    }
+
+    .admin-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .admin-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .admin-title em { font-style: italic; color: var(--primary); }
+    .admin-sub {
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .stat-value.unread { color: var(--primary); }
+    .stat-value.read { color: #fbbf24; }
+    .stat-value.replied { color: #34d399; }
+    .stat-value.archived { color: #64748b; }
+
+    /* Filter tabs */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .filter-tab {
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-tab:hover {
+      color: var(--light);
+      border-color: rgba(255,255,255,.15);
+    }
+    .filter-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .filter-tab .count {
+      margin-left: 6px;
+      font-size: 0.75rem;
+      opacity: .75;
+    }
+
+    /* Table */
+    .table-wrap {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+    }
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .table-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+    .refresh-btn {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .refresh-btn:hover { color: var(--light); }
+    .table-scroll { overflow-x: auto; }
+
+    table { width: 100%; text-align: left; border-collapse: collapse; }
+    thead tr { border-bottom: 1px solid var(--border-light); }
+    th {
+      padding: 12px 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+    td {
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border-light);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,.02); }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .status-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .status-pill.unread { background: rgba(255,56,92,.15); color: var(--primary); }
+    .status-pill.unread::before { background: var(--primary); }
+    .status-pill.read { background: rgba(251,191,36,.12); color: #fbbf24; }
+    .status-pill.read::before { background: #fbbf24; }
+    .status-pill.replied { background: rgba(52,211,153,.12); color: #34d399; }
+    .status-pill.replied::before { background: #34d399; }
+    .status-pill.archived { background: rgba(100,116,139,.15); color: #94a3b8; }
+    .status-pill.archived::before { background: #94a3b8; }
+
+    tr.row-unread td:nth-child(2) { font-weight: 600; }
+
+    .td-email { color: var(--gray); }
+    .td-preview {
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--gray);
+    }
+    .td-date {
+      color: #666;
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+
+    .view-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: opacity .2s;
+      padding: 0;
+      font-weight: 500;
+    }
+    .view-btn:hover { opacity: .7; }
+
+    .empty-state {
+      padding: 80px 24px;
+      text-align: center;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    .empty-state .big {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      font-family: var(--font-display);
+      color: rgba(255,255,255,.3);
+    }
+    .error-state {
+      padding: 60px 24px;
+      text-align: center;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 24px;
+    }
+    .modal-overlay.visible { display: flex; }
+
+    .modal-card {
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 560px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color .2s;
+      padding: 4px 8px;
+    }
+    .modal-close:hover { color: var(--light); }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      padding-right: 32px;
+    }
+    .modal-field {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    .modal-field-label { color: var(--gray); font-size: 0.82rem; }
+    .modal-field-value { color: var(--light); font-weight: 500; }
+    .modal-field a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .modal-field a:hover { opacity: .8; }
+
+    .modal-status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .modal-message-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+    }
+    .modal-message-text {
+      color: rgba(255,255,255,.85);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+    }
+    .modal-btn {
+      flex: 1 1 calc(50% - 5px);
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: opacity .2s, background .2s, border-color .2s;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .modal-btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .modal-btn.primary:hover { opacity: .9; }
+    .modal-btn.secondary {
+      background: rgba(255,255,255,.04);
+      border-color: var(--border);
+      color: var(--light);
+    }
+    .modal-btn.secondary:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.15);
+    }
+    .modal-btn.danger {
+      background: transparent;
+      border-color: rgba(100,116,139,.3);
+      color: #94a3b8;
+    }
+    .modal-btn.danger:hover {
+      background: rgba(100,116,139,.1);
+      border-color: rgba(100,116,139,.5);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .td-preview { max-width: 180px; }
+    }
+    @media (max-width: 768px) {
+      .admin-email { display: none; }
+      th, td { padding: 12px 14px; }
+      .admin-content { padding: 24px 16px 60px; }
+      .admin-header { padding: 14px 16px; }
+      .modal-actions { flex-direction: column; }
+      .modal-btn { flex: 1 1 100%; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stat-card { padding: 16px; }
+      .stat-value { font-size: 1.6rem; }
+      th.col-hide-sm, td.col-hide-sm { display: none; }
+      .td-preview { max-width: 140px; }
+      .modal-card { padding: 24px; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="logo.png" alt="Nestd">
+        <span>Nestd Admin</span>
+      </div>
+      <form id="login-form" onsubmit="return false">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input class="form-input" id="login-email" type="email" placeholder="admin@nestd.nl" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Wachtwoord</label>
+          <input class="form-input" id="login-password" type="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="form-btn" id="login-btn">Inloggen</button>
+        <p id="login-error" class="form-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="admin-screen" class="admin-screen">
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <img src="logo.png" alt="Nestd">
+          <span>Nestd Admin</span>
+        </div>
+        <div class="admin-header-right">
+          <span id="admin-email" class="admin-email"></span>
+          <button id="logout-btn" class="btn-outline">Uitloggen</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <h1 class="admin-title">Contact <em>berichten</em></h1>
+      <p class="admin-sub">Beheer inkomende berichten van het contactformulier.</p>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Ongelezen</div>
+          <div id="stat-unread" class="stat-value unread">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gelezen</div>
+          <div id="stat-read" class="stat-value read">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Beantwoord</div>
+          <div id="stat-replied" class="stat-value replied">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gearchiveerd</div>
+          <div id="stat-archived" class="stat-value archived">–</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-tab active" data-filter="all">Alles <span class="count" id="count-all">0</span></button>
+        <button class="filter-tab" data-filter="unread">Ongelezen <span class="count" id="count-unread">0</span></button>
+        <button class="filter-tab" data-filter="read">Gelezen <span class="count" id="count-read">0</span></button>
+        <button class="filter-tab" data-filter="replied">Beantwoord <span class="count" id="count-replied">0</span></button>
+        <button class="filter-tab" data-filter="archived">Gearchiveerd <span class="count" id="count-archived">0</span></button>
+      </div>
+
+      <!-- Messages Table -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <span class="table-title">Berichten</span>
+          <button id="refresh-btn" class="refresh-btn">↻ Vernieuwen</button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Naam</th>
+                <th class="col-hide-sm">Email</th>
+                <th class="col-hide-sm">Bericht</th>
+                <th>Datum</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="messages-body">
+              <tr><td colspan="6" class="empty-state">Laden…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div id="message-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close" aria-label="Sluiten">×</button>
+      <div class="modal-title" id="modal-name">–</div>
+      <div class="modal-status-row">
+        <span id="modal-status" class="status-pill unread">Ongelezen</span>
+      </div>
+      <div class="modal-field">
+        <span class="modal-field-label">Email: </span>
+        <a id="modal-email" href=""></a>
+      </div>
+      <div class="modal-field">
+        <span class="modal-field-label">Verstuurd op: </span>
+        <span id="modal-date" class="modal-field-value"></span>
+      </div>
+      <div class="modal-message-section">
+        <span class="modal-field-label">Bericht:</span>
+        <p id="modal-message" class="modal-message-text"></p>
+      </div>
+      <div class="modal-actions">
+        <a id="modal-reply" href="" class="modal-btn primary">📧 Beantwoord</a>
+        <button id="modal-mark-replied" class="modal-btn secondary">✓ Markeer als beantwoord</button>
+        <button id="modal-mark-read" class="modal-btn secondary">Markeer als gelezen</button>
+        <button id="modal-archive" class="modal-btn danger">Archiveren</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ── Nestd Admin — uses plain fetch, no external SDK ──
+const SUPABASE_URL = 'https://uauoewczlexhbhvxcrjg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhdW9ld2N6bGV4aGJodnhjcmpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODU4NjcsImV4cCI6MjA4Nzg2MTg2N30.IlegUIZl3Oj4V1V_aTc0hD24coo19clgYkNVyYQ7bJI';
+
+const ALLOWED_ADMINS = [
+  'i_sadike@hotmail.com',
+  'hicham_sadike@hotmail.com'
+];
+
+const STATUS_LABELS = {
+  unread: 'Ongelezen',
+  read: 'Gelezen',
+  replied: 'Beantwoord',
+  archived: 'Gearchiveerd'
+};
+
+const SESSION_KEY = 'nestd-admin-session';
+
+function setBanner(msg, color) {
+  const b = document.getElementById('debug-banner');
+  if (b) { b.textContent = msg; b.style.background = color; }
+}
+function hideBanner() {
+  const b = document.getElementById('debug-banner');
+  if (b) b.style.display = 'none';
+}
+function setDebug(msg, isError = false) {
+  const el = document.getElementById('login-error');
+  if (el) {
+    el.textContent = msg;
+    el.style.color = isError ? '#FF385C' : '#34d399';
+  }
+}
+
+// ── Simple Supabase client using fetch ──
+const sb = {
+  session: null,
+
+  async signIn(email, password) {
+    const res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) return { error: data };
+    this.session = data;
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify(data)); } catch {}
+    return { data };
+  },
+
+  async signOut() {
+    if (this.session) {
+      try {
+        await fetch(SUPABASE_URL + '/auth/v1/logout', {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + this.session.access_token
+          }
+        });
+      } catch {}
+    }
+    this.session = null;
+    try { localStorage.removeItem(SESSION_KEY); } catch {}
+  },
+
+  loadSession() {
+    try {
+      const raw = localStorage.getItem(SESSION_KEY);
+      if (raw) this.session = JSON.parse(raw);
+    } catch {}
+    return this.session;
+  },
+
+  user() {
+    return this.session?.user || null;
+  },
+
+  async select(table, query = '') {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + query, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + this.session.access_token
+      }
+    });
+    if (!res.ok) throw new Error('SELECT failed: ' + res.status);
+    return res.json();
+  },
+
+  async update(table, matchQuery, patch) {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + matchQuery, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + this.session.access_token,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(patch)
+    });
+    if (!res.ok) throw new Error('UPDATE failed: ' + res.status);
+  }
+};
+
+const loginScreen = document.getElementById('login-screen');
+const adminScreen = document.getElementById('admin-screen');
+let allMessages = [];
+let currentFilter = 'all';
+
+// ── Init ──
+(function init() {
+  const session = sb.loadSession();
+  if (session && session.user && ALLOWED_ADMINS.includes(session.user.email)) {
+    showAdmin(session.user);
+  } else if (session) {
+    sb.signOut();
+  }
+  hideBanner();
+})();
+
+// ── Login ──
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errorEl.textContent = 'Inloggen...';
+  errorEl.style.color = '#888';
+  btn.disabled = true;
+
+  try {
+    const { data, error } = await sb.signIn(email, password);
+    if (error) {
+      errorEl.textContent = 'Ongeldige inloggegevens.';
+      errorEl.style.color = '#FF385C';
+      return;
+    }
+    if (!ALLOWED_ADMINS.includes(data.user.email)) {
+      await sb.signOut();
+      errorEl.textContent = 'Je hebt geen toegang tot het admin panel.';
+      errorEl.style.color = '#FF385C';
+      return;
+    }
+    showAdmin(data.user);
+  } catch (err) {
+    errorEl.textContent = 'Netwerkfout: ' + err.message;
+    errorEl.style.color = '#FF385C';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Inloggen';
+  }
+});
+
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  await sb.signOut();
+  adminScreen.classList.remove('visible');
+  loginScreen.classList.remove('hidden');
+  allMessages = [];
+});
+
+function showAdmin(user) {
+  loginScreen.classList.add('hidden');
+  adminScreen.classList.add('visible');
+  document.getElementById('admin-email').textContent = user.email;
+  loadMessages();
+}
+
+// ── Data ──
+async function loadMessages() {
+  try {
+    const data = await sb.select('contact_messages', 'select=*&order=created_at.desc');
+    allMessages = data || [];
+    updateStats();
+    updateFilterCounts();
+    renderTable();
+  } catch (err) {
+    document.getElementById('messages-body').innerHTML =
+      '<tr><td colspan="6" class="error-state">Fout bij laden: ' + err.message + '</td></tr>';
+  }
+}
+
+function updateStats() {
+  const counts = { unread: 0, read: 0, replied: 0, archived: 0 };
+  allMessages.forEach(m => { counts[m.status] = (counts[m.status] || 0) + 1; });
+  document.getElementById('stat-unread').textContent = counts.unread;
+  document.getElementById('stat-read').textContent = counts.read;
+  document.getElementById('stat-replied').textContent = counts.replied;
+  document.getElementById('stat-archived').textContent = counts.archived;
+}
+
+function updateFilterCounts() {
+  const counts = { unread: 0, read: 0, replied: 0, archived: 0 };
+  allMessages.forEach(m => { counts[m.status] = (counts[m.status] || 0) + 1; });
+  document.getElementById('count-all').textContent = allMessages.length;
+  document.getElementById('count-unread').textContent = counts.unread;
+  document.getElementById('count-read').textContent = counts.read;
+  document.getElementById('count-replied').textContent = counts.replied;
+  document.getElementById('count-archived').textContent = counts.archived;
+}
+
+function renderTable() {
+  const filtered = currentFilter === 'all'
+    ? allMessages
+    : allMessages.filter(m => m.status === currentFilter);
+
+  const tbody = document.getElementById('messages-body');
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" class="empty-state">
+      <div class="big">📭</div>
+      ${currentFilter === 'all' ? 'Nog geen berichten ontvangen.' : 'Geen berichten in deze categorie.'}
+    </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(m => `
+    <tr data-id="${m.id}" class="${m.status === 'unread' ? 'row-unread' : ''}">
+      <td><span class="status-pill ${m.status}">${STATUS_LABELS[m.status]}</span></td>
+      <td>${escHtml(m.name)}</td>
+      <td class="td-email col-hide-sm">${escHtml(m.email)}</td>
+      <td class="td-preview col-hide-sm">${escHtml(m.message)}</td>
+      <td class="td-date">${formatDate(m.created_at)}</td>
+      <td><button class="view-btn" data-id="${m.id}">Bekijk →</button></td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => openModal(row.dataset.id));
+  });
+}
+
+document.getElementById('filter-bar').addEventListener('click', (e) => {
+  const btn = e.target.closest('.filter-tab');
+  if (!btn) return;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  renderTable();
+});
+
+document.getElementById('refresh-btn').addEventListener('click', loadMessages);
+
+// ── Modal ──
+let currentModalId = null;
+const modal = document.getElementById('message-modal');
+
+function openModal(id) {
+  const m = allMessages.find(msg => msg.id === id);
+  if (!m) return;
+  currentModalId = id;
+
+  document.getElementById('modal-name').textContent = m.name;
+  document.getElementById('modal-email').textContent = m.email;
+  document.getElementById('modal-email').href = 'mailto:' + m.email;
+  document.getElementById('modal-date').textContent = new Date(m.created_at).toLocaleString('nl-NL', {
+    day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+  document.getElementById('modal-message').textContent = m.message;
+  document.getElementById('modal-reply').href =
+    'mailto:' + m.email + '?subject=' + encodeURIComponent('Re: je bericht aan Nestd');
+
+  const statusEl = document.getElementById('modal-status');
+  statusEl.textContent = STATUS_LABELS[m.status];
+  statusEl.className = 'status-pill ' + m.status;
+
+  document.getElementById('modal-mark-read').style.display =
+    m.status === 'unread' ? '' : 'none';
+  document.getElementById('modal-mark-replied').style.display =
+    m.status === 'replied' ? 'none' : '';
+  document.getElementById('modal-archive').style.display =
+    m.status === 'archived' ? 'none' : '';
+
+  if (m.status === 'unread') updateStatus(id, 'read', false);
+
+  modal.classList.add('visible');
+}
+
+function closeModal() {
+  modal.classList.remove('visible');
+  currentModalId = null;
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+});
+
+async function updateStatus(id, status, closeAfter = true) {
+  try {
+    await sb.update('contact_messages', 'id=eq.' + id, { status });
+    const msg = allMessages.find(m => m.id === id);
+    if (msg) msg.status = status;
+    updateStats();
+    updateFilterCounts();
+    renderTable();
+    if (closeAfter) closeModal();
+  } catch (err) {
+    alert('Fout bij opslaan: ' + err.message);
+  }
+}
+
+document.getElementById('modal-mark-read').addEventListener('click', () => {
+  if (currentModalId) updateStatus(currentModalId, 'read');
+});
+document.getElementById('modal-mark-replied').addEventListener('click', () => {
+  if (currentModalId) updateStatus(currentModalId, 'replied');
+});
+document.getElementById('modal-archive').addEventListener('click', () => {
+  if (currentModalId) updateStatus(currentModalId, 'archived');
+});
+
+// ── Helpers ──
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  const now = new Date();
+  const diffHours = (now - d) / (1000 * 60 * 60);
+  if (diffHours < 24) {
+    return d.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+  }
+  if (diffHours < 24 * 7) {
+    return d.toLocaleDateString('nl-NL', { weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+  return d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
+}
+</script>
+</script>
+</body>
+</html>
