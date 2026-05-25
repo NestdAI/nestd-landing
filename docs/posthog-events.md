@@ -56,7 +56,7 @@ Website pages are marketing/content pages. They drive visitors to the app downlo
 | Waitlist signup started | `waitlist_signup_started` | — | Visitor submits the waitlist form | `placement`, attribution props | Do not send the submitted email to analytics. |
 | Waitlist signup completed | `waitlist_signup_completed` | `Lead` | Waitlist API returns success | PostHog: `placement`, attribution props; Meta: `content_name=waitlist_signup`, `content_category=website_lead`, `placement` | Fire only after backend success. No email/name/phone. |
 | Waitlist duplicate | `waitlist_signup_duplicate` | — | Waitlist API returns duplicate/already exists, including 409 or duplicate/already_exists response body | `placement`, attribution props | Not a new Meta `Lead`, to avoid double-counting. |
-| Waitlist signup failed | `waitlist_signup_failed` | — | Waitlist API fails | stable `reason`, `placement`, attribution props | Reason code only: `invalid_email`, `duplicate`, `network_error`, `server_error`, `unknown_error`. No raw error messages. |
+| Waitlist signup failed | `waitlist_signup_failed` | — | Waitlist API fails | stable `reason`, `placement`, attribution props | Reason code only: `invalid_email`, `duplicate`, `rate_limited`, `network_error`, `server_error`, `unknown_error`. No raw error messages. |
 | Navigation click | `navigation_clicked` | — | Nav/footer link clicked | `label`, `href`, `location` | PostHog-only. |
 | Theme change | `theme_toggled` | — | Visitor toggles theme | `theme` | PostHog-only utility event. |
 | Deeplink page view | `app_deeplink_viewed` | `PageView` | `/app` deeplink page loads | attribution props | Public website/deeplink page, not native app event. |
@@ -116,8 +116,8 @@ The app is the product funnel. PostHog is already installed in the native app.
 - Meta Pixel loads from the public pixel ID only in safe public marketing/deeplink contexts and tracks only standard website events listed above.
 - Automatic PostHog click autocapture and session recordings are disabled.
 - Event payloads include allow-listed UTM parameters/click IDs in PostHog only: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`.
-- First-touch attribution is stored in `localStorage`; current-touch attribution is stored in `sessionStorage` and survives same-session navigation/language changes. Payloads include top-level current attribution plus `first_touch_*` and `current_touch_*` fields for UTM/click IDs, `landing_page`, `referrer`, and `captured_at`.
-- Waitlist API submissions include the same sanitized attribution fields plus `source=landing`; the submitted email is sent only to the backend and is stripped from analytics payloads.
+- First-touch attribution is stored in `localStorage`; current-touch attribution is stored in `sessionStorage` and survives same-session navigation/language changes. Payloads include top-level current attribution, compatibility fields (`first_touch_*`, `current_touch_*`), and nested `first_touch` / `current_touch` objects for UTM/click IDs, `landing_page`, `referrer`, and `captured_at`.
+- Waitlist API submissions include the same sanitized attribution fields and nested touch objects plus `source=landing`; the submitted email is sent only to the backend and is stripped from analytics payloads.
 - `url`, `landing_page`, and `referrer` are stripped to origin + path before PostHog capture or waitlist submission; listing/product deeplink routes, unknown query strings, and listing referrers are not sent to Meta.
 - Meta event parameters are allow-listed and do not include email, phone, raw URLs, raw referrers, full preferences, listing IDs, or message content; Meta is not initialized on `/listing/*` or after same-origin listing referrers.
 - Events fired before the PostHog bundle loads are queued and flushed after initialization.

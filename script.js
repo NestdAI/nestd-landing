@@ -189,11 +189,18 @@
     };
   }
 
-  function prefixedAttribution(prefix, attribution = {}) {
+  function attributionSnapshot(attribution = {}) {
     return [...ATTRIBUTION_FIELDS, ...ATTRIBUTION_CONTEXT_FIELDS].reduce((payload, field) => {
       if (attribution[field] !== undefined && attribution[field] !== null && attribution[field] !== '') {
-        payload[`${prefix}_${field}`] = attribution[field];
+        payload[field] = attribution[field];
       }
+      return payload;
+    }, {});
+  }
+
+  function prefixedAttribution(prefix, attribution = {}) {
+    return Object.entries(attributionSnapshot(attribution)).reduce((payload, [field, value]) => {
+      payload[`${prefix}_${field}`] = value;
       return payload;
     }, {});
   }
@@ -224,6 +231,8 @@
       ...currentAttribution,
       ...prefixedAttribution('first_touch', firstTouch),
       ...prefixedAttribution('current_touch', currentTouch),
+      first_touch: attributionSnapshot(firstTouch),
+      current_touch: attributionSnapshot(currentTouch),
       ...properties,
     });
   }
@@ -656,8 +665,15 @@ if (waMock) {
     }
   }
 
+  function waitlistErrorCode(payload) {
+    return typeof payload?.error?.code === 'string'
+      ? payload.error.code
+      : (typeof payload?.code === 'string' ? payload.code : '');
+  }
+
   function getFailureReason(response, error, payload) {
     if (isDuplicateWaitlistResponse(response, payload)) return 'duplicate';
+    if (response?.status === 429 || waitlistErrorCode(payload).toUpperCase() === 'RATE_LIMITED') return 'rate_limited';
     if (response?.status === 400 || response?.status === 422) return 'invalid_email';
     if (response?.status >= 500) return 'server_error';
     if (error?.name === 'TypeError') return 'network_error';
