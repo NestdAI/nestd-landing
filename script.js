@@ -25,6 +25,19 @@
   ]);
   const POSTHOG_QUEUE = [];
   let posthogReady = false;
+  const FIRST_TOUCH_STORAGE_KEY = 'nestd_attribution_first_touch_v1';
+  const CURRENT_TOUCH_STORAGE_KEY = 'nestd_attribution_current_touch_v1';
+  const ATTRIBUTION_FIELDS = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_term',
+    'fbclid',
+    'gclid',
+  ];
+  const ATTRIBUTION_CONTEXT_FIELDS = ['landing_page', 'referrer', 'captured_at'];
+  const SENSITIVE_ANALYTICS_KEYS = new Set(['email', 'phone', 'name']);
 
   // Meta Pixel may implicitly receive page URL/referrer from the browser.
   // Keep it limited to safe public marketing/deeplink contexts and never load
@@ -37,6 +50,7 @@
     'utm_content',
     'utm_term',
     'fbclid',
+    'gclid',
   ]);
 
   function isListingPath(pathname = '') {
@@ -84,20 +98,134 @@
     }
   }
 
-  function getAttributionPayload(properties = {}) {
+  function compactObject(object = {}) {
+    return Object.entries(object).reduce((compact, [key, value]) => {
+      if (value !== undefined && value !== null && value !== '') compact[key] = value;
+      return compact;
+    }, {});
+  }
+
+  function readStoredAttribution(storage, key) {
+    try {
+      const raw = storage?.getItem?.(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeStoredAttribution(storage, key, value) {
+    try {
+      storage?.setItem?.(key, JSON.stringify(value));
+    } catch {
+      // Storage can be unavailable in private browsing or blocked embeds.
+    }
+  }
+
+  function getBrowserStorage(kind) {
+    try {
+      return window[kind];
+    } catch {
+      return null;
+    }
+  }
+
+  function getLanguage() {
+    try {
+      return document.documentElement.lang || localStorage.getItem('nestd-lang') || 'nl';
+    } catch {
+      return document.documentElement.lang || 'nl';
+    }
+  }
+
+  function getAttributionFromLocation() {
     const params = new URLSearchParams(window.location.search);
+    const attribution = {
+      landing_page: safeUrl(window.location.href),
+      referrer: safeUrl(document.referrer),
+      captured_at: new Date().toISOString(),
+    };
+
+    ATTRIBUTION_FIELDS.forEach(field => {
+      const value = params.get(field);
+      if (value) attribution[field] = value;
+    });
+
+    return compactObject(attribution);
+  }
+
+  function hasCampaignAttribution(attribution = {}) {
+    return ATTRIBUTION_FIELDS.some(field => Boolean(attribution[field]));
+  }
+
+  function persistAttribution() {
+    const pageAttribution = getAttributionFromLocation();
+    const localStorageRef = getBrowserStorage('localStorage');
+    const sessionStorageRef = getBrowserStorage('sessionStorage');
+    let firstTouch = readStoredAttribution(localStorageRef, FIRST_TOUCH_STORAGE_KEY);
+    let currentTouch = readStoredAttribution(sessionStorageRef, CURRENT_TOUCH_STORAGE_KEY);
+
+    if (!firstTouch) {
+      firstTouch = pageAttribution;
+      writeStoredAttribution(localStorageRef, FIRST_TOUCH_STORAGE_KEY, firstTouch);
+    }
+
+    // Current-touch should survive same-session navigation/language changes, but
+    // refresh when a new ad/social/search click brings explicit attribution.
+    if (!currentTouch || hasCampaignAttribution(pageAttribution)) {
+      currentTouch = pageAttribution;
+      writeStoredAttribution(sessionStorageRef, CURRENT_TOUCH_STORAGE_KEY, currentTouch);
+    }
+
+    return { firstTouch, currentTouch, pageAttribution };
+  }
+
+  const initialAttribution = persistAttribution();
+
+  function getPersistedAttribution() {
     return {
+      firstTouch: readStoredAttribution(getBrowserStorage('localStorage'), FIRST_TOUCH_STORAGE_KEY) || initialAttribution.firstTouch || initialAttribution.pageAttribution,
+      currentTouch: readStoredAttribution(getBrowserStorage('sessionStorage'), CURRENT_TOUCH_STORAGE_KEY) || initialAttribution.currentTouch || initialAttribution.pageAttribution,
+    };
+  }
+
+  function prefixedAttribution(prefix, attribution = {}) {
+    return [...ATTRIBUTION_FIELDS, ...ATTRIBUTION_CONTEXT_FIELDS].reduce((payload, field) => {
+      if (attribution[field] !== undefined && attribution[field] !== null && attribution[field] !== '') {
+        payload[`${prefix}_${field}`] = attribution[field];
+      }
+      return payload;
+    }, {});
+  }
+
+  function stripSensitiveAnalyticsProperties(properties = {}) {
+    return Object.entries(properties).reduce((safe, [key, value]) => {
+      if (!SENSITIVE_ANALYTICS_KEYS.has(String(key).toLowerCase())) safe[key] = value;
+      return safe;
+    }, {});
+  }
+
+  function getAttributionPayload(properties = {}) {
+    const { firstTouch, currentTouch } = getPersistedAttribution();
+    const currentAttribution = compactObject({
+      ...ATTRIBUTION_FIELDS.reduce((payload, field) => {
+        payload[field] = currentTouch?.[field];
+        return payload;
+      }, {}),
+      landing_page: currentTouch?.landing_page,
+      referrer: currentTouch?.referrer,
+      captured_at: currentTouch?.captured_at,
+    });
+
+    return compactObject({
       path: window.location.pathname,
       url: safeUrl(window.location.href),
-      referrer: safeUrl(document.referrer),
-      language: document.documentElement.lang || localStorage.getItem('nestd-lang') || 'nl',
-      utm_source: params.get('utm_source'),
-      utm_medium: params.get('utm_medium'),
-      utm_campaign: params.get('utm_campaign'),
-      utm_content: params.get('utm_content'),
-      utm_term: params.get('utm_term'),
+      language: getLanguage(),
+      ...currentAttribution,
+      ...prefixedAttribution('first_touch', firstTouch),
+      ...prefixedAttribution('current_touch', currentTouch),
       ...properties,
-    };
+    });
   }
 
   function sanitizeMetaProperties(properties = {}) {
@@ -142,7 +270,7 @@
 
   window.nestdAnalytics = {
     track(event, properties = {}) {
-      const payload = getAttributionPayload(properties);
+      const payload = getAttributionPayload(stripSensitiveAnalyticsProperties(properties));
       if (posthogReady && window.posthog?.capture) {
         window.posthog.capture(event, payload);
         return;
@@ -150,6 +278,12 @@
       if (POSTHOG_KEY) POSTHOG_QUEUE.push([event, payload]);
     },
     trackMeta,
+    getAttribution() {
+      return getAttributionPayload();
+    },
+    getWaitlistAttribution() {
+      return getAttributionPayload({ source: 'landing' });
+    },
   };
 
   loadMetaPixel();
@@ -501,9 +635,30 @@ if (waMock) {
     return dictionary?.[lang]?.[key] || fallback;
   }
 
-  function getFailureReason(response, error) {
+  function isDuplicateWaitlistResponse(response, payload) {
+    if (response?.status === 409) return true;
+    const duplicateText = [
+      payload?.status,
+      payload?.code,
+      payload?.error,
+      payload?.reason,
+      payload?.message,
+    ].filter(Boolean).join(' ').toLowerCase();
+
+    return duplicateText.includes('duplicate') || duplicateText.includes('already_exists') || duplicateText.includes('already exists');
+  }
+
+  async function readJsonResponse(response) {
+    try {
+      return await response.clone().json();
+    } catch {
+      return null;
+    }
+  }
+
+  function getFailureReason(response, error, payload) {
+    if (isDuplicateWaitlistResponse(response, payload)) return 'duplicate';
     if (response?.status === 400 || response?.status === 422) return 'invalid_email';
-    if (response?.status === 409) return 'duplicate';
     if (response?.status >= 500) return 'server_error';
     if (error?.name === 'TypeError') return 'network_error';
     return 'unknown_error';
@@ -536,13 +691,15 @@ if (waMock) {
 
     let response = null;
     try {
+      const attribution = window.nestdAnalytics?.getWaitlistAttribution?.() || { source: 'landing' };
       response = await fetch(WAITLIST_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ ...attribution, email, source: 'landing' }),
       });
+      const responseBody = await readJsonResponse(response);
 
-      if (response.status === 409) {
+      if (isDuplicateWaitlistResponse(response, responseBody)) {
         if (messageEl) {
           messageEl.textContent = copy('duplicateMsg', 'Je staat al op de lijst — we houden je op de hoogte.');
           messageEl.className = 'form-msg success';
@@ -567,7 +724,8 @@ if (waMock) {
         placement,
       });
     } catch (error) {
-      const reason = getFailureReason(response, error);
+      const responseBody = response ? await readJsonResponse(response) : null;
+      const reason = getFailureReason(response, error, responseBody);
       trackWaitlistFailure(reason, placement);
       if (messageEl) {
         messageEl.textContent = copy('errorMsg', 'Er ging iets mis. Probeer het later opnieuw.');
