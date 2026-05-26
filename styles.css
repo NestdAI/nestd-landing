@@ -213,12 +213,28 @@ body.light .hero-overlay {
 }
 
 .hero-waitlist-kicker {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #fff;
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.hero-offer-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border-radius: 999px;
+  background: rgba(255,56,92,.16);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  font-size: 0.96rem;
+  font-weight: 900;
+  line-height: 1.25;
 }
 
 .hero-waitlist-note {
@@ -1582,7 +1598,7 @@ body.light .testimonial-dot.active {
 @media (max-width: 768px) {
   .feature-grid { grid-template-columns: 1fr; gap: 20px; }
   .steps { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
-  body { padding-bottom: 82px; }
+  body { padding-bottom: 104px; }
   .waitlist-form { flex-direction: column; }
   .waitlist-form button { width: 100%; }
   .hero { min-height: auto; padding: 92px 18px 56px; }
@@ -1595,13 +1611,16 @@ body.light .testimonial-dot.active {
   .cta-strip-card { align-items: stretch; padding: 18px; }
   .cta-strip-card span { width: 100%; }
   .mobile-sticky-cta {
-    display: inline-flex;
+    display: none;
     position: fixed;
     left: 16px;
     right: 16px;
     bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 60;
     min-height: 54px;
+  }
+  .mobile-sticky-cta.is-visible {
+    display: inline-flex;
   }
   /* testimonial carousel handled above */
   .swipe-phone { width: 240px; height: 360px; }
@@ -1653,6 +1672,12 @@ body.light .hero-waitlist-card {
 
 body.light .hero-waitlist-kicker {
   color: #1a1a1a;
+}
+
+body.light .hero-offer-pill {
+  color: #1a1a1a;
+  border-color: rgba(255,56,92,.22);
+  background: rgba(255,56,92,.12);
 }
 
 body.light .hero-waitlist-note {
