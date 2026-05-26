@@ -103,7 +103,7 @@
     body.light .back-link:hover { color: #1a1a1a; }
   </style>
   <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
-  <script>if(localStorage.getItem("nestd-lang")!=="nl")document.documentElement.classList.add("i18n-loading")</script>
+  <script>(function(){try{var p=new URLSearchParams(location.search);var q=(p.get("lang")||"").toLowerCase();var u=(q==="en"||q==="nl")?q:(/^\/en(?:\/|$)/.test(location.pathname)?"en":localStorage.getItem("nestd-lang"));if(u&&u!=="nl")document.documentElement.classList.add("i18n-loading")}catch(e){}})()</script>
 </head>
 <body>
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1435983921187208&ev=PageView&noscript=1"></noscript>

@@ -625,25 +625,70 @@ const translations = {
   },
 };
 
-let currentLang = localStorage.getItem('nestd-lang') || 'nl';
+const SUPPORTED_LANGUAGES = new Set(['nl', 'en']);
 
-function applyLang(lang) {
-  currentLang = lang;
-  const t = translations[lang];
-  document.documentElement.lang = lang;
+function getUrlLang() {
+  try {
+    const queryLang = new URLSearchParams(window.location.search).get('lang')?.toLowerCase();
+    if (SUPPORTED_LANGUAGES.has(queryLang)) return queryLang;
+    if (/^\/en(?:\/|$)/.test(window.location.pathname)) return 'en';
+  } catch {
+    // Ignore malformed URLs or unavailable browser APIs.
+  }
+  return null;
+}
+
+function getStoredLang() {
+  try {
+    const storedLang = localStorage.getItem('nestd-lang');
+    return SUPPORTED_LANGUAGES.has(storedLang) ? storedLang : null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialLang() {
+  return getUrlLang() || getStoredLang() || 'nl';
+}
+
+function persistLang(lang) {
+  try {
+    localStorage.setItem('nestd-lang', lang);
+  } catch {
+    // Storage can be unavailable in private browsing or blocked embeds.
+  }
+}
+
+function syncLangQueryParam(lang) {
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  } catch {
+    // Updating the visible URL is best-effort only.
+  }
+}
+
+let currentLang = getInitialLang();
+
+function applyLang(lang, options = {}) {
+  const nextLang = SUPPORTED_LANGUAGES.has(lang) ? lang : 'nl';
+  currentLang = nextLang;
+  const t = translations[nextLang];
+  document.documentElement.lang = nextLang;
 
   // Update page title based on current page
   const path = location.pathname;
   if (path.includes('privacy')) {
-    document.title = lang === 'nl' ? 'Nestd — Privacybeleid' : 'Nestd — Privacy Policy';
+    document.title = nextLang === 'nl' ? 'Nestd — Privacybeleid' : 'Nestd — Privacy Policy';
   } else if (path.includes('features')) {
-    document.title = lang === 'nl' ? 'Features | Nestd — Jouw AI Woonassistent' : 'Features | Nestd — Your AI Housing Assistant';
+    document.title = nextLang === 'nl' ? 'Features | Nestd — Jouw AI Woonassistent' : 'Features | Nestd — Your AI Housing Assistant';
   } else if (path.includes('pricing')) {
-    document.title = lang === 'nl' ? 'Prijzen | Nestd — Jouw AI Woonassistent' : 'Pricing | Nestd — Your AI Housing Assistant';
+    document.title = nextLang === 'nl' ? 'Prijzen | Nestd — Jouw AI Woonassistent' : 'Pricing | Nestd — Your AI Housing Assistant';
   } else if (path.includes('about')) {
-    document.title = lang === 'nl' ? 'Over Ons | Nestd — Jouw AI Woonassistent' : 'About Us | Nestd — Your AI Housing Assistant';
+    document.title = nextLang === 'nl' ? 'Over Ons | Nestd — Jouw AI Woonassistent' : 'About Us | Nestd — Your AI Housing Assistant';
   } else {
-    document.title = lang === 'nl' ? 'Nestd — Jouw AI Woonassistent' : 'Nestd — Your AI Housing Assistant';
+    document.title = nextLang === 'nl' ? 'Nestd — Jouw AI Woonassistent' : 'Nestd — Your AI Housing Assistant';
   }
 
   // Text content
@@ -666,9 +711,10 @@ function applyLang(lang) {
 
   // Update lang toggle button
   const langBtn = document.getElementById('lang-toggle');
-  if (langBtn) langBtn.textContent = lang === 'nl' ? '🇬🇧' : '🇳🇱';
+  if (langBtn) langBtn.textContent = nextLang === 'nl' ? '🇬🇧' : '🇳🇱';
 
-  localStorage.setItem('nestd-lang', lang);
+  persistLang(nextLang);
+  if (options.updateUrl) syncLangQueryParam(nextLang);
 
   // Remove loading cloak (prevents FOUC)
   document.documentElement.classList.remove('i18n-loading');
@@ -679,6 +725,6 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(currentLang);
 
   document.getElementById('lang-toggle').addEventListener('click', () => {
-    applyLang(currentLang === 'nl' ? 'en' : 'nl');
+    applyLang(currentLang === 'nl' ? 'en' : 'nl', { updateUrl: true });
   });
 });

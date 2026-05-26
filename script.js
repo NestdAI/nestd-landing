@@ -51,6 +51,7 @@
     'utm_term',
     'fbclid',
     'gclid',
+    'lang',
   ]);
 
   function isListingPath(pathname = '') {
@@ -61,6 +62,7 @@
     const normalizedPath = pathname.replace(/\/index\.html$/, '/');
     if (isListingPath(normalizedPath)) return false;
     if (normalizedPath === '/' || normalizedPath === '/index.html') return true;
+    if (normalizedPath === '/en' || normalizedPath === '/en/') return true;
     if (normalizedPath === '/about.html' || normalizedPath === '/pricing.html' || normalizedPath === '/privacy.html') return true;
     if (normalizedPath === '/app' || normalizedPath === '/app/' || normalizedPath === '/app/index.html') return true;
     return false;
