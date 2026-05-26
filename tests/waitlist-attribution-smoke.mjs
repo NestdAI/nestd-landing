@@ -144,4 +144,65 @@ assert.equal(
   JSON.stringify(['waitlist_signup_failed', { reason: 'rate_limited', placement: 'hero' }]),
 );
 
+const successTracked = [];
+let successSubmitHandler;
+const successInput = { value: 'success@example.com' };
+const successButton = { disabled: false, textContent: '' };
+const successMessageEl = { textContent: '', className: 'form-msg', classList: { contains: (className) => className === 'form-msg' } };
+const successForm = {
+  dataset: { placement: 'hero' },
+  nextElementSibling: successMessageEl,
+  querySelector(selector) {
+    if (selector === 'input[type="email"]') return successInput;
+    if (selector === 'button[type="submit"]') return successButton;
+    return null;
+  },
+  closest: () => null,
+  reset() {
+    successInput.value = '';
+  },
+  addEventListener(_event, handler) {
+    successSubmitHandler = handler;
+  },
+};
+
+const successContext = vm.createContext({
+  console,
+  currentLang: 'nl',
+  translations: {
+    nl: {
+      submitLoading: 'Even geduld...',
+      submitBtn: 'Claim je plek',
+      successMsg: '🎉 Je staat op de lijst! Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.',
+    },
+  },
+  document: { querySelectorAll: () => [successForm], documentElement: { lang: 'nl' } },
+  window: {
+    nestdAnalytics: {
+      getWaitlistAttribution: () => ({ source: 'landing' }),
+      track: (event, properties) => successTracked.push(['posthog', event, properties]),
+      trackMeta: (event, properties) => successTracked.push(['meta', event, properties]),
+    },
+  },
+  fetch: async () => ({
+    ok: true,
+    status: 200,
+    clone() {
+      return this;
+    },
+    async json() {
+      return { success: true };
+    },
+  }),
+});
+
+vm.runInContext(extractIife('initWaitlistForms'), successContext);
+assert.equal(typeof successSubmitHandler, 'function');
+await successSubmitHandler({ preventDefault() {}, currentTarget: successForm });
+assert.equal(successMessageEl.textContent, '🎉 Je staat op de lijst! Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.');
+assert.equal(successMessageEl.className, 'form-msg success');
+assert.ok(successTracked.some(([kind, event]) => kind === 'posthog' && event === 'waitlist_signup_completed'));
+assert.ok(successTracked.some(([kind, event]) => kind === 'meta' && event === 'Lead'));
+assert.equal(successButton.textContent, 'Claim je plek');
+
 console.log('waitlist attribution smoke passed');

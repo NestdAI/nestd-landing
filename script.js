@@ -774,7 +774,7 @@ if (waMock) {
       if (!response.ok) throw new Error('waitlist_request_failed');
 
       if (messageEl) {
-        messageEl.textContent = copy('successMsg', '🎉 Je staat op de lijst! We houden je op de hoogte.');
+        messageEl.textContent = copy('successMsg', '🎉 Je staat op de lijst! Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.');
         messageEl.className = 'form-msg success';
       }
       form.reset();
@@ -795,7 +795,7 @@ if (waMock) {
       }
     } finally {
       button.disabled = false;
-      button.textContent = copy('submitBtn', 'Schrijf je in');
+      button.textContent = copy('submitBtn', 'Claim je plek');
     }
   }
 
