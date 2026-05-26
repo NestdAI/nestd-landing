@@ -1598,7 +1598,7 @@ body.light .testimonial-dot.active {
 @media (max-width: 768px) {
   .feature-grid { grid-template-columns: 1fr; gap: 20px; }
   .steps { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
-  body { padding-bottom: 82px; }
+  body { padding-bottom: 104px; }
   .waitlist-form { flex-direction: column; }
   .waitlist-form button { width: 100%; }
   .hero { min-height: auto; padding: 92px 18px 56px; }
@@ -1611,13 +1611,16 @@ body.light .testimonial-dot.active {
   .cta-strip-card { align-items: stretch; padding: 18px; }
   .cta-strip-card span { width: 100%; }
   .mobile-sticky-cta {
-    display: inline-flex;
+    display: none;
     position: fixed;
     left: 16px;
     right: 16px;
     bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 60;
     min-height: 54px;
+  }
+  .mobile-sticky-cta.is-visible {
+    display: inline-flex;
   }
   /* testimonial carousel handled above */
   .swipe-phone { width: 240px; height: 360px; }

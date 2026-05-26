@@ -562,6 +562,32 @@ if (waMock) {
   window.addEventListener('resize', setupObservers);
 })();
 
+// Show the mobile sticky CTA only after the hero waitlist form scrolls away.
+(function initMobileStickyCtaVisibility() {
+  const stickyCta = document.querySelector('.mobile-sticky-cta');
+  const heroWaitlistForm = document.getElementById('waitlist-hero');
+  const mobileQuery = window.matchMedia?.('(max-width: 768px)');
+
+  if (!stickyCta || !heroWaitlistForm || !mobileQuery) return;
+
+  function updateStickyCtaVisibility() {
+    const formRect = heroWaitlistForm.getBoundingClientRect();
+    const shouldShow = mobileQuery.matches && formRect.bottom <= 0;
+    stickyCta.classList.toggle('is-visible', shouldShow);
+  }
+
+  const observer = 'IntersectionObserver' in window
+    ? new IntersectionObserver(updateStickyCtaVisibility, { threshold: [0, 1] })
+    : null;
+
+  observer?.observe(heroWaitlistForm);
+  updateStickyCtaVisibility();
+
+  window.addEventListener('scroll', updateStickyCtaVisibility, { passive: true });
+  window.addEventListener('resize', updateStickyCtaVisibility);
+  mobileQuery.addEventListener?.('change', updateStickyCtaVisibility);
+})();
+
 // Track marketing CTA and navigation clicks
 (function initMarketingClickTracking() {
   function waitlistHashForLink(link) {
