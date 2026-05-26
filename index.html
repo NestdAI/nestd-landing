@@ -33,7 +33,7 @@
         <a href="/about.html" data-i18n="nav_about">Over ons</a>
       </div>
       <div class="navbar-right">
-        <a href="#waitlist-bottom" class="navbar-cta" data-i18n="cta">Early Access →</a>
+        <a href="#waitlist-hero" class="navbar-cta" data-cta-placement="nav" data-i18n="cta">Join de waitlist →</a>
         <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
         <button class="navbar-hamburger" id="hamburger" aria-label="Open menu">
@@ -50,8 +50,10 @@
     <a href="/" class="active">Home</a>
     <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
-    <a href="#waitlist-bottom" data-i18n="cta">Early Access →</a>
+    <a href="#waitlist-hero" data-cta-placement="mobile_nav" data-i18n="cta">Join de waitlist →</a>
   </div>
+
+  <a href="#waitlist-hero" class="mobile-sticky-cta" data-cta-placement="mobile_sticky" data-i18n="stickyCta">Join de waitlist</a>
 
   <!-- ═══════════════════════════════════════ -->
   <!-- 1. HERO                                 -->
@@ -71,15 +73,15 @@
       <p class="hero-sub fade-in" data-i18n="heroSub">
         Nestd is je persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.
       </p>
-      <div class="app-badges fade-in">
-        <a href="https://apps.apple.com/app/nestd/id6761392857" class="badge-link" target="_blank" rel="noopener">
-          <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
-        </a>
-        <a href="#" class="badge-link">
-          <img src="images/google-play-badge.svg" alt="Get it on Google Play" class="app-badge">
-        </a>
+      <div class="hero-waitlist-card fade-in">
+        <p class="hero-waitlist-kicker" data-i18n="heroWaitlistKicker">Pre-launch early access</p>
+        <form class="waitlist-form waitlist-form-prominent" id="waitlist-hero" data-placement="hero">
+          <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+          <button type="submit" data-i18n="submitBtn">Join de waitlist</button>
+        </form>
+        <p class="form-msg" id="msg-hero" role="status" aria-live="polite"></p>
+        <p class="hero-waitlist-note" data-i18n="heroWaitlistNote">Nestd is nog pre-launch. Laat je e-mailadres achter en krijg als eerste toegang.</p>
       </div>
-      <!-- App is live — download CTA's above replace the old signup form -->
     </div>
   </section>
 
@@ -145,15 +147,11 @@
   <!-- ═══════════════════════════════════════ -->
   <!-- 3. CTA BUTTONS (first instance)         -->
   <!-- ═══════════════════════════════════════ -->
-  <section class="cta-badges-section">
+  <section class="cta-strip-section">
     <div class="container">
-      <div class="app-badges-row fade-in">
-        <a href="https://apps.apple.com/app/nestd/id6761392857" class="badge-link" target="_blank" rel="noopener">
-          <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
-        </a>
-        <a href="#" class="badge-link">
-          <img src="images/google-play-badge.svg" alt="Get it on Google Play" class="app-badge">
-        </a>
+      <div class="cta-strip-card fade-in">
+        <span data-i18n="ctaStripTitle">Stop met refreshen. Laat Nestd voor je zoeken.</span>
+        <a href="#waitlist-hero" class="cta-strip-link" data-cta-placement="mid_page_1" data-i18n="ctaStripButton">Join de waitlist</a>
       </div>
     </div>
   </section>
@@ -256,15 +254,11 @@
   <!-- ═══════════════════════════════════════ -->
   <!-- 6. CTA BUTTONS (second instance)        -->
   <!-- ═══════════════════════════════════════ -->
-  <section class="cta-badges-section">
+  <section class="cta-strip-section">
     <div class="container">
-      <div class="app-badges-row fade-in">
-        <a href="https://apps.apple.com/app/nestd/id6761392857" class="badge-link" target="_blank" rel="noopener">
-          <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
-        </a>
-        <a href="#" class="badge-link">
-          <img src="images/google-play-badge.svg" alt="Get it on Google Play" class="app-badge">
-        </a>
+      <div class="cta-strip-card fade-in">
+        <span data-i18n="ctaStripTitle2">Wil je early access zodra er plekken opengaan?</span>
+        <a href="#waitlist-hero" class="cta-strip-link" data-cta-placement="mid_page_2" data-i18n="ctaStripButton">Join de waitlist</a>
       </div>
     </div>
   </section>
@@ -501,14 +495,7 @@
       </form>
       <p class="form-msg" id="msg-footer" role="status" aria-live="polite"></p>
       <p class="waitlist-note fade-in" data-i18n="waitlistNote">Geen spam. Alleen een bericht wanneer we live gaan.</p>
-      <div class="app-badges fade-in waitlist-downloads">
-        <a href="https://apps.apple.com/app/nestd/id6761392857" class="badge-link" target="_blank" rel="noopener">
-          <img src="images/app-store-badge.svg" alt="Download on the App Store" class="app-badge">
-        </a>
-        <a href="#" class="badge-link">
-          <img src="images/google-play-badge.svg" alt="Get it on Google Play" class="app-badge">
-        </a>
-      </div>
+      <p class="waitlist-launch-note fade-in" data-i18n="waitlistLaunchNote">We sturen je een update zodra Nestd klaar is voor de eerste gebruikers.</p>
     </div>
   </section>
 
