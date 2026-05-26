@@ -46,13 +46,13 @@ Native app events are PostHog-only for now. Do **not** install Meta Pixel in the
 
 ## Website funnel events
 
-Website pages are marketing/content pages. They drive visitors to the app download CTAs and the waitlist/early-access form. There is no website WhatsApp/contact conversion and no website subscription flow.
+Website pages are marketing/content pages. The current public funnel is the waitlist/early-access form; app-store download CTAs are intentionally hidden until the apps are actually downloadable. There is no website WhatsApp/contact conversion and no website subscription flow.
 
 | Funnel step | PostHog event | Meta event | When | Key properties | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Page visit | `page_view` | `PageView` | Landing/public page loads | PostHog: `path`, sanitized `url`, UTM/click IDs, first/current-touch attribution, `language` | Meta `PageView` fires regardless of PostHog key. |
 | Section/content view | `whatsapp_alerts_section_viewed`, `ai_matching_section_viewed`, `duo_search_section_viewed`, `how_it_works_section_viewed`, `pricing_section_viewed`, `waitlist_section_viewed` | `ViewContent` | Key sections enter viewport once per page load | PostHog attribution props; Meta: `content_name`, `content_category=landing_section` | This is the website `ViewContent` mapping. |
-| App CTA click | `store_badge_clicked` | `ViewContent` | App Store / Google Play badge clicked | PostHog: `store`, `label`, sanitized `href`, `placement`, attribution props; Meta: `content_name=app_download_cta`, `content_category=app_download`, `placement`, `store` | Not `Lead`; only successful waitlist signup is a lead. |
+| Waitlist CTA click | `cta_clicked` | `ViewContent` | Visitor clicks a prominent waitlist/early-access CTA | PostHog: `content_name=waitlist_cta`, `content_category=website_lead`, `label`, sanitized `href`, `placement`, attribution props; Meta: `content_name=waitlist_cta`, `content_category=website_lead`, `placement` | Not `Lead`; only successful waitlist signup is a lead. |
 | Waitlist signup started | `waitlist_signup_started` | — | Visitor submits the waitlist form | `placement`, attribution props | Do not send the submitted email to analytics. |
 | Waitlist signup completed | `waitlist_signup_completed` | `Lead` | Waitlist API returns success | PostHog: `placement`, attribution props; Meta: `content_name=waitlist_signup`, `content_category=website_lead`, `placement` | Fire only after backend success. No email/name/phone. |
 | Waitlist duplicate | `waitlist_signup_duplicate` | — | Waitlist API returns duplicate/already exists, including 409 or duplicate/already_exists response body | `placement`, attribution props | Not a new Meta `Lead`, to avoid double-counting. |

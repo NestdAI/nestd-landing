@@ -238,7 +238,7 @@
   }
 
   function sanitizeMetaProperties(properties = {}) {
-    const allowedKeys = new Set(['content_name', 'content_category', 'placement', 'store']);
+    const allowedKeys = new Set(['content_name', 'content_category', 'placement']);
     return Object.entries(properties).reduce((safe, [key, value]) => {
       if (allowedKeys.has(key) && value !== undefined && value !== null && value !== '') safe[key] = value;
       return safe;
@@ -564,26 +564,72 @@ if (waMock) {
 
 // Track marketing CTA and navigation clicks
 (function initMarketingClickTracking() {
+  function waitlistHashForLink(link) {
+    const rawHref = link.getAttribute('href') || '';
+    if (!rawHref) return '';
+
+    if (rawHref === '#waitlist-hero' || rawHref === '#waitlist-bottom') return rawHref;
+
+    try {
+      const url = new URL(rawHref, window.location.href);
+      const currentPath = window.location.pathname.replace(/\/index\.html$/, '/') || '/';
+      const targetPath = url.pathname.replace(/\/index\.html$/, '/') || '/';
+      if (url.origin === window.location.origin && targetPath === currentPath && (url.hash === '#waitlist-hero' || url.hash === '#waitlist-bottom')) {
+        return url.hash;
+      }
+    } catch {
+      return '';
+    }
+
+    return '';
+  }
+
+  function focusWaitlistTarget(hash) {
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.setTimeout(() => {
+      const input = target.matches?.('.waitlist-form')
+        ? target.querySelector('input[type="email"]')
+        : target.querySelector('.waitlist-form input[type="email"]');
+      input?.focus({ preventScroll: true });
+    }, 450);
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu')?.classList.remove('open');
+    document.getElementById('hamburger')?.classList.remove('open');
+  }
+
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a, button');
     if (!link) return;
 
-    if (link.matches('.badge-link') || link.querySelector?.('.app-badge')) {
-      const href = link.getAttribute('href') || '';
-      const store = href.includes('apps.apple.com') ? 'app_store' : 'google_play';
-      const placement = link.closest('.hero') ? 'hero' : link.closest('.cta-badges-section') ? 'mid_page' : link.closest('.waitlist-bottom') ? 'bottom' : 'other';
-      window.nestdAnalytics?.track('store_badge_clicked', {
-        store,
-        label: link.textContent?.trim() || link.querySelector?.('img')?.getAttribute('alt') || null,
-        href: href ? href.split('?')[0] : null,
+    const waitlistHash = waitlistHashForLink(link);
+    const isWaitlistCta = Boolean(waitlistHash || link.dataset.ctaPlacement);
+
+    if (isWaitlistCta) {
+      const rawHref = link.getAttribute('href') || '';
+      const placement = link.dataset.ctaPlacement || (link.closest('.hero') ? 'hero' : link.closest('.cta-strip-section') ? 'mid_page' : link.closest('.waitlist-bottom') ? 'bottom' : 'other');
+      window.nestdAnalytics?.track('cta_clicked', {
+        content_name: 'waitlist_cta',
+        content_category: 'website_lead',
+        label: link.textContent?.trim() || null,
+        href: rawHref ? rawHref.split('?')[0] : null,
         placement,
       });
       window.nestdAnalytics?.trackMeta('ViewContent', {
-        content_name: 'app_download_cta',
-        content_category: 'app_download',
+        content_name: 'waitlist_cta',
+        content_category: 'website_lead',
         placement,
-        store,
       });
+
+      if (waitlistHash) {
+        event.preventDefault();
+        closeMobileMenu();
+        focusWaitlistTarget(waitlistHash);
+      }
       return;
     }
 
