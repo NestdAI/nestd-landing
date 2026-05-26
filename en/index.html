@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Nestd — English landing</title>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var lang = (params.get('lang') || '').toLowerCase();
+      if (lang !== 'en' && lang !== 'nl') params.set('lang', 'en');
+      var next = '/' + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+      window.location.replace(next);
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/?lang=en">
+  </noscript>
+</head>
+<body>
+  <p>Redirecting to <a href="/?lang=en">the English Nestd landing page</a>…</p>
+</body>
+</html>

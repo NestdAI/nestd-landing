@@ -34,6 +34,17 @@ or:
 
 A `<noscript>` PageView fallback is present only on public marketing/deeplink HTML pages for visitors without JavaScript. It is intentionally omitted from `/listing/*`.
 
+### Language-specific ad URLs
+
+Paid/social campaigns can force the landing language with a safe `lang` query parameter while preserving UTM/click attribution:
+
+```text
+https://www.nestd.nl/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>
+https://www.nestd.nl/?lang=nl&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>
+```
+
+Language priority on page load is: valid `lang=en|nl` query param, then stored `nestd-lang`, then Dutch. `/en/` redirects to the homepage with `lang=en` while preserving existing query parameters, but the query-param URL is the preferred ad destination because it is explicit and works cleanly with UTMs. `lang` is allow-listed for Meta Pixel safety checks and is not stored as attribution; analytics still capture the resolved page `language`.
+
 ### App
 
 The Expo app uses `posthog-react-native` from `app/lib/posthog.ts` with host:
