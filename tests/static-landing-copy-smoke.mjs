@@ -21,7 +21,7 @@ assert.match(script, /IntersectionObserver/i, 'sticky CTA visibility should use 
 assert.match(script, /formRect\.bottom\s*<=\s*0[\s\S]*is-visible/i, 'sticky CTA should appear only after the hero form scrolls out above the viewport');
 assert.match(styles, /\.mobile-sticky-cta\s*\{[\s\S]*display:\s*none[\s\S]*\.mobile-sticky-cta\.is-visible\s*\{[\s\S]*display:\s*inline-flex/i, 'sticky CTA should be hidden by default and shown only via visibility class');
 assert.match(styles, /body\s*\{\s*padding-bottom:\s*104px;/i, 'mobile layout should reserve bottom padding for sticky CTA');
-assert.match(searchable, /Geen spam\. Alleen launch access \+ je gratis Pro-maand als je bij de eerste 100 zit\./i, 'waitlist microcopy should exist');
+assert.match(searchable, /Geen spam\. Alleen launch access en je Pro-voordeel als je bij de eerste 100 zit\./i, 'waitlist microcopy should exist');
 assert.match(searchable, /Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis/i, 'success copy should avoid overpromising eligibility');
 
 assert.doesNotMatch(searchable, /countdown|aftellen|remaining spots|spots left|plekken over|nog \d+ plekken/i, 'no fake countdown or fake remaining-spots copy');

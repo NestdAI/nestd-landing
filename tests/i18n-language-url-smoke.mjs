@@ -74,7 +74,7 @@ const context = vm.createContext({
 vm.runInContext(source, context);
 
 assert.equal(document.documentElement.lang, 'en', 'valid ?lang=en should win over stored Dutch preference');
-assert.match(htmlElements[0].innerHTML, /Find your dream rental/i, 'English hero copy should render on first load');
+assert.match(htmlElements[0].innerHTML, /Stop refreshing/i, 'English hero copy should render on first load');
 assert.match(textElements[1].textContent, /Your personal AI housing assistant/i, 'English footer copy should render on first load');
 assert.equal(localStorage.getItem('nestd-lang'), 'en', 'resolved URL language should persist for later visits');
 assert.equal(langButton.textContent, '🇳🇱', 'toggle should offer Dutch while English is active');
