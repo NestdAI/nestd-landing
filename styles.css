@@ -1770,3 +1770,58 @@ body.light .footer-logo-img {
 body.light .floating-cta {
   box-shadow: 0 2px 12px rgba(255,56,92,.3);
 }
+
+/* Launch QA polish: responsive safety, accessible focus, reduced motion */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+.mobile-sticky-cta:focus-visible,
+.navbar-cta:focus-visible {
+  outline: 3px solid rgba(255,56,92,.42);
+  outline-offset: 3px;
+}
+
+.waitlist-form,
+.waitlist-form input,
+.waitlist-form button {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  html,
+  body,
+  main,
+  .premium-hero,
+  .hero-premium-grid,
+  .premium-waitlist-card,
+  .hero-product {
+    max-width: 100%;
+  }
+
+  .waitlist-form {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+
+  .fade-in,
+  .fade-in-left,
+  .fade-in-right,
+  .fade-in-scale,
+  .wa-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

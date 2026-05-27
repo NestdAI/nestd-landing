@@ -34,9 +34,9 @@
       </div>
       <div class="navbar-right">
         <a href="#waitlist-hero" class="navbar-cta" data-cta-placement="nav" data-i18n="cta">Join de waitlist →</a>
-        <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
-        <button class="navbar-hamburger" id="hamburger" aria-label="Open menu">
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Toggle language">🇬🇧</button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode">☀️</button>
+        <button class="navbar-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -46,7 +46,7 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="navbar-mobile" id="mobile-menu">
+  <div class="navbar-mobile" id="mobile-menu" aria-hidden="true">
     <a href="/" class="active">Home</a>
     <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
@@ -344,15 +344,17 @@
     // Hamburger toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
+    function setMobileMenuOpen(isOpen) {
+      hamburger.classList.toggle('open', isOpen);
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    }
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
+      setMobileMenuOpen(!mobileMenu.classList.contains('open'));
     });
     mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
+      a.addEventListener('click', () => setMobileMenuOpen(false));
     });
   </script>
 </body>

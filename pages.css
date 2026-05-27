@@ -39,6 +39,7 @@
     border: none !important;
     border-bottom: none !important;
     width: 100%;
+    padding: 0 max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left));
   }
   .navbar .navbar-brand {
     display: flex;
@@ -47,7 +48,7 @@
   }
   .navbar .navbar-brand span { display: none; }
   .navbar .navbar-links { display: none; }
-  .navbar .navbar-inner { height: auto; padding: 8px 0; }
+  .navbar .navbar-inner { height: auto; padding: 8px 0; max-width: 100%; }
 }
 
 .navbar-inner {
@@ -112,6 +113,7 @@ body.light .navbar-brand span {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .navbar-cta {
@@ -2031,13 +2033,22 @@ body.light .page-section.alt { background: transparent; }
 
 @media (max-width: 768px) {
   .premium-hero.hero { padding: 104px 0 58px; }
-  .premium-hero .hero-title { font-size: clamp(2.72rem, 14vw, 4.5rem); }
+  .premium-hero .hero-title {
+    max-width: 100%;
+    font-size: clamp(2.34rem, 11.2vw, 3.45rem);
+    line-height: 1.02;
+    letter-spacing: -.058em;
+    overflow-wrap: normal;
+  }
+  .premium-hero .hero-title em { display: block; }
+  .premium-hero .hero-sub { max-width: 100%; font-size: 1.05rem; }
   .hero-waitlist-copy { align-items: flex-start; flex-direction: column; }
-  .hero-product { min-height: auto; margin-top: 18px; }
-  .premium-phone-shell { width: min(100%, 318px); }
+  .premium-waitlist-card.hero-waitlist-card { width: 100%; max-width: 100%; }
+  .hero-product { min-height: auto; margin-top: 22px; width: 100%; justify-items: center; }
+  .premium-phone-shell { width: min(100%, 318px); max-width: calc(100vw - 42px); }
   .premium-phone-screen { min-height: 548px; }
   .match-spotlight { height: 210px; }
-  .floating-product-card { position: static; margin-top: 10px; width: min(100%, 318px); }
+  .floating-product-card { position: static; margin-top: 10px; width: min(100%, 318px); max-width: calc(100vw - 42px); }
   .trust-rail { padding-bottom: 44px; }
   .trust-rail-grid,
   .premium-pricing-grid,
@@ -2057,6 +2068,10 @@ body.light .page-section.alt { background: transparent; }
 
 @media (max-width: 480px) {
   .premium-hero .container { padding-inline: 18px; }
+  .premium-hero.hero { padding-top: 96px; }
+  .hero-premium-grid { gap: 26px; }
+  .premium-waitlist-card .hero-offer-pill { font-size: .8rem; }
+  .premium-waitlist-card.hero-waitlist-card { padding: 16px; border-radius: 26px; }
   .hero-proof-row span { width: 100%; text-align: center; }
   .premium-phone-shell { padding: 9px; border-radius: 40px; }
   .premium-phone-screen { border-radius: 32px; }
@@ -2064,6 +2079,25 @@ body.light .page-section.alt { background: transparent; }
   .premium-whatsapp-panel,
   .duo-premium-board,
   .premium-price-card { border-radius: 28px; }
+}
+
+
+
+@media (max-width: 420px) {
+  .premium-hero .hero-title {
+    font-size: clamp(2.18rem, 10.7vw, 2.9rem);
+    letter-spacing: -.05em;
+  }
+  .premium-hero .hero-sub { font-size: 1rem; line-height: 1.55; }
+}
+
+@media (max-width: 768px) {
+  .navbar-cta { display: none; }
+  .navbar-brand img { width: 34px; height: 34px; border-radius: 10px; }
+  .navbar-right { gap: 7px; }
+  .lang-toggle,
+  .theme-toggle,
+  .navbar-hamburger { width: 38px; height: 38px; flex: 0 0 38px; }
 }
 
 /* Premium QA polish */
