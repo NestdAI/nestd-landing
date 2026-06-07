@@ -564,17 +564,17 @@ if (waMock) {
   window.addEventListener('resize', setupObservers);
 })();
 
-// Show the mobile sticky CTA only after the hero waitlist form scrolls away.
+// Show the mobile sticky CTA only after the hero download card scrolls away.
 (function initMobileStickyCtaVisibility() {
   const stickyCta = document.querySelector('.mobile-sticky-cta');
-  const heroWaitlistForm = document.getElementById('waitlist-hero');
+  const heroDownloadCard = document.querySelector('.hero-download-card');
   const mobileQuery = window.matchMedia?.('(max-width: 768px)');
 
-  if (!stickyCta || !heroWaitlistForm || !mobileQuery) return;
+  if (!stickyCta || !heroDownloadCard || !mobileQuery) return;
 
   function updateStickyCtaVisibility() {
-    const formRect = heroWaitlistForm.getBoundingClientRect();
-    const shouldShow = mobileQuery.matches && formRect.bottom <= 0;
+    const triggerRect = heroDownloadCard.getBoundingClientRect();
+    const shouldShow = mobileQuery.matches && triggerRect.bottom <= 0;
     stickyCta.classList.toggle('is-visible', shouldShow);
   }
 
@@ -582,7 +582,7 @@ if (waMock) {
     ? new IntersectionObserver(updateStickyCtaVisibility, { threshold: [0, 1] })
     : null;
 
-  observer?.observe(heroWaitlistForm);
+  observer?.observe(heroDownloadCard);
   updateStickyCtaVisibility();
 
   window.addEventListener('scroll', updateStickyCtaVisibility, { passive: true });
@@ -592,37 +592,17 @@ if (waMock) {
 
 // Track marketing CTA and navigation clicks
 (function initMarketingClickTracking() {
-  function waitlistHashForLink(link) {
+  const APP_STORE_URL = 'https://apps.apple.com/app/nestd/id6740091498';
+
+  function appStoreUrlForLink(link) {
     const rawHref = link.getAttribute('href') || '';
-    if (!rawHref) return '';
-
-    if (rawHref === '#waitlist-hero' || rawHref === '#waitlist-bottom') return rawHref;
-
+    if (!rawHref) return null;
     try {
       const url = new URL(rawHref, window.location.href);
-      const currentPath = window.location.pathname.replace(/\/index\.html$/, '/') || '/';
-      const targetPath = url.pathname.replace(/\/index\.html$/, '/') || '/';
-      if (url.origin === window.location.origin && targetPath === currentPath && (url.hash === '#waitlist-hero' || url.hash === '#waitlist-bottom')) {
-        return url.hash;
-      }
+      return url.href === APP_STORE_URL ? url.href : null;
     } catch {
-      return '';
+      return null;
     }
-
-    return '';
-  }
-
-  function focusWaitlistTarget(hash) {
-    const target = document.querySelector(hash);
-    if (!target) return;
-
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    window.setTimeout(() => {
-      const input = target.matches?.('.waitlist-form')
-        ? target.querySelector('input[type="email"]')
-        : target.querySelector('.waitlist-form input[type="email"]');
-      input?.focus({ preventScroll: true });
-    }, 450);
   }
 
   function closeMobileMenu() {
@@ -634,30 +614,26 @@ if (waMock) {
     const link = event.target.closest?.('a, button');
     if (!link) return;
 
-    const waitlistHash = waitlistHashForLink(link);
-    const isWaitlistCta = Boolean(waitlistHash || link.dataset.ctaPlacement);
+    const appStoreUrl = appStoreUrlForLink(link);
+    const isAppStoreCta = Boolean(appStoreUrl && link.dataset.ctaPlacement);
 
-    if (isWaitlistCta) {
+    if (isAppStoreCta) {
       const rawHref = link.getAttribute('href') || '';
-      const placement = link.dataset.ctaPlacement || (link.closest('.hero') ? 'hero' : link.closest('.cta-strip-section') ? 'mid_page' : link.closest('.waitlist-bottom') ? 'bottom' : 'other');
+      const placement = link.dataset.ctaPlacement || (link.closest('.hero') ? 'hero' : link.closest('.cta-strip-section') ? 'mid_page' : link.closest('.download-bottom') ? 'bottom' : 'other');
       window.nestdAnalytics?.track('cta_clicked', {
-        content_name: 'waitlist_cta',
-        content_category: 'website_lead',
+        content_name: 'app_store_cta',
+        content_category: 'app_download',
         label: link.textContent?.trim() || null,
         href: rawHref ? rawHref.split('?')[0] : null,
         placement,
       });
       window.nestdAnalytics?.trackMeta('ViewContent', {
-        content_name: 'waitlist_cta',
-        content_category: 'website_lead',
+        content_name: 'app_store_cta',
+        content_category: 'app_download',
         placement,
       });
 
-      if (waitlistHash) {
-        event.preventDefault();
-        closeMobileMenu();
-        focusWaitlistTarget(waitlistHash);
-      }
+      closeMobileMenu();
       return;
     }
 
@@ -679,7 +655,7 @@ if (waMock) {
     ['.duo-section', 'duo_search_section_viewed'],
     ['.how-it-works', 'how_it_works_section_viewed'],
     ['.pricing-section', 'pricing_section_viewed'],
-    ['#waitlist-bottom', 'waitlist_section_viewed'],
+    ['#download-bottom', 'download_section_viewed'],
   ];
 
   const sectionObserver = new IntersectionObserver((entries, observerInstance) => {
