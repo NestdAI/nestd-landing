@@ -8,6 +8,42 @@ const styles = fs.readFileSync(new URL('../styles.css', import.meta.url), 'utf8'
 const publicHtml = [index, fs.readFileSync(new URL('../pricing.html', import.meta.url), 'utf8')].join('\n');
 const searchable = [index, i18n, script].join('\n');
 
+function readJpegDimensions(buffer) {
+  assert.equal(buffer.readUInt16BE(0), 0xffd8, 'hero listing image should be a JPEG');
+
+  let offset = 2;
+  while (offset < buffer.length) {
+    if (buffer[offset] !== 0xff) {
+      offset += 1;
+      continue;
+    }
+
+    const marker = buffer[offset + 1];
+    offset += 2;
+    if (marker === 0xd8 || marker === 0xd9) continue;
+
+    const segmentLength = buffer.readUInt16BE(offset);
+    const isStartOfFrame = marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
+    if (isStartOfFrame) {
+      return {
+        height: buffer.readUInt16BE(offset + 3),
+        width: buffer.readUInt16BE(offset + 5),
+      };
+    }
+    offset += segmentLength;
+  }
+
+  assert.fail('hero listing image should contain JPEG dimensions');
+}
+
+const heroListingSrc = index.match(/class="match-spotlight"[\s\S]*?<img[^>]+src="([^"]+)"/i)?.[1];
+assert.ok(heroListingSrc, 'hero listing image should remain present');
+const heroListingDimensions = readJpegDimensions(fs.readFileSync(new URL(`../${heroListingSrc}`, import.meta.url)));
+assert.ok(
+  heroListingDimensions.width >= 600 && heroListingDimensions.height >= 500,
+  `hero listing image should be retina-ready, received ${heroListingDimensions.width}x${heroListingDimensions.height}`,
+);
+
 assert.match(index, /id="waitlist-hero"/i, 'hero waitlist form should remain present');
 assert.match(index, /heroWaitlistOffer/i, 'hero offer copy key should exist above the fold');
 assert.match(searchable, /Eerste 100 krijgen 1 maand Pro gratis/i, 'Dutch first-100 Pro offer should exist');
