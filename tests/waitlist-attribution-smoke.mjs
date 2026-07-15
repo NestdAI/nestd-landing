@@ -173,7 +173,7 @@ const successContext = vm.createContext({
     nl: {
       submitLoading: 'Even geduld...',
       submitBtn: 'Claim je plek',
-      successMsg: '🎉 Je staat op de lijst! Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.',
+      successMsg: 'Je staat op de lijst. Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.',
     },
   },
   document: { querySelectorAll: () => [successForm], documentElement: { lang: 'nl' } },
@@ -199,7 +199,7 @@ const successContext = vm.createContext({
 vm.runInContext(extractIife('initWaitlistForms'), successContext);
 assert.equal(typeof successSubmitHandler, 'function');
 await successSubmitHandler({ preventDefault() {}, currentTarget: successForm });
-assert.equal(successMessageEl.textContent, '🎉 Je staat op de lijst! Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.');
+assert.equal(successMessageEl.textContent, 'Je staat op de lijst. Als je bij de eerste 100 zit, krijg je 1 maand Pro gratis.');
 assert.equal(successMessageEl.className, 'form-msg success');
 assert.ok(successTracked.some(([kind, event]) => kind === 'posthog' && event === 'waitlist_signup_completed'));
 assert.ok(successTracked.some(([kind, event]) => kind === 'meta' && event === 'Lead'));

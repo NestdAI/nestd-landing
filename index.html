@@ -34,9 +34,9 @@
       </div>
       <div class="navbar-right">
         <a href="#waitlist-hero" class="navbar-cta" data-cta-placement="nav" data-i18n="cta">Join de waitlist →</a>
-        <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
-        <button class="navbar-hamburger" id="hamburger" aria-label="Open menu">
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Toggle language">🇬🇧</button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode">☀️</button>
+        <button class="navbar-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -46,255 +46,188 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="navbar-mobile" id="mobile-menu">
+  <div class="navbar-mobile" id="mobile-menu" aria-hidden="true">
     <a href="/" class="active">Home</a>
     <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
     <a href="#waitlist-hero" data-cta-placement="mobile_nav" data-i18n="cta">Join de waitlist →</a>
   </div>
 
-  <a href="#waitlist-hero" class="mobile-sticky-cta" data-cta-placement="mobile_sticky" data-i18n="stickyCta">🎁 Claim 1 maand Pro gratis</a>
+  <a href="#waitlist-hero" class="mobile-sticky-cta" data-cta-placement="mobile_sticky" data-i18n="stickyCta">Claim 1 maand Pro gratis</a>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 1. HERO                                 -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero-bg">
-      <img src="images/hero-bg.jpg" alt="" loading="eager">
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="container">
-      <div class="hero-logo fade-in-scale">
-        <img src="logo.png" alt="Nestd" class="hero-logo-img">
+  <main>
+    <!-- Premium hero -->
+    <section class="hero premium-hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="premium-glow premium-glow-one"></div>
+        <div class="premium-glow premium-glow-two"></div>
       </div>
-      <h1 class="hero-title fade-in" data-i18n-html="heroTitle">
-        Vind je droomwoning.<br><em>Laat AI de rest doen.</em>
-      </h1>
-      <p class="hero-sub fade-in" data-i18n="heroSub">
-        Nestd is je persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.
-      </p>
-      <div class="hero-waitlist-card fade-in">
-        <p class="hero-waitlist-kicker" data-i18n="heroWaitlistKicker">Nestd lanceert over een paar dagen</p>
-        <p class="hero-offer-pill" data-i18n="heroWaitlistOffer">🎁 Eerste 100 krijgen 1 maand Pro gratis</p>
-        <form class="waitlist-form waitlist-form-prominent" id="waitlist-hero" data-placement="hero">
-          <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
-          <button type="submit" data-i18n="submitBtn">Claim je plek</button>
-        </form>
-        <p class="form-msg" id="msg-hero" role="status" aria-live="polite"></p>
-        <p class="hero-waitlist-note" data-i18n="heroWaitlistNote">Geen spam. Alleen launch access + je gratis Pro-maand als je bij de eerste 100 zit.</p>
-      </div>
-    </div>
-  </section>
+      <div class="container hero-premium-grid">
+        <div class="hero-copy fade-in">
+          <div class="hero-eyebrow" data-i18n="premiumHeroEyebrow">Early access voor Nederlandse huurzoekers</div>
+          <h1 class="hero-title" data-i18n-html="heroTitle">Stop met refreshen.<br><em>Nestd vindt je volgende huurwoning.</em></h1>
+          <p class="hero-sub" data-i18n="heroSub">Een rustige AI-woonassistent die het aanbod volgt, je beste matches uitlegt en je alleen een WhatsApp stuurt als het echt relevant is.</p>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 2. WHATSAPP ALERTS                      -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="page-section" id="whatsapp">
-    <div class="container">
-      <div class="feature-detail reverse">
-        <div class="fade-in-right">
-          <div class="feature-detail-label" data-i18n="feat_wa_label">Pro Feature</div>
-          <h2 class="feature-detail-title" data-i18n="feat_wa_title">WhatsApp Notificaties</h2>
-          <p class="feature-detail-desc" data-i18n="feat_wa_desc">
-            Nieuwe match? Direct een bericht op WhatsApp. Geen app openen, geen email checken. Nestd stuurt je de woningen die er toe doen — direct naar je telefoon. Inclusief bij Pro.
-          </p>
-          <div class="mini-grid">
-            <div class="mini-card">
-              <h4 data-i18n="feat_wa_mini1_title">Instant Matches</h4>
-              <p data-i18n="feat_wa_mini1_desc">Nieuwe woning gevonden? Binnen seconden een WhatsApp bericht met alle details.</p>
+          <div class="hero-waitlist-card premium-waitlist-card fade-in">
+            <div class="hero-waitlist-copy">
+              <p class="hero-waitlist-kicker" data-i18n="heroWaitlistKicker">Nestd opent binnenkort</p>
+              <p class="hero-offer-pill" data-i18n="heroWaitlistOffer">Eerste 100 krijgen 1 maand Pro gratis</p>
             </div>
-            <div class="mini-card">
-              <h4 data-i18n="feat_wa_mini2_title">AI Agent via WhatsApp</h4>
-              <p data-i18n="feat_wa_mini2_desc">Bespreek matches, pas filters aan en stel vragen — allemaal via WhatsApp. Je AI-assistent is altijd bereikbaar.</p>
-            </div>
+            <form class="waitlist-form waitlist-form-prominent" id="waitlist-hero" data-placement="hero">
+              <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+              <button type="submit" data-i18n="submitBtn">Claim je plek</button>
+            </form>
+            <p class="form-msg" id="msg-hero" role="status" aria-live="polite"></p>
+            <p class="hero-waitlist-note" data-i18n="heroWaitlistNote">Geen spam. Alleen launch access en je Pro-voordeel als je bij de eerste 100 zit.</p>
+          </div>
+
+          <div class="hero-proof-row" aria-label="Nestd trust points">
+            <span data-i18n="heroProof1">Gemaakt voor de NL huurmarkt</span>
+            <span data-i18n="heroProof2">WhatsApp alerts</span>
+            <span data-i18n="heroProof3">Jij houdt controle</span>
           </div>
         </div>
 
-        <!-- WhatsApp Chat Mockup with typing animation -->
-        <div class="wa-mock fade-in-left">
-          <div class="wa-header">
+        <div class="hero-product fade-in-right" aria-label="Nestd product preview">
+          <div class="premium-phone-shell">
+            <div class="premium-phone-notch"></div>
+            <div class="premium-phone-screen">
+              <div class="app-topbar">
+                <img src="logo.png" alt="" aria-hidden="true">
+                <span>Nestd</span>
+                <b>Live</b>
+              </div>
+              <div class="match-spotlight">
+                <img src="images/apartment-1.jpg" alt="Appartement in de Jordaan" width="800" height="595" loading="eager" fetchpriority="high" decoding="async">
+                <div class="match-spotlight-badge">92% match</div>
+              </div>
+              <div class="match-card-premium active">
+                <div>
+                  <strong data-i18n="heroMockTitle">Jordaan appartement</strong>
+                  <span data-i18n="heroMockMeta">€1.450/mnd · 2 kamers · 65m²</span>
+                </div>
+                <small data-i18n="heroMockReason">Past bij je stijlprofiel en budget</small>
+              </div>
+              <div class="assistant-note">
+                <span>Nestd</span>
+                <p data-i18n="heroMockNote">Nieuwe sterke match gevonden. Wil je reageren of eerst vergelijken?</p>
+              </div>
+            </div>
+          </div>
+          <div class="floating-product-card floating-card-top">
+            <span data-i18n="heroFloat1Label">Woningradar</span>
+            <strong data-i18n="heroFloat1Value">24/7 actief</strong>
+          </div>
+          <div class="floating-product-card floating-card-bottom">
+            <span data-i18n="heroFloat2Label">Volgende stap</span>
+            <strong data-i18n="heroFloat2Value">WhatsApp alert klaar</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-rail" aria-label="Waarom Nestd rustiger zoeken maakt">
+      <div class="container trust-rail-grid">
+        <div>
+          <strong data-i18n="trustRail1Title">Alleen relevante matches</strong>
+          <span data-i18n="trustRail1Text">Geen eindeloze feed, wel duidelijke keuzes.</span>
+        </div>
+        <div>
+          <strong data-i18n="trustRail2Title">Uitleg bij elke match</strong>
+          <span data-i18n="trustRail2Text">Waarom past deze woning bij jou?</span>
+        </div>
+        <div>
+          <strong data-i18n="trustRail3Title">Rustige notificaties</strong>
+          <span data-i18n="trustRail3Text">Geen spam. Alleen belangrijke updates.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section premium-section" id="matching">
+      <div class="container feature-detail premium-feature-detail">
+        <div class="fade-in-left">
+          <div class="feature-detail-label" data-i18n="premiumMatchLabel">AI Matching</div>
+          <h2 class="feature-detail-title" data-i18n="premiumMatchTitle">Een short-list die voelt alsof iemand je echt kent.</h2>
+          <p class="feature-detail-desc" data-i18n="premiumMatchDesc">Nestd combineert harde eisen zoals budget en locatie met stijl, sfeer en leefvoorkeuren. Je krijgt minder ruis en meer context: wat klopt, wat twijfelt, en waarom.</p>
+          <ul class="feature-detail-list premium-list">
+            <li><span class="check">✓</span><span data-i18n="premiumMatchLi1">Filtert eerst op must-haves: stad, budget, kamers en oppervlakte.</span></li>
+            <li><span class="check">✓</span><span data-i18n="premiumMatchLi2">Begrijpt voorkeuren die normale filters missen: licht, stijl, buurtgevoel.</span></li>
+            <li><span class="check">✓</span><span data-i18n="premiumMatchLi3">Geeft een korte Nederlandse uitleg per match.</span></li>
+          </ul>
+        </div>
+        <div class="premium-match-panel fade-in-right">
+          <div class="panel-header"><span data-i18n="premiumMatchPanelTitle">Vandaag voor jou</span><b>3 matches</b></div>
+          <div class="premium-listing-card featured">
+            <img src="images/listing-depijp.jpg" alt="Appartement De Pijp" loading="lazy">
+            <div><strong>De Pijp, Amsterdam</strong><span>€1.650 · 3 kamers · balkon</span></div>
+            <em>94%</em>
+          </div>
+          <div class="premium-listing-card">
+            <img src="images/listing-jordaan.jpg" alt="Appartement Jordaan" loading="lazy">
+            <div><strong>Jordaan</strong><span>€1.450 · 2 kamers · licht</span></div>
+            <em>92%</em>
+          </div>
+          <div class="panel-insight">
+            <span data-i18n="premiumInsightLabel">AI uitleg</span>
+            <p data-i18n="premiumInsightText">Veel daglicht, rustige straat en binnen budget. Minpunt: werkplek is compact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section premium-section premium-section-alt" id="whatsapp">
+      <div class="container feature-detail reverse premium-feature-detail">
+        <div class="fade-in-right">
+          <div class="feature-detail-label" data-i18n="premiumWaLabel">WhatsApp Alerts</div>
+          <h2 class="feature-detail-title" data-i18n="premiumWaTitle">Als snelheid telt, komt Nestd naar jou.</h2>
+          <p class="feature-detail-desc" data-i18n="premiumWaDesc">Goede huurwoningen verdwijnen snel. Nestd stuurt een compacte WhatsApp-alert met de reden waarom de woning interessant is, zodat je direct kunt beslissen.</p>
+          <div class="mini-grid premium-mini-grid">
+            <div class="mini-card"><h4 data-i18n="premiumWaMini1Title">Geen extra app-checks</h4><p data-i18n="premiumWaMini1Text">Je ziet de belangrijkste match meteen op je telefoon.</p></div>
+            <div class="mini-card"><h4 data-i18n="premiumWaMini2Title">Instelbaar en rustig</h4><p data-i18n="premiumWaMini2Text">Alleen alerts die bij je voorkeuren passen.</p></div>
+          </div>
+        </div>
+        <div class="premium-whatsapp-panel wa-mock fade-in-left">
+          <div class="wa-header premium-wa-header">
             <img src="logo.png" alt="Nestd">
             <div>
               <div class="wa-header-name">Nestd</div>
-              <div class="wa-header-status wa-typing-status"><span data-i18n="wa_typing">aan het typen</span><span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>
+              <div class="wa-header-status wa-typing-status"><span data-i18n="premiumWaStatus">nieuwe match</span><span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>
             </div>
           </div>
-          <div class="wa-body">
+          <div class="wa-body premium-wa-body">
             <div class="wa-msg incoming wa-animate" style="--delay:0s">
-              <strong data-i18n="feat_wa_msg1_title">Nieuwe match!</strong>
-              <p data-i18n-html="feat_wa_msg1_body">Appartement Grote Gracht<br>Centrum · €1.150/mnd · 65m²<br>2 kamers · Gemeubileerd</p>
-              <p class="wa-msg-match" data-i18n="feat_wa_msg1_match">92% match</p>
+              <strong data-i18n="premiumWaMsgTitle">Sterke match gevonden</strong>
+              <p data-i18n-html="premiumWaMsgBody">Jordaan · €1.450/mnd · 92% match<br>Past bij je budget, lichtvoorkeur en gewenste buurt.</p>
+              <p class="wa-msg-match" data-i18n="premiumWaMsgMatch">92% match</p>
               <div class="wa-msg-time">14:32</div>
             </div>
             <div class="wa-msg incoming wa-animate" style="--delay:0.3s">
-              <strong data-i18n="feat_wa_msg2_title">Duo Match! 💕</strong>
-              <p data-i18n="feat_wa_msg2_body">Studio Rivierenwijk — jullie hebben allebei geliked!</p>
+              <strong data-i18n="premiumWaDuoTitle">Duo Match! 💕</strong>
+              <p data-i18n="premiumWaDuoBody">Oud-West appartement — jullie hebben allebei geliked.</p>
               <div class="wa-msg-time">15:07</div>
             </div>
             <div class="wa-msg outgoing wa-animate" style="--delay:0.6s">
-              <p data-i18n="feat_wa_msg3">Kun je me meer vertellen over het appartement?</p>
+              <p data-i18n="premiumWaReply">Stuur details</p>
               <div class="wa-msg-time">15:08 ✓✓</div>
             </div>
             <div class="wa-msg incoming wa-animate" style="--delay:0.9s">
-              <p data-i18n="feat_wa_msg4">Natuurlijk! Het appartement heeft een open keuken, eiken vloeren en veel lichtinval. De buurt is rustig maar dichtbij het centrum. Wil je het opslaan als favoriet?</p>
+              <p data-i18n="premiumWaAnswer">Zeker. Ik zet de plus- en minpunten overzichtelijk voor je klaar.</p>
               <div class="wa-msg-time">15:08</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 3. CTA BUTTONS (first instance)         -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="cta-strip-section">
-    <div class="container">
-      <div class="cta-strip-card fade-in">
-        <span data-i18n="ctaStripTitle">Stop met refreshen. Eerste 100 wachtlijstgebruikers krijgen 1 maand Pro gratis.</span>
-        <a href="#waitlist-hero" class="cta-strip-link" data-cta-placement="mid_page_1" data-i18n="ctaStripButton">Claim je plek</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 4. AI MATCHING                          -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="page-section alt" id="matching">
-    <div class="container">
-      <div class="feature-detail fade-in-left">
-        <div>
-          <div class="feature-detail-label" data-i18n="feat_match_label">AI Matching</div>
-          <h2 class="feature-detail-title" data-i18n="feat_match_title">Twee-score Matching &amp; Persoonlijke Uitleg</h2>
-          <p class="feature-detail-desc" data-i18n="feat_match_desc">
-            Nestd matcht niet op basis van simpele filters. Ons twee-score systeem combineert harde criteria (budget, stad, kamers) met AI-matching die je stijl, sfeer en levensstijl begrijpt — inclusief een uitleg waarom een woning bij je past.
-          </p>
-          <ul class="feature-detail-list">
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_match_li1">Harde filters: budget, stad, kamers, oppervlakte — 100% match of niets.</span>
-            </li>
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_match_li2">AI-matching: vergelijkt jouw stijlprofiel met foto's en beschrijving van de woning.</span>
-            </li>
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_match_li3">Persoonlijke uitleg in het Nederlands: "Moderne keuken past bij je smaak, maar geen aparte werkkamer."</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="mock-card fade-in-right">
-          <div class="mock-card-header">
-            <span data-i18n="feat_mock_header">Match Overview</span>
-            <div class="mock-dots"><span style="background:#ef4444"></span><span style="background:#eab308"></span><span style="background:#22c55e"></span></div>
-          </div>
-          <div class="mock-item mock-item-with-photo">
-            <img src="images/apartment-1.jpg" alt="Appartement" class="mock-item-photo" loading="lazy">
-            <div>
-              <div class="mock-item-title" data-i18n="feat_mock_apt1">Appartement Grote Gracht</div>
-              <div class="mock-item-sub" data-i18n="feat_mock_apt1_sub">Centrum · €1.150/mnd · 65m²</div>
-            </div>
-            <div class="mock-item-score mock-item-score-lg">92%</div>
-          </div>
-          <div class="mock-item mock-item-with-photo">
-            <img src="images/apartment-2.jpg" alt="Studio" class="mock-item-photo" loading="lazy">
-            <div>
-              <div class="mock-item-title" data-i18n="feat_mock_apt2">Studio Rivierenwijk</div>
-              <div class="mock-item-sub" data-i18n="feat_mock_apt2_sub">Zuid · €875/mnd · 42m²</div>
-            </div>
-            <div class="mock-item-score mock-item-score-lg">87%</div>
-          </div>
-          <div class="mock-explanation">
-            <div class="mock-explanation-label" data-i18n="feat_mock_explain_label">AI Uitleg</div>
-            <div class="mock-explanation-text" data-i18n="feat_mock_explain_text">"Modern interieur en eiken vloeren passen bij je smaak. Minpunt: geen aparte werkkamer en stijl is wat klinischer dan je voorkeur."</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 5. AI CHAT                              -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="page-section" id="ai-chat">
-    <div class="container">
-      <div class="section-label fade-in" data-i18n="feat_chat_label">Je Échte Zoekpartner</div>
-      <h2 class="section-title fade-in" data-i18n-html="feat_chat_title">AI Chat<br><em>die met je meedenkt</em></h2>
-      <p class="fade-in" style="text-align:center;color:var(--gray);max-width:600px;margin:0 auto 0;font-size:0.95rem;line-height:1.6;" data-i18n="feat_chat_sub">
-        De AI chatbot is je échte zoekpartner. Bespreek alles: zoekcriteria aanpassen, stijlvoorkeuren delen, vragen stellen over woningen, buurten en meer.
-      </p>
-
-      <div class="card-grid-3">
-        <div class="page-card fade-in">
-          <div class="page-card-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </div>
-          <h3 data-i18n="feat_chat_card1_title">Bespreek je wensen</h3>
-          <p data-i18n="feat_chat_card1_desc">Vertel de AI wat je zoekt. Pas je criteria aan door gewoon te chatten — "Ik wil eigenlijk toch een balkon" en het is geregeld.</p>
-        </div>
-        <div class="page-card fade-in">
-          <div class="page-card-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </div>
-          <h3 data-i18n="feat_chat_card2_title">Visuele Inspiratie</h3>
-          <p data-i18n="feat_chat_card2_desc">Upload foto's van interieurs die je mooi vindt. Onze AI analyseert stijl, sfeer en kleuren om je matches te verbeteren.</p>
-        </div>
-        <div class="page-card fade-in">
-          <div class="page-card-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </div>
-          <h3 data-i18n="feat_chat_card3_title">Slimme Suggesties</h3>
-          <p data-i18n="feat_chat_card3_desc">De AI leert van je feedback. Hoe meer je gebruikt, hoe beter de matches worden. Jouw persoonlijke woningexpert.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 6. CTA BUTTONS (second instance)        -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="cta-strip-section">
-    <div class="container">
-      <div class="cta-strip-card fade-in">
-        <span data-i18n="ctaStripTitle2">Nestd gaat bijna live. Sta op de lijst en maak kans op 1 maand Pro gratis.</span>
-        <a href="#waitlist-hero" class="cta-strip-link" data-cta-placement="mid_page_2" data-i18n="ctaStripButton">Claim je plek</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 7. SWIPING & DUO ZOEKEN                -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="page-section alt" id="duo-zoeken">
-    <div class="container">
-      <div class="feature-detail">
+    <section class="page-section premium-section duo-section" id="duo-zoeken">
+      <div class="container feature-detail premium-feature-detail">
         <div class="fade-in-left">
-          <div class="feature-detail-label" data-i18n="feat_duo_label">Pro Feature</div>
-          <h2 class="feature-detail-title" data-i18n="feat_duo_title">Duo Zoeken</h2>
-          <p class="feature-detail-desc" data-i18n="feat_duo_desc">
-            Op zoek naar een woning met je partner, vriend(in) of huisgenoot? Met Duo Zoeken swipe je allebei op woningen en krijg je een melding zodra jullie allebei een woning liken — een Duo Match!
-          </p>
-          <ul class="feature-detail-list">
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_duo_li1">Koppel je zoekprofiel aan je partner of huisgenoot.</span>
-            </li>
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_duo_li2">Swipe onafhankelijk op woningen — geen discussie nodig.</span>
-            </li>
-            <li>
-              <span class="check"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></span>
-              <span data-i18n="feat_duo_li3">Duo Match melding via WhatsApp wanneer jullie allebei een woning liken.</span>
-            </li>
-          </ul>
+          <div class="feature-detail-label" data-i18n="premiumDuoLabel">Samen zoeken</div>
+          <h2 class="feature-detail-title" data-i18n="premiumDuoTitle">Voor stellen en huisgenoten zonder groepschat-chaos.</h2>
+          <p class="feature-detail-desc" data-i18n="premiumDuoDesc">Zoek apart, vergelijk slim en krijg pas een signaal als een woning voor jullie allebei interessant is. Minder discussie, betere shortlist.</p>
         </div>
-
-        <!-- Swipe Animation -->
-        <div class="swipe-demo fade-in-right" id="swipe-demo">
-          <div class="swipe-phone">
+        <div class="swipe-demo premium-swipe-demo fade-in-right" id="swipe-demo">
+          <div class="swipe-phone premium-swipe-phone">
             <div class="swipe-stack" id="swipe-stack">
               <!-- Cards injected by JS -->
             </div>
@@ -312,193 +245,87 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 8. HOE HET WERKT                       -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="how-it-works">
-    <div class="container">
-      <div class="section-label fade-in" data-i18n="howLabel">Hoe het werkt</div>
-      <h2 class="section-title fade-in" data-i18n-html="howTitle">Vier stappen naar<br><em>je nieuwe thuis.</em></h2>
-
-      <div class="steps-scroll-layout">
-        <div class="steps-text-col">
-          <div class="steps-text-sticky">
-          <div class="step-item step-active" data-step-index="0">
-            <div class="step-num">01</div>
-            <h3 data-i18n="s1Title">Maak een profiel aan</h3>
-            <p data-i18n="s1Desc">Via onze AI-chat. Vertel wat je zoekt — budget, locatie, wensen. In een paar minuten klaar.</p>
-          </div>
-          <div class="step-item" data-step-index="1">
-            <div class="step-num">02</div>
-            <h3 data-i18n="s2Title">AI matcht woningen</h3>
-            <p data-i18n="s2Desc">Op basis van jouw wensen. Geen eindeloos scrollen — alleen woningen die er toe doen.</p>
-          </div>
-          <div class="step-item" data-step-index="2">
-            <div class="step-num">03</div>
-            <h3 data-i18n="s3Title">Bekijk je matches</h3>
-            <p data-i18n="s3Desc">Bespreek je matches met de AI-assistent. Pas je zoekcriteria aan, deel stijlvoorkeuren of stel vragen.</p>
-          </div>
-          <div class="step-item" data-step-index="3">
-            <div class="step-num">04</div>
-            <h3 data-i18n="s4Title">Ontvang updates</h3>
-            <p data-i18n="s4Desc">Via WhatsApp. Nieuwe matches, statusupdates, alles direct op je telefoon.</p>
-          </div>
-          </div><!-- .steps-text-sticky -->
+    <section class="how-it-works premium-how">
+      <div class="container">
+        <div class="section-label fade-in" data-i18n="howLabel">Hoe het werkt</div>
+        <h2 class="section-title fade-in" data-i18n-html="premiumHowTitle">Van zoekstress naar<br><em>een heldere shortlist.</em></h2>
+        <div class="premium-steps-grid">
+          <div class="premium-step fade-in"><span>01</span><h3 data-i18n="premiumStep1Title">Vertel wat je zoekt</h3><p data-i18n="premiumStep1Text">Budget, stad, must-haves en sfeer. Gewoon in normale taal.</p></div>
+          <div class="premium-step fade-in"><span>02</span><h3 data-i18n="premiumStep2Title">Nestd kijkt mee</h3><p data-i18n="premiumStep2Text">De woningradar volgt nieuw aanbod en haalt ruis uit je feed.</p></div>
+          <div class="premium-step fade-in"><span>03</span><h3 data-i18n="premiumStep3Title">Je krijgt uitleg</h3><p data-i18n="premiumStep3Text">Niet alleen een score, maar ook waarom een woning past.</p></div>
+          <div class="premium-step fade-in"><span>04</span><h3 data-i18n="premiumStep4Title">Reageer sneller</h3><p data-i18n="premiumStep4Text">Bij een sterke match krijg je een compacte WhatsApp-alert.</p></div>
         </div>
-        <div class="steps-anim-col">
-          <div class="steps-anim-sticky">
-            <!-- Phone mockup frame -->
-            <div class="phone-mockup">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <!-- Step 1: Profile creation -->
-                <div class="step-anim active" data-step="0">
-                  <div class="anim-profile">
-                    <div class="anim-profile-header">Nieuw Profiel</div>
-                    <div class="anim-field" data-delay="0">
-                      <span class="anim-field-label">Naam</span>
-                      <span class="anim-field-value"><span class="typing-text" data-text="Sarah de Vries"></span><span class="typing-cursor">|</span></span>
-                      <span class="anim-field-check">✓</span>
-                    </div>
-                    <div class="anim-field" data-delay="1">
-                      <span class="anim-field-label">Locatie</span>
-                      <span class="anim-field-value"><span class="typing-text" data-text="Amsterdam"></span><span class="typing-cursor">|</span></span>
-                      <span class="anim-field-check">✓</span>
-                    </div>
-                    <div class="anim-field" data-delay="2">
-                      <span class="anim-field-label">Budget</span>
-                      <span class="anim-field-value"><span class="typing-text" data-text="€1.200 – €1.800"></span><span class="typing-cursor">|</span></span>
-                      <span class="anim-field-check">✓</span>
-                    </div>
-                    <div class="anim-field" data-delay="3">
-                      <span class="anim-field-label">Wensen</span>
-                      <span class="anim-field-value"><span class="typing-text" data-text="Balkon, huisdieren"></span><span class="typing-cursor">|</span></span>
-                      <span class="anim-field-check">✓</span>
-                    </div>
-                    <div class="anim-profile-btn" data-delay="4">Profiel opslaan ✨</div>
-                  </div>
-                </div>
-                <!-- Step 2: AI matching -->
-                <div class="step-anim" data-step="1">
-                  <div class="anim-matching">
-                    <div class="anim-ai-brain">
-                      <svg class="ai-sparkle" viewBox="0 0 24 24" width="48" height="48"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z" fill="currentColor"/></svg>
-                      <span class="ai-label">AI analyseert...</span>
-                    </div>
-                    <div class="anim-match-card" data-delay="0">
-                      <div class="match-card-img"><img src="images/listing-jordaan.jpg" alt="Jordaan appartement" loading="lazy"></div>
-                      <div class="match-card-info">
-                        <span class="match-card-title">Jordaan, 2k</span>
-                        <span class="match-card-price">€1.450/mnd</span>
-                      </div>
-                      <span class="match-pct">92%</span>
-                    </div>
-                    <div class="anim-match-card" data-delay="1">
-                      <div class="match-card-img"><img src="images/listing-depijp.jpg" alt="De Pijp appartement" loading="lazy"></div>
-                      <div class="match-card-info">
-                        <span class="match-card-title">De Pijp, 3k</span>
-                        <span class="match-card-price">€1.650/mnd</span>
-                      </div>
-                      <span class="match-pct">87%</span>
-                    </div>
-                    <div class="anim-match-card" data-delay="2">
-                      <div class="match-card-img"><img src="images/listing-oudwest.jpg" alt="Oud-West appartement" loading="lazy"></div>
-                      <div class="match-card-info">
-                        <span class="match-card-title">Oud-West, 2k</span>
-                        <span class="match-card-price">€1.550/mnd</span>
-                      </div>
-                      <span class="match-pct">81%</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Step 3: Browse matches -->
-                <div class="step-anim" data-step="2">
-                  <div class="anim-browse">
-                    <div class="anim-browse-header">Jouw Matches</div>
-                    <div class="anim-browse-cards">
-                      <div class="browse-card" data-delay="0">
-                        <div class="browse-card-img"><img src="images/listing-jordaan.jpg" alt="Jordaan" loading="lazy"><div class="browse-card-badge">92%</div></div>
-                        <div class="browse-card-details">
-                          <span class="browse-card-title">Jordaan</span>
-                          <span class="browse-card-sub">2 kamers · 65m² · €1.450</span>
-                        </div>
-                      </div>
-                      <div class="browse-card" data-delay="1">
-                        <div class="browse-card-img"><img src="images/listing-depijp.jpg" alt="De Pijp" loading="lazy"><div class="browse-card-badge">87%</div></div>
-                        <div class="browse-card-details">
-                          <span class="browse-card-title">De Pijp</span>
-                          <span class="browse-card-sub">3 kamers · 78m² · €1.650</span>
-                        </div>
-                      </div>
-                      <div class="browse-card" data-delay="2">
-                        <div class="browse-card-img"><img src="images/listing-oudwest.jpg" alt="Oud-West" loading="lazy"><div class="browse-card-badge">81%</div></div>
-                        <div class="browse-card-details">
-                          <span class="browse-card-title">Oud-West</span>
-                          <span class="browse-card-sub">2 kamers · 58m² · €1.550</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Step 4: Notifications -->
-                <div class="step-anim" data-step="3">
-                  <div class="anim-notifs">
-                    <div class="anim-notif-banner" data-delay="0">
-                      <div class="notif-icon">🏠</div>
-                      <div class="notif-text">
-                        <strong>Nestd</strong>
-                        <span>Nieuwe match: Jordaan, €1.450/mnd — 92% match!</span>
-                      </div>
-                    </div>
-                    <div class="anim-notif-bubble" data-delay="1">
-                      <div class="notif-bubble-avatar">N</div>
-                      <div class="notif-bubble-msg">
-                        <span class="notif-bubble-name">Nestd AI</span>
-                        <span class="notif-bubble-text">Hi Sarah! 🎉 We hebben 2 nieuwe woningen voor je gevonden die perfect matchen.</span>
-                        <span class="notif-bubble-time">Nu</span>
-                      </div>
-                    </div>
-                    <div class="anim-notif-bubble" data-delay="2">
-                      <div class="notif-bubble-avatar">N</div>
-                      <div class="notif-bubble-msg">
-                        <span class="notif-bubble-name">Nestd AI</span>
-                        <span class="notif-bubble-text">Die woning in de Jordaan is perfect voor je! 🏠 Precies de vloer- en keukenstijl die je wilde hebben.</span>
-                        <span class="notif-bubble-time">Nu</span>
-                      </div>
-                    </div>
-                    <div class="anim-notif-vibrate" data-delay="3">📳</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </section>
+
+    <section class="trust-section premium-section">
+      <div class="container trust-grid">
+        <div class="trust-copy fade-in-left">
+          <div class="feature-detail-label" data-i18n="premiumTrustLabel">Vertrouwen</div>
+          <h2 class="feature-detail-title" data-i18n="premiumTrustTitle">Premium hoeft niet schreeuwerig te zijn. Het moet betrouwbaar voelen.</h2>
+          <p class="feature-detail-desc" data-i18n="premiumTrustDesc">Daarom kiest Nestd voor heldere keuzes, privacybewuste analytics en notificaties waar jij controle over houdt.</p>
+        </div>
+        <div class="trust-cards fade-in-right">
+          <div><strong data-i18n="premiumTrustCard1Title">Privacy-first</strong><span data-i18n="premiumTrustCard1Text">Geen e-mailadres in analytics-events en geen onnodige trackingruis.</span></div>
+          <div><strong data-i18n="premiumTrustCard2Title">Nederlandse context</strong><span data-i18n="premiumTrustCard2Text">Copy, alerts en matchuitleg zijn gemaakt voor de Nederlandse huurmarkt.</span></div>
+          <div><strong data-i18n="premiumTrustCard3Title">Geen spam</strong><span data-i18n="premiumTrustCard3Text">De waitlist is voor launch access, updates en je Pro-voordeel.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-section premium-pricing" id="pricing-preview">
+      <div class="container">
+        <div class="section-label fade-in" data-i18n="premiumPricingLabel">Pricing preview</div>
+        <h2 class="section-title fade-in" data-i18n-html="premiumPricingTitle">Start rustig.<br><em>Upgrade als snelheid telt.</em></h2>
+        <p class="pricing-intro fade-in" data-i18n="premiumPricingSub">Nestd is nog pre-launch. De eerste 100 wachtlijstgebruikers krijgen 1 maand Pro gratis zodra early access opent.</p>
+        <div class="premium-pricing-grid">
+          <div class="premium-price-card fade-in">
+            <span data-i18n="price_free_name">Gratis</span>
+            <strong>€0</strong>
+            <p data-i18n="premiumFreeDesc">Voor rustig browsen en slimme basis-matches.</p>
+            <ul><li data-i18n="price_free_f1">AI-matching</li><li data-i18n="price_free_f3">Woningen browsen & opslaan</li><li data-i18n="price_free_f4">Push notificaties</li></ul>
+          </div>
+          <div class="premium-price-card featured fade-in">
+            <div class="pricing-badge" data-i18n="price_pro_badge">Eerste 100: 1 maand gratis</div>
+            <span data-i18n="price_pro_name">Pro</span>
+            <strong>€19,95</strong>
+            <p data-i18n="premiumProDesc">Voor woningzoekers die sneller willen reageren met WhatsApp en AI-uitleg.</p>
+            <ul><li data-i18n="price_pro_f_wa">WhatsApp alerts</li><li data-i18n="price_pro_f2">AI agent — ook bestuurbaar via WhatsApp</li><li data-i18n="price_pro_f3">Duo Zoeken — zoek samen met je partner</li></ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials section temporarily hidden. -->
+    <section class="faq-section premium-faq" id="faq">
+      <div class="container">
+        <div class="section-label fade-in" data-i18n="premiumFaqLabel">FAQ</div>
+        <h2 class="section-title fade-in" data-i18n-html="premiumFaqTitle">Vragen voordat je<br><em>op de lijst gaat?</em></h2>
+        <div class="premium-faq-list">
+          <details class="fade-in"><summary data-i18n="premiumFaq1Q">Is Nestd al live?</summary><p data-i18n="premiumFaq1A">Nog niet volledig. Je kunt je nu aanmelden voor early access; we sturen een update zodra de launch opent.</p></details>
+          <details class="fade-in"><summary data-i18n="premiumFaq2Q">Krijg ik veel WhatsApp-berichten?</summary><p data-i18n="premiumFaq2A">Nee. De bedoeling is juist minder ruis: alleen compacte alerts voor matches die bij je profiel passen.</p></details>
+          <details class="fade-in"><summary data-i18n="premiumFaq3Q">Wat betekent 1 maand Pro gratis?</summary><p data-i18n="premiumFaq3A">Als je bij de eerste 100 wachtlijstgebruikers zit, krijg je bij early access 1 maand Pro zonder kosten.</p></details>
+          <details class="fade-in"><summary data-i18n="premiumFaq4Q">Kan ik samen zoeken?</summary><p data-i18n="premiumFaq4A">Ja. Duo Zoeken is gemaakt voor partners, vrienden of huisgenoten die samen een woning zoeken.</p></details>
+        </div>
+      </div>
+    </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 10. FINAL CTA                           -->
-  <!-- ═══════════════════════════════════════ -->
-  <section class="waitlist-bottom" id="waitlist-bottom">
-    <div class="container">
-      <div class="section-label fade-in" data-i18n="waitlistLabel">Early access</div>
-      <h2 class="section-title fade-in" data-i18n-html="waitlistTitle"><em>Nestd is in ontwikkeling.</em></h2>
-      <p class="waitlist-sub fade-in" data-i18n="waitlistSub">Eerste 100 wachtlijstgebruikers krijgen 1 maand Pro gratis.</p>
-      <form class="waitlist-form fade-in" id="waitlist-footer" data-placement="bottom">
-        <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
-        <button type="submit" data-i18n="submitBtn">Claim je plek</button>
-      </form>
-      <p class="form-msg" id="msg-footer" role="status" aria-live="polite"></p>
-      <p class="waitlist-note fade-in" data-i18n="waitlistNote">Geen spam. Alleen launch access + je gratis Pro-maand als je bij de eerste 100 zit.</p>
-      <p class="waitlist-launch-note fade-in" data-i18n="waitlistLaunchNote">Nestd lanceert over een paar dagen. We sturen je een update zodra early access opent.</p>
-    </div>
-  </section>
+    <section class="waitlist-bottom premium-final-cta" id="waitlist-bottom">
+      <div class="container">
+        <div class="section-label fade-in" data-i18n="waitlistLabel">Early access</div>
+        <h2 class="section-title fade-in" data-i18n-html="waitlistTitle"><em>Schrijf je in voor de Nestd wachtlijst.</em></h2>
+        <p class="waitlist-sub fade-in" data-i18n="waitlistSub">Eerste 100 wachtlijstgebruikers krijgen 1 maand Pro gratis.</p>
+        <form class="waitlist-form fade-in" id="waitlist-footer" data-placement="bottom">
+          <input type="email" name="email" inputmode="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="je@email.nl" required>
+          <button type="submit" data-i18n="submitBtn">Claim je plek</button>
+        </form>
+        <p class="form-msg" id="msg-footer" role="status" aria-live="polite"></p>
+        <p class="waitlist-note fade-in" data-i18n="waitlistNote">Geen spam. Alleen launch access en je Pro-voordeel als je bij de eerste 100 zit.</p>
+        <p class="waitlist-launch-note fade-in" data-i18n="waitlistLaunchNote">Nestd lanceert binnenkort. We sturen je een update zodra early access opent.</p>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="page-footer">
@@ -551,15 +378,17 @@
     // Hamburger toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
+    function setMobileMenuOpen(isOpen) {
+      hamburger.classList.toggle('open', isOpen);
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    }
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
+      setMobileMenuOpen(!mobileMenu.classList.contains('open'));
     });
     mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
+      a.addEventListener('click', () => setMobileMenuOpen(false));
     });
   </script>
 </body>
