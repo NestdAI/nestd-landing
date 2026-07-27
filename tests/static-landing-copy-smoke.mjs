@@ -49,6 +49,9 @@ assert.match(index, new RegExp(`href="${appStoreUrl}"`, 'i'), 'hero should link 
 assert.match(index, /images\/app-store-badge\.svg/i, 'hero should use the local App Store badge asset');
 assert.match(index, /heroDownloadKicker/i, 'hero download copy key should exist above the fold');
 assert.match(index, /mobile-sticky-cta[^>]+data-cta-placement="mobile_sticky"/i, 'mobile sticky CTA should remain tracked');
+assert.match(index, /data-i18n-html="price_pro_f2"[^>]*><strong>AI agent<\/strong>/i, 'homepage should render the AI agent emphasis as HTML');
+assert.match(index, /data-i18n-html="price_pro_f3"[^>]*><strong>Duo Zoeken<\/strong>/i, 'homepage should render the Duo Search emphasis as HTML');
+assert.doesNotMatch(index, /data-i18n="price_pro_f[23]"/i, 'homepage should not render Pro benefit markup as plain text');
 assert.match(searchable, /Download in de App Store/i, 'Dutch App Store CTA should exist');
 assert.match(searchable, /Download on the App Store/i, 'English App Store CTA should exist');
 assert.match(script, /initMobileStickyCtaVisibility/i, 'sticky CTA visibility controller should exist');
