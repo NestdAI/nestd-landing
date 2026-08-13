@@ -882,7 +882,7 @@ body.light .navbar-brand span {
 
 .persona-card {
   position: relative;
-  padding: 28px 28px 32px;
+  padding: 32px 28px 34px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.08);
   background: linear-gradient(180deg, rgba(255,56,92,.04) 0%, rgba(255,255,255,.02) 60%);
@@ -898,20 +898,26 @@ body.light .navbar-brand span {
 .persona-content {
   position: relative;
   z-index: 2;
-  max-width: 60%;
 }
 
+/* Icon sits on its own line above the name, as the card's only visual accent. */
 .persona-name-row {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   margin-bottom: 6px;
 }
 
 .persona-icon {
-  width: 18px;
-  height: 18px;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  border-radius: 13px;
   color: var(--primary);
+  background: rgba(255,56,92,.10);
+  border: 1px solid rgba(255,56,92,.22);
   flex-shrink: 0;
 }
 
@@ -937,22 +943,6 @@ body.light .navbar-brand span {
   line-height: 1.6;
 }
 
-.persona-illustration {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 220px;
-  height: 220px;
-  pointer-events: none;
-  background-image: url('images/personas.png');
-  background-repeat: no-repeat;
-  /* image is 2078x757 with 3 buildings side-by-side; slice into thirds */
-  background-size: 300% auto;
-}
-
-.persona-card:nth-child(1) .persona-illustration { background-position: 0% center; }
-.persona-card:nth-child(2) .persona-illustration { background-position: 50% center; }
-.persona-card:nth-child(3) .persona-illustration { background-position: 100% center; }
 
 /* ── Contact ── */
 .contact-grid {
@@ -1301,9 +1291,7 @@ body.light .navbar-brand span {
   .card-grid-3 { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
   .persona-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
-  .persona-card { min-height: 200px; }
-  .persona-content { max-width: 58%; }
-  .persona-illustration { width: 200px; height: 200px; }
+  .persona-card { min-height: 0; }
   .contact-grid { grid-template-columns: 1fr; }
   .diff-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; margin-top: 48px; }
   .section-divider { margin-top: 56px; }
@@ -1316,8 +1304,7 @@ body.light .navbar-brand span {
   .navbar-right { gap: 6px; }
   .navbar-cta { min-height: 38px; padding: 0 12px; font-size: 0.75rem; }
   .diff-grid { grid-template-columns: 1fr; gap: 36px; }
-  .persona-content { max-width: 60%; }
-  .persona-illustration { width: 170px; height: 170px; }
+  .persona-card { padding: 26px 22px 28px; }
   .page-footer-grid { grid-template-columns: 1fr; }
   .stats-visual-grid { grid-template-columns: 1fr; }
 }
