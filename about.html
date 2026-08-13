@@ -14,41 +14,6 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pages.css">
-  <style>
-    .contact-field {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.05);
-      color: var(--light);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color .2s;
-      display: block;
-    }
-    .contact-field::placeholder { color: #555; }
-    .contact-field:focus { border-color: var(--primary); }
-    textarea.contact-field { resize: vertical; min-height: 110px; }
-    .contact-label { display: block; font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,.6); margin-bottom: 8px; }
-    .contact-field-group { margin-bottom: 20px; }
-    .contact-submit {
-      width: 100%; padding: 14px; border-radius: 12px; border: none;
-      background: var(--primary); color: #fff; font-family: var(--font-body);
-      font-size: 0.95rem; font-weight: 600; cursor: pointer;
-      transition: opacity .2s, transform .15s;
-    }
-    .contact-submit:hover { opacity: .9; transform: translateY(-1px); }
-    .contact-submit:active { transform: translateY(0); }
-    .contact-submit:disabled { opacity: .5; cursor: not-allowed; }
-    .contact-msg { text-align: center; margin-top: 12px; font-size: 0.875rem; min-height: 1.2em; }
-    .contact-msg.success { color: #34d399; }
-    .contact-msg.error { color: var(--primary); }
-    body.light .contact-field { border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.04); color: #1a1a1a; }
-    body.light .contact-field::placeholder { color: #aaa; }
-    body.light .contact-label { color: #555; }
-  </style>
   <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
   <script>(function(){try{var p=new URLSearchParams(location.search);var q=(p.get("lang")||"").toLowerCase();var u=(q==="en"||q==="nl")?q:(/^\/en(?:\/|$)/.test(location.pathname)?"en":localStorage.getItem("nestd-lang"));if(u&&u!=="nl")document.documentElement.classList.add("i18n-loading")}catch(e){}})()</script>
 </head>
@@ -315,26 +280,6 @@
           </div>
         </div>
 
-        <!-- Contact Form -->
-        <div class="contact-form-wrap fade-in-right">
-          <form id="contact-form">
-            <div class="contact-field-group">
-              <label class="contact-label" for="name" data-i18n="about_contact_form_name">Naam</label>
-              <input class="contact-field" id="name" name="name" placeholder="Je naam" type="text" required data-i18n-placeholder="about_contact_form_name_ph">
-            </div>
-            <div class="contact-field-group">
-              <label class="contact-label" for="email" data-i18n="about_contact_form_email">Email</label>
-              <input class="contact-field" id="email" name="email" placeholder="je@email.nl" type="email" required data-i18n-placeholder="about_contact_form_email_ph">
-            </div>
-            <div class="contact-field-group">
-              <label class="contact-label" for="message" data-i18n="about_contact_form_message">Bericht</label>
-              <textarea class="contact-field" id="message" name="message" placeholder="Vertel ons waar we je mee kunnen helpen..." rows="4" required data-i18n-placeholder="about_contact_form_message_ph"></textarea>
-            </div>
-            <button class="contact-submit" id="contact-submit" type="submit" data-i18n="about_contact_form_submit">Verstuur Bericht</button>
-            <p class="contact-msg" id="contact-msg"></p>
-          </form>
-        </div>
-
       </div>
     </div>
   </section>
@@ -382,39 +327,6 @@
   </footer>
 
   <script>
-    // Contact form
-    const t = () => translations && translations[currentLang] || {};
-    document.getElementById('contact-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('contact-submit');
-      const msg = document.getElementById('contact-msg');
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if (!name || !email || !message) return;
-      btn.disabled = true;
-      btn.textContent = t().about_contact_form_loading || 'Even geduld...';
-      msg.textContent = '';
-      msg.className = 'contact-msg';
-      try {
-        const res = await fetch('https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/contact-form', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message })
-        });
-        if (!res.ok) throw new Error();
-        msg.textContent = t().about_contact_form_success || 'Bedankt! Je bericht is verstuurd.';
-        msg.className = 'contact-msg success';
-        document.getElementById('contact-form').reset();
-      } catch {
-        msg.textContent = t().about_contact_form_error || 'Er ging iets mis. Probeer het later opnieuw.';
-        msg.className = 'contact-msg error';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = t().about_contact_form_submit || 'Verstuur Bericht';
-      }
-    });
-
     // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');

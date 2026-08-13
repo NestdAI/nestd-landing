@@ -947,8 +947,10 @@ body.light .navbar-brand span {
 /* ── Contact ── */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 64px;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .contact-info h2 {
