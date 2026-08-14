@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "G3C9H2352V.nl.nestd.app",
-        "paths": ["/listing/*", "/app", "/app/*"]
+        "paths": ["/listing/*", "/app", "/app/*", "/invite/*"]
       }
     ]
   }
