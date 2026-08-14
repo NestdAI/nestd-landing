@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/listing/:id", "destination": "/listing/index.html" },
+    { "source": "/invite/:code", "destination": "/invite/index.html" },
     { "source": "/app", "destination": "/app/index.html" },
     { "source": "/app/:path*", "destination": "/app/index.html" },
     { "source": "/verified", "destination": "/verified/index.html" },
