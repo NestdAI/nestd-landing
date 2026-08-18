@@ -378,7 +378,7 @@ const translations = {
 
     // Footer (shared)
     footer_desc: 'Jouw persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.',
-    footer_desc_about: 'Jouw AI woonassistent. Gebouwd om de Nederlandse woningcrisis aan te pakken voor jongeren van 18 tot 35.',
+    footer_desc_about: 'Jouw AI woonassistent. Gebouwd om de Nederlandse woningcrisis aan te pakken.',
     footer_desc_pricing: 'Jouw AI woonassistent. Vindt woningen en stuurt matches via WhatsApp.',
     footer_product: 'Product',
     footer_features: 'Features',
@@ -774,7 +774,7 @@ const translations = {
 
     // Footer (shared)
     footer_desc: 'Your personal AI housing assistant. Finds rentals and sends matches via WhatsApp.',
-    footer_desc_about: 'Your AI housing assistant. Built to tackle the Dutch housing crisis for young people aged 18 to 35.',
+    footer_desc_about: 'Your AI housing assistant. Built to tackle the Dutch housing crisis.',
     footer_desc_pricing: 'Your AI housing assistant. Finds rentals and sends matches via WhatsApp.',
     footer_product: 'Product',
     footer_features: 'Features',

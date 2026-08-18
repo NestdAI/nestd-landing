@@ -669,6 +669,10 @@ body { padding-bottom: 104px; }
 .contact-item-label { font-size: .74rem; color: var(--ink-faint); letter-spacing: .03em; text-transform: uppercase; }
 .contact-item-value { font-weight: 500; }
 
+/* Contact row (info-only, no form) */
+.contact-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.4rem 2.5rem; margin-top: var(--sp-5); }
+.contact-row .contact-item { margin-bottom: 0; }
+
 /* Forms */
 .form-card { padding: 1.7rem; border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--hairline); box-shadow: var(--shadow-md); }
 .field-group { margin-bottom: 1.1rem; }

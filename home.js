@@ -126,9 +126,11 @@
     let cards = [];            // { el, data }
     let top = 0;               // index of the active (front) card
     let inView = false;
-    let userEngaged = false;   // once true, ambient autoplay stops for good
+    let userEngaged = false;   // true while the user is driving; resumes after idle
     let autoTimer = null;
+    let resumeTimer = null;    // hands control back to ambient autoplay after idle
     let busy = false;          // a card is mid fly-off
+    const RESUME_IDLE = 4500;  // ms of no interaction before autoplay resumes
 
     function buildCard(data) {
       const el = document.createElement('div');
@@ -202,6 +204,7 @@
         busy = false;
         if (top >= cards.length) showMatch();
         else layout(true);   // remaining cards rise into place
+        if (userEngaged) scheduleResume();   // hand back to autoplay after idle
       }, dur * 1000);
     }
 
@@ -217,8 +220,7 @@
 
       el.addEventListener('pointerdown', (e) => {
         if (busy || el.style.pointerEvents === 'none') return;
-        userEngaged = true;
-        stopAuto();
+        engage();
         dragging = true;
         el.setPointerCapture(e.pointerId);
         el.classList.add('dragging');
@@ -250,7 +252,7 @@
           commit(el, projected < 0 || (dx === 0 && vx < 0) ? -1 : 1, vx);
         } else {
           springBack(el);
-          scheduleAuto(2600);
+          scheduleResume();
         }
       }
       el.addEventListener('pointerup', release);
@@ -259,8 +261,8 @@
 
     // Buttons reuse the same commit path on the current front card.
     function frontCard() { return cards[top]?.el || null; }
-    nopeBtn?.addEventListener('click', () => { if (busy) return; userEngaged = true; stopAuto(); const el = frontCard(); if (el) { el.style.transition = 'none'; commit(el, -1, -900); } });
-    likeBtn?.addEventListener('click', () => { if (busy) return; userEngaged = true; stopAuto(); const el = frontCard(); if (el) { el.style.transition = 'none'; commit(el, 1, 900); } });
+    nopeBtn?.addEventListener('click', () => { if (busy) return; engage(); const el = frontCard(); if (el) { el.style.transition = 'none'; commit(el, -1, -900); } });
+    likeBtn?.addEventListener('click', () => { if (busy) return; engage(); const el = frontCard(); if (el) { el.style.transition = 'none'; commit(el, 1, 900); } });
 
     function showMatch() {
       if (!overlay) { build(); return; }
@@ -305,6 +307,21 @@
       autoTimer = setTimeout(autoStep, delay);
     }
     function stopAuto() { clearTimeout(autoTimer); autoTimer = null; }
+
+    // The user takes over on any interaction; ambient autoplay pauses...
+    function engage() {
+      userEngaged = true;
+      stopAuto();
+      clearTimeout(resumeTimer);
+    }
+    // ...then resumes after a spell of inactivity, so the demo never dies.
+    function scheduleResume() {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        userEngaged = false;
+        if (inView) scheduleAuto(500);
+      }, RESUME_IDLE);
+    }
 
     build();
 
