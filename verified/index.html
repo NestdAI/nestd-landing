@@ -7,81 +7,45 @@
   <meta name="robots" content="noindex">
   <title>E-mail bevestigd — Nestd</title>
   <meta name="description" content="Je e-mailadres is bevestigd. Open de Nestd app.">
+  <meta name="theme-color" content="#08080a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0a0a0a;
-      color: #f5f5f5;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .container { text-align: center; max-width: 420px; }
-    .logo { width: 64px; height: 64px; border-radius: 16px; margin-bottom: 1.5rem; }
-    .check {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: rgba(16, 185, 129, 0.15);
-      color: #10b981;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px; font-weight: 700;
-      margin: 0 auto 1.25rem;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.75rem; font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      color: #a0a0a0; font-size: 0.95rem;
-      margin-bottom: 2rem; line-height: 1.5;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      border-radius: 12px;
-      font-size: 1rem; font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.15s, opacity 0.15s;
-      cursor: pointer;
-      border: none;
-    }
-    .btn:hover { transform: scale(1.02); }
-    .btn-primary {
-      background: linear-gradient(135deg, #FF385C, #ED1543);
-      color: #fff;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      color: #f5f5f5;
-      border: 1px solid rgba(255,255,255,0.12);
-      width: 100%;
-    }
-    .stores { margin-top: 2rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-    .stores img { height: 44px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--brand:#ff385c;--brand2:#ff6a5b}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#08080a;color:#f4f4f6;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;-webkit-font-smoothing:antialiased;position:relative;overflow:hidden}
+    body::before,body::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none}
+    body::before{width:520px;height:520px;top:-160px;right:-120px;background:radial-gradient(circle,rgba(255,56,92,.5),transparent 70%)}
+    body::after{width:460px;height:460px;bottom:-160px;left:-140px;background:radial-gradient(circle,rgba(120,90,255,.3),transparent 70%)}
+    .card{position:relative;z-index:1;width:100%;max-width:420px;text-align:center;padding:2.4rem 2rem;border-radius:28px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);box-shadow:0 24px 70px rgba(0,0,0,.55);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
+    .logo{width:60px;height:60px;border-radius:15px;margin:0 auto 1.4rem}
+    .badge-icon{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;margin:0 auto 1.25rem}
+    .badge-ok{background:rgba(46,204,113,.15);color:#2ecc71}
+    h1{font-size:1.6rem;font-weight:600;letter-spacing:-.02em;margin-bottom:.5rem}
+    .subtitle{color:#a4a4ad;font-size:.95rem;line-height:1.55;margin-bottom:1.8rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:.9rem 1.6rem;border-radius:999px;font:inherit;font-weight:600;font-size:1rem;border:0;cursor:pointer;text-decoration:none;transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .3s;margin-bottom:.8rem}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{color:#fff;background:linear-gradient(180deg,var(--brand2),var(--brand));box-shadow:0 0 0 1px rgba(255,56,92,.35),0 14px 40px rgba(255,56,92,.3)}
+    .btn-secondary{color:#f4f4f6;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+    .stores{margin-top:1.6rem;display:flex;justify-content:center}
+    .stores img{height:44px}
+    @media (prefers-reduced-motion:reduce){.btn{transition:none}}
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="card">
     <img src="/logo.png" alt="Nestd" class="logo">
-    <div class="check" aria-hidden="true">&#10003;</div>
+    <div class="badge-icon badge-ok" aria-hidden="true">&#10003;</div>
     <h1>E-mail bevestigd</h1>
     <p class="subtitle">Bedankt! Je e-mailadres is bevestigd. Je kunt nu terug naar de Nestd app.</p>
     <a href="nestd://" class="btn btn-primary">Open Nestd</a>
     <a href="/" class="btn btn-secondary">Meer over Nestd</a>
     <div class="stores">
-      <a href="https://apps.apple.com/app/nestd/id6740091498" target="_blank" rel="noopener">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      <a href="https://apps.apple.com/app/nestd/id6740091498" target="_blank" rel="noopener" aria-label="Download in de App Store">
+        <img src="/images/app-store-badge.svg" alt="Download in de App Store">
       </a>
     </div>
   </div>

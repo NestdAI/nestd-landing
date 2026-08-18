@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Prijzen | Nestd — Jouw AI Woonassistent</title>
-  <meta name="description" content="Nestd is bijna volledig gratis. WhatsApp alerts, AI-agent en Duo Zoeken zijn Pro. Bekijk onze prijzen.">
+  <meta name="description" content="Eén plan. Probeer Nestd een week gratis — niet tevreden, geld terug. Daarna €19,95/mnd, altijd opzegbaar.">
   <meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
+  <meta name="theme-color" content="#0a0a0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="pages.css">
   <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
   <script>(function(){try{var p=new URLSearchParams(location.search);var q=(p.get("lang")||"").toLowerCase();var u=(q==="en"||q==="nl")?q:(/^\/en(?:\/|$)/.test(location.pathname)?"en":localStorage.getItem("nestd-lang"));if(u&&u!=="nl")document.documentElement.classList.add("i18n-loading")}catch(e){}})()</script>
 </head>
@@ -22,221 +22,113 @@
   <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-transparent">
-    <div class="navbar-inner">
-      <a href="/" class="navbar-brand">
-        <img src="logo.png" alt="Nestd">
+  <nav class="nav" id="nav" aria-label="Hoofdnavigatie">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand" aria-label="Nestd home">
+        <img src="logo.png" alt="Nestd" width="28" height="28">
+        <span>Nestd</span>
       </a>
-      <div class="navbar-links">
+      <div class="nav-links">
         <a href="/" data-i18n="nav_home">Home</a>
         <a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a>
         <a href="/about.html" data-i18n="nav_about">Over ons</a>
       </div>
-      <div class="navbar-right">
-        <a href="/#waitlist-hero" class="navbar-cta" data-cta-placement="pricing_nav" data-i18n="cta">Join de waitlist →</a>
-        <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
-        <button class="navbar-hamburger" id="hamburger" aria-label="Menu openen">
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="nav-right">
+        <button class="icon-btn lang-toggle" id="lang-toggle" type="button" aria-label="Toggle language">🇬🇧</button>
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode">☀️</button>
+        <a href="https://apps.apple.com/app/nestd/id6740091498" class="btn btn-primary nav-cta" data-cta-placement="pricing_nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
+        <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+          <span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile menu -->
-  <div class="navbar-mobile" id="mobile-menu">
+  <div class="mobile-sheet" id="mobile-menu" aria-hidden="true">
     <a href="/" data-i18n="nav_home">Home</a>
     <a href="/pricing.html" class="active" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" data-i18n="nav_about">Over ons</a>
-    <a href="/#waitlist-hero" data-cta-placement="pricing_mobile_nav" data-i18n="cta">Join de waitlist →</a>
+    <a href="https://apps.apple.com/app/nestd/id6740091498" class="btn btn-primary" data-cta-placement="pricing_mobile_nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
   </div>
 
-  <!-- Page Header -->
-  <header class="page-header">
-    <div class="section-label" data-i18n="price_label">Pricing preview</div>
-    <h1 class="page-header-title" data-i18n-html="price_title">Prijzen voor <em>na de launch</em></h1>
-    <p class="page-header-sub" data-i18n="price_sub">Nestd is nog pre-launch en lanceert over een paar dagen. Eerste 100 wachtlijstgebruikers krijgen 1 maand Pro gratis; deze prijzen laten zien hoe Gratis en Pro straks werken.</p>
-  </header>
-
-  <!-- Pricing Cards -->
-  <section class="page-section">
-    <div class="container">
-      <div class="pricing-grid">
-
-        <!-- Free Plan -->
-        <div class="pricing-card">
-          <h2 data-i18n="price_free_name">Gratis</h2>
-          <p class="pricing-desc" data-i18n="price_free_desc">Alles wat je nodig hebt om je droomwoning te vinden.</p>
-          <div class="pricing-price">
-            <span class="amount" data-i18n="price_free_amount">&euro;0</span>
-            <span class="period" data-i18n="price_free_period">/maand</span>
-          </div>
-          <ul class="pricing-features">
-            <li><span class="check">✓</span> <span data-i18n="price_free_f1">AI-matching</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_free_f3">Woningen browsen &amp; opslaan</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_free_f4">Push notificaties</span></li>
-          </ul>
-          <a href="/#waitlist-hero" class="pricing-btn outline" data-cta-placement="pricing_free" data-i18n="price_free_btn">Join de waitlist</a>
-        </div>
-
-        <!-- Pro Plan -->
-        <div class="pricing-card featured">
-          <span class="pricing-badge" data-i18n="price_pro_badge">Eerste 100: 1 maand gratis</span>
-          <h2 data-i18n="price_pro_name">Pro</h2>
-          <p class="pricing-desc" data-i18n="price_pro_desc">Je persoonlijke AI-zoekpartner. Laat Nestd alles regelen.</p>
-          <div class="pricing-price">
-            <span class="amount" data-i18n="price_pro_amount">&euro;19,95</span>
-            <span class="period" data-i18n="price_pro_period">/maand</span>
-          </div>
-          <ul class="pricing-features">
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f1">Alles van Gratis</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f_wa">WhatsApp alerts</span></li>
-            <li><span class="check">✓</span> <span data-i18n-html="price_pro_f2"><strong>AI agent</strong> &mdash; ook bestuurbaar via WhatsApp</span></li>
-            <li><span class="check">✓</span> <span data-i18n-html="price_pro_f3"><strong>Duo Zoeken</strong> &mdash; zoek samen met je partner</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f4">AI matching met uitleg</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f5">Visueel stijlprofiel</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f6">AI chat</span></li>
-            <li><span class="check">✓</span> <span data-i18n="price_pro_f7">Voorrang bij support</span></li>
-          </ul>
-          <a href="/#waitlist-hero" class="pricing-btn primary" data-cta-placement="pricing_pro" data-i18n="price_pro_btn">Claim 1 maand Pro gratis</a>
-        </div>
-
+  <main>
+    <!-- Page hero -->
+    <header class="page-hero">
+      <div class="hero-aura" aria-hidden="true">
+        <div class="aura aura-a"></div>
+        <div class="aura aura-b"></div>
       </div>
-
-      <!-- Comparison Table -->
-      <div class="compare-table">
-        <h3 data-i18n="price_compare_title">Vergelijk Features</h3>
-        <div class="compare-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th data-i18n="price_compare_feature">Feature</th>
-                <th data-i18n="price_compare_free">Gratis</th>
-                <th class="accent" data-i18n="price_compare_pro">Pro</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-i18n="price_compare_r1_feat">AI Matching</td>
-                <td data-i18n="price_compare_r1_free">Harde filters</td>
-                <td class="accent" data-i18n="price_compare_r1_pro">Harde + AI matching (met uitleg)</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r2_feat">WhatsApp Alerts</td>
-                <td class="muted">&mdash;</td>
-                <td class="accent" data-i18n="price_compare_r2_pro">Onbeperkt</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r3_feat">AI Agent (ook via WhatsApp)</td>
-                <td class="muted">&mdash;</td>
-                <td class="accent" data-i18n="price_compare_r3_pro">Volledige conversatie</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r4_feat">AI Chat</td>
-                <td class="muted">&mdash;</td>
-                <td class="accent" data-i18n="price_compare_r4_pro">Onbeperkt</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r5_feat">Duo Zoeken</td>
-                <td class="muted">&mdash;</td>
-                <td class="accent" data-i18n="price_compare_r5_pro">Inclusief</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r6_feat">Visuele Inspiratie</td>
-                <td class="muted">&mdash;</td>
-                <td data-i18n="price_compare_r6_pro">Foto's uploaden → betere matches</td>
-              </tr>
-              <tr>
-                <td data-i18n="price_compare_r7_feat">Push Notificaties</td>
-                <td data-i18n="price_compare_r7_free">Inclusief</td>
-                <td data-i18n="price_compare_r7_pro">Inclusief</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="wrap">
+        <div class="section-label reveal" data-i18n="price_label">Prijzen</div>
+        <h1 class="page-title reveal" data-i18n-html="price_title" style="--i:1">Eén plan.<br><em>Alles inbegrepen.</em></h1>
+        <p class="page-lead reveal" data-i18n="price_sub" style="--i:2">Probeer Nestd een week gratis. Bevalt het niet? Je geld terug — geen gedoe. Daarna €19,95 per maand, altijd opzegbaar.</p>
       </div>
+    </header>
 
-      <!-- FAQ -->
-      <div class="faq-section" id="faq">
-        <h3 data-i18n="price_faq_title">Veelgestelde Vragen</h3>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <h4 data-i18n="price_faq1_q">Kan ik op elk moment upgraden of downgraden?</h4>
-            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p data-i18n="price_faq1_a">Ja, je kunt op elk moment wisselen tussen Gratis en Pro via de app. Bij upgraden krijg je direct toegang tot alle Pro-features.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <h4 data-i18n="price_faq2_q">Hoe betaal ik voor Pro?</h4>
-            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p data-i18n="price_faq2_a">Betalen is nog niet actief omdat Nestd pre-launch is. Join de waitlist; als je bij de eerste 100 zit, krijg je 1 maand Pro gratis zodra early access opent.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <h4 data-i18n="price_faq3_q">Zijn WhatsApp alerts inbegrepen bij Pro?</h4>
-            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p data-i18n="price_faq3_a">Ja! WhatsApp alerts (notificaties over nieuwe matches) zijn een Pro-feature. Met een Pro-abonnement ontvang je direct WhatsApp-berichten bij nieuwe matches. De AI-agent (volledige conversatie via WhatsApp) is ook onderdeel van Pro.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <h4 data-i18n="price_faq4_q">Wat is het verschil tussen WhatsApp alerts en de AI-agent?</h4>
-            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p data-i18n="price_faq4_a">Alerts zijn eenrichtingsberichten: "Nieuwe match gevonden!". De AI-agent is een volledige chatpartner op WhatsApp: je kunt reageren, filters aanpassen, vragen stellen en je zoektocht besturen. Beide zijn inbegrepen bij Pro.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <h4 data-i18n="price_faq5_q">Kan ik mijn account verwijderen?</h4>
-            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p data-i18n="price_faq5_a">Absoluut. Via Instellingen → "Verwijder account" worden al je gegevens permanent verwijderd. GDPR-compliant, geen vragen.</p>
+    <!-- Plan -->
+    <section class="pricing-section" style="padding-top: 1.5rem;">
+      <div class="wrap">
+        <div class="pricing-grid single">
+          <div class="price-card featured reveal">
+            <div class="price-badge" data-i18n="pricingTrialBadge">1 week gratis</div>
+            <span class="price-name" data-i18n="price_pro_name">Pro</span>
+            <strong class="price-amount">€19,95<span class="price-per" data-i18n="pricingPerMonth">/mnd</span></strong>
+            <p class="price-trial" data-i18n="pricingTrialNote">Eerste week gratis — daarna €19,95/mnd. Altijd opzegbaar.</p>
+            <p class="price-desc" data-i18n="price_pro_desc">Je persoonlijke AI-zoekpartner. Laat Nestd het zoeken doen.</p>
+            <ul>
+              <li data-i18n="price_pro_f_wa">WhatsApp alerts</li>
+              <li data-i18n-html="price_pro_f2"><strong>AI agent</strong> — ook bestuurbaar via WhatsApp</li>
+              <li data-i18n-html="price_pro_f3"><strong>Duo Zoeken</strong> — zoek samen met je partner</li>
+              <li data-i18n="price_pro_f4">AI matching met uitleg</li>
+              <li data-i18n="price_pro_f5">Visueel stijlprofiel</li>
+              <li data-i18n="price_pro_f6">AI chat</li>
+              <li data-i18n="price_pro_f7">Voorrang bij support</li>
+            </ul>
+            <a href="https://apps.apple.com/app/nestd/id6740091498" class="btn btn-primary btn-lg magnetic" style="width:100%;margin-top:1.4rem;" data-cta-placement="pricing_pro" data-i18n="price_pro_btn" target="_blank" rel="noopener">Start je gratis week</a>
+            <div class="price-guarantee" data-i18n="pricingGuarantee">Niet tevreden in je eerste week? Geld terug, geen gedoe.</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-label" data-i18n="premiumFaqLabel">FAQ</div>
+          <h2 class="section-title" data-i18n="price_faq_title">Veelgestelde vragen</h2>
+        </div>
+        <div class="faq-list reveal">
+          <details><summary data-i18n="price_faq1_q">Hoe werkt de gratis proefweek?</summary><div class="faq-a"><p data-i18n="price_faq1_a">Je downloadt Nestd en start direct met een week Pro — gratis. Je krijgt meteen toegang tot alle functies, zonder verplichtingen.</p></div></details>
+          <details><summary data-i18n="price_faq2_q">Wat gebeurt er na mijn proefweek?</summary><div class="faq-a"><p data-i18n="price_faq2_a">Na je gratis week is Nestd €19,95 per maand. Je kunt op elk moment opzeggen in de app. En ben je niet tevreden in je eerste week? Dan krijg je je geld terug — geen gedoe.</p></div></details>
+          <details><summary data-i18n="price_faq3_q">Zijn WhatsApp alerts inbegrepen?</summary><div class="faq-a"><p data-i18n="price_faq3_a">Ja. WhatsApp alerts (notificaties over nieuwe matches) horen bij je Nestd-abonnement. Je ontvangt direct een WhatsApp bij een sterke match. De AI-agent — volledige conversatie via WhatsApp — hoort er ook bij.</p></div></details>
+          <details><summary data-i18n="price_faq4_q">Wat is het verschil tussen WhatsApp alerts en de AI-agent?</summary><div class="faq-a"><p data-i18n="price_faq4_a">Alerts zijn eenrichtingsberichten: "Nieuwe match gevonden!". De AI-agent is een volledige chatpartner op WhatsApp: je kunt reageren, filters aanpassen, vragen stellen en je zoektocht besturen. Beide horen bij Nestd.</p></div></details>
+          <details><summary data-i18n="price_faq5_q">Kan ik mijn account verwijderen?</summary><div class="faq-a"><p data-i18n="price_faq5_a">Absoluut. Via Instellingen → "Verwijder account" worden al je gegevens permanent verwijderd. GDPR-compliant, geen vragen.</p></div></details>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="page-footer">
-    <div class="page-footer-inner">
-      <div class="page-footer-grid">
-        <div class="page-footer-brand">
-          <a href="/" class="navbar-brand" style="margin-bottom: 12px; display: inline-flex;">
-            <img src="logo.png" alt="Nestd">
-            <span>Nestd</span>
-          </a>
-          <p data-i18n="footer_desc_pricing">Jouw AI woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand"><img src="logo.png" alt="Nestd" width="24" height="24"><span>Nestd</span></a>
+          <p data-i18n="footer_desc">Jouw persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
         </div>
         <div>
           <h5 data-i18n="footer_product">Product</h5>
           <ul>
             <li><a href="/pricing.html" data-i18n="footer_pricing">Prijzen</a></li>
+            <li><a href="/about.html" data-i18n="footer_about_nestd">Over Nestd</a></li>
           </ul>
         </div>
         <div>
-          <h5 data-i18n="footer_company">Bedrijf</h5>
+          <h5 data-i18n="footer_support">Support</h5>
           <ul>
-            <li><a href="/about.html" data-i18n="footer_about">Over ons</a></li>
             <li><a href="/about.html#contact" data-i18n="footer_contact">Contact</a></li>
+            <li><a href="/pricing.html#faq" data-i18n="footer_faq">FAQ</a></li>
           </ul>
         </div>
         <div>
@@ -248,48 +140,35 @@
           </ul>
         </div>
       </div>
-      <div class="page-footer-bottom">
+      <div class="footer-bottom">
         <span>&copy; 2026 Nestd. Amsterdam.</span>
-        <div class="page-footer-bottom-links">
+        <div class="footer-bottom-links">
           <a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a>
-          <a href="#" data-i18n="footer_terms">Voorwaarden</a>
+          <a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a>
+          <a href="#" data-i18n="footer_cookies">Cookiebeleid</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Hamburger toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
-    });
-
-    // FAQ Accordion
-    document.querySelectorAll('.faq-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        // Close all
-        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-        document.querySelectorAll('.faq-toggle').forEach(b => b.setAttribute('aria-expanded', 'false'));
-        // Toggle current
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  </script>
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script src="home.js"></script>
+  <script>
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const sheet = document.getElementById('mobile-menu');
+      if (!hamburger || !sheet) return;
+      function setOpen(isOpen) {
+        hamburger.classList.toggle('open', isOpen);
+        sheet.classList.toggle('open', isOpen);
+        document.body.classList.toggle('sheet-open', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        sheet.setAttribute('aria-hidden', String(!isOpen));
+      }
+      hamburger.addEventListener('click', () => setOpen(!sheet.classList.contains('open')));
+      sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    })();
+  </script>
 </body>
 </html>

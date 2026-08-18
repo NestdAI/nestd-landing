@@ -6,49 +6,14 @@
   <title>Over Ons | Nestd — Jouw AI Woonassistent</title>
   <meta name="description" content="Nestd lost de woningcrisis op voor jongeren in Nederland met AI. Leer meer over onze missie en neem contact op.">
   <meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
+  <meta name="theme-color" content="#0a0a0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="pages.css">
-  <style>
-    .contact-field {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.05);
-      color: var(--light);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color .2s;
-      display: block;
-    }
-    .contact-field::placeholder { color: #555; }
-    .contact-field:focus { border-color: var(--primary); }
-    textarea.contact-field { resize: vertical; min-height: 110px; }
-    .contact-label { display: block; font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,.6); margin-bottom: 8px; }
-    .contact-field-group { margin-bottom: 20px; }
-    .contact-submit {
-      width: 100%; padding: 14px; border-radius: 12px; border: none;
-      background: var(--primary); color: #fff; font-family: var(--font-body);
-      font-size: 0.95rem; font-weight: 600; cursor: pointer;
-      transition: opacity .2s, transform .15s;
-    }
-    .contact-submit:hover { opacity: .9; transform: translateY(-1px); }
-    .contact-submit:active { transform: translateY(0); }
-    .contact-submit:disabled { opacity: .5; cursor: not-allowed; }
-    .contact-msg { text-align: center; margin-top: 12px; font-size: 0.875rem; min-height: 1.2em; }
-    .contact-msg.success { color: #34d399; }
-    .contact-msg.error { color: var(--primary); }
-    body.light .contact-field { border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.04); color: #1a1a1a; }
-    body.light .contact-field::placeholder { color: #aaa; }
-    body.light .contact-label { color: #555; }
-  </style>
   <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
   <script>(function(){try{var p=new URLSearchParams(location.search);var q=(p.get("lang")||"").toLowerCase();var u=(q==="en"||q==="nl")?q:(/^\/en(?:\/|$)/.test(location.pathname)?"en":localStorage.getItem("nestd-lang"));if(u&&u!=="nl")document.documentElement.classList.add("i18n-loading")}catch(e){}})()</script>
 </head>
@@ -57,310 +22,205 @@
   <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-transparent">
-    <div class="navbar-inner">
-      <a href="/" class="navbar-brand">
-        <img src="logo.png" alt="Nestd">
+  <nav class="nav" id="nav" aria-label="Hoofdnavigatie">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand" aria-label="Nestd home">
+        <img src="logo.png" alt="Nestd" width="28" height="28">
+        <span>Nestd</span>
       </a>
-      <div class="navbar-links">
+      <div class="nav-links">
         <a href="/" data-i18n="nav_home">Home</a>
         <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
         <a href="/about.html" class="active" data-i18n="nav_about">Over ons</a>
       </div>
-      <div class="navbar-right">
-        <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">🇬🇧</button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
-        <button class="navbar-hamburger" id="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="nav-right">
+        <button class="icon-btn lang-toggle" id="lang-toggle" type="button" aria-label="Toggle language">🇬🇧</button>
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode">☀️</button>
+        <a href="https://apps.apple.com/app/nestd/id6740091498" class="btn btn-primary nav-cta" data-cta-placement="about_nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
+        <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+          <span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile menu -->
-  <div class="navbar-mobile" id="mobile-menu">
+  <div class="mobile-sheet" id="mobile-menu" aria-hidden="true">
     <a href="/" data-i18n="nav_home">Home</a>
     <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
     <a href="/about.html" class="active" data-i18n="nav_about">Over ons</a>
+    <a href="https://apps.apple.com/app/nestd/id6740091498" class="btn btn-primary" data-cta-placement="about_mobile_nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
   </div>
 
-  <!-- Page Header / Mission -->
-  <header class="page-header">
-    <div class="container">
-      <div class="section-label" data-i18n="about_label">Onze Missie</div>
-      <h1 class="page-header-title" data-i18n-html="about_title">
-        De woningcrisis oplossen met <em>AI</em> als wapen.
-      </h1>
-      <p class="page-header-sub" data-i18n="about_sub">
-        Nederland heeft een tekort van 420.000 woningen. 400.000 tot 600.000 mensen zoeken actief naar een huurwoning. Nestd is gebouwd om die zoektocht eerlijker, sneller en slimmer te maken — met AI die voor jou werkt.
-      </p>
-    </div>
-  </header>
+  <main>
+    <!-- Mission / hero -->
+    <header class="page-hero">
+      <div class="hero-aura" aria-hidden="true">
+        <div class="aura aura-a"></div>
+        <div class="aura aura-b"></div>
+      </div>
+      <div class="wrap">
+        <div class="section-label reveal" data-i18n="about_label">Onze Missie</div>
+        <h1 class="page-title reveal" data-i18n-html="about_title" style="--i:1">De woningcrisis oplossen met <em>AI</em> als wapen.</h1>
+        <p class="page-lead reveal" data-i18n="about_sub" style="--i:2">Nederland heeft een tekort van 420.000 woningen. 400.000 tot 600.000 mensen zoeken actief naar een huurwoning. Nestd is gebouwd om die zoektocht eerlijker, sneller en slimmer te maken — met AI die voor jou werkt.</p>
+      </div>
+    </header>
 
-  <!-- Background / Stats Section -->
-  <section class="page-section alt">
-    <div class="container">
-      <div class="feature-detail">
-        <!-- Stats visual -->
-        <div class="stats-visual fade-in-left">
-          <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
-            <div class="page-card-icon" style="margin-bottom:0;">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-            <div style="font-weight:600;font-size:0.95rem;" data-i18n="about_stats_heading">Woningcrisis in Cijfers</div>
+    <!-- Origin + stats -->
+    <section class="feature feature-alt">
+      <div class="wrap feature-split">
+        <div class="panel reveal-scale">
+          <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;">
+            <span class="ico" style="margin-bottom:0;">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </span>
+            <strong style="font-size:1rem;" data-i18n="about_stats_heading">Woningcrisis in Cijfers</strong>
           </div>
-          <div class="stats-visual-grid">
-            <div class="stats-visual-item">
-              <div class="num" data-i18n="about_stat1_num">420K</div>
-              <div class="label" data-i18n="about_stat1_label">Woningtekort NL</div>
-            </div>
-            <div class="stats-visual-item">
-              <div class="num" data-i18n="about_stat2_num">600K</div>
-              <div class="label" data-i18n="about_stat2_label">Actieve zoekers</div>
-            </div>
-            <div class="stats-visual-item">
-              <div class="num" data-i18n="about_stat3_num">18–35</div>
-              <div class="label" data-i18n="about_stat3_label">Doelgroep leeftijd</div>
-            </div>
-            <div class="stats-visual-item">
-              <div class="num" style="color:var(--primary);" data-i18n="about_stat4_num">24/7</div>
-              <div class="label" data-i18n="about_stat4_label">AI zoekt voor jou</div>
-            </div>
+          <div class="stat-grid">
+            <div class="stat"><div class="num" data-i18n="about_stat1_num">420K</div><div class="label" data-i18n="about_stat1_label">Woningtekort NL</div></div>
+            <div class="stat"><div class="num" data-i18n="about_stat2_num">600K</div><div class="label" data-i18n="about_stat2_label">Actieve zoekers</div></div>
+            <div class="stat"><div class="num" data-i18n="about_stat3_num">18–35</div><div class="label" data-i18n="about_stat3_label">Doelgroep leeftijd</div></div>
+            <div class="stat"><div class="num" data-i18n="about_stat4_num">24/7</div><div class="label" data-i18n="about_stat4_label">AI zoekt voor jou</div></div>
           </div>
         </div>
-
-        <!-- Text side -->
-        <div class="fade-in-right">
-          <h3 class="feature-detail-title" data-i18n="about_origin_title">Gebouwd uit frustratie</h3>
-          <p class="feature-detail-desc" data-i18n="about_origin_p1">
-            Nestd is ontstaan uit eigen ervaring met de Nederlandse woningmarkt. Eindeloos scrollen op woningplatformen, dezelfde formulieren invullen, te laat reageren omdat je de listing miste. We wisten dat het beter kon.
-          </p>
-          <p class="feature-detail-desc" data-i18n="about_origin_p2">
-            Daarnaast zagen we dat bestaande platforms extreem veel geld vragen voor basis functionaliteit. Wij geloven dat woningzoeken toegankelijk en betaalbaar moet zijn — en dat AI het zware werk kan doen.
-          </p>
-          <p class="feature-detail-desc" data-i18n="about_origin_p3">
-            Onze AI-first aanpak draait het zoekproces om: in plaats van jij die zoekt, zoekt Nestd voor jou. AI leert je voorkeuren en matcht woningen op stijl en sfeer — niet alleen prijs en kamers.
-          </p>
+        <div class="feature-copy reveal">
+          <h2 class="feature-title" data-i18n="about_origin_title">Gebouwd uit frustratie</h2>
+          <p class="feature-desc" data-i18n="about_origin_p1">Nestd is ontstaan uit eigen ervaring met de Nederlandse woningmarkt. Eindeloos scrollen op woningplatformen, dezelfde formulieren invullen, te laat reageren omdat je de listing miste. We wisten dat het beter kon.</p>
+          <p class="feature-desc" style="margin-top:1rem;" data-i18n="about_origin_p2">Daarnaast zagen we dat bestaande platforms extreem veel geld vragen voor basis functionaliteit. Wij geloven dat woningzoeken toegankelijk en betaalbaar moet zijn — en dat AI het zware werk kan doen.</p>
+          <p class="feature-desc" style="margin-top:1rem;" data-i18n="about_origin_p3">Onze AI-first aanpak draait het zoekproces om: in plaats van jij die zoekt, zoekt Nestd voor jou. AI leert je voorkeuren en matcht woningen op stijl en sfeer — niet alleen prijs en kamers.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- What Makes Us Different -->
-  <section class="page-section diff-section">
-    <div class="container">
-      <h2 class="section-title fade-in" data-i18n-html="about_diff_title">Wat <em>Nestd</em> anders maakt</h2>
-      <p class="section-sub fade-in" data-i18n="about_diff_sub">AI die begrijpt wat jij zoekt. Geen eindeloos scrollen, maar slimme matches, persoonlijk advies en toegang tot woningen die écht bij je passen.</p>
-      <div class="diff-grid">
-        <div class="diff-card fade-in">
-          <div class="diff-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"/>
-              <circle cx="12" cy="12" r="5"/>
-              <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-              <line x1="12" y1="2" x2="12" y2="5"/>
-              <line x1="12" y1="19" x2="12" y2="22"/>
-              <line x1="2" y1="12" x2="5" y2="12"/>
-              <line x1="19" y1="12" x2="22" y2="12"/>
-            </svg>
-          </div>
-          <h4 data-i18n="about_diff1_title">AI Matching</h4>
-          <p data-i18n="about_diff1_desc">Onze AI scant duizenden woningen en matcht alleen wat écht bij jouw situatie past.</p>
+    <!-- What makes us different -->
+    <section class="feature">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n-html="about_diff_title">Wat <em>Nestd</em> anders maakt</h2>
+          <p class="section-sub" data-i18n="about_diff_sub">AI die begrijpt wat jij zoekt. Geen eindeloos scrollen, maar slimme matches, persoonlijk advies en toegang tot woningen die écht bij je passen.</p>
         </div>
-        <div class="diff-card fade-in">
-          <div class="diff-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="9" cy="8" r="3"/>
-              <path d="M3 19c0-2.8 2.7-5 6-5s6 2.2 6 5"/>
-              <circle cx="17" cy="9" r="2.5"/>
-              <path d="M14 18c0-1.9 1.6-3.5 3.5-3.5s3.5 1.6 3.5 3.5"/>
-            </svg>
+        <div class="icon-grid">
+          <div class="icon-card reveal">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></span>
+            <h4 data-i18n="about_diff1_title">AI Matching</h4>
+            <p data-i18n="about_diff1_desc">Onze AI scant duizenden woningen en matcht alleen wat écht bij jouw situatie past.</p>
           </div>
-          <h4 data-i18n="about_diff2_title">Duo Zoeken</h4>
-          <p data-i18n="about_diff2_desc">Samen zoeken, samen beslissen. Deel je zoektocht en krijg meldingen bij een Duo Match.</p>
-        </div>
-        <div class="diff-card fade-in">
-          <div class="diff-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3L3 21z"/>
-              <path d="M8.4 10.7c.6 1.4 1.7 2.5 3 3.1l1.4-1.3c.3-.3.7-.3 1.1-.2l2.6.9c.4.1.7.5.7.9 0 2.5-2 4.5-4.5 4.5-3.6 0-6.5-2.9-6.5-6.5 0-2.5 2-4.5 4.5-4.5.4 0 .8.3.9.7l.9 2.6c.1.4 0 .8-.3 1.1L9.9 13"/>
-            </svg>
+          <div class="icon-card reveal" style="--i:1">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14 18c0-1.9 1.6-3.5 3.5-3.5s3.5 1.6 3.5 3.5"/></svg></span>
+            <h4 data-i18n="about_diff2_title">Duo Zoeken</h4>
+            <p data-i18n="about_diff2_desc">Samen zoeken, samen beslissen. Deel je zoektocht en krijg meldingen bij een Duo Match.</p>
           </div>
-          <h4 data-i18n="about_diff3_title">WhatsApp AI</h4>
-          <p data-i18n="about_diff3_desc">Stel vragen, krijg filters, plan bezichtigingen — allemaal via WhatsApp.</p>
-        </div>
-        <div class="diff-card fade-in">
-          <div class="diff-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>
-              <circle cx="9" cy="12" r="0.9" fill="currentColor"/>
-              <circle cx="12" cy="12" r="0.9" fill="currentColor"/>
-              <circle cx="15" cy="12" r="0.9" fill="currentColor"/>
-            </svg>
+          <div class="icon-card reveal" style="--i:2">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3L3 21z"/><path d="M8.4 10.7c.6 1.4 1.7 2.5 3 3.1l1.4-1.3c.3-.3.7-.3 1.1-.2l2.6.9c.4.1.7.5.7.9 0 2.5-2 4.5-4.5 4.5-3.6 0-6.5-2.9-6.5-6.5 0-2.5 2-4.5 4.5-4.5.4 0 .8.3.9.7l.9 2.6c.1.4 0 .8-.3 1.1L9.9 13"/></svg></span>
+            <h4 data-i18n="about_diff3_title">WhatsApp AI</h4>
+            <p data-i18n="about_diff3_desc">Stel vragen, krijg filters, plan bezichtigingen — allemaal via WhatsApp.</p>
           </div>
-          <h4 data-i18n="about_diff4_title">AI Chat</h4>
-          <p data-i18n="about_diff4_desc">Persoonlijk advies, uitleg over zoekcriteria en ondersteuning wanneer jij het nodig hebt.</p>
+          <div class="icon-card reveal" style="--i:3">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><circle cx="9" cy="12" r="0.9" fill="currentColor"/><circle cx="12" cy="12" r="0.9" fill="currentColor"/><circle cx="15" cy="12" r="0.9" fill="currentColor"/></svg></span>
+            <h4 data-i18n="about_diff4_title">AI Chat</h4>
+            <p data-i18n="about_diff4_desc">Persoonlijk advies, uitleg over zoekcriteria en ondersteuning wanneer jij het nodig hebt.</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="section-divider fade-in"></div>
-  </section>
+    </section>
 
-  <!-- Personas / For Who -->
-  <section class="page-section alt persona-section">
-    <div class="container">
-      <h2 class="section-title fade-in" data-i18n-html="about_persona_title">Voor wie is <em>Nestd?</em></h2>
-      <p class="section-sub fade-in" data-i18n="about_persona_sub">
-        Of je nu student bent, young professional of expat — Nestd past zich aan jouw situatie aan.
-      </p>
-      <div class="persona-grid">
-        <!-- Lisa — Young Professional -->
-        <div class="persona-card fade-in">
-          <div class="persona-content">
-            <div class="persona-name-row">
-              <svg class="persona-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
-              </svg>
+    <!-- Personas -->
+    <section class="feature feature-alt">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n-html="about_persona_title">Voor wie is <em>Nestd?</em></h2>
+          <p class="section-sub" data-i18n="about_persona_sub">Of je nu student bent, young professional of expat — Nestd past zich aan jouw situatie aan.</p>
+        </div>
+        <div class="persona-grid">
+          <div class="persona-card reveal">
+            <div class="persona-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
               <h4 data-i18n="about_persona1_name">Lisa, 24</h4>
             </div>
             <div class="persona-role" data-i18n="about_persona1_role">Young Professional</div>
             <p data-i18n="about_persona1_desc">Budget €900–€1.200, zoekt in de stad. Wil geen tijd verspillen aan eindeloos scrollen — laat AI het werk doen.</p>
           </div>
-        </div>
-
-        <!-- Marc — Expat -->
-        <div class="persona-card fade-in">
-          <div class="persona-content">
-            <div class="persona-name-row">
-              <svg class="persona-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="7" width="18" height="13" rx="2"/>
-                <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
-                <line x1="3" y1="13" x2="21" y2="13"/>
-              </svg>
+          <div class="persona-card reveal" style="--i:1">
+            <div class="persona-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><line x1="3" y1="13" x2="21" y2="13"/></svg>
               <h4 data-i18n="about_persona2_name">Marc, 31</h4>
             </div>
             <div class="persona-role" data-i18n="about_persona2_role">Expat</div>
             <p data-i18n="about_persona2_desc">Budget €1.800, net naar Nederland verhuisd. Snapt het systeem niet — de AI-agent begeleidt hem stap voor stap door het huurproces.</p>
           </div>
-        </div>
-
-        <!-- Sophie — Student -->
-        <div class="persona-card fade-in">
-          <div class="persona-content">
-            <div class="persona-name-row">
-              <svg class="persona-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 3 L22 8 L12 13 L2 8 Z"/>
-                <path d="M5 10v5c0 2 3.5 4 7 4s7-2 7-4v-5"/>
-              </svg>
+          <div class="persona-card reveal" style="--i:2">
+            <div class="persona-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L22 8 L12 13 L2 8 Z"/><path d="M5 10v5c0 2 3.5 4 7 4s7-2 7-4v-5"/></svg>
               <h4 data-i18n="about_persona3_name">Sophie, 20</h4>
             </div>
             <div class="persona-role" data-i18n="about_persona3_role">Student</div>
-            <p data-i18n="about_persona3_desc">Budget €400–€600, prijsgevoelig. Gebruikt de gratis versie: AI-matching en push notificaties. Geen abonnement nodig.</p>
+            <p data-i18n="about_persona3_desc">Budget €400–€600, prijsgevoelig. Probeert Nestd eerst een week gratis en beslist daarna rustig of het het waard is.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Section -->
-  <section class="page-section" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-
-        <!-- Contact Info -->
-        <div class="contact-info fade-in-left">
+    <!-- Contact -->
+    <section class="feature" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-info reveal">
           <h2 data-i18n="about_contact_title">Neem contact op</h2>
           <p data-i18n="about_contact_sub">Heb je een vraag, feedback of wil je samenwerken? We horen graag van je.</p>
-
           <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label" data-i18n="about_contact_email_label">Email</div>
-              <div class="contact-item-value" data-i18n="about_contact_email_value">hello@nestd.nl</div>
-            </div>
+            <span class="ico"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+            <div><div class="contact-item-label" data-i18n="about_contact_email_label">Email</div><div class="contact-item-value" data-i18n="about_contact_email_value">hello@nestd.nl</div></div>
           </div>
-
           <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label" data-i18n="about_contact_location_label">Locatie</div>
-              <div class="contact-item-value" data-i18n="about_contact_location_value">Amsterdam, Nederland</div>
-            </div>
+            <span class="ico"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+            <div><div class="contact-item-label" data-i18n="about_contact_location_label">Locatie</div><div class="contact-item-value" data-i18n="about_contact_location_value">Amsterdam, Nederland</div></div>
           </div>
-
           <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label" data-i18n="about_contact_socials_label">Socials</div>
-              <div class="contact-item-value" data-i18n="about_contact_socials_value">Instagram · LinkedIn · TikTok</div>
-            </div>
+            <span class="ico"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
+            <div><div class="contact-item-label" data-i18n="about_contact_socials_label">Socials</div><div class="contact-item-value" data-i18n="about_contact_socials_value">Instagram · LinkedIn · TikTok</div></div>
           </div>
         </div>
 
-        <!-- Contact Form -->
-        <div class="contact-form-wrap fade-in-right">
+        <div class="form-card reveal-scale">
           <form id="contact-form">
-            <div class="contact-field-group">
-              <label class="contact-label" for="name" data-i18n="about_contact_form_name">Naam</label>
-              <input class="contact-field" id="name" name="name" placeholder="Je naam" type="text" required data-i18n-placeholder="about_contact_form_name_ph">
+            <div class="field-group">
+              <label class="field-label" for="name" data-i18n="about_contact_form_name">Naam</label>
+              <input class="field" id="name" name="name" placeholder="Je naam" type="text" required data-i18n-placeholder="about_contact_form_name_ph">
             </div>
-            <div class="contact-field-group">
-              <label class="contact-label" for="email" data-i18n="about_contact_form_email">Email</label>
-              <input class="contact-field" id="email" name="email" placeholder="je@email.nl" type="email" required data-i18n-placeholder="about_contact_form_email_ph">
+            <div class="field-group">
+              <label class="field-label" for="email" data-i18n="about_contact_form_email">Email</label>
+              <input class="field" id="email" name="email" placeholder="je@email.nl" type="email" required data-i18n-placeholder="about_contact_form_email_ph">
             </div>
-            <div class="contact-field-group">
-              <label class="contact-label" for="message" data-i18n="about_contact_form_message">Bericht</label>
-              <textarea class="contact-field" id="message" name="message" placeholder="Vertel ons waar we je mee kunnen helpen..." rows="4" required data-i18n-placeholder="about_contact_form_message_ph"></textarea>
+            <div class="field-group">
+              <label class="field-label" for="message" data-i18n="about_contact_form_message">Bericht</label>
+              <textarea class="field" id="message" name="message" placeholder="Vertel ons waar we je mee kunnen helpen..." rows="4" required data-i18n-placeholder="about_contact_form_message_ph"></textarea>
             </div>
-            <button class="contact-submit" id="contact-submit" type="submit" data-i18n="about_contact_form_submit">Verstuur Bericht</button>
-            <p class="contact-msg" id="contact-msg"></p>
+            <button class="btn btn-primary form-submit" id="contact-submit" type="submit" data-i18n="about_contact_form_submit">Verstuur Bericht</button>
+            <p class="form-msg" id="contact-msg"></p>
           </form>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="page-footer">
-    <div class="page-footer-inner">
-      <div class="page-footer-grid">
-        <div class="page-footer-brand">
-          <a href="/" class="navbar-brand" style="display:inline-flex;margin-bottom:12px;">
-            <img src="logo.png" alt="Nestd">
-            <span>Nestd</span>
-          </a>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand"><img src="logo.png" alt="Nestd" width="24" height="24"><span>Nestd</span></a>
           <p data-i18n="footer_desc_about">Jouw AI woonassistent. Gebouwd om de Nederlandse woningcrisis aan te pakken voor jongeren van 18 tot 35.</p>
         </div>
         <div>
           <h5 data-i18n="footer_product">Product</h5>
           <ul>
             <li><a href="/pricing.html" data-i18n="footer_pricing">Prijzen</a></li>
+            <li><a href="/about.html" data-i18n="footer_about_nestd">Over Nestd</a></li>
           </ul>
         </div>
         <div>
-          <h5 data-i18n="footer_over">Over</h5>
+          <h5 data-i18n="footer_support">Support</h5>
           <ul>
-            <li><a href="/about.html" data-i18n="footer_about">Over ons</a></li>
             <li><a href="/about.html#contact" data-i18n="footer_contact">Contact</a></li>
+            <li><a href="/pricing.html#faq" data-i18n="footer_faq">FAQ</a></li>
           </ul>
         </div>
         <div>
@@ -368,12 +228,13 @@
           <ul>
             <li><a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a></li>
             <li><a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a></li>
+            <li><a href="#" data-i18n="footer_cookies">Cookiebeleid</a></li>
           </ul>
         </div>
       </div>
-      <div class="page-footer-bottom">
+      <div class="footer-bottom">
         <span>&copy; 2026 Nestd. Amsterdam.</span>
-        <div class="page-footer-bottom-links">
+        <div class="footer-bottom-links">
           <a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a>
           <a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a>
         </div>
@@ -383,7 +244,7 @@
 
   <script>
     // Contact form
-    const t = () => translations && translations[currentLang] || {};
+    const t = () => (typeof translations !== 'undefined' && translations[typeof currentLang !== 'undefined' ? currentLang : 'nl']) || {};
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('contact-submit');
@@ -395,7 +256,7 @@
       btn.disabled = true;
       btn.textContent = t().about_contact_form_loading || 'Even geduld...';
       msg.textContent = '';
-      msg.className = 'contact-msg';
+      msg.className = 'form-msg';
       try {
         const res = await fetch('https://uauoewczlexhbhvxcrjg.supabase.co/functions/v1/contact-form', {
           method: 'POST',
@@ -404,32 +265,35 @@
         });
         if (!res.ok) throw new Error();
         msg.textContent = t().about_contact_form_success || 'Bedankt! Je bericht is verstuurd.';
-        msg.className = 'contact-msg success';
+        msg.className = 'form-msg success';
         document.getElementById('contact-form').reset();
       } catch {
         msg.textContent = t().about_contact_form_error || 'Er ging iets mis. Probeer het later opnieuw.';
-        msg.className = 'contact-msg error';
+        msg.className = 'form-msg error';
       } finally {
         btn.disabled = false;
         btn.textContent = t().about_contact_form_submit || 'Verstuur Bericht';
       }
     });
 
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
-    });
+    // Hamburger / mobile sheet
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const sheet = document.getElementById('mobile-menu');
+      if (!hamburger || !sheet) return;
+      function setOpen(isOpen) {
+        hamburger.classList.toggle('open', isOpen);
+        sheet.classList.toggle('open', isOpen);
+        document.body.classList.toggle('sheet-open', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        sheet.setAttribute('aria-hidden', String(!isOpen));
+      }
+      hamburger.addEventListener('click', () => setOpen(!sheet.classList.contains('open')));
+      sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    })();
   </script>
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
