@@ -1,11 +1,11 @@
-:root { color-scheme: light; --ink: #222a27; --muted: #5b6460; --line: #dfe4e1; --red: #d92b47; --soft: #f5f7f5; }
+:root { color-scheme: light; --ink: #172538; --muted: #586477; --line: #dce2e9; --red: #d91d46; --soft: #f2f5f8; }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 28px; }
-body { margin: 0; background: #fff; color: var(--ink); font-family: "DM Sans", Arial, sans-serif; font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: "Archivo", Arial, sans-serif; font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, p { margin: 0; }
-h1 { max-width: 18ch; font-size: clamp(40px, 4.3vw, 60px); line-height: 1.1; letter-spacing: -.05em; font-weight: 600; }
-h2 { font-size: 29px; line-height: 1.25; letter-spacing: -.035em; font-weight: 500; }
-h3 { font-size: 17px; line-height: 1.5; font-weight: 600; }
+h1 { max-width: 18ch; font-size: clamp(40px, 4.3vw, 60px); line-height: 1.1; letter-spacing: -.05em; font-weight: 700; }
+h2 { font-size: 29px; line-height: 1.25; letter-spacing: -.035em; font-weight: 700; }
+h3 { font-size: 17px; line-height: 1.5; font-weight: 700; }
 a { color: inherit; text-underline-offset: 4px; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
@@ -16,7 +16,7 @@ button { font: inherit; }
 .skip-link:focus { transform: none; }
 .site-header { min-height: 98px; display: flex; align-items: center; gap: 28px; }
 .brand { display: inline-flex; align-items: center; gap: 5px; font-size: 28px; font-weight: 700; letter-spacing: -.05em; text-decoration: none; }
-.brand img { display: block; width: 44px; height: 44px; }
+.brand img { display: block; width: 60px; height: 60px; object-fit: contain; }
 .header-nav { display: flex; align-items: center; margin-left: auto; gap: 28px; font-size: 14px; }
 .header-nav a { padding-block: 10px; text-decoration: none; }
 .header-nav [aria-current] { text-decoration: underline; }
@@ -37,7 +37,7 @@ button { font: inherit; }
 .download-section { padding: 48px; margin-block: 26px 76px; background: var(--soft); }
 .download-section > p { color: var(--muted); margin-top: 16px; }
 .download-button { display: inline-flex; align-items: center; justify-content: center; min-height: 55px; max-width: 100%; padding: 14px 24px; border-radius: 6px; background: var(--red); color: #fff; font-size: 16px; font-weight: 600; line-height: 1.4; text-decoration: none; }
-.download-button:hover { background: #bd2039; }
+.download-button:hover { background: #b81539; }
 .download-section .download-button, .pricing-intro .download-button { margin-top: 28px; }
 .download-note, .download-section .download-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .pricing-intro h1 { max-width: 19ch; }
@@ -68,7 +68,7 @@ details p { padding: 0 26px 22px 0; font-size: 15px; }
   .container { width: calc(100% - 40px); }
   .site-header { min-height: 80px; gap: 10px 20px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 12px; }
   .brand { font-size: 26px; }
-  .brand img { width: 40px; height: 40px; }
+  .brand img { width: 52px; height: 52px; }
   .language-button { margin-left: auto; }
   .header-nav { order: 3; width: 100%; margin: 0; gap: 28px; font-size: 13px; }
   .page-intro { padding-block: 32px 48px; }
