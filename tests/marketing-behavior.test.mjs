@@ -246,13 +246,15 @@ test('product paths never initialize analytics even when called directly', () =>
 
 test('section events fire once and reject unknown section names', () => {
   const section = element('SECTION', { 'data-section': 'how_it_works' });
+  const pricing = element('SECTION', { 'data-section': 'pricing' });
   const bad = element('SECTION', { 'data-section': 'private@example.com' });
-  const env = environment({ elements: [section, bad] }); env.runAnalytics(); env.loadSdk();
+  const env = environment({ elements: [section, pricing, bad] }); env.runAnalytics(); env.loadSdk();
   for (const observer of env.observers) {
     const rows = observer.targets.map(target => ({ target, isIntersecting: true }));
     observer.callback(rows, observer); observer.callback(rows, observer);
   }
   assert.equal(env.sent.filter(row => row.event === 'how_it_works_section_viewed').length, 1);
+  assert.equal(env.sent.filter(row => row.event === 'pricing_section_viewed').length, 1);
   assert.doesNotMatch(JSON.stringify(env.sent), /private@/);
 });
 

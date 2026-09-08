@@ -10,7 +10,7 @@
   const PLACEMENTS = new Set(['hero', 'nav', 'mid_page', 'bottom', 'mobile_sticky']);
   const SECTIONS = {
     how_it_works: 'how_it_works_section_viewed', alerts: 'whatsapp_alerts_section_viewed',
-    filters: 'filters_section_viewed', faq: 'faq_section_viewed', download: 'download_section_viewed',
+    filters: 'filters_section_viewed', pricing: 'pricing_section_viewed', faq: 'faq_section_viewed', download: 'download_section_viewed',
   };
   const EVENTS = new Set(['page_view', 'cta_clicked', 'navigation_clicked', 'theme_toggled',
     'app_deeplink_viewed', 'app_deeplink_fallback_shown', 'app_deeplink_opened', ...Object.values(SECTIONS)]);
@@ -116,7 +116,7 @@
       if ((isPage || url.origin === window.location.origin) && !PUBLIC_PATHS.has(url.pathname)) return false;
       if (url.origin !== window.location.origin && url.pathname !== '/') return false;
       if (/@|%40|%2540/i.test(url.href)) return false;
-      if (url.hash && !/^#(?:how-it-works|how_it_works|hoe-het-werkt|alerts|filters|faq|vragen|download|main|contact)$/.test(url.hash)) return false;
+      if (url.hash && !/^#(?:how-it-works|how_it_works|hoe-het-werkt|alerts|filters|pricing|prijzen|faq|vragen|download|main|contact|cookies)$/.test(url.hash)) return false;
       for (const [key, value] of url.searchParams) {
         if (key === 'lang' && ['nl', 'en'].includes(value)) continue;
         if (!CAMPAIGN_FIELDS.includes(key) || !campaignValue(value)) return false;

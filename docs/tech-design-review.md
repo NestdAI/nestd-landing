@@ -1,3 +1,5 @@
+> Actuele revisie: zie [content-brand-review.md](content-brand-review.md) voor herstelde productiecontent en het palet uit de app. De navy-/raspberrybeschrijving hieronder documenteert de eerdere ontwerpversie.
+
 # Visuele review — Nestd techrichtingen
 
 De goedgekeurde conceptrichting is uitgewerkt in drie afzonderlijke branches vanaf `origin/main`:

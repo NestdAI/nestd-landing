@@ -1,14 +1,14 @@
 :root {
   color-scheme: light;
-  --navy: #172538;
-  --muted: #576273;
-  --raspberry: #e9254f;
-  --button: #d91d46;
-  --line: #dde2e7;
-  --pale: #f3f5f7;
+  --ink: #222222;
+  --muted: #717171;
+  --brand: #ff385c;
+  --button: #c80d36;
+  --line: #dddddd;
+  --pale: #f7f7f7;
   font-family: "Archivo", sans-serif;
   font-synthesis: none;
-  color: var(--navy);
+  color: var(--ink);
   background: #fff;
   text-rendering: optimizeLegibility;
 }
@@ -37,8 +37,11 @@ summary {
   touch-action: manipulation;
 }
 :focus-visible {
-  outline: 3px solid #286fd1;
+  outline: 3px solid #c80d36;
   outline-offset: 5px;
+}
+.requirements :focus-visible {
+  outline-color: #fff;
 }
 img {
   display: block;
@@ -144,7 +147,7 @@ h3 {
   min-width: 62px;
   min-height: 44px;
   background: transparent;
-  color: var(--navy);
+  color: var(--ink);
   font-weight: 550;
   font-size: 13px;
   padding-left: 26px;
@@ -188,7 +191,7 @@ h1 > span {
     transform 0.18s ease;
 }
 .download:hover {
-  background: #be1237;
+  background: #a80e32;
   transform: translateY(-1px);
 }
 .download svg {
@@ -202,7 +205,7 @@ h1 > span {
 .product-stage {
   position: relative;
   height: 464px;
-  background: var(--raspberry);
+  background: var(--brand);
   border-radius: 22px;
   isolation: isolate;
 }
@@ -222,7 +225,7 @@ h1 > span {
 .product-field {
   position: absolute;
   inset: 0 0 0 43%;
-  background: var(--raspberry);
+  background: var(--brand);
   border-radius: 0 22px 22px 0;
 }
 .phone {
@@ -296,7 +299,7 @@ h1 > span {
 }
 .listing-copy > p {
   font-size: 12px;
-  color: var(--navy);
+  color: var(--ink);
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 8px;
@@ -380,7 +383,7 @@ h1 > span {
 .alert-body p {
   font-size: 20px;
   font-weight: 650;
-  color: var(--navy);
+  color: var(--ink);
   letter-spacing: -0.5px;
   margin-top: 7px;
   line-height: 1.3;
@@ -422,7 +425,7 @@ h1 > span {
   right: 0;
   padding: 10px 25px 12px;
   border-radius: 0 0 22px 22px;
-  background: var(--raspberry);
+  background: var(--brand);
   color: #05090e;
   font-size: 11px;
   line-height: 1.5;
@@ -472,7 +475,7 @@ h1 > span {
   margin-top: 7px;
 }
 .requirements {
-  background: var(--navy);
+  background: var(--ink);
   padding: 89px 0 83px;
   color: #fff;
 }
@@ -486,7 +489,7 @@ h1 > span {
   max-width: 510px;
 }
 .requirements-copy > p {
-  color: #c4cbd4;
+  color: #dddddd;
   margin-top: 24px;
   max-width: 430px;
 }
@@ -499,7 +502,7 @@ h1 > span {
   font-weight: 550;
   text-decoration: underline;
   text-underline-offset: 7px;
-  text-decoration-color: #9aa9ba;
+  text-decoration-color: #bbbbbb;
 }
 .requirements-link:hover {
   text-decoration-color: #fff;
@@ -511,7 +514,7 @@ h1 > span {
   background: var(--pale);
   padding: 28px;
   border-radius: 20px;
-  color: var(--navy);
+  color: var(--ink);
   box-shadow: 0 25px 50px -25px rgb(0 0 0 / 25%);
 }
 .filter-screen-title {
@@ -538,7 +541,7 @@ h1 > span {
   min-height: 60px;
 }
 .filter-list > div + div {
-  border-top: 1px solid #e7ebef;
+  border-top: 1px solid #eeeeee;
 }
 .filter-list dt {
   display: flex;
@@ -552,7 +555,7 @@ h1 > span {
   height: 19px;
   flex: 0 0 auto;
   fill: none;
-  stroke: var(--navy);
+  stroke: var(--ink);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -587,7 +590,7 @@ h1 > span {
 }
 .filter-example > figcaption {
   margin-top: 15px;
-  color: #c4cbd4;
+  color: #dddddd;
   font-size: 11px;
   text-align: right;
 }
@@ -902,9 +905,6 @@ details p {
   .site-header nav {
     gap: 18px;
     font-size: 12px;
-  }
-  .site-header nav > a:first-child {
-    display: none;
   }
   #lang-toggle {
     padding-left: 12px;

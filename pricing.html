@@ -1,70 +1,423 @@
 <!doctype html>
 <html lang="nl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title data-nl="Kosten — Nestd" data-en="Pricing — Nestd">Kosten — Nestd</title>
-  <meta name="description" content="Download Nestd gratis voor iPhone. Bekijk de actuele functies en eventuele betaalde opties in de app." data-nl="Download Nestd gratis voor iPhone. Bekijk de actuele functies en eventuele betaalde opties in de app." data-en="Download Nestd for free on iPhone. See the app for current features and any paid options.">
-  <meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
-  <link rel="canonical" href="https://www.nestd.nl/pricing.html">
-  <link rel="alternate" hreflang="nl" href="https://www.nestd.nl/pricing.html?lang=nl">
-  <link rel="alternate" hreflang="en" href="https://www.nestd.nl/pricing.html?lang=en">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" sizes="32x32">
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="support.css">
-</head>
-<body>
-  <a class="skip-link" href="#main" data-nl="Naar de inhoud" data-en="Skip to content">Naar de inhoud</a>
-  <header class="site-header container">
-    <a class="brand" href="/" aria-label="Nestd startpagina" data-aria-nl="Nestd startpagina" data-aria-en="Nestd home"><img src="logo.png" alt="" width="44" height="44"><span>Nestd</span></a>
-    <nav class="header-nav" aria-label="Hoofdnavigatie" data-aria-nl="Hoofdnavigatie" data-aria-en="Main navigation">
-      <a href="/" data-nl="Home" data-en="Home">Home</a>
-      <a href="about.html" data-nl="Over Nestd" data-en="About Nestd">Over Nestd</a>
-      <a href="pricing.html" aria-current="page" data-nl="Kosten" data-en="Pricing">Kosten</a>
-    </nav>
-    <button id="lang-toggle" class="language-button" type="button" aria-label="Switch to English">EN</button>
-  </header>
-  <main id="main" class="support-page container">
-    <header class="page-intro pricing-intro">
-      <p class="page-label" data-nl="Kosten" data-en="Pricing">Kosten</p>
-      <h1 data-nl="Gratis te downloaden." data-en="Free to download.">Gratis te downloaden.</h1>
-      <p class="page-description" data-nl="Haal Nestd uit de App Store en stel je zoekfilters in. Zo kan Nestd het nieuwe huuraanbod voor je volgen." data-en="Get Nestd from the App Store and set your search filters. Nestd can then follow new rental listings for you.">Haal Nestd uit de App Store en stel je zoekfilters in. Zo kan Nestd het nieuwe huuraanbod voor je volgen.</p>
-      <a class="download-button" href="https://apps.apple.com/nl/app/nestd/id6761392857" target="_blank" rel="noopener" data-cta-placement="hero" data-nl="Download voor iPhone" data-en="Download for iPhone">Download voor iPhone</a>
-      <p class="download-note" data-nl="Beschikbaar voor iPhone." data-en="Available for iPhone.">Beschikbaar voor iPhone.</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title
+      data-nl="Prijzen — Gratis en Nestd Pro"
+      data-en="Pricing — Free and Nestd Pro"
+    >
+      Prijzen — Gratis en Nestd Pro
+    </title>
+    <meta
+      name="description"
+      content="Bekijk woningen en ontvang pushmeldingen met Nestd Gratis. Nestd Pro voegt WhatsApp-meldingen toe voor €19,95 per maand."
+      data-nl="Bekijk woningen en ontvang pushmeldingen met Nestd Gratis. Nestd Pro voegt WhatsApp-meldingen toe voor €19,95 per maand."
+      data-en="View rentals and receive push alerts with Nestd Free. Nestd Pro adds WhatsApp alerts for €19.95 per month."
+    />
+    <meta
+      name="posthog-key"
+      content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="https://www.nestd.nl/pricing.html" />
+    <link
+      rel="alternate"
+      hreflang="nl"
+      href="https://www.nestd.nl/pricing.html?lang=nl"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.nestd.nl/pricing.html?lang=en"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="favicon.ico" sizes="32x32" />
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="stylesheet" href="support.css" />
+  </head>
+  <body>
+    <a
+      class="skip-link"
+      href="#main"
+      data-nl="Naar de inhoud"
+      data-en="Skip to content"
+      >Naar de inhoud</a
+    >
+    <header class="site-header container">
+      <a
+        class="brand"
+        href="/"
+        aria-label="Nestd startpagina"
+        data-aria-nl="Nestd startpagina"
+        data-aria-en="Nestd home"
+        ><img src="logo.png" alt="" width="64" height="64" /><span
+          >Nestd</span
+        ></a
+      >
+      <nav
+        class="header-nav"
+        aria-label="Hoofdnavigatie"
+        data-aria-nl="Hoofdnavigatie"
+        data-aria-en="Main navigation"
+      >
+        <a
+          href="pricing.html"
+          aria-current="page"
+          data-nl="Prijzen"
+          data-en="Pricing"
+          >Prijzen</a
+        ><a href="about.html" data-nl="Over Nestd" data-en="About Nestd"
+          >Over Nestd</a
+        ><a href="about.html#contact" data-nl="Contact" data-en="Contact"
+          >Contact</a
+        >
+      </nav>
+      <button
+        id="lang-toggle"
+        class="language-button"
+        type="button"
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
     </header>
-    <section class="content-row">
-      <h2 data-nl="Functies en betaalde opties." data-en="Features and paid options.">Functies en betaalde opties.</h2>
-      <div><p data-nl="In de app vind je de actuele informatie over beschikbare functies en eventuele betaalde opties. Bekijk daar wat een optie inhoudt en wat deze kost voordat je kiest." data-en="Check the app for up-to-date information about available features and any paid options. You can review what an option includes and what it costs before you choose.">In de app vind je de actuele informatie over beschikbare functies en eventuele betaalde opties. Bekijk daar wat een optie inhoudt en wat deze kost voordat je kiest.</p>
-      <p data-nl="Gratis downloaden betekent dat je niet betaalt om de app te installeren. Voor bepaalde opties kunnen kosten gelden." data-en="Free to download means you do not pay to install the app. Some options may have a cost.">Gratis downloaden betekent dat je niet betaalt om de app te installeren. Voor bepaalde opties kunnen kosten gelden.</p></div>
-    </section>
-    <section class="content-row" data-section="faq">
-      <h2 data-nl="Praktische vragen." data-en="Practical questions.">Praktische vragen.</h2>
-      <div class="faq-list">
-        <details><summary data-nl="Waar download ik Nestd?" data-en="Where can I download Nestd?">Waar download ik Nestd?</summary><p data-nl="Nestd is beschikbaar voor iPhone in de App Store. De downloadknop brengt je rechtstreeks naar de app." data-en="Nestd is available for iPhone on the App Store. The download button takes you directly to the app.">Nestd is beschikbaar voor iPhone in de App Store. De downloadknop brengt je rechtstreeks naar de app.</p></details>
-        <details><summary data-nl="Waar zie ik de actuele kosten?" data-en="Where can I see current pricing?">Waar zie ik de actuele kosten?</summary><p data-nl="Open Nestd voor de actuele informatie over functies, prijzen en eventuele abonnementsvoorwaarden." data-en="Open Nestd for current information about features, prices and any subscription terms.">Open Nestd voor de actuele informatie over functies, prijzen en eventuele abonnementsvoorwaarden.</p></details>
-        <details><summary data-nl="Ik heb een vraag over een betaling." data-en="I have a question about a payment.">Ik heb een vraag over een betaling.</summary><p data-nl="Mail ons op hello@nestd.nl met je vraag." data-en="Email us at hello@nestd.nl with your question.">Mail ons op hello@nestd.nl met je vraag.</p></details>
+    <main id="main" class="support-page container">
+      <header class="page-intro pricing-intro">
+        <h1
+          data-nl="Begin gratis. Kies wat bij je past."
+          data-en="Start free. Choose what works for you."
+        >
+          Begin gratis. Kies wat bij je past.
+        </h1>
+        <p
+          class="page-description"
+          data-nl="Je woningzoektocht begint met Gratis. Wil je woningmeldingen ook via WhatsApp? Kies dan Nestd Pro."
+          data-en="Start your home search with Free. Want rental alerts on WhatsApp too? Choose Nestd Pro."
+        >
+          Je woningzoektocht begint met Gratis. Wil je woningmeldingen ook via
+          WhatsApp? Kies dan Nestd Pro.
+        </p>
+        <a
+          class="download-button"
+          href="https://apps.apple.com/nl/app/nestd/id6761392857"
+          target="_blank"
+          rel="noopener"
+          data-cta-placement="hero"
+          ><svg
+            width="22"
+            height="25"
+            viewBox="0 0 24 28"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M17.1 4.5c1.1-1.3 1.8-3 1.6-4.5-1.6.1-3.4 1.1-4.5 2.4-1 1.1-1.8 2.9-1.5 4.5 1.7.1 3.3-.9 4.4-2.4ZM21 14.9c0-3.6 3-5.3 3-5.4-1.7-2.5-4.3-2.8-5.2-2.8-2.2-.3-4.3 1.3-5.4 1.3-1.1 0-2.8-1.3-4.6-1.3-2.4 0-4.7 1.4-5.9 3.6-2.5 4.4-.6 10.9 1.8 14.4 1.2 1.7 2.5 3.5 4.3 3.3 1.8-.1 2.4-1.1 4.6-1.1 2.1 0 2.7 1.1 4.6 1 1.9 0 3.1-1.7 4.2-3.4 1.4-2 1.9-4 1.9-4.1-.1 0-3.3-1.3-3.3-5.5Z"
+              transform="translate(-1 0) scale(.9)"
+            /></svg
+          ><span data-nl="Download voor iPhone" data-en="Download for iPhone"
+            >Download voor iPhone</span
+          ></a
+        >
+        <p
+          class="download-note"
+          data-nl="Gratis in de App Store. Pro kies je in de app."
+          data-en="Free on the App Store. Choose Pro in the app."
+        >
+          Gratis in de App Store. Pro kies je in de app.
+        </p>
+      </header>
+      <section
+        class="plans"
+        aria-label="Vergelijk Gratis en Pro"
+        data-aria-nl="Vergelijk Gratis en Pro"
+        data-aria-en="Compare Free and Pro"
+        data-section="pricing"
+      >
+        <article class="plan">
+          <h2 data-nl="Gratis" data-en="Free">Gratis</h2>
+          <p class="plan-price">
+            <span>€ 0</span
+            ><span class="price-period" data-nl="/ maand" data-en="/ month"
+              >/ maand</span
+            >
+          </p>
+          <p
+            class="plan-description"
+            data-nl="De basis voor je woningzoektocht."
+            data-en="The essentials for your home search."
+          >
+            De basis voor je woningzoektocht.
+          </p>
+          <ul class="plan-features">
+            <li>
+              <span
+                data-nl="Woningen bekijken en opslaan"
+                data-en="View and save rental listings"
+                >Woningen bekijken en opslaan</span
+              >
+            </li>
+            <li>
+              <span
+                data-nl="Zoekfilters voor stad, budget, kamers en oppervlakte"
+                data-en="Search filters for city, budget, rooms and floor area"
+                >Zoekfilters voor stad, budget, kamers en oppervlakte</span
+              >
+            </li>
+            <li>
+              <span
+                data-nl="Pushmeldingen bij nieuwe woningen binnen je filters"
+                data-en="Push alerts for new homes within your filters"
+                >Pushmeldingen bij nieuwe woningen binnen je filters</span
+              >
+            </li>
+          </ul>
+        </article>
+        <article class="plan plan-pro">
+          <h2>Nestd Pro</h2>
+          <p class="plan-price">
+            <span data-nl="€ 19,95" data-en="€ 19.95">€ 19,95</span
+            ><span class="price-period" data-nl="/ maand" data-en="/ month"
+              >/ maand</span
+            >
+          </p>
+          <p
+            class="plan-description"
+            data-nl="Je woningmeldingen ook op WhatsApp."
+            data-en="Your rental alerts on WhatsApp too."
+          >
+            Je woningmeldingen ook op WhatsApp.
+          </p>
+          <ul class="plan-features">
+            <li>
+              <span data-nl="Alles uit Gratis" data-en="Everything in Free"
+                >Alles uit Gratis</span
+              >
+            </li>
+            <li>
+              <span
+                data-nl="WhatsApp-meldingen bij nieuwe woningen binnen je filters"
+                data-en="WhatsApp alerts for new homes within your filters"
+                >WhatsApp-meldingen bij nieuwe woningen binnen je filters</span
+              >
+            </li>
+          </ul>
+          <p
+            class="plan-note"
+            data-nl="Je sluit Pro af in de app. Daar bekijk je de prijs en voorwaarden voordat je bevestigt."
+            data-en="Subscribe to Pro in the app. Review the price and terms there before you confirm."
+          >
+            Je sluit Pro af in de app. Daar bekijk je de prijs en voorwaarden
+            voordat je bevestigt.
+          </p>
+        </article>
+      </section>
+      <section class="content-row pricing-faq" id="faq" data-section="faq">
+        <h2
+          data-nl="Helder voordat je begint."
+          data-en="Clear before you start."
+        >
+          Helder voordat je begint.
+        </h2>
+        <div class="faq-list">
+          <details>
+            <summary
+              data-nl="Wat kost Nestd?"
+              data-en="How much does Nestd cost?"
+            >
+              Wat kost Nestd?
+            </summary>
+            <p
+              data-nl="Nestd Gratis kost €0 per maand. Nestd Pro kost €19,95 per maand en voegt WhatsApp-meldingen toe aan de functies van Gratis."
+              data-en="Nestd Free costs €0 per month. Nestd Pro costs €19.95 per month and adds WhatsApp alerts to the features in Free."
+            >
+              Nestd Gratis kost €0 per maand. Nestd Pro kost €19,95 per maand en
+              voegt WhatsApp-meldingen toe aan de functies van Gratis.
+            </p>
+          </details>
+          <details>
+            <summary
+              data-nl="Welke meldingen krijg ik met Gratis?"
+              data-en="Which alerts do I get with Free?"
+            >
+              Welke meldingen krijg ik met Gratis?
+            </summary>
+            <p
+              data-nl="Met Gratis krijg je pushmeldingen wanneer een nieuwe woning aan je zoekfilters voldoet. Je kunt woningen bekijken en opslaan en je zoekfilters aanpassen."
+              data-en="With Free, you receive push notifications when a new home meets your search filters. You can view and save listings and change your filters."
+            >
+              Met Gratis krijg je pushmeldingen wanneer een nieuwe woning aan je
+              zoekfilters voldoet. Je kunt woningen bekijken en opslaan en je
+              zoekfilters aanpassen.
+            </p>
+          </details>
+          <details>
+            <summary
+              data-nl="Hoe werken WhatsApp-meldingen?"
+              data-en="How do WhatsApp alerts work?"
+            >
+              Hoe werken WhatsApp-meldingen?
+            </summary>
+            <p
+              data-nl="Met Nestd Pro ontvang je meldingen van nieuwe woningen binnen je zoekfilters ook via WhatsApp. Je bekijkt de woning en reageert zelf bij de aanbieder."
+              data-en="With Nestd Pro, you also receive alerts for new homes within your search filters on WhatsApp. You view the listing and respond to the advertiser yourself."
+            >
+              Met Nestd Pro ontvang je meldingen van nieuwe woningen binnen je
+              zoekfilters ook via WhatsApp. Je bekijkt de woning en reageert
+              zelf bij de aanbieder.
+            </p>
+          </details>
+          <details>
+            <summary
+              data-nl="Hoe betaal en beheer ik mijn abonnement?"
+              data-en="How do I pay for and manage my subscription?"
+            >
+              Hoe betaal en beheer ik mijn abonnement?
+            </summary>
+            <p
+              data-nl="Je sluit Nestd Pro af in de app. Betaling en abonnementbeheer lopen via de App Store. Bekijk de prijs en abonnementsvoorwaarden voordat je bevestigt."
+              data-en="Subscribe to Nestd Pro in the app. Payment and subscription management go through the App Store. Review the price and subscription terms before you confirm."
+            >
+              Je sluit Nestd Pro af in de app. Betaling en abonnementbeheer
+              lopen via de App Store. Bekijk de prijs en abonnementsvoorwaarden
+              voordat je bevestigt.
+            </p>
+          </details>
+          <details>
+            <summary
+              data-nl="Kan ik Nestd gebruiken zonder Pro?"
+              data-en="Can I use Nestd without Pro?"
+            >
+              Kan ik Nestd gebruiken zonder Pro?
+            </summary>
+            <p
+              data-nl="Ja. Met Gratis kun je woningen bekijken en opslaan, je zoekfilters instellen en pushmeldingen ontvangen. Je kiest zelf of je WhatsApp-meldingen via Pro wilt."
+              data-en="Yes. Free lets you view and save listings, set your filters and receive push alerts. You decide whether you want WhatsApp alerts with Pro."
+            >
+              Ja. Met Gratis kun je woningen bekijken en opslaan, je zoekfilters
+              instellen en pushmeldingen ontvangen. Je kiest zelf of je
+              WhatsApp-meldingen via Pro wilt.
+            </p>
+          </details>
+          <details>
+            <summary
+              data-nl="Hoe verwijder ik mijn account?"
+              data-en="How do I delete my account?"
+            >
+              Hoe verwijder ik mijn account?
+            </summary>
+            <p
+              data-nl="Je verwijdert je account via Instellingen in de Nestd-app. Heb je hulp nodig? Mail ons op hello@nestd.nl."
+              data-en="Delete your account through Settings in the Nestd app. Need help? Email us at hello@nestd.nl."
+            >
+              Je verwijdert je account via Instellingen in de Nestd-app. Heb je
+              hulp nodig? Mail ons op hello@nestd.nl.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="download-section" data-section="download">
+        <div>
+          <h2
+            data-nl="Klaar om je zoekfilters in te stellen?"
+            data-en="Ready to set your search filters?"
+          >
+            Klaar om je zoekfilters in te stellen?
+          </h2>
+          <p
+            data-nl="Download Nestd. Begin met Gratis."
+            data-en="Download Nestd. Start with Free."
+          >
+            Download Nestd. Begin met Gratis.
+          </p>
+        </div>
+        <div>
+          <a
+            class="download-button"
+            href="https://apps.apple.com/nl/app/nestd/id6761392857"
+            target="_blank"
+            rel="noopener"
+            data-cta-placement="bottom"
+            ><svg
+              width="22"
+              height="25"
+              viewBox="0 0 24 28"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M17.1 4.5c1.1-1.3 1.8-3 1.6-4.5-1.6.1-3.4 1.1-4.5 2.4-1 1.1-1.8 2.9-1.5 4.5 1.7.1 3.3-.9 4.4-2.4ZM21 14.9c0-3.6 3-5.3 3-5.4-1.7-2.5-4.3-2.8-5.2-2.8-2.2-.3-4.3 1.3-5.4 1.3-1.1 0-2.8-1.3-4.6-1.3-2.4 0-4.7 1.4-5.9 3.6-2.5 4.4-.6 10.9 1.8 14.4 1.2 1.7 2.5 3.5 4.3 3.3 1.8-.1 2.4-1.1 4.6-1.1 2.1 0 2.7 1.1 4.6 1 1.9 0 3.1-1.7 4.2-3.4 1.4-2 1.9-4 1.9-4.1-.1 0-3.3-1.3-3.3-5.5Z"
+                transform="translate(-1 0) scale(.9)"
+              /></svg
+            ><span data-nl="Download voor iPhone" data-en="Download for iPhone"
+              >Download voor iPhone</span
+            ></a
+          >
+          <p
+            class="download-note"
+            data-nl="Gratis in de App Store"
+            data-en="Free on the App Store"
+          >
+            Gratis in de App Store
+          </p>
+        </div>
+      </section>
+      <section class="pricing-contact">
+        <p
+          data-nl="Nog een vraag over Gratis of Pro?"
+          data-en="Another question about Free or Pro?"
+        >
+          Nog een vraag over Gratis of Pro?
+        </p>
+        <a class="contact-link" href="mailto:hello@nestd.nl">hello@nestd.nl</a>
+      </section>
+    </main>
+    <footer class="site-footer container">
+      <div class="footer-identity">
+        <p>© 2026 Nestd</p>
+        <p
+          class="footer-location"
+          data-nl="Amsterdam, Nederland"
+          data-en="Amsterdam, the Netherlands"
+        >
+          Amsterdam, Nederland
+        </p>
       </div>
-    </section>
-    <section class="contact-section">
-      <h2 data-nl="Hulp nodig?" data-en="Need a hand?">Hulp nodig?</h2>
-      <p data-nl="Je kunt ons bereiken via e-mail." data-en="You can reach us by email.">Je kunt ons bereiken via e-mail.</p>
-      <a class="contact-link" href="mailto:hello@nestd.nl">hello@nestd.nl</a>
-    </section>
-  </main>
-  <footer class="site-footer container">
-    <p>© 2026 Nestd</p>
-    <nav aria-label="Voettekst" data-aria-nl="Voettekst" data-aria-en="Footer">
-      <a href="about.html" data-nl="Over Nestd" data-en="About Nestd">Over Nestd</a>
-      <a href="pricing.html" data-nl="Kosten" data-en="Pricing">Kosten</a>
-      <a href="privacy.html" data-nl="Privacy" data-en="Privacy">Privacy</a>
-      <a href="mailto:hello@nestd.nl">hello@nestd.nl</a>
-    </nav>
-  </footer>
-  <script src="landing.js"></script>
-  <script src="script.js"></script>
-</body>
+      <nav
+        aria-label="Voettekst"
+        data-aria-nl="Voettekst"
+        data-aria-en="Footer"
+      >
+        <a href="pricing.html" data-nl="Prijzen" data-en="Pricing">Prijzen</a
+        ><a href="about.html" data-nl="Over Nestd" data-en="About Nestd"
+          >Over Nestd</a
+        ><a href="privacy.html" data-nl="Privacy" data-en="Privacy">Privacy</a
+        ><a
+          href="privacy.html#cookies"
+          data-nl="Cookiebeleid"
+          data-en="Cookie policy"
+          >Cookiebeleid</a
+        ><a href="about.html#contact" data-nl="Contact" data-en="Contact"
+          >Contact</a
+        >
+        <a
+          href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+          target="_blank"
+          rel="noopener"
+          data-nl="Appvoorwaarden"
+          data-en="App terms"
+          >Appvoorwaarden</a
+        >
+      </nav>
+    </footer>
+    <script src="landing.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

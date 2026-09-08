@@ -1,39 +1,138 @@
-import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = fileURLToPath(new URL('..', import.meta.url));
-const store = 'https://apps.apple.com/nl/app/nestd/id6761392857';
-for (const page of ['index.html', 'about.html', 'pricing.html']) {
-  const html = fs.readFileSync(path.join(root, page), 'utf8');
-  const copy = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
-  assert.doesNotMatch(copy, /\bAI\b|chatbot|swip(?:e|en|ing)?|duo\s+(?:zoeken|search)|auto[- ]?(?:react|apply)|wachtlijst|waitlist|pre-launch|eerste 100|first 100|meest gekozen|most popular|most chosen|\d+%\s*match/i, `${page}: removed product claims`);
-  assert.doesNotMatch(copy, /snelste|fastest|binnen \d+ seconden|within \d+ seconds|\d+\+\s*(?:websites|huurwebsites)/i, `${page}: unsupported proof`);
-  assert.doesNotMatch(html, /user-scalable=no|maximum-scale=1|facebook\.com\/tr|<form\b|<input\b/i, `${page}: privacy/accessibility regression`);
+const root = fileURLToPath(new URL("..", import.meta.url));
+const store = "https://apps.apple.com/nl/app/nestd/id6761392857";
+for (const page of ["index.html", "about.html", "pricing.html"]) {
+  const html = fs.readFileSync(path.join(root, page), "utf8");
+  const copy = html.replace(
+    /<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi,
+    "",
+  );
+  assert.doesNotMatch(
+    copy,
+    /\bAI\b|chatbot|swip(?:e|en|ing)?|duo\s+(?:zoeken|search)|auto[- ]?(?:react|apply)|wachtlijst|waitlist|pre-launch|eerste 100|first 100|meest gekozen|most popular|most chosen|\d+%\s*match/i,
+    `${page}: removed product claims`,
+  );
+  assert.doesNotMatch(
+    copy,
+    /snelste|fastest|binnen \d+ seconden|within \d+ seconds|\d+\+\s*(?:websites|huurwebsites)/i,
+    `${page}: unsupported proof`,
+  );
+  assert.doesNotMatch(
+    html,
+    /user-scalable=no|maximum-scale=1|facebook\.com\/tr/i,
+    `${page}: privacy/accessibility regression`,
+  );
+  if (page === "about.html") {
+    const forms = [...html.matchAll(/<form\b[^>]*>/g)];
+    assert.equal(forms.length, 1, "Only the existing contact form is allowed");
+    assert.match(forms[0][0], /id="contact-form"/);
+    assert.match(forms[0][0], /method="post"/);
+    assert.match(
+      forms[0][0],
+      /\bhidden\b/,
+      "No native submission without the contact script",
+    );
+    assert.match(
+      html,
+      /src="contact.js"/,
+      "Contact form enhancement is loaded",
+    );
+    assert.match(
+      html,
+      /mailto:hello@nestd.nl/,
+      "Email fallback remains available",
+    );
+    const fields = [
+      ...html.matchAll(/<(?:input|textarea)\b[^>]*\bname="([^"]+)"[^>]*>/g),
+    ];
+    assert.deepEqual(fields.map(([, name]) => name).sort(), [
+      "email",
+      "message",
+      "name",
+    ]);
+    for (const [field] of fields) {
+      assert.match(field, /\brequired\b/);
+      assert.match(field, /\bmaxlength="\d+"/);
+    }
+  } else {
+    assert.doesNotMatch(
+      html,
+      /<form\b|<input\b|<textarea\b/i,
+      `${page}: no waitlist or search preference collection`,
+    );
+  }
   assert.match(html, /id="lang-toggle"/, `${page}: language control`);
-  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(ids.length, new Set(ids).size, `${page}: duplicate IDs`);
   const ctas = [...html.matchAll(/<a\b[^>]*data-cta-placement="[^"]+"[^>]*>/g)];
   assert.ok(ctas.length, `${page}: download CTA`);
   for (const [tag] of ctas) {
-    assert.ok(tag.includes(`href="${store}"`), `${page}: verified native App Store link`);
+    assert.ok(
+      tag.includes(`href="${store}"`),
+      `${page}: verified native App Store link`,
+    );
     assert.match(tag, /rel="[^"]*noopener/, `${page}: safe new tab`);
   }
   for (const [tag] of html.matchAll(/<[^!][^>]*\bdata-nl="[^"]*"[^>]*>/g)) {
-    assert.match(tag, /data-en="[^"]+"/, `${page}: missing English translation`);
+    assert.match(
+      tag,
+      /data-en="[^"]+"/,
+      `${page}: missing English translation`,
+    );
   }
   for (const [, href] of html.matchAll(/href="#([^"]*)"/g)) {
-    assert.ok(href && ids.includes(href), `${page}: broken local anchor #${href}`);
+    assert.ok(
+      href && ids.includes(href),
+      `${page}: broken local anchor #${href}`,
+    );
   }
   for (const [, resource] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
-    if (/^(https?:|mailto:|tel:|data:|#)/.test(resource) || resource === '/') continue;
-    const local = path.resolve(root, resource.replace(/^\//, '').split(/[?#]/)[0]);
+    if (/^(https?:|mailto:|tel:|data:|#)/.test(resource) || resource === "/")
+      continue;
+    const local = path.resolve(
+      root,
+      resource.replace(/^\//, "").split(/[?#]/)[0],
+    );
     assert.ok(fs.existsSync(local), `${page}: missing resource ${resource}`);
+    if (resource.includes("#") && local.endsWith(".html")) {
+      const anchor = resource.split("#")[1];
+      assert.ok(
+        fs.readFileSync(local, "utf8").includes(`id="${anchor}"`),
+        `${page}: missing destination anchor ${resource}`,
+      );
+    }
+  }
+  assert.match(
+    html,
+    /href="\/?pricing\.html"/,
+    `${page}: pricing remains discoverable`,
+  );
+  assert.match(
+    html,
+    /href="\/?about\.html"/,
+    `${page}: about remains discoverable`,
+  );
+  if (page === "index.html" || page === "pricing.html") {
+    assert.match(copy, /€\s?0/, `${page}: explicit free price`);
+    assert.match(copy, /€\s?19[,.]\d{2}/, `${page}: explicit Pro price`);
+    assert.match(copy, /WhatsApp/, `${page}: concrete Pro channel`);
+    assert.match(copy, /[Pp]ush/, `${page}: concrete free channel`);
   }
 }
-for (const page of ['app/index.html', 'listing/index.html', 'verified/index.html']) {
-  const html = fs.readFileSync(path.join(root, page), 'utf8');
-  assert.doesNotMatch(html, /id6740091498|AI-powered|chat with AI/i, `${page}: stale download fallback`);
+for (const page of [
+  "app/index.html",
+  "listing/index.html",
+  "verified/index.html",
+]) {
+  const html = fs.readFileSync(path.join(root, page), "utf8");
+  assert.doesNotMatch(
+    html,
+    /id6740091498|AI-powered|chat with AI/i,
+    `${page}: stale download fallback`,
+  );
 }
-console.log('Static alerts landing contract passed');
+console.log("Static alerts landing contract passed");

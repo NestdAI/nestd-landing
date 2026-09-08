@@ -47,6 +47,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/landing.css" />
+    <link rel="stylesheet" href="/content.css" />
   </head>
   <body>
     <a
@@ -63,22 +64,54 @@
         aria-label="Nestd startpagina"
         data-aria-nl="Nestd startpagina"
         data-aria-en="Nestd home"
-        ><img src="/logo.png" width="64" height="64" alt="" /><span
+        ><img src="/logo.png" alt="" width="64" height="64" /><span
           >Nestd</span
         ></a
       >
       <nav
+        class="site-nav-primary"
         aria-label="Hoofdnavigatie"
         data-aria-nl="Hoofdnavigatie"
         data-aria-en="Main navigation"
       >
         <a href="#hoe-het-werkt" data-nl="Zo werkt het" data-en="How it works"
           >Zo werkt het</a
-        >
-        <a href="#vragen" data-nl="Vragen" data-en="Questions">Vragen</a>
-        <button id="lang-toggle" type="button" aria-label="Switch to English">
-          EN
-        </button>
+        ><a href="/pricing.html" data-nl="Prijzen" data-en="Pricing">Prijzen</a
+        ><a href="/about.html" data-nl="Over Nestd" data-en="About Nestd"
+          >Over Nestd</a
+        ><a href="#vragen" data-nl="Vragen" data-en="Questions">Vragen</a>
+      </nav>
+      <button
+        id="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-nl="Menu"
+        data-en="Menu"
+      >
+        Menu</button
+      ><button
+        id="lang-toggle"
+        class="language-button"
+        type="button"
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
+      <nav
+        class="site-nav-mobile"
+        id="mobile-menu"
+        hidden
+        aria-label="Mobiele navigatie"
+        data-aria-nl="Mobiele navigatie"
+        data-aria-en="Mobile navigation"
+      >
+        <a href="#hoe-het-werkt" data-nl="Zo werkt het" data-en="How it works"
+          >Zo werkt het</a
+        ><a href="/pricing.html" data-nl="Prijzen" data-en="Pricing">Prijzen</a
+        ><a href="/about.html" data-nl="Over Nestd" data-en="About Nestd"
+          >Over Nestd</a
+        ><a href="#vragen" data-nl="Vragen" data-en="Questions">Vragen</a>
       </nav>
     </header>
     <main id="main">
@@ -451,6 +484,176 @@
           </figure>
         </div>
       </section>
+
+      <section
+        class="pricing-overview content-width"
+        data-section="pricing"
+        id="prijzen"
+        aria-labelledby="pricing-title"
+      >
+        <div class="content-heading">
+          <h2
+            id="pricing-title"
+            data-nl="Gratis beginnen. WhatsApp met Pro."
+            data-en="Start free. WhatsApp with Pro."
+          >
+            Gratis beginnen. WhatsApp met Pro.
+          </h2>
+          <p
+            data-nl="Volg nieuwe huurwoningen met de gratis versie. Kies Pro als je meldingen ook via WhatsApp wilt ontvangen."
+            data-en="Follow new rental listings with the free plan. Choose Pro to also receive alerts on WhatsApp."
+          >
+            Volg nieuwe huurwoningen met de gratis versie. Kies Pro als je
+            meldingen ook via WhatsApp wilt ontvangen.
+          </p>
+        </div>
+        <div class="plan-columns">
+          <article class="plan-summary" aria-labelledby="free-title">
+            <h3 id="free-title" data-nl="Gratis" data-en="Free">Gratis</h3>
+            <p class="plan-amount">
+              <span>€0</span
+              ><span class="plan-period" data-nl="per maand" data-en="per month"
+                >per maand</span
+              >
+            </p>
+            <p
+              class="plan-description"
+              data-nl="De basis voor jouw zoektocht."
+              data-en="The essentials for your search."
+            >
+              De basis voor jouw zoektocht.
+            </p>
+            <ul>
+              <li
+                data-nl="Zoekfilters instellen"
+                data-en="Set your search filters"
+              >
+                Zoekfilters instellen
+              </li>
+              <li
+                data-nl="Woningen bekijken en opslaan"
+                data-en="Browse and save homes"
+              >
+                Woningen bekijken en opslaan
+              </li>
+              <li
+                data-nl="Pushmeldingen bij nieuw aanbod"
+                data-en="Push alerts for new listings"
+              >
+                Pushmeldingen bij nieuw aanbod
+              </li>
+            </ul>
+          </article>
+          <article class="plan-summary plan-pro" aria-labelledby="pro-title">
+            <h3 id="pro-title">Nestd Pro</h3>
+            <p class="plan-amount">
+              <span data-plan-price="pro" data-nl="€ 19,95" data-en="€19.95"
+                >€ 19,95</span
+              ><span class="plan-period" data-nl="per maand" data-en="per month"
+                >per maand</span
+              >
+            </p>
+            <p
+              class="plan-description"
+              data-nl="Je woningmelding ook in WhatsApp."
+              data-en="Your rental alert on WhatsApp too."
+            >
+              Je woningmelding ook in WhatsApp.
+            </p>
+            <ul>
+              <li data-nl="Alles van Gratis" data-en="Everything in Free">
+                Alles van Gratis
+              </li>
+              <li
+                data-nl="WhatsApp-meldingen bij nieuw aanbod"
+                data-en="WhatsApp alerts for new listings"
+              >
+                WhatsApp-meldingen bij nieuw aanbod
+              </li>
+              <li
+                data-nl="Meldingen binnen jouw zoekfilters"
+                data-en="Alerts within your search filters"
+              >
+                Meldingen binnen jouw zoekfilters
+              </li>
+            </ul>
+          </article>
+        </div>
+        <div class="pricing-followup">
+          <a
+            href="/pricing.html"
+            data-nl="Bekijk prijzen en praktische vragen"
+            data-en="View pricing and practical questions"
+            >Bekijk prijzen en praktische vragen</a
+          >
+          <p
+            data-nl="Je kiest Pro in de app. Daar zie je de prijs en abonnementsvoorwaarden vóór je bevestigt."
+            data-en="Choose Pro in the app. You can review the price and subscription terms before confirming."
+          >
+            Je kiest Pro in de app. Daar zie je de prijs en
+            abonnementsvoorwaarden vóór je bevestigt.
+          </p>
+        </div>
+      </section>
+      <section class="story-overview" aria-labelledby="story-title">
+        <div class="content-width story-layout">
+          <div>
+            <h2
+              id="story-title"
+              data-nl="Gebouwd uit eigen zoekfrustratie."
+              data-en="Built from our own rental search frustration."
+            >
+              Gebouwd uit eigen zoekfrustratie.
+            </h2>
+            <a
+              href="/about.html"
+              data-nl="Lees het verhaal van Nestd"
+              data-en="Read the Nestd story"
+              >Lees het verhaal van Nestd</a
+            >
+          </div>
+          <div>
+            <p
+              data-nl="Steeds dezelfde websites openen. Advertenties missen. Te laat reageren. We kennen de frustratie van een huurwoning zoeken in Nederland. Daarom bouwen we Nestd."
+              data-en="Checking the same websites. Missing listings. Responding too late. We know how frustrating it can be to find a rental home in the Netherlands. That is why we are building Nestd."
+            >
+              Steeds dezelfde websites openen. Advertenties missen. Te laat
+              reageren. We kennen de frustratie van een huurwoning zoeken in
+              Nederland. Daarom bouwen we Nestd.
+            </p>
+            <p
+              data-nl="Vanuit Amsterdam werken we aan een toegankelijkere, betaalbare zoektocht voor studenten, starters en expats. Jij stelt je eisen in. Nestd volgt het nieuwe aanbod."
+              data-en="From Amsterdam, we are making the search more accessible and affordable for students, young professionals and expats. You set your requirements. Nestd follows new listings."
+            >
+              Vanuit Amsterdam werken we aan een toegankelijkere, betaalbare
+              zoektocht voor studenten, starters en expats. Jij stelt je eisen
+              in. Nestd volgt het nieuwe aanbod.
+            </p>
+            <div class="privacy-note">
+              <h3
+                data-nl="Jouw zoektocht blijft van jou."
+                data-en="Your search stays yours."
+              >
+                Jouw zoektocht blijft van jou.
+              </h3>
+              <p
+                data-nl="Je beslist zelf op welke woning je reageert. Je e-mailadres en zoekvoorkeuren komen niet in onze analytics-events."
+                data-en="You decide which homes to respond to. Your email address and search preferences stay out of our analytics events."
+              >
+                Je beslist zelf op welke woning je reageert. Je e-mailadres en
+                zoekvoorkeuren komen niet in onze analytics-events.
+              </p>
+              <a
+                href="/privacy.html"
+                data-nl="Lees ons privacybeleid"
+                data-en="Read our privacy policy"
+                >Lees ons privacybeleid</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="faq wrap" id="vragen" data-section="faq">
         <div class="faq-intro">
           <h2 data-nl="Goed om te weten." data-en="Good to know.">
@@ -516,11 +719,12 @@
               Is Nestd gratis?
             </summary>
             <p
-              data-nl="Je kunt Nestd gratis downloaden. De actuele mogelijkheden en voorwaarden van eventuele betaalde opties vind je in de app."
-              data-en="Nestd is free to download. You can find the current details and terms of any paid options in the app."
+              data-nl="Ja. Woningen bekijken en opslaan, zoekfilters en pushmeldingen zijn gratis. Met Nestd Pro ontvang je ook WhatsApp-meldingen. Bekijk de prijzen voor de details."
+              data-en="Yes. Browsing and saving homes, search filters and push alerts are free. Nestd Pro also includes WhatsApp alerts. See our pricing page for details."
             >
-              Je kunt Nestd gratis downloaden. De actuele mogelijkheden en
-              voorwaarden van eventuele betaalde opties vind je in de app.
+              Ja. Woningen bekijken en opslaan, zoekfilters en pushmeldingen
+              zijn gratis. Met Nestd Pro ontvang je ook WhatsApp-meldingen.
+              Bekijk de prijzen voor de details.
             </p>
           </details>
         </div>
@@ -571,14 +775,21 @@
       >
         <a href="/about.html" data-nl="Over Nestd" data-en="About Nestd"
           >Over Nestd</a
-        ><a
-          href="/pricing.html"
-          data-nl="Gratis &amp; betaald"
-          data-en="Free &amp; paid"
+        ><a href="/pricing.html" data-nl="Prijzen" data-en="Free &amp; paid"
           >Gratis &amp; betaald</a
         ><a href="/privacy.html" data-nl="Privacy" data-en="Privacy">Privacy</a
         ><a href="mailto:hello@nestd.nl" data-nl="Contact" data-en="Contact"
           >Contact</a
+        >
+        <a href="/privacy.html#cookies" data-nl="Cookies" data-en="Cookies"
+          >Cookies</a
+        ><a
+          href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+          target="_blank"
+          rel="noopener"
+          data-nl="Appvoorwaarden"
+          data-en="App terms"
+          >Appvoorwaarden</a
         >
       </nav>
       <span>© Nestd</span>
