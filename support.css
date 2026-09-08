@@ -1,0 +1,95 @@
+:root { color-scheme: light; --ink: #222a27; --muted: #5b6460; --line: #dfe4e1; --red: #d92b47; --soft: #f5f7f5; }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: "DM Sans", Arial, sans-serif; font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+h1 { max-width: 18ch; font-size: clamp(40px, 4.3vw, 60px); line-height: 1.1; letter-spacing: -.05em; font-weight: 600; }
+h2 { font-size: 29px; line-height: 1.25; letter-spacing: -.035em; font-weight: 500; }
+h3 { font-size: 17px; line-height: 1.5; font-weight: 600; }
+a { color: inherit; text-underline-offset: 4px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+button { font: inherit; }
+[hidden] { display: none !important; }
+.container { width: min(1080px, calc(100% - 80px)); margin-inline: auto; }
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 20; padding: 12px 20px; background: #fff; transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+.site-header { min-height: 98px; display: flex; align-items: center; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 5px; font-size: 28px; font-weight: 700; letter-spacing: -.05em; text-decoration: none; }
+.brand img { display: block; width: 44px; height: 44px; }
+.header-nav { display: flex; align-items: center; margin-left: auto; gap: 28px; font-size: 14px; }
+.header-nav a { padding-block: 10px; text-decoration: none; }
+.header-nav [aria-current] { text-decoration: underline; }
+.header-nav a:hover { text-decoration: underline; }
+.language-button { min-height: 44px; min-width: 44px; padding: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.page-intro { padding-block: 62px 78px; }
+.page-label { margin-bottom: 22px; color: var(--muted); font-size: 14px; }
+.page-description { margin-top: 26px; max-width: 62ch; color: var(--muted); font-size: 19px; line-height: 1.65; }
+.content-row { display: grid; grid-template-columns: 1fr 1.55fr; gap: 76px; padding-block: 45px 52px; border-top: 1px solid var(--line); }
+.content-row h2 { max-width: 14ch; }
+.content-row p { color: var(--muted); }
+.content-row p + p { margin-top: 18px; }
+.plain-steps { margin: 0; padding-left: 24px; }
+.plain-steps li { padding-left: 10px; }
+.plain-steps li + li { margin-top: 25px; }
+.plain-steps h3 { margin-bottom: 5px; }
+.contact-link { display: inline-block; margin-top: 17px; font-weight: 500; }
+.download-section { padding: 48px; margin-block: 26px 76px; background: var(--soft); }
+.download-section > p { color: var(--muted); margin-top: 16px; }
+.download-button { display: inline-flex; align-items: center; justify-content: center; min-height: 55px; max-width: 100%; padding: 14px 24px; border-radius: 6px; background: var(--red); color: #fff; font-size: 16px; font-weight: 600; line-height: 1.4; text-decoration: none; }
+.download-button:hover { background: #bd2039; }
+.download-section .download-button, .pricing-intro .download-button { margin-top: 28px; }
+.download-note, .download-section .download-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.pricing-intro h1 { max-width: 19ch; }
+.faq-list { border-top: 1px solid var(--line); }
+details { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; position: relative; list-style: none; font-size: 16px; padding: 18px 32px 18px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 4px; top: 17px; font-size: 22px; line-height: 1.2; }
+details[open] summary::after { content: "−"; }
+details p { padding: 0 26px 22px 0; font-size: 15px; }
+.contact-section { padding-block: 28px 80px; }
+.contact-section > p { color: var(--muted); margin-top: 15px; }
+.site-footer { border-top: 1px solid var(--line); padding-block: 33px; display: flex; align-items: center; gap: 25px; font-size: 13px; color: var(--muted); }
+.site-footer nav { display: flex; margin-left: auto; gap: 26px; flex-wrap: wrap; }
+.site-footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.legal-page { max-width: 760px; }
+.legal-page .page-intro { padding-bottom: 35px; }
+.policy-date { margin-top: 18px; color: var(--muted); font-size: 14px; }
+.legal-content { padding-bottom: 76px; color: var(--muted); font-size: 16px; }
+.legal-content section { margin-top: 36px; }
+.legal-content h2 { font-size: 23px; margin-bottom: 18px; color: var(--ink); }
+.legal-content p + p { margin-top: 16px; }
+.legal-content ul { padding-left: 23px; margin-block: 14px; }
+.legal-content li + li { margin-top: 9px; }
+.legal-content a { overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  .container { width: calc(100% - 40px); }
+  .site-header { min-height: 80px; gap: 10px 20px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 12px; }
+  .brand { font-size: 26px; }
+  .brand img { width: 40px; height: 40px; }
+  .language-button { margin-left: auto; }
+  .header-nav { order: 3; width: 100%; margin: 0; gap: 28px; font-size: 13px; }
+  .page-intro { padding-block: 32px 48px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 26px; }
+  .page-label { margin-bottom: 18px; font-size: 13px; }
+  .page-description { margin-top: 22px; font-size: 17px; }
+  .content-row { grid-template-columns: 1fr; gap: 22px; padding-block: 31px 39px; font-size: 16px; }
+  .content-row h2 { max-width: 22ch; }
+  .download-section { padding: 30px 24px; margin-block: 10px 46px; }
+  .download-section > p { font-size: 16px; }
+  .download-button { font-size: 15px; padding-inline: 20px; }
+  .download-section .download-note { font-size: 11px; }
+  .contact-section { padding-block: 18px 52px; }
+  .site-footer { flex-direction: column; align-items: flex-start; gap: 12px; padding-block: 24px 34px; }
+  .site-footer nav { margin: 0; gap: 7px 23px; }
+  .legal-page .page-intro { padding-bottom: 30px; }
+  .legal-content { font-size: 15px; padding-bottom: 49px; }
+  .legal-content h2 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
