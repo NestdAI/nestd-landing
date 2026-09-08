@@ -22,6 +22,13 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     `${page}: unsupported proof`,
   );
   assert.doesNotMatch(
+    copy,
+    /\bgratis\b|\bfree\b|€\s?0\b|€\s?19[,.](?:95|99)|free-title|plan-columns|class="plans"/i,
+    `${page}: superseded free tier or old subscription price`,
+  );
+  assert.match(copy, /€15 per maand/, `${page}: Dutch monthly Pro price`);
+  assert.match(copy, /€15 per month/, `${page}: English monthly Pro price`);
+  assert.doesNotMatch(
     html,
     /user-scalable=no|maximum-scale=1|facebook\.com\/tr/i,
     `${page}: privacy/accessibility regression`,
@@ -117,10 +124,17 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     `${page}: about remains discoverable`,
   );
   if (page === "index.html" || page === "pricing.html") {
-    assert.match(copy, /€\s?0/, `${page}: explicit free price`);
-    assert.match(copy, /€\s?19[,.]\d{2}/, `${page}: explicit Pro price`);
+    const plans = [
+      ...html.matchAll(/data-plan-price="pro"[^>]*>\s*€15\s*<\/span\s*>/g),
+    ];
+    assert.equal(plans.length, 1, `${page}: exactly one Pro plan at €15`);
+    assert.match(
+      copy,
+      /(?:Alle|alle) (?:genoemde )?functies zijn inbegrepen|Alle functies in één abonnement/,
+      `${page}: all features included`,
+    );
     assert.match(copy, /WhatsApp/, `${page}: concrete Pro channel`);
-    assert.match(copy, /[Pp]ush/, `${page}: concrete free channel`);
+    assert.match(copy, /[Pp]ush/, `${page}: included push channel`);
   }
 }
 for (const page of [
