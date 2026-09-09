@@ -55,7 +55,6 @@ test("all existing legal disclosures and dates are preserved in both languages",
 });
 test("verification backend routing and universal-link association remain unchanged", () => {
   for (const path of [
-    "vercel.json",
     ".well-known/apple-app-site-association",
     ".well-known/assetlinks.json",
   ])
@@ -71,4 +70,37 @@ test("deep-link fallbacks never auto-redirect or expose listing IDs to marketing
   assert.ok(app.includes(APP_STORE));
   const js = fs.readFileSync("deeplink.js", "utf8");
   assert.doesNotMatch(js, /location\.(href|replace|assign)\s*[=(]/);
+});
+
+test("Vercel packages the public website and preserves all verification rewrites", () => {
+  const config = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
+  const previous = JSON.parse(
+    execFileSync("git", ["show", "f09f8ea:vercel.json"], { encoding: "utf8" }),
+  );
+  assert.deepEqual(config.rewrites, previous.rewrites);
+  assert.equal(config.outputDirectory, "dist");
+  execFileSync(process.execPath, ["scripts/package-site.mjs"]);
+  for (const file of [
+    "index.html",
+    "en/index.html",
+    "pricing.html",
+    "download.html",
+    "fonts/fonts.css",
+    "images/download-qr.svg",
+    "app/index.html",
+    "listing/index.html",
+    "verified/index.html",
+    ".well-known/apple-app-site-association",
+  ]) {
+    assert.deepEqual(fs.readFileSync("dist/" + file), fs.readFileSync(file));
+  }
+  for (const excluded of [
+    "node_modules",
+    "docs",
+    "tests",
+    "test-artifacts",
+    "package.json",
+    ".git",
+  ])
+    assert.ok(!fs.existsSync("dist/" + excluded));
 });

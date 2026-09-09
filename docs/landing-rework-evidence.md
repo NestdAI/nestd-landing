@@ -30,7 +30,7 @@ The exact new price/billing contract and release/channel state were escalated ea
 
 - [#19](https://github.com/NestdAI/nestd-landing/pull/19) is **merged** and included in the base. Its download-funnel and attribution intent is retained; stale product claims and invalid store ID are corrected.
 - [#20](https://github.com/NestdAI/nestd-landing/pull/20) remains open. The new About page incorporates its contact-form removal and preserves `#contact` plus `hello@nestd.nl`. Do not merge #20's old About markup over this redesign; it can be reconciled/superseded after review. This task does not close another contributor's PR.
-- [#21](https://github.com/NestdAI/nestd-landing/pull/21) remains open and separate. Its partner-invite copy is not appropriate for the new marketing direction. Existing AASA, asset links and production verification rewrites remain byte-for-byte unchanged. No invite route or partner feature was enabled.
+- [#21](https://github.com/NestdAI/nestd-landing/pull/21) remains open and separate. Its partner-invite copy is not appropriate for the new marketing direction. Existing AASA and asset links remain byte-for-byte unchanged; production verification rewrite values are unchanged. No invite route or partner feature was enabled.
 
 ## Route and content audit
 
@@ -70,7 +70,7 @@ The old policy describes prior waitlist, AI and WhatsApp data processing. Removi
 ## Validation
 
 - Deterministic static build succeeds.
-- Content/attribution tests: **5 passed**, including preserved first/current-touch attribution, paid-only claims, legal parity, unchanged verification infrastructure and private listing fallback.
+- Content/attribution tests: **5 passed**, including preserved first/current-touch attribution, paid-only claims, legal parity, unchanged verification routes/associations and private listing fallback.
 - Browser coverage: **27 passed** (26-test main suite plus the additional legacy-route test), including all ten marketing/legal routes at 390px and 1440px; internal links and anchors; consistent store destinations; feature/verification/AASA routes; no page JavaScript errors; axe WCAG A/AA scans; keyboard skip/menu/Escape/FAQ; no-JavaScript usability; language campaign preservation; 320/375/768/1024px and 200%-zoom-equivalent layout; reduced motion; sticky CTA visibility; intent-only conversion tracking.
 - First browser pass caught mobile decorative-ring overflow. Fixed by clipping only the illustration stage; subsequent checks pass without hiding document overflow.
 - Final mobile Lighthouse lab run (local preview, third-party analytics blocked): **Performance 97, Accessibility 100, Best Practices 100, SEO 100**; LCP 2.6s. Original brand fonts are self-hosted under their OFL licenses, responsive WebP imagery replaces the 93KB hero JPEG on served pages, and the navigation icon is 9.6KB instead of 192KB.
@@ -103,3 +103,8 @@ All files above are in `test-artifacts/landing-2026-09-09/`.
 ### Parent copy clarification applied
 
 Unverified channel/platform explanations were removed from the product flow (including Telegram/Android FAQs and the Android availability note). The procedure and FAQs use channel-neutral housing-search language. The legal-review notice was removed from the privacy-page shell; the original legal body and date are unchanged. Exact new pricing and billing period are still pending; visitors are explicitly told to review the current in-app price, billing period and terms before confirming payment. No additional price question or credential fallback was attempted. Linear remains pending protected access. No merge/deploy.
+
+
+### Public-preview build fix
+
+The new npm build emits static pages at the repository root. Inspection of the installed Vercel static builder (`@vercel/static-build`, zero-config package build) establishes a default output path of `public` when no output directory is configured; this project generates neither `public` nor `dist`. Added an explicit branch-local static build contract: `framework: null`, `npm ci --include=dev`, `npm run build:vercel`, `outputDirectory: dist`. A deterministic packaging script copies only existing public website files into `dist`, excluding source/docs/test artifacts/dependencies. Existing verification rewrites and app associations are preserved and tested. No project-wide protection or production deployment settings were changed. Successful remote preview/access remains subject to independent readback; this local diagnosis is not presented as authenticated access to the prior deployment logs.
