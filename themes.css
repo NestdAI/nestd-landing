@@ -1469,3 +1469,28 @@ summary > span {
     padding: 18px;
   }
 }
+
+/* About contact supports the story; corporate identity stays in footer/legal. */
+.about-contact {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+.about-contact > div {
+  max-width: 700px;
+}
+.about-contact h2 {
+  font-size: clamp(30px, 3.5vw, 48px);
+}
+.about-contact .button {
+  flex-shrink: 0;
+}
+@media (max-width: 800px) {
+  .about-contact {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+}

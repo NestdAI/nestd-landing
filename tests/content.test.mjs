@@ -16,6 +16,11 @@ test("marketing claims and every store destination reflect the paid-only verifie
         html,
         /AI[ -](?:matching|assistant|agent|woonassistent)|WhatsApp|Telegram|Android|unconfirmed public|duo|swip|19[,.]95|id6740091498|92%|testimonial|fastest|snelste|gratis downloaden|download gratis|start free/i,
       );
+      const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
+      assert.doesNotMatch(
+        main,
+        /Muba B\.V\.|trust-section|store-proof|company-details/,
+      );
       assert.ok(html.includes(copy[lang].paid));
       assert.ok(html.includes(APP_STORE));
       assert.doesNotMatch(html, /href="#"|user-scalable=no|maximum-scale=1/);

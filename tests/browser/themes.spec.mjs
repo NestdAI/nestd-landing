@@ -133,10 +133,9 @@ for (const colorScheme of ["light", "dark"]) {
       await expect(page.locator("#story")).toBeVisible();
       await expect(page.locator(".story-copy p")).toHaveCount(3);
       await expect(page.locator(".about-values article")).toHaveCount(3);
-      await expect(page.locator(".company-details")).toContainText("Muba B.V.");
-      await expect(page.locator(".company-details")).toContainText(
-        "hello@nestd.nl",
-      );
+      await expect(page.locator("main")).not.toContainText("Muba B.V.");
+      await expect(page.locator("footer")).toContainText("Muba B.V.");
+      await expect(page.locator("#contact")).toContainText("hello@nestd.nl");
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,

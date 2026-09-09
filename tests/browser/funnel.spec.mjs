@@ -236,8 +236,11 @@ test("product illustrations are visibly labelled and never masquerade as interac
         )
         .count(),
     ).toBe(0);
-    await expect(page.locator(".trust-section")).toBeVisible();
-    expect(await page.locator(".trust-grid a").count()).toBe(3);
+    await expect(
+      page.locator(".trust-section, .store-proof, .hero-trust"),
+    ).toHaveCount(0);
+    await expect(page.locator("main")).not.toContainText("Muba B.V.");
+    await expect(page.locator("footer")).toContainText("Muba B.V.");
     const axe = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();

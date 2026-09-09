@@ -32,8 +32,8 @@ export const aboutCopy = {
         "Een melding is een aanleiding om te kijken, geen besluit. Controleer de woning, beschikbaarheid en voorwaarden bij de oorspronkelijke aanbieder.",
       ],
       [
-        "Duidelijkheid vóór je begint.",
-        "Nestd is een betaalde dienst. Bekijk de prijs, looptijd en voorwaarden in de app voordat je een abonnement bevestigt.",
+        "Van kijken naar reageren.",
+        "Zie je een woning die je wilt bekijken? Ga door naar de oorspronkelijke advertentie. Zo houd je de woning, de voorwaarden en de plek waar je reageert bij elkaar.",
       ],
     ],
     audienceLabel: "VOOR JOUW VOLGENDE HOOFDSTUK",
@@ -41,10 +41,10 @@ export const aboutCopy = {
       "Een nieuwe stad. Je eigen plek.<br>Of gewoon toe aan iets anders.",
     audienceBody:
       "Je hoeft niet in één hokje te passen om een woning te zoeken. Nestd is er voor mensen die hun zoektocht gericht willen aanpakken en zelf de regie willen houden.",
-    contactLabel: "HET BEDRIJF ACHTER DE APP",
-    contactTitle: "Nestd, van Muba B.V.",
+    contactLabel: "WE HOREN GRAAG VAN JE",
+    contactTitle: "Een vraag over je zoektocht?",
     contactBody:
-      "Nestd is een dienst van Muba B.V. in Nederland, ook vermeld als aanbieder in de App Store. Heb je een vraag over de app of wil je feedback delen? We horen graag van je.",
+      "Kom je ergens niet uit in de app, of heb je een idee voor Nestd? Mail ons. Jouw ervaringen helpen ons de zoektocht beter te maken.",
     contactAction: "Neem contact op",
     companyLabel: "Aanbieder",
     supportLabel: "Vragen & feedback",
@@ -84,8 +84,8 @@ export const aboutCopy = {
         "An alert is a reason to look, not a decision. Check the home, availability and conditions with the original provider.",
       ],
       [
-        "Clarity before you begin.",
-        "Nestd is a paid service. Review the price, billing period and terms in the app before confirming a subscription.",
+        "From viewing to responding.",
+        "See a home you want to explore? Continue to the original listing, with the details, conditions and place to respond together.",
       ],
     ],
     audienceLabel: "FOR YOUR NEXT CHAPTER",
@@ -93,10 +93,10 @@ export const aboutCopy = {
       "A new city. A place of your own.<br>Or simply time for a change.",
     audienceBody:
       "You do not have to fit one profile to look for a home. Nestd is for people who want a focused search while keeping control of their next move.",
-    contactLabel: "THE COMPANY BEHIND THE APP",
-    contactTitle: "Nestd, by Muba B.V.",
+    contactLabel: "WE WOULD LIKE TO HEAR FROM YOU",
+    contactTitle: "A question about your search?",
     contactBody:
-      "Nestd is a service of Muba B.V. in the Netherlands, also listed as the provider in the App Store. Have a question about the app or feedback to share? We would like to hear from you.",
+      "Need help with the app, or have an idea for Nestd? Email us. Your experiences help us improve the rental search.",
     contactAction: "Get in touch",
     companyLabel: "Provider",
     supportLabel: "Questions & feedback",

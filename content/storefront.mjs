@@ -46,33 +46,6 @@ export const storefront = {
     ],
     flowLabel: "EEN HELDERE ROUTE",
     flowTitle: "Jouw wensen erin.<br><em>Jouw volgende stap eruit.</em>",
-    trustLabel: "WEET WAAR JE AAN TOE BENT",
-    trustTitle:
-      "Een app voor je zoektocht.<br>Een bedrijf dat je kunt bereiken.",
-    trustIntro:
-      "Een huurwoning zoeken is al spannend genoeg. Daarom maken we duidelijk wie we zijn, waar je betaalt en waar je terechtkunt met vragen.",
-    trust: [
-      [
-        "Muba B.V.",
-        "Nestd is een dienst van Muba B.V. in Nederland. Je vindt ons ook als aanbieder in de App Store.",
-        "Over Nestd",
-      ],
-      [
-        "Aankoop via Apple",
-        "Bekijk de prijs, looptijd en voorwaarden vóór je betaalt. Beheer je abonnement via je Apple-account.",
-        "Over het abonnement",
-      ],
-      [
-        "Een vraag? Mail ons.",
-        "Voor vragen over Nestd kun je contact opnemen via hello@nestd.nl.",
-        "hello@nestd.nl",
-      ],
-    ],
-    trustStrip: ["Voor iPhone", "Abonnement via Apple", "Van Muba B.V."],
-    storeHeading: "Bekijk Nestd in de App Store",
-    storeBody:
-      "Lees de appinformatie en bekijk of Nestd bij jouw zoektocht past.",
-    storeLink: "Naar de App Store",
   },
   en: {
     badge: "FOR RENTAL SEEKERS IN THE NETHERLANDS",
@@ -114,31 +87,5 @@ export const storefront = {
     ],
     flowLabel: "A CLEAR PATH FORWARD",
     flowTitle: "Your needs come first.<br><em>Your next move follows.</em>",
-    trustLabel: "KNOW WHERE YOU STAND",
-    trustTitle: "An app for your search.<br>A company you can reach.",
-    trustIntro:
-      "Finding a rental is a big enough task. We make it clear who we are, where you pay and how to contact us with questions.",
-    trust: [
-      [
-        "Muba B.V.",
-        "Nestd is a service of Muba B.V. in the Netherlands, also listed as the provider in the App Store.",
-        "About Nestd",
-      ],
-      [
-        "Purchase through Apple",
-        "Review the price, billing period and terms before paying. Manage your subscription through your Apple account.",
-        "About the subscription",
-      ],
-      [
-        "Have a question? Email us.",
-        "For questions about Nestd, contact us at hello@nestd.nl.",
-        "hello@nestd.nl",
-      ],
-    ],
-    trustStrip: ["For iPhone", "Subscribe through Apple", "By Muba B.V."],
-    storeHeading: "Explore Nestd in the App Store",
-    storeBody:
-      "Read the app information and see whether Nestd is right for your search.",
-    storeLink: "Visit the App Store",
   },
 };

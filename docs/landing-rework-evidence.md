@@ -1,6 +1,14 @@
 # Paid rental-alert landing rework — 9 September 2026
 
-## Live Nestd content alignment — latest revision
+## User-benefit focus — latest correction
+
+Hicham explicitly rejected Muba B.V./corporate credentials as marketing. Removed in both locales: the complete homepage corporate/Apple hero badge row, three company/purchase/support trust cards, and App Store proof block. Deleted their renderer and unused copy. About retains the full mission/origin/principles/audience story; its company/legal credentials grid is replaced by plain help/feedback email contact, and its purchase-oriented principle now describes going from viewing to responding.
+
+Muba B.V. remains only as discreet footer identification, original legal disclosures and factual structured publisher metadata, not visible marketing content. Actual purchase and cancellation facts remain where useful in pricing/FAQ. The concrete stop-refreshing, search-criteria, alert and provider-response narrative is unchanged. No substitute fake review/count/timing proof was added.
+
+Fresh evidence: `test-artifacts/landing-benefits-2026-09-09/`, NL/EN light/dark desktop/mobile Home/About/Pricing/Download and320px. Compare with the immediately preceding `landing-live-content-2026-09-09/`. Hero and About compositions visually reviewed; no corporate grid or empty section remains. Updated existing regression checks require corporate content/cards to be absent from marketing main content while preserving footer identity, legal text and reachable support. An old test initially expected the deliberately removed trust section; corrected that obsolete expectation without dropping illustration/axe coverage. Exact final checks and preview state are in the PR closeout.
+
+## Live Nestd content alignment — previous revision
 
 **Source, not competitor imitation:** independently fetched [current Home](https://www.nestd.nl/) and [current About](https://www.nestd.nl/about.html) on9September2026 at09:44UTC; both HTTP200. Continued from25efd60 on the same PR22 (6011250 is an earlier theme/About checkpoint, not a reset target). Hicham asked for content closer to the current site, so this is a content-led implementation, not another cosmetic redesign.
 
