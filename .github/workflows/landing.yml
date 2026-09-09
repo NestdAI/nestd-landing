@@ -1,0 +1,28 @@
+name: Landing build and checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - name: Check generated pages are committed
+        run: git diff --exit-code -- index.html about.html pricing.html privacy.html en/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: dist
+          include-hidden-files: true

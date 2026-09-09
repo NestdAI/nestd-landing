@@ -1,68 +1,70 @@
-import assert from 'node:assert/strict';
-import fs from 'node:fs';
-
-const index = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const i18n = fs.readFileSync(new URL('../i18n.js', import.meta.url), 'utf8');
-const script = fs.readFileSync(new URL('../script.js', import.meta.url), 'utf8');
-const styles = fs.readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
-const publicHtml = [index, fs.readFileSync(new URL('../pricing.html', import.meta.url), 'utf8')].join('\n');
-const searchable = [index, i18n, script].join('\n');
-const appStoreUrl = 'https://apps.apple.com/app/nestd/id6740091498';
-
-function readJpegDimensions(buffer) {
-  assert.equal(buffer.readUInt16BE(0), 0xffd8, 'hero listing image should be a JPEG');
-
-  let offset = 2;
-  while (offset < buffer.length) {
-    if (buffer[offset] !== 0xff) {
-      offset += 1;
-      continue;
-    }
-
-    const marker = buffer[offset + 1];
-    offset += 2;
-    if (marker === 0xd8 || marker === 0xd9) continue;
-
-    const segmentLength = buffer.readUInt16BE(offset);
-    const isStartOfFrame = marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
-    if (isStartOfFrame) {
-      return {
-        height: buffer.readUInt16BE(offset + 3),
-        width: buffer.readUInt16BE(offset + 5),
-      };
-    }
-    offset += segmentLength;
-  }
-
-  assert.fail('hero listing image should contain JPEG dimensions');
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+const root = path.resolve(import.meta.dirname, "..");
+const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
+const APP = "https://apps.apple.com/nl/app/nestd/id6761392857";
+const pages = [
+  "index.html",
+  "about.html",
+  "pricing.html",
+  "en/index.html",
+  "en/about.html",
+  "en/pricing.html",
+];
+for (const page of pages) {
+  const html = read(page);
+  assert.equal((html.match(/<h1>/g) || []).length, 1, page + " has one h1");
+  assert.ok(html.includes(APP), page + " has correct App Store destination");
+  assert.ok(
+    html.includes('href="/assets/site.css"'),
+    page + " uses fresh shared design",
+  );
+  assert.doesNotMatch(
+    html,
+    /WhatsApp|Telegram|Duo Zoeken|AI-matching|Google Play|6740091498|€19|€0|92%|testimonials/i,
+    page + " does not advertise obsolete/unverified features",
+  );
+  assert.match(html, /<link rel="canonical"/);
+  assert.match(html, /<link rel="alternate" hreflang="en"/);
+  assert.match(html, /data-cta-placement=/);
+  assert.doesNotMatch(html, /user-scalable=no|maximum-scale=1/);
+  assert.ok(
+    html.indexOf("localStorage.getItem('nestd-theme')") <
+      html.indexOf("/assets/site.css"),
+    "theme runs before stylesheet",
+  );
+  assert.match(html, /Betaald abonnement|Paid subscription/);
 }
-
-const heroListingSrc = index.match(/class="match-spotlight"[\s\S]*?<img[^>]+src="([^"]+)"/i)?.[1];
-assert.ok(heroListingSrc, 'hero listing image should remain present');
-const heroListingDimensions = readJpegDimensions(fs.readFileSync(new URL(`../${heroListingSrc}`, import.meta.url)));
 assert.ok(
-  heroListingDimensions.width >= 600 && heroListingDimensions.height >= 500,
-  `hero listing image should be retina-ready, received ${heroListingDimensions.width}x${heroListingDimensions.height}`,
+  read("about.html").includes("Een realistische missie."),
+  "About explains an honest mission",
 );
-
-assert.match(index, new RegExp(`href="${appStoreUrl}"`, 'i'), 'hero should link directly to the App Store listing');
-assert.match(index, /images\/app-store-badge\.svg/i, 'hero should use the local App Store badge asset');
-assert.match(index, /heroDownloadKicker/i, 'hero download copy key should exist above the fold');
-assert.match(index, /mobile-sticky-cta[^>]+data-cta-placement="mobile_sticky"/i, 'mobile sticky CTA should remain tracked');
-assert.match(index, /data-i18n-html="price_pro_f2"[^>]*><strong>AI agent<\/strong>/i, 'homepage should render the AI agent emphasis as HTML');
-assert.match(index, /data-i18n-html="price_pro_f3"[^>]*><strong>Duo Zoeken<\/strong>/i, 'homepage should render the Duo Search emphasis as HTML');
-assert.doesNotMatch(index, /data-i18n="price_pro_f[23]"/i, 'homepage should not render Pro benefit markup as plain text');
-assert.match(searchable, /Download in de App Store/i, 'Dutch App Store CTA should exist');
-assert.match(searchable, /Download on the App Store/i, 'English App Store CTA should exist');
-assert.match(script, /initMobileStickyCtaVisibility/i, 'sticky CTA visibility controller should exist');
-assert.match(script, /querySelector\('\.hero-download-card'\)/i, 'sticky CTA visibility should use the hero download card as its trigger');
-assert.match(script, /IntersectionObserver/i, 'sticky CTA visibility should use IntersectionObserver');
-assert.match(script, /triggerRect\.bottom\s*<=\s*0[\s\S]*is-visible/i, 'sticky CTA should appear only after the hero download card scrolls out above the viewport');
-assert.match(styles, /\.mobile-sticky-cta\s*\{[\s\S]*display:\s*none[\s\S]*\.mobile-sticky-cta\.is-visible\s*\{[\s\S]*display:\s*inline-flex/i, 'sticky CTA should be hidden by default and shown only via visibility class');
-assert.match(styles, /body\s*\{\s*padding-bottom:\s*104px;/i, 'mobile layout should reserve bottom padding for sticky CTA');
-
-assert.doesNotMatch(searchable, /countdown|aftellen|remaining spots|spots left|plekken over|nog \d+ plekken/i, 'no fake countdown or fake remaining-spots copy');
-assert.doesNotMatch(index, /waitlist-form|waitlist-hero|waitlist-footer|wachtlijst|waitlist|eerste 100|first 100|pre-launch|early access/i, 'home should no longer use waitlist or pre-launch copy');
-assert.doesNotMatch(publicHtml, /Google Play|Downloaden op Google Play/i, 'public Google Play CTA copy should not be introduced');
-
-console.log('static landing copy smoke passed');
+assert.ok(
+  (read("about.html").match(/<article>/g) || []).length >= 6,
+  "About has story chapters and principles",
+);
+const cfg = JSON.parse(read("vercel.json"));
+assert.equal(cfg.outputDirectory, "dist");
+for (const route of [
+  "/listing/:id",
+  "/app",
+  "/verified",
+  "/verify-error",
+  "/verify",
+])
+  assert.ok(
+    cfg.rewrites.some((r) => r.source === route),
+    "preserved route " + route,
+  );
+for (const file of [
+  ".well-known/apple-app-site-association",
+  "app/index.html",
+  "listing/index.html",
+  "verified/index.html",
+  "verify-error/index.html",
+])
+  assert.ok(fs.existsSync(path.join(root, "dist", file)), "packaged " + file);
+console.log(
+  "Static marketing, bilingual SEO, safe claims, canonical store links and preserved build routes passed.",
+);

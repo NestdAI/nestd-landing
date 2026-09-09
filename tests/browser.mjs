@@ -1,0 +1,180 @@
+import assert from "node:assert/strict";
+import { chromium } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+import { spawn } from "node:child_process";
+const server = spawn(
+  "python3",
+  ["-m", "http.server", "3189", "--directory", "dist"],
+  { stdio: "ignore" },
+);
+const origin = "http://127.0.0.1:3189";
+let browser;
+try {
+  for (let i = 0; i < 30; i++) {
+    try {
+      if ((await fetch(origin)).ok) break;
+    } catch {}
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  browser = await chromium.launch({
+    channel: process.env.CI ? undefined : "chrome",
+    headless: true,
+  });
+  const pages = [
+    "/",
+    "/about.html",
+    "/pricing.html",
+    "/privacy.html",
+    "/en/",
+    "/en/about.html",
+    "/en/pricing.html",
+    "/en/privacy.html",
+  ];
+  let renderChecks = 0,
+    a11yChecks = 0;
+  for (const colorScheme of ["light", "dark"]) {
+    const context = await browser.newContext({
+      colorScheme,
+      viewport: { width: 1440, height: 950 },
+      reducedMotion: "reduce",
+    });
+    await context.route(/posthog|facebook/, (r) => r.abort());
+    const page = await context.newPage();
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    for (const route of pages) {
+      await page.goto(origin + route);
+      await page.locator("h1").waitFor();
+      await page.evaluate(() => document.fonts.ready);
+      const axe = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze();
+      assert.deepEqual(
+        axe.violations.map((v) => ({
+          id: v.id,
+          nodes: v.nodes.map((n) => n.target),
+        })),
+        [],
+        route + " " + colorScheme + " accessibility",
+      );
+      a11yChecks++;
+      for (const width of [1440, 768, 390, 320]) {
+        await page.setViewportSize({ width, height: 950 });
+        assert.equal(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+          true,
+          route + " " + width + " " + colorScheme + " overflow",
+        );
+        renderChecks++;
+      }
+      const localLinks = await page
+        .locator("a[href]")
+        .evaluateAll((links) =>
+          links.map((a) => a.href).filter((h) => h.startsWith(location.origin)),
+        );
+      for (const link of new Set(localLinks)) {
+        const u = new URL(link);
+        assert.ok(
+          (await page.request.get(u.origin + u.pathname)).ok(),
+          "local link " + link,
+        );
+      }
+      await page.setViewportSize({ width: 1440, height: 950 });
+    }
+    assert.deepEqual(errors, [], "No marketing runtime exceptions");
+    await page.goto(origin + "/?utm_source=meta&utm_campaign=fresh");
+    await page
+      .locator("#theme")
+      .selectOption(colorScheme === "light" ? "dark" : "light");
+    const selected = colorScheme === "light" ? "dark" : "light";
+    assert.equal(
+      await page.evaluate(() => localStorage.getItem("nestd-theme")),
+      selected,
+    );
+    await page.goto(origin + "/about.html");
+    assert.equal(
+      await page.locator("html").getAttribute("data-theme"),
+      selected,
+      "theme persists across pages",
+    );
+    await page.reload();
+    assert.equal(
+      await page.locator("html").getAttribute("data-theme"),
+      selected,
+      "theme persists on reload",
+    );
+    await page.locator("#theme").selectOption("system");
+    assert.equal(
+      await page.locator("html").getAttribute("data-theme"),
+      null,
+      "system removes forced theme",
+    );
+    await page.goto(origin + "/?utm_source=meta&utm_campaign=fresh");
+    await page.locator("[data-language]").click();
+    assert.equal(new URL(page.url()).pathname, "/en/");
+    assert.equal(new URL(page.url()).searchParams.get("utm_campaign"), "fresh");
+    await page.waitForFunction(() => Boolean(window.nestdAnalytics));
+    const attribution = await page.evaluate(() =>
+      window.nestdAnalytics.getAttribution(),
+    );
+    assert.equal(attribution.utm_source, "meta");
+    await page.goto(origin + "/?lang=en&utm_campaign=direct");
+    await page.waitForURL("**/en/?utm_campaign=direct");
+    assert.equal(await page.locator("html").getAttribute("lang"), "en");
+    await page.evaluate(() => {
+      window.__events = [];
+      window.nestdAnalytics.track = (...v) => window.__events.push(v);
+      window.nestdAnalytics.trackMeta = () => {};
+    });
+    const popup = page.waitForEvent("popup");
+    await page.locator("[data-cta-placement=hero]").click();
+    const app = await popup;
+    await app.close();
+    assert.ok(
+      (await page.evaluate(() => window.__events)).some(
+        ([event, props]) =>
+          event === "cta_clicked" && props.placement === "hero",
+      ),
+      "CTA intent emitted, not signup/purchase",
+    );
+    await page.locator("summary").first().focus();
+    await page.keyboard.press("Enter");
+    assert.equal(
+      await page.locator("details").first().getAttribute("open"),
+      "",
+      "FAQ keyboard support",
+    );
+    await context.close();
+  }
+  const nojs = await browser.newContext({
+    javaScriptEnabled: false,
+    colorScheme: "dark",
+    viewport: { width: 320, height: 800 },
+  });
+  const p = await nojs.newPage();
+  for (const route of pages) {
+    await p.goto(origin + route);
+    assert.ok(await p.locator("h1").isVisible(), route + " no-JS content");
+    assert.equal(
+      await p.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      true,
+      "no-JS narrow overflow",
+    );
+  }
+  await p.goto(origin + "/");
+  await p.locator("[data-language]").click();
+  assert.equal(new URL(p.url()).pathname, "/en/");
+  await p.locator("summary").first().click();
+  assert.equal(await p.locator("details").first().getAttribute("open"), "");
+  await nojs.close();
+  console.log(
+    `${renderChecks} viewport/theme checks; ${a11yChecks} axe page/theme scans; eight no-JS routes; local links, FAQ keyboard, system/persistent theme, bilingual attribution and CTA intent passed.`,
+  );
+} finally {
+  await browser?.close();
+  server.kill();
+}
