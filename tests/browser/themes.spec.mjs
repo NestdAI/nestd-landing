@@ -174,7 +174,9 @@ test("mobile header keeps its geometry while deferred handlers load", async ({
   });
   await page.goto("/", { waitUntil: "commit" });
   await expect(page.locator("#main")).toBeVisible();
-  await page.evaluate(() => document.fonts.ready);
+  // FontFaceSet.ready can wait for document load on Chromium, which this test
+  // deliberately holds open. Load only the actual layout font instead.
+  await page.evaluate(() => document.fonts.load('500 14px "Inter"'));
   const before = await page
     .locator("#main")
     .evaluate((el) => el.getBoundingClientRect().top);
