@@ -207,6 +207,30 @@ try {
   await mp.locator("#speed").scrollIntoViewIfNeeded();
   await mp.waitForTimeout(850);
   assert.ok(await mp.locator(".reach-cards article").first().isVisible());
+  const disclosure = mp.locator('.faq-items details').first();
+  const summary = disclosure.locator('summary');
+  await summary.scrollIntoViewIfNeeded();
+  const closedHeight = await disclosure.evaluate(el => el.getBoundingClientRect().height);
+  await summary.focus();
+  await mp.keyboard.press('Enter');
+  assert.ok(await disclosure.evaluate(el => el.getAnimations().length > 0), 'FAQ opens with animation');
+  await mp.waitForTimeout(350);
+  assert.ok(await disclosure.evaluate(el => el.getBoundingClientRect().height) > closedHeight);
+  await mp.keyboard.press('Enter');
+  assert.ok(await disclosure.evaluate(el => el.getAnimations().length > 0), 'FAQ closes with animation');
+  await mp.waitForTimeout(350);
+  assert.equal(await disclosure.getAttribute('open'), null);
+  await summary.click();
+  await mp.waitForTimeout(75);
+  await summary.click();
+  await mp.waitForTimeout(350);
+  assert.equal(await disclosure.getAttribute('open'), null, 'rapid reversal settles closed');
+  assert.equal(await mp.locator('[data-proof-preview] .proof-reviews figure').count(), 3);
+  assert.match(await mp.locator('[data-proof-preview]').innerText(), /FICTIEVE PLACEHOLDER/);
+  await mp.locator('[data-proof-preview]').scrollIntoViewIfNeeded();
+  await mp.screenshot({path: '/tmp/nestd-placeholders-mobile.png'});
+  await mp.setViewportSize({width: 1440, height: 1000});
+  await mp.screenshot({path: '/tmp/nestd-placeholders-desktop.png'});
   await mp.emulateMedia({ reducedMotion: "reduce" });
   assert.equal(
     await mp.evaluate(

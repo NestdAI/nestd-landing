@@ -83,6 +83,38 @@
       motionControl.hidden = motion.matches;
     });
   }
+  // Keep native details/summary semantics and no-JS behavior; animate both directions.
+  document.querySelectorAll('.faq-items details').forEach((details) => {
+    const summary = details.querySelector('summary');
+    let animation;
+    let expanded = details.open;
+    const settle = () => {
+      animation?.cancel();
+      animation = undefined;
+      details.open = expanded;
+      details.style.removeProperty('height');
+      details.style.removeProperty('overflow');
+    };
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      const start = details.getBoundingClientRect().height;
+      expanded = !expanded;
+      animation?.cancel();
+      if (motion.matches || !details.animate) { settle(); return; }
+      details.style.removeProperty('height');
+      details.open = expanded;
+      const end = details.getBoundingClientRect().height;
+      details.open = true;
+      details.style.overflow = 'hidden';
+      animation = details.animate(
+        [{ height: `${start}px` }, { height: `${end}px` }],
+        { duration: 300, easing: 'cubic-bezier(.22,1,.36,1)' }
+      );
+      animation.onfinish = settle;
+    });
+    motion.addEventListener('change', () => { if (motion.matches) settle(); });
+    window.addEventListener('resize', () => { if (animation) settle(); });
+  });
   const current = new URL(location.href),
     queryLanguage = current.searchParams.get("lang");
   // Explicit query links remain supported; language paths work even without JavaScript.

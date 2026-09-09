@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { previewProof } from "./preview-proof.mjs";
 import { content } from "./content.mjs";
 import { privacyContent } from "./privacy-content.mjs";
 const root = path.resolve(import.meta.dirname, "..");
@@ -51,6 +52,18 @@ function reach(c) {
 function experiences(c) {
   return `<section class="experiences"><div class="wrap experiences-inner"><div><p class="eyebrow">${c.reviewLabel}</p><h2>${c.reviewTitle}</h2></div><div><p class="lead">${c.reviewIntro}</p><a class="text-link" href="mailto:hello@nestd.nl?subject=Nestd%20ervaring">${c.reviewCta} ${arrow}</a><a class="review-store" href="${APP}" target="_blank" rel="noopener">${c.reviewStore} ${arrow}</a><p class="caption">${c.reviewNote}</p></div></div></section>`;
 }
+function proofPlaceholders(l) {
+  // Vercel production must never include design-only proof. Local/preview are reviewable.
+  if (process.env.VERCEL_ENV === "production" || process.env.NESTD_HIDE_PROOF_PREVIEW === "1") return "";
+  const en = l === "en";
+  const label = en ? "FICTIONAL PLACEHOLDER" : "FICTIEVE PLACEHOLDER";
+  return `<section class="wrap section proof-preview" data-proof-preview aria-label="${en ? 'Design placeholders' : 'Ontwerp-placeholders'}">
+    <p class="proof-notice">${en ? 'DESIGN PREVIEW · All figures, timings and reviews below are fictional. Replace with verified data before publication.' : 'ONTWERPPREVIEW · Alle onderstaande cijfers, tijden en reviews zijn fictief. Vervang ze vóór publicatie door geverifieerde gegevens.'}</p>
+    <div class="proof-metrics"><article><span class="proof-label">${label}</span><h2>${en ? 'A search shared by many.' : 'Samen op zoek naar thuis.'}</h2><strong class="proof-number">${previewProof.activeUsers}</strong><p>${en ? 'active users — example figure, not a current count' : 'actieve gebruikers — voorbeeldcijfer, geen actueel aantal'}</p></article>
+    <article><span class="proof-label">${label}</span><h2>${en ? 'Every moment matters.' : 'Elk moment telt.'}</h2><p>${en ? 'Illustrative notification comparison — not benchmark results.' : 'Voorbeeld van een notificatievergelijking — geen benchmarkresultaten.'}</p><dl class="proof-timings">${previewProof.timings.map(([name,time]) => `<div><dt>${name}</dt><dd>${time} <small>${en ? '(fictional)' : '(fictief)'}</small></dd></div>`).join('')}</dl></article></div>
+    <h2>${en ? 'Room for your users’ stories.' : 'Ruimte voor jullie gebruikersverhalen.'}</h2><div class="proof-reviews">${previewProof.reviews[l].map(([name,quote]) => `<figure><figcaption><span class="proof-label">${label}</span><strong>${name}</strong></figcaption><blockquote>“${quote}”</blockquote><p class="caption">${en ? 'Example copy — not a real customer review.' : 'Voorbeeldtekst — geen echte gebruikersreview.'}</p></figure>`).join('')}</div>
+  </section>`;
+}
 function homeOffer(c) {
   return `<section class="wrap home-offer"><div><p class="eyebrow">${c.priceEyebrow}</p><h2>${c.offerTitle}</h2><p class="lead">${c.offerIntro}</p></div><div>${offer(c)}${cta(c, "home-offer")}<p class="caption">${c.priceNote}</p></div></section>`;
 }
@@ -62,7 +75,7 @@ function home(c, l) {
   return `<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span class="little-star" aria-hidden="true">✳</span> ${c.eyebrow}</p><h1>${c.hero}</h1><p class="lead">${c.intro}</p><div class="hero-cta">${cta(c, "hero")}<small>${c.iphone}</small></div><a class="text-link" href="#how">${c.heroLink} <span aria-hidden="true">↓</span></a></div>${phones(c, l)}</section><div class="criteria-strip"><div class="wrap">${c.strip.map((s, i) => `<span>${s}</span>${i < 3 ? '<b aria-hidden="true">✳</b>' : ""}`).join("")}</div></div>
 <section class="wrap journey section" id="how"><div class="section-heading"><p class="eyebrow">${c.journeyLabel}</p><h2>${c.journeyTitle}</h2><p class="lead">${c.journeyIntro}</p></div><ol class="steps">${c.steps.map(([h, p], i) => `<li><span class="step-number">0${i + 1}</span><div><h3>${h}</h3><p>${p}</p></div></li>`).join("")}</ol></section>
 <section class="focus-section"><div class="wrap focus-inner"><div class="search-illustration"><div class="drawing-title"><span aria-hidden="true">⌂</span> ${l === "nl" ? "Mijn volgende plek" : "My next place"}</div><dl>${c.filters.map((f, i) => `<div><dt>${f}</dt><dd>${c.sample[i]}<span aria-hidden="true">${i === 0 ? "⌖" : "✓"}</span></dd></div>`).join("")}</dl><p>${c.sampleLabel}</p></div><div class="focus-copy"><p class="eyebrow">${c.focusLabel}</p><h2>${c.focusTitle}</h2><p class="lead">${c.focusIntro}</p><p class="focus-note"><span aria-hidden="true">↳</span> ${c.focusNote}</p></div></div></section>
-${reach(c)}<section class="wrap story-teaser section"><p class="eyebrow">${c.storyLabel}</p><div class="story-teaser-inner"><h2>${c.storyTitle}</h2><div><p class="lead">${c.storyIntro}</p><a class="text-link" href="${url(l, "about.html")}">${c.storyLink} ${arrow}</a></div></div></section>${experiences(c)}${homeOffer(c)}${faq(c)}${closing(c)}`;
+${reach(c)}<section class="wrap story-teaser section"><p class="eyebrow">${c.storyLabel}</p><div class="story-teaser-inner"><h2>${c.storyTitle}</h2><div><p class="lead">${c.storyIntro}</p><a class="text-link" href="${url(l, "about.html")}">${c.storyLink} ${arrow}</a></div></div></section>${experiences(c)}${proofPlaceholders(l)}${homeOffer(c)}${faq(c)}${closing(c)}`;
 }
 function about(c, l) {
   return `<section class="wrap about-hero"><p class="eyebrow">${c.aboutEyebrow}</p><h1>${c.aboutTitle}</h1><p class="lead">${c.aboutLead}</p></section><figure class="about-photo wrap"><img src="/assets/amsterdam.jpg" alt="${l === "nl" ? "Woningen langs een Amsterdamse gracht" : "Homes along an Amsterdam canal"}" width="1400" height="933"><figcaption>${c.aboutPhoto}</figcaption></figure><section class="wrap story-body">${c.aboutSections.map(([h, a, b], i) => `<article><div class="story-index">0${i + 1} <span aria-hidden="true">/</span> NESTD</div><div><h2>${h}</h2><p>${a}</p><p>${b}</p></div></article>`).join("")}</section><section class="principles"><div class="wrap"><p class="eyebrow">Nestd, ${l === "nl" ? "in drie gedachten" : "in three thoughts"}</p><h2>${c.principlesTitle}</h2><div class="principles-grid">${c.principles.map(([h, p], i) => `<article><span class="principle-symbol" aria-hidden="true">${["↗", "◎", "✳"][i]}</span><h3>${h}</h3><p>${p}</p></article>`).join("")}</div></div></section><section class="wrap contact section" id="contact"><div><p class="eyebrow">${c.contact}</p><h2>${c.contactTitle}</h2></div><div><p class="lead">${c.contactText}</p><a class="contact-mail" href="mailto:hello@nestd.nl">hello@nestd.nl ${arrow}</a></div></section>${closing(c)}`;

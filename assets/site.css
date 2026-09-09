@@ -2208,3 +2208,21 @@ details > p {
     right: 23px;
   }
 }
+
+/* Preview-only social-proof layout; each fixture remains explicitly labelled. */
+.proof-notice { padding: 20px; border: 1px dashed var(--ink); border-radius: 16px; font-size: 14px; line-height: 1.6; margin-bottom: 32px; }
+.proof-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+.proof-metrics article, .proof-reviews figure { padding: 28px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); }
+.proof-label { display: block; color: var(--muted); font-size: 11px; letter-spacing: .08em; font-weight: 700; margin-bottom: 16px; }
+.proof-preview h2 { font-size: clamp(24px, 3vw, 36px); line-height: 1.2; margin-bottom: 24px; }
+.proof-number { display: block; font-size: clamp(44px, 7vw, 76px); letter-spacing: -.05em; }
+.proof-preview p { line-height: 1.6; }
+.proof-timings { margin-top: 20px; }
+.proof-timings div { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.proof-timings dd { margin: 0; font-weight: 700; }
+.proof-timings small { font-size: 11px; font-weight: 400; }
+.proof-reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.proof-reviews figure { margin: 0; }
+.proof-reviews blockquote { margin: 24px 0; line-height: 1.7; }
+@media(max-width: 767px) { .proof-metrics, .proof-reviews { grid-template-columns: 1fr; } }
+@media(prefers-reduced-motion: no-preference) { .faq-items summary span { transition: transform 300ms ease; } }
