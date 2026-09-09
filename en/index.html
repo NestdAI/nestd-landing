@@ -42,18 +42,38 @@
 </nav>
 <div class="header-actions">
 <a class="language" data-language href="/" aria-label="Lees in het Nederlands">NL</a>
-<label class="theme-label">
-<span class="sr-only">Appearance</span>
+<fieldset class="theme-switch" hidden>
+<legend class="sr-only">Appearance</legend>
+<label title="System">
+<input class="sr-only" type="radio" name="theme" value="system" aria-label="System">
+<span aria-hidden="true">
 <svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
-<path d="M12 5a7 7 0 0 1 0 14Z" fill="currentColor"/>
+<rect x="3" y="4" width="18" height="13" rx="2"/>
+<path d="M8 21h8m-4-4v4"/>
 </svg>
-<select id="theme" aria-label="Appearance">
-<option value="system">System</option>
-<option value="light">Light</option>
-<option value="dark">Dark</option>
-</select>
+</span>
 </label>
+<label title="Light">
+<input class="sr-only" type="radio" name="theme" value="light" aria-label="Light">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+</span>
+</label>
+<label title="Dark">
+<input class="sr-only" type="radio" name="theme" value="dark" aria-label="Dark">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>
+</svg>
+</span>
+</label>
+</fieldset>
+<noscript>
+<span class="theme-fallback">System</span>
+</noscript>
 <a class="nav-download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="nav" target="_blank" rel="noopener">Get the app <span aria-hidden="true">↗</span>
 </a>
 </div>
@@ -81,7 +101,7 @@
 <span>Download on the App Store</span>
 <span aria-hidden="true">↗</span>
 </a>
-<small>For iPhone · Paid subscription</small>
+<small>For iPhone · First week free, then €19.99/month</small>
 </div>
 <a class="text-link" href="#how">See how Nestd helps <span aria-hidden="true">↓</span>
 </a>
@@ -186,15 +206,97 @@
 </div>
 </div>
 </section>
+<section class="wrap section reach" id="speed">
+<div class="section-heading">
+<p class="eyebrow">Built for the moment that matters</p>
+<h2>Rental listings don’t wait.<br>
+<span>Why should you?</span>
+</h2>
+<p class="lead">A home can appear while you’re studying, working or on the move. Nestd takes care of the repeated checking and brings relevant listings to you.</p>
+</div>
+<div class="reach-cards">
+<article>
+<span class="reach-icon" aria-hidden="true">◎</span>
+<h3>More places. One search.</h3>
+<p>Rental listings are spread across platforms and letting agents. Nestd brings multiple sources together, so you don’t have to keep checking the same websites.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">⌖</span>
+<h3>Your needs as a filter.</h3>
+<p>Not every new listing deserves your attention. City, budget, rooms and floor area help identify the homes worth a look.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">↗</span>
+<h3>From an alert to a response.</h3>
+<p>Open the home from your alert, check its conditions and continue to the original provider. Fewer detours between spotting a home and responding yourself.</p>
+</article>
+</div>
+<div class="source-band">
+<p class="eyebrow">Including listings from</p>
+<ul aria-label="Including listings from">
+<li>Funda</li>
+<li>Pararius</li>
+<li>Kamernet</li>
+<li>Vesteda</li>
+<li>123Wonen</li>
+<li>Rotsvast</li>
+</ul>
+<p class="caption">Listings vary by source and area. Nestd is independent of these providers; some require their own account or payment.</p>
+</div>
+<p class="caption speed-note">Alert timing depends on the source, processing and your phone connection. Always check current availability with the provider.</p>
+</section>
 <section class="wrap story-teaser section">
 <p class="eyebrow">Why Nestd exists</p>
 <div class="story-teaser-inner">
-<h2>You want a home.<br>Not an endless search.</h2>
+<h2>A student. A young professional.<br>
+<span>The same search.</span>
+</h2>
 <div>
-<p class="lead">Another tab. Another refresh. Still a little too late. That frustration is why Nestd exists. We want to make the search lighter, leaving more room for the rest of your life.</p>
+<p class="lead">We built Nestd around something we know first-hand: how difficult it is to find a rental home. One of us is studying, the other is working. You want to move forward, but your attention keeps returning to the same listings. There had to be an easier way.</p>
 <a class="text-link" href="/en/about.html">Read our story <span aria-hidden="true">↗</span>
 </a>
 </div>
+</div>
+</section>
+<section class="experiences">
+<div class="wrap experiences-inner">
+<div>
+<p class="eyebrow">Experiences with Nestd</p>
+<h2>Your search.<br>
+<span>Your story.</span>
+</h2>
+</div>
+<div>
+<p class="lead">Already using Nestd? Tell us what helps and what could be better. Your feedback helps us build an app that makes the rental search easier.</p>
+<a class="text-link" href="mailto:hello@nestd.nl?subject=Nestd%20ervaring">Share your experience <span aria-hidden="true">↗</span>
+</a>
+<a class="review-store" href="https://apps.apple.com/nl/app/nestd/id6761392857" target="_blank" rel="noopener">Read ratings on the App Store <span aria-hidden="true">↗</span>
+</a>
+<p class="caption">We only publish personal experiences with permission.</p>
+</div>
+</div>
+</section>
+<section class="wrap home-offer">
+<div>
+<p class="eyebrow">The Nestd subscription</p>
+<h2>Give your search a head start.</h2>
+<p class="lead">Discover what Nestd can do for your search for one free week. Then €19.99 per month.</p>
+</div>
+<div>
+<div class="offer-summary">
+<span class="trial-pill">Your first week is free</span>
+<p>
+<strong>€19.99</strong> <span>/ month</span>
+</p>
+</div>
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="home-offer" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download on the App Store</span>
+<span aria-hidden="true">↗</span>
+</a>
+<p class="caption">After the first free week, the subscription costs €19.99 per month. Review trial eligibility, renewal and cancellation terms on the purchase screen before confirming.</p>
 </div>
 </section>
 <section class="wrap faq" id="faq">
@@ -209,9 +311,9 @@
 <p>Nestd follows rental listings and tells you when a home matches your search preferences. View the home in the app and respond through the provider. Nestd does not rent out properties itself.</p>
 </details>
 <details>
-<summary>Is Nestd free?<span aria-hidden="true">+</span>
+<summary>What does Nestd cost after the free week?<span aria-hidden="true">+</span>
 </summary>
-<p>Nestd requires a paid subscription. You can see the current price, duration and subscription terms in the app before subscribing.</p>
+<p>Your first week is free. After that, Nestd costs €19.99 per month. It is a paid subscription, not a permanently free plan. Check the trial, renewal and cancellation terms in the app before confirming.</p>
 </details>
 <details>
 <summary>What can I search for?<span aria-hidden="true">+</span>
@@ -247,7 +349,7 @@
 <span>Download on the App Store</span>
 <span aria-hidden="true">↗</span>
 </a>
-<small>For iPhone · Paid subscription</small>
+<small>For iPhone · First week free, then €19.99/month</small>
 </div>
 <div class="sun-mark" aria-hidden="true">✳</div>
 </div>

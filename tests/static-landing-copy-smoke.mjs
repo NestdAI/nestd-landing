@@ -22,7 +22,7 @@ for (const page of pages) {
   );
   assert.doesNotMatch(
     html,
-    /WhatsApp|Telegram|Duo Zoeken|AI-matching|Google Play|6740091498|€19|€0|92%|testimonials/i,
+    /WhatsApp|Telegram|Duo Zoeken|AI-matching|Google Play|6740091498|€0|92%|testimonials/i,
     page + " does not advertise obsolete/unverified features",
   );
   assert.match(html, /<link rel="canonical"/);
@@ -34,7 +34,12 @@ for (const page of pages) {
       html.indexOf("/assets/site.css"),
     "theme runs before stylesheet",
   );
-  assert.match(html, /Betaald abonnement|Paid subscription/);
+  assert.match(html, /€19[,.]99/);
+  assert.match(
+    html,
+    /Eerste week gratis|First week free|eerste gratis week|first free week/,
+  );
+  assert.doesNotMatch(html, /snelste|meeste platforms|fastest|most platforms/i);
 }
 assert.ok(
   read("about.html").includes("Een realistische missie."),

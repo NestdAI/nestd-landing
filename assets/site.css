@@ -220,30 +220,6 @@ h3 {
   display: grid;
   place-items: center;
 }
-.theme-label {
-  position: relative;
-  width: 40px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-}
-.theme-label svg {
-  width: 22px;
-  height: 22px;
-}
-.theme-label select {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-}
-.theme-label:focus-within {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 5px;
-}
 .nav-download {
   background: var(--ink);
   color: var(--bg);
@@ -1498,4 +1474,276 @@ details > p {
   .legal-page h2 {
     font-size: 23px;
   }
+}
+
+/* A real three-position control: visible state, native radio keys and touch targets. */
+.theme-switch {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 3px;
+  margin: 0;
+  min-width: 0;
+  background: var(--surface);
+}
+.theme-switch[hidden] {
+  display: none;
+}
+.theme-switch label {
+  position: relative;
+  cursor: pointer;
+}
+.theme-switch label > span {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.theme-switch input:checked + span {
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: 0 2px 5px #0002;
+}
+.theme-switch input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.theme-switch label:hover > span {
+  transform: translateY(-1px);
+}
+.theme-fallback {
+  font-size: 11px;
+  color: var(--muted);
+}
+.caption {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.reach {
+  border-bottom: 1px solid var(--line);
+}
+.reach .section-heading {
+  max-width: 760px;
+}
+.reach .lead {
+  margin-top: 24px;
+}
+.reach-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 45px;
+}
+.reach-cards article {
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.reach-icon {
+  display: block;
+  color: var(--accent);
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+.reach-cards h3 {
+  font-size: 22px;
+}
+.reach-cards p {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.source-band {
+  margin-top: 45px;
+}
+.source-band ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 12px;
+  padding: 0;
+  margin: 20px 0;
+}
+.source-band li {
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-weight: 750;
+}
+.speed-note {
+  margin-top: 16px;
+}
+.experiences {
+  background: var(--surface);
+  padding-block: 70px;
+}
+.experiences-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+.experiences h2 {
+  margin-top: 20px;
+}
+.experiences .text-link {
+  margin-top: 22px;
+}
+.review-store {
+  display: block;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 13px;
+  margin-block: 22px;
+}
+.home-offer {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  padding-block: 85px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.home-offer h2 {
+  font-size: 44px;
+  margin-block: 20px;
+}
+.home-offer .caption {
+  max-width: 380px;
+  margin-top: 20px;
+}
+.offer-summary {
+  margin-block: 26px;
+}
+.trial-pill {
+  display: inline-block;
+  background: var(--soft);
+  color: var(--ink);
+  padding: 9px 15px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 750;
+}
+.offer-summary p {
+  margin-top: 16px;
+}
+.offer-summary strong {
+  font-size: 52px;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+}
+.offer-summary p > span {
+  color: var(--muted);
+  font-size: 15px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy {
+    animation: nestd-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .alert {
+    animation: nestd-enter 0.8s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .orbit {
+    animation: nestd-turn 2.5s ease-out;
+  }
+  .download,
+  .nav-download {
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+  .download:hover,
+  .nav-download:hover {
+    transform: translateY(-3px);
+  }
+  .reach-cards article {
+    transition: border-color 0.2s ease;
+  }
+  .reach-cards article:hover {
+    border-color: var(--accent);
+  }
+  @keyframes nestd-enter {
+    from {
+      opacity: 0.3;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes nestd-turn {
+    from {
+      opacity: 0.4;
+      transform: scale(0.7);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .nav-download {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .theme-switch label > span {
+    width: 36px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .reach-cards,
+  .experiences-inner,
+  .home-offer {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .reach-cards article {
+    padding: 24px;
+  }
+  .reach-icon {
+    margin-bottom: 14px;
+  }
+  .source-band li {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+  .experiences,
+  .home-offer {
+    padding-block: 60px;
+  }
+  .home-offer h2 {
+    font-size: 36px;
+  }
+  .offer-summary strong {
+    font-size: 48px;
+  }
+  .hero-cta small {
+    max-width: 280px;
+    line-height: 1.7;
+  }
+}
+
+.theme-switch svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

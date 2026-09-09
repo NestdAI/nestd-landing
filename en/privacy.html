@@ -42,18 +42,38 @@
 </nav>
 <div class="header-actions">
 <a class="language" data-language href="/privacy.html" aria-label="Lees in het Nederlands">NL</a>
-<label class="theme-label">
-<span class="sr-only">Appearance</span>
+<fieldset class="theme-switch" hidden>
+<legend class="sr-only">Appearance</legend>
+<label title="System">
+<input class="sr-only" type="radio" name="theme" value="system" aria-label="System">
+<span aria-hidden="true">
 <svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
-<path d="M12 5a7 7 0 0 1 0 14Z" fill="currentColor"/>
+<rect x="3" y="4" width="18" height="13" rx="2"/>
+<path d="M8 21h8m-4-4v4"/>
 </svg>
-<select id="theme" aria-label="Appearance">
-<option value="system">System</option>
-<option value="light">Light</option>
-<option value="dark">Dark</option>
-</select>
+</span>
 </label>
+<label title="Light">
+<input class="sr-only" type="radio" name="theme" value="light" aria-label="Light">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+</span>
+</label>
+<label title="Dark">
+<input class="sr-only" type="radio" name="theme" value="dark" aria-label="Dark">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>
+</svg>
+</span>
+</label>
+</fieldset>
+<noscript>
+<span class="theme-fallback">System</span>
+</noscript>
 <a class="nav-download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="nav" target="_blank" rel="noopener">Get the app <span aria-hidden="true">↗</span>
 </a>
 </div>

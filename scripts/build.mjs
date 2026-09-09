@@ -11,9 +11,27 @@ const url = (l, p = "") => (l === "en" ? "/en/" : "/") + p;
 function cta(c, placement = "body") {
   return `<a class="download" href="${APP}" data-cta-placement="${placement}" target="_blank" rel="noopener">${apple}<span>${c.appstore}</span>${arrow}</a>`;
 }
+const themeIcons = {
+  system:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>',
+  light:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>',
+  dark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>',
+};
 function header(c, l, p) {
   const other = l === "nl" ? "en" : "nl";
-  return `<a class="skip" href="#main">${c.skip}</a><header class="site-header"><div class="wrap header-inner"><a class="brand" href="${url(l)}" aria-label="Nestd ${c.home}"><img src="/logo.png" width="43" height="43" alt=""><span>nestd<span class="brand-dot">.</span></span></a><nav class="desktop-nav" aria-label="${c.menu}"><a href="${url(l)}#how">${c.how}</a><a href="${url(l, "about.html")}" ${p === "about.html" ? 'aria-current="page"' : ""}>${c.about}</a><a href="${url(l, "pricing.html")}" ${p === "pricing.html" ? 'aria-current="page"' : ""}>${c.pricing}</a></nav><div class="header-actions"><a class="language" data-language href="${url(other, p)}" aria-label="${c.language}">${other.toUpperCase()}</a><label class="theme-label"><span class="sr-only">${c.theme}</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 5a7 7 0 0 1 0 14Z" fill="currentColor"/></svg><select id="theme" aria-label="${c.theme}"><option value="system">${c.system}</option><option value="light">${c.light}</option><option value="dark">${c.dark}</option></select></label><a class="nav-download" href="${APP}" data-cta-placement="nav" target="_blank" rel="noopener">${c.download} ${arrow}</a></div></div><nav class="mobile-nav wrap" aria-label="${c.menu}"><a href="${url(l)}#how">${c.how}</a><a href="${url(l, "about.html")}">${c.about}</a><a href="${url(l, "pricing.html")}">${c.pricing}</a></nav></header>`;
+  return `<a class="skip" href="#main">${c.skip}</a><header class="site-header"><div class="wrap header-inner"><a class="brand" href="${url(l)}" aria-label="Nestd ${c.home}"><img src="/logo.png" width="43" height="43" alt=""><span>nestd<span class="brand-dot">.</span></span></a><nav class="desktop-nav" aria-label="${c.menu}"><a href="${url(l)}#how">${c.how}</a><a href="${url(l, "about.html")}" ${p === "about.html" ? 'aria-current="page"' : ""}>${c.about}</a><a href="${url(l, "pricing.html")}" ${p === "pricing.html" ? 'aria-current="page"' : ""}>${c.pricing}</a></nav><div class="header-actions"><a class="language" data-language href="${url(other, p)}" aria-label="${c.language}">${other.toUpperCase()}</a><fieldset class="theme-switch" hidden><legend class="sr-only">${c.theme}</legend>${[
+    ["system", c.system],
+    ["light", c.light],
+    ["dark", c.dark],
+  ]
+    .map(
+      ([value, label]) =>
+        `<label title="${label}"><input class="sr-only" type="radio" name="theme" value="${value}" aria-label="${label}"><span aria-hidden="true">${themeIcons[value]}</span></label>`,
+    )
+    .join(
+      "",
+    )}</fieldset><noscript><span class="theme-fallback">${c.system}</span></noscript><a class="nav-download" href="${APP}" data-cta-placement="nav" target="_blank" rel="noopener">${c.download} ${arrow}</a></div></div><nav class="mobile-nav wrap" aria-label="${c.menu}"><a href="${url(l)}#how">${c.how}</a><a href="${url(l, "about.html")}">${c.about}</a><a href="${url(l, "pricing.html")}">${c.pricing}</a></nav></header>`;
 }
 function closing(c) {
   return `<section class="closing"><div class="wrap closing-inner"><div><p class="eyebrow">${c.closingLabel}</p><h2>${c.closing}</h2></div><div class="closing-action"><p>${c.closingNote}</p>${cta(c, "closing")}<small>${c.iphone}</small></div><div class="sun-mark" aria-hidden="true">✳</div></div></section>`;
@@ -24,17 +42,29 @@ function footer(c, l) {
 function faq(c) {
   return `<section class="wrap faq" id="faq"><div><p class="eyebrow">${c.faqLabel}</p><h2>${c.faqTitle}</h2></div><div class="faq-items">${c.faqs.map(([q, a]) => `<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join("")}</div></section>`;
 }
+function offer(c) {
+  return `<div class="offer-summary"><span class="trial-pill">${c.trial}</span><p><strong>${c.amount}</strong> <span>${c.period}</span></p></div>`;
+}
+function reach(c) {
+  return `<section class="wrap section reach" id="speed"><div class="section-heading"><p class="eyebrow">${c.speedLabel}</p><h2>${c.speedTitle}</h2><p class="lead">${c.speedIntro}</p></div><div class="reach-cards">${c.speedCards.map(([h, p], i) => `<article><span class="reach-icon" aria-hidden="true">${["◎", "⌖", "↗"][i]}</span><h3>${h}</h3><p>${p}</p></article>`).join("")}</div><div class="source-band"><p class="eyebrow">${c.sourceLabel}</p><ul aria-label="${c.sourceLabel}">${["Funda", "Pararius", "Kamernet", "Vesteda", "123Wonen", "Rotsvast"].map((x) => `<li>${x}</li>`).join("")}</ul><p class="caption">${c.sourceNote}</p></div><p class="caption speed-note">${c.speedNote}</p></section>`;
+}
+function experiences(c) {
+  return `<section class="experiences"><div class="wrap experiences-inner"><div><p class="eyebrow">${c.reviewLabel}</p><h2>${c.reviewTitle}</h2></div><div><p class="lead">${c.reviewIntro}</p><a class="text-link" href="mailto:hello@nestd.nl?subject=Nestd%20ervaring">${c.reviewCta} ${arrow}</a><a class="review-store" href="${APP}" target="_blank" rel="noopener">${c.reviewStore} ${arrow}</a><p class="caption">${c.reviewNote}</p></div></div></section>`;
+}
+function homeOffer(c) {
+  return `<section class="wrap home-offer"><div><p class="eyebrow">${c.priceEyebrow}</p><h2>${c.offerTitle}</h2><p class="lead">${c.offerIntro}</p></div><div>${offer(c)}${cta(c, "home-offer")}<p class="caption">${c.priceNote}</p></div></section>`;
+}
 function home(c, l) {
   return `<section class="wrap hero"><div class="hero-copy"><p class="eyebrow"><span class="little-star" aria-hidden="true">✳</span> ${c.eyebrow}</p><h1>${c.hero}</h1><p class="lead">${c.intro}</p><div class="hero-cta">${cta(c, "hero")}<small>${c.iphone}</small></div><a class="text-link" href="#how">${c.heroLink} <span aria-hidden="true">↓</span></a></div><figure class="hero-art"><div class="photo-arch"><img src="/assets/amsterdam.jpg" width="1400" height="933" fetchpriority="high" alt="${l === "nl" ? "Amsterdamse grachtenpanden in het avondlicht" : "Amsterdam canal houses in the evening light"}"><span class="photo-note">${c.photoCaption}</span></div><div class="orbit" aria-hidden="true">✳</div><div class="alert"><img src="/logo.png" width="46" height="46" alt=""><div><div class="alert-brand">Nestd <span>●</span></div><strong>${c.alertTitle}</strong><p>${c.alertBody}</p></div><span class="alert-arrow" aria-hidden="true">↗</span></div><figcaption>${c.illustration}</figcaption></figure></section><div class="criteria-strip"><div class="wrap">${c.strip.map((s, i) => `<span>${s}</span>${i < 3 ? '<b aria-hidden="true">✳</b>' : ""}`).join("")}</div></div>
 <section class="wrap journey section" id="how"><div class="section-heading"><p class="eyebrow">${c.journeyLabel}</p><h2>${c.journeyTitle}</h2><p class="lead">${c.journeyIntro}</p></div><ol class="steps">${c.steps.map(([h, p], i) => `<li><span class="step-number">0${i + 1}</span><div><h3>${h}</h3><p>${p}</p></div></li>`).join("")}</ol></section>
 <section class="focus-section"><div class="wrap focus-inner"><div class="search-illustration"><div class="drawing-title"><span aria-hidden="true">⌂</span> ${l === "nl" ? "Mijn volgende plek" : "My next place"}</div><dl>${c.filters.map((f, i) => `<div><dt>${f}</dt><dd>${c.sample[i]}<span aria-hidden="true">${i === 0 ? "⌖" : "✓"}</span></dd></div>`).join("")}</dl><p>${c.sampleLabel}</p></div><div class="focus-copy"><p class="eyebrow">${c.focusLabel}</p><h2>${c.focusTitle}</h2><p class="lead">${c.focusIntro}</p><p class="focus-note"><span aria-hidden="true">↳</span> ${c.focusNote}</p></div></div></section>
-<section class="wrap story-teaser section"><p class="eyebrow">${c.storyLabel}</p><div class="story-teaser-inner"><h2>${c.storyTitle}</h2><div><p class="lead">${c.storyIntro}</p><a class="text-link" href="${url(l, "about.html")}">${c.storyLink} ${arrow}</a></div></div></section>${faq(c)}${closing(c)}`;
+${reach(c)}<section class="wrap story-teaser section"><p class="eyebrow">${c.storyLabel}</p><div class="story-teaser-inner"><h2>${c.storyTitle}</h2><div><p class="lead">${c.storyIntro}</p><a class="text-link" href="${url(l, "about.html")}">${c.storyLink} ${arrow}</a></div></div></section>${experiences(c)}${homeOffer(c)}${faq(c)}${closing(c)}`;
 }
 function about(c, l) {
   return `<section class="wrap about-hero"><p class="eyebrow">${c.aboutEyebrow}</p><h1>${c.aboutTitle}</h1><p class="lead">${c.aboutLead}</p></section><figure class="about-photo wrap"><img src="/assets/amsterdam.jpg" alt="${l === "nl" ? "Woningen langs een Amsterdamse gracht" : "Homes along an Amsterdam canal"}" width="1400" height="933"><figcaption>${c.aboutPhoto}</figcaption></figure><section class="wrap story-body">${c.aboutSections.map(([h, a, b], i) => `<article><div class="story-index">0${i + 1} <span aria-hidden="true">/</span> NESTD</div><div><h2>${h}</h2><p>${a}</p><p>${b}</p></div></article>`).join("")}</section><section class="principles"><div class="wrap"><p class="eyebrow">Nestd, ${l === "nl" ? "in drie gedachten" : "in three thoughts"}</p><h2>${c.principlesTitle}</h2><div class="principles-grid">${c.principles.map(([h, p], i) => `<article><span class="principle-symbol" aria-hidden="true">${["↗", "◎", "✳"][i]}</span><h3>${h}</h3><p>${p}</p></article>`).join("")}</div></div></section><section class="wrap contact section" id="contact"><div><p class="eyebrow">${c.contact}</p><h2>${c.contactTitle}</h2></div><div><p class="lead">${c.contactText}</p><a class="contact-mail" href="mailto:hello@nestd.nl">hello@nestd.nl ${arrow}</a></div></section>${closing(c)}`;
 }
 function pricing(c) {
-  return `<section class="wrap price-hero"><div><p class="eyebrow">${c.priceEyebrow}</p><h1>${c.priceTitle}</h1><p class="lead">${c.priceIntro}</p></div><div class="subscription"><div class="subscription-top"><img src="/logo.png" width="64" height="64" alt=""><span>Nestd</span><span aria-hidden="true">↗</span></div><ul>${c.priceFeatures.map((f) => `<li><span aria-hidden="true">✓</span>${f}</li>`).join("")}</ul>${cta(c, "subscription")}<p>${c.priceNote}</p></div></section><section class="wrap price-detail"><p class="eyebrow">${c.priceDetail}</p><h2>${c.priceValue}</h2></section>${faq(c)}${closing(c)}`;
+  return `<section class="wrap price-hero"><div><p class="eyebrow">${c.priceEyebrow}</p><h1>${c.priceTitle}</h1><p class="lead">${c.priceIntro}</p></div><div class="subscription"><div class="subscription-top"><img src="/logo.png" width="64" height="64" alt=""><span>Nestd</span><span aria-hidden="true">↗</span></div>${offer(c)}<ul>${c.priceFeatures.map((f) => `<li><span aria-hidden="true">✓</span>${f}</li>`).join("")}</ul>${cta(c, "subscription")}<p>${c.priceNote}</p></div></section><section class="wrap price-detail"><p class="eyebrow">${c.priceDetail}</p><h2>${c.priceValue}</h2></section>${faq(c)}${closing(c)}`;
 }
 function privacy(c, l) {
   const t = privacyContent[l];

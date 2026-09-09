@@ -84,10 +84,23 @@ try {
       await page.setViewportSize({ width: 1440, height: 950 });
     }
     assert.deepEqual(errors, [], "No marketing runtime exceptions");
+    await page.goto(origin + "/");
+    await page.locator('input[name="theme"][value="system"]').focus();
+    await page.keyboard.press("ArrowRight");
+    assert.equal(
+      await page.evaluate(() => localStorage.getItem("nestd-theme")),
+      "light",
+      "native radio arrow-key control",
+    );
+    await page
+      .locator('.theme-switch label:has(input[value="system"])')
+      .click();
     await page.goto(origin + "/?utm_source=meta&utm_campaign=fresh");
     await page
-      .locator("#theme")
-      .selectOption(colorScheme === "light" ? "dark" : "light");
+      .locator(
+        `.theme-switch label:has(input[value="${colorScheme === "light" ? "dark" : "light"}"])`,
+      )
+      .click();
     const selected = colorScheme === "light" ? "dark" : "light";
     assert.equal(
       await page.evaluate(() => localStorage.getItem("nestd-theme")),
@@ -105,7 +118,9 @@ try {
       selected,
       "theme persists on reload",
     );
-    await page.locator("#theme").selectOption("system");
+    await page
+      .locator('.theme-switch label:has(input[value="system"])')
+      .click();
     assert.equal(
       await page.locator("html").getAttribute("data-theme"),
       null,
@@ -171,6 +186,29 @@ try {
   await p.locator("summary").first().click();
   assert.equal(await p.locator("details").first().getAttribute("open"), "");
   await nojs.close();
+  const motionContext = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+  });
+  await motionContext.route(/posthog|facebook/, (r) => r.abort());
+  const mp = await motionContext.newPage();
+  await mp.goto(origin + "/");
+  await mp.locator("#speed").scrollIntoViewIfNeeded();
+  await mp.waitForTimeout(850);
+  assert.ok(await mp.locator(".reach-cards article").first().isVisible());
+  await mp.emulateMedia({ reducedMotion: "reduce" });
+  assert.equal(
+    await mp.evaluate(
+      () =>
+        document.getAnimations().filter((a) => a.playState === "running")
+          .length,
+    ),
+    0,
+    "reduced motion cancels running animation",
+  );
+  await mp.goto(origin + "/pricing.html");
+  assert.match(await mp.locator(".offer-summary").innerText(), /19,99/);
+  assert.match(await mp.locator(".subscription").innerText(), /eerste.*week/i);
+  await motionContext.close();
   console.log(
     `${renderChecks} viewport/theme checks; ${a11yChecks} axe page/theme scans; eight no-JS routes; local links, FAQ keyboard, system/persistent theme, bilingual attribution and CTA intent passed.`,
   );

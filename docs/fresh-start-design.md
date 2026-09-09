@@ -11,9 +11,19 @@
 
 An editorial housing identity: oversized Manrope typography, warm off-white and charcoal surfaces, coral details, Amsterdam canal photography, a single honestly labelled alert illustration, generous spacing and a numbered search journey. No phone-dashboard hero, testimonials without evidence, fake live listings or feature-card wall.
 
-Copy starts with the actual rental-search frustration: repeated refreshing, city/budget/rooms/area, relevant alerts and responding through the provider. Nestd is a paid iPhone app. Current price and duration are intentionally not invented; they are disclosed in the app before subscription. Muba B.V. appears only in legal/footer context.
+Copy starts with the actual rental-search frustration: repeated refreshing, city/budget/rooms/area, relevant alerts and responding through the provider. Nestd is a paid iPhone app. On 9 September Hicham confirmed the offer: first week free, then €19.99/month. This supersedes the initial price-unspecified draft; app/store billing configuration still needs release verification. Muba B.V. appears only in legal/footer context.
 
 About is a substantial narrative: the search ritual, why Nestd reverses it, what remains the renter's choice, realistic limits, guiding principles and an actual contact link. No invented founders, milestones or users.
+
+## Refinement — 9 September, afternoon
+
+- Proper native radio theme control: system/light/dark icons, keyboard navigation, persistent choice and cross-tab synchronization.
+- Finite hero/alert animation and progressive scroll entrances. Content is visible without scripts; reduced-motion disables/cancels animation. No looping motion.
+- Confirmed pricing/trial on home, pricing, FAQ and CTA notes in both languages.
+- Founder premise supplied by Hicham: a student and a young professional with personal rental-search difficulty. Editorial story uses that premise without fictional names, milestones or housing outcomes.
+- Multi-source/filter/alert-to-provider explanation. Named source examples were checked against the app's `listingSources.ts` (21 configured sources). This is not proof of continuous source health or comparative market leadership: no “fastest” or “most platforms” assertion is published.
+- Public NL App Store customer-review feed returned no entries on this check. No genuine quotes were supplied. The experience section invites feedback and links to App Store ratings; it does not fabricate testimonials or star ratings.
+- Local build/static tests and full browser suite passed after this refinement, including native-radio keyboard operation and reduced-motion switching. Screenshots: `docs/polish-screenshots/`.
 
 ## Implementation
 

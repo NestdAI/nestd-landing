@@ -6,7 +6,7 @@ export const content = {
     pricing: "Abonnement",
     download: "Download de app",
     appstore: "Download in de App Store",
-    iphone: "Voor iPhone · Betaald abonnement",
+    iphone: "Voor iPhone · Eerste week gratis, daarna €19,99/maand",
     skip: "Naar de inhoud",
     menu: "Menu",
     theme: "Weergave",
@@ -51,9 +51,10 @@ export const content = {
     sampleLabel: "Voorbeeld van zoekwensen · ingesteld in de app",
     focusNote: "Jouw wensen veranderen? Pas je zoekcriteria aan in Nestd.",
     storyLabel: "Waarom Nestd bestaat",
-    storyTitle: "Je wilt een thuis.<br>Geen eindeloze zoektocht.",
+    storyTitle:
+      "Een student. Een young professional.<br><span>Dezelfde zoektocht.</span>",
     storyIntro:
-      "Nog een tabblad. Nog een keer verversen. En toch net te laat. Die frustratie is de reden achter Nestd. We willen het zoekwerk lichter maken, zodat er meer ruimte overblijft voor de rest van je leven.",
+      "We bouwden Nestd vanuit iets wat we zelf kennen: hoe moeilijk het is om een huurwoning te vinden. De één zoekt naast een studie, de ander naast het werk. Je wilt vooruit, maar je aandacht gaat steeds weer naar dezelfde advertenties. Dat moest makkelijker kunnen.",
     storyLink: "Lees ons verhaal",
     faqLabel: "Goed om te weten",
     faqTitle: "Nog even dit.",
@@ -63,8 +64,8 @@ export const content = {
         "Nestd volgt het huuraanbod en laat je weten wanneer een woning bij je ingestelde zoekwensen past. Je bekijkt de woning in de app en reageert via de aanbieder. Nestd verhuurt zelf geen woningen.",
       ],
       [
-        "Is Nestd gratis?",
-        "Nestd werkt met een betaald abonnement. De actuele prijs, looptijd en abonnementsvoorwaarden zie je in de app voordat je een abonnement afsluit.",
+        "Wat kost Nestd na de gratis week?",
+        "Je eerste week is gratis. Daarna kost Nestd €19,99 per maand. Het is een betaald abonnement, geen blijvend gratis versie. Controleer de voorwaarden voor de proefperiode, verlenging en opzegging in de app voordat je bevestigt.",
       ],
       [
         "Waarop kan ik zoeken?",
@@ -90,13 +91,13 @@ export const content = {
     aboutTitle:
       "Een huis zoeken<br>mag niet je hele<br><span>leven overnemen.</span>",
     aboutLead:
-      "Een eigen plek is iets om naar uit te kijken. Maar de weg ernaartoe? Die voelt te vaak als werk dat nooit af is.",
+      "Wij zijn een student en een young professional die zelf hebben ervaren hoe lastig een huurwoning vinden is. Vanuit die gedeelde frustratie bouwen we Nestd: minder zoeken als dagtaak, meer ruimte voor je volgende stap.",
     aboutPhoto: "Voor de plek waar jouw dagelijks leven straks begint.",
     aboutSections: [
       [
-        "Herkenbaar, helaas.",
-        "Je kent het ritueel. Even kijken tijdens de lunch. Nog een keer in de trein. Voor het slapen toch weer die websites openen. De woningen die niet passen blijven langskomen. Die ene die wél past? Daar had je eerder bij willen zijn.",
-        "Zoeken vraagt aandacht die je ook nodig hebt voor je werk, je studie, de mensen om je heen. Nestd begint bij een simpele gedachte: dat voortdurende controleren zou niet jouw taak hoeven zijn.",
+        "Twee levens, dezelfde frustratie.",
+        "Een student en een young professional: andere agenda’s, maar dezelfde behoefte aan een eigen plek. We hebben zelf ervaren hoe moeilijk het is om een huurwoning te vinden. En hoeveel aandacht die zoektocht opeist naast de dingen die je eigenlijk wilt doen.",
+        "Zo ontstond de gedachte achter Nestd. Niet nog een website om elke dag te verversen, maar een app die het aanbod voor je volgt. Je vertelt wat je zoekt; een relevante melding brengt je terug wanneer er iets is om te bekijken.",
       ],
       [
         "Wij doen het zoekwerk. Jij maakt de keuze.",
@@ -130,9 +131,9 @@ export const content = {
     priceTitle:
       "Jij hebt al genoeg<br>te doen.<br><span>Laat ons meekijken.</span>",
     priceIntro:
-      "Met een betaald Nestd-abonnement laat je het terugkerende zoekwerk aan de app over. Jij richt je op de woningen die voor jou relevant zijn.",
+      "Probeer Nestd de eerste week gratis. Daarna betaal je €19,99 per maand om het terugkerende zoekwerk aan de app over te laten.",
     priceNote:
-      "Je ziet de actuele prijs en looptijd in de app, vóór je een abonnement afsluit.",
+      "Na de eerste gratis week wordt het abonnement €19,99 per maand. Bekijk de proefperiode, verlenging en opzegvoorwaarden in het aankoopscherm vóór je bevestigt.",
     priceFeatures: [
       "Zoekwensen op basis van stad, budget, kamers en oppervlakte",
       "Nieuw huuraanbod dat bij je criteria past",
@@ -142,6 +143,42 @@ export const content = {
     priceDetail: "Waar je voor betaalt",
     priceValue:
       "Niet voor nóg een lijst om doorheen te scrollen. Wel voor het volgen van aanbod en het herkennen van woningen die aansluiten op jouw zoekwensen.",
+    amount: "€19,99",
+    period: "/ maand",
+    trial: "Je eerste week is gratis",
+    offerTitle: "Geef je zoektocht een voorsprong.",
+    offerIntro:
+      "Ontdek een week lang wat Nestd voor jouw zoektocht kan doen. Daarna €19,99 per maand.",
+    speedLabel: "Gebouwd voor het moment dat telt",
+    speedTitle: "Het aanbod wacht niet.<br><span>Waarom zou jij?</span>",
+    speedIntro:
+      "Een woning kan verschijnen terwijl jij college volgt, werkt of onderweg bent. Nestd neemt het terugkerende controleren over en brengt relevant aanbod naar je toe.",
+    speedCards: [
+      [
+        "Meer plekken, één zoektocht.",
+        "Aanbod is verspreid over huurplatforms en makelaars. Nestd brengt meerdere bronnen samen, zodat je niet steeds dezelfde websites hoeft af te gaan.",
+      ],
+      [
+        "Jouw wensen als filter.",
+        "Niet elke nieuwe advertentie verdient je aandacht. Stad, budget, kamers en oppervlakte helpen het aanbod te vinden dat voor jou interessant is.",
+      ],
+      [
+        "Van melding naar reactie.",
+        "Open de woning vanuit je melding, bekijk de voorwaarden en ga door naar de oorspronkelijke aanbieder. Minder omwegen tussen iets zien en zelf reageren.",
+      ],
+    ],
+    sourceLabel: "Onder andere aanbod van",
+    sourceNote:
+      "Het aanbod verschilt per bron en regio. Nestd is onafhankelijk van deze aanbieders; sommige aanbieders vragen een eigen account of betaling.",
+    speedNote:
+      "De tijd tot een melding hangt af van de bron, verwerking en je telefoonverbinding. Bekijk altijd de actuele beschikbaarheid bij de aanbieder.",
+    reviewLabel: "Ervaringen met Nestd",
+    reviewTitle: "Jouw zoektocht.<br><span>Jouw verhaal.</span>",
+    reviewIntro:
+      "Gebruik je Nestd al? Vertel wat je helpt en wat beter kan. Zo bouwen we verder aan een app die woningzoeken echt makkelijker maakt.",
+    reviewCta: "Deel je ervaring",
+    reviewStore: "Bekijk beoordelingen in de App Store",
+    reviewNote: "We plaatsen persoonlijke ervaringen alleen met toestemming.",
   },
   en: {
     home: "Home",
@@ -150,7 +187,7 @@ export const content = {
     pricing: "Subscription",
     download: "Get the app",
     appstore: "Download on the App Store",
-    iphone: "For iPhone · Paid subscription",
+    iphone: "For iPhone · First week free, then €19.99/month",
     skip: "Skip to content",
     menu: "Menu",
     theme: "Appearance",
@@ -195,9 +232,10 @@ export const content = {
     sampleLabel: "Example preferences · set up in the app",
     focusNote: "Plans change? Update your search criteria in Nestd.",
     storyLabel: "Why Nestd exists",
-    storyTitle: "You want a home.<br>Not an endless search.",
+    storyTitle:
+      "A student. A young professional.<br><span>The same search.</span>",
     storyIntro:
-      "Another tab. Another refresh. Still a little too late. That frustration is why Nestd exists. We want to make the search lighter, leaving more room for the rest of your life.",
+      "We built Nestd around something we know first-hand: how difficult it is to find a rental home. One of us is studying, the other is working. You want to move forward, but your attention keeps returning to the same listings. There had to be an easier way.",
     storyLink: "Read our story",
     faqLabel: "Good to know",
     faqTitle: "A few answers.",
@@ -207,8 +245,8 @@ export const content = {
         "Nestd follows rental listings and tells you when a home matches your search preferences. View the home in the app and respond through the provider. Nestd does not rent out properties itself.",
       ],
       [
-        "Is Nestd free?",
-        "Nestd requires a paid subscription. You can see the current price, duration and subscription terms in the app before subscribing.",
+        "What does Nestd cost after the free week?",
+        "Your first week is free. After that, Nestd costs €19.99 per month. It is a paid subscription, not a permanently free plan. Check the trial, renewal and cancellation terms in the app before confirming.",
       ],
       [
         "What can I search for?",
@@ -234,13 +272,13 @@ export const content = {
     aboutTitle:
       "Finding a home<br>shouldn’t take over<br><span>your whole life.</span>",
     aboutLead:
-      "A place of your own is something to look forward to. But getting there? Too often, it feels like a job that never ends.",
+      "We are a student and a young professional who have experienced how hard finding a rental home can be. That shared frustration is why we are building Nestd: less searching as a second job, more space for your next step.",
     aboutPhoto: "For the place where your everyday life will begin.",
     aboutSections: [
       [
-        "Sound familiar?",
-        "You know the routine. A quick check over lunch. Another on the train. Opening those same websites before bed. The places that don’t fit keep turning up. The one that does? You wish you had seen it sooner.",
-        "Searching takes attention you also need for work, study and the people around you. Nestd starts with a simple thought: all that constant checking shouldn’t have to be your job.",
+        "Two lives. The same frustration.",
+        "A student and a young professional: different schedules, the same need for a place of our own. We have experienced how difficult finding a rental can be, and how much attention it takes away from the things you want to do.",
+        "That is where the idea for Nestd began. Not another website to refresh every day, but an app that follows the listings for you. Tell it what you need; a relevant alert brings you back when there is something worth a look.",
       ],
       [
         "We follow the listings. You make the choice.",
@@ -274,9 +312,9 @@ export const content = {
     priceTitle:
       "You have enough<br>on your plate.<br><span>Let us look out.</span>",
     priceIntro:
-      "With a paid Nestd subscription, you leave the repetitive checking to the app. Focus on the homes that are relevant to you.",
+      "Try Nestd free for your first week. Then pay €19.99 per month to let the app handle the repetitive checking.",
     priceNote:
-      "See the current price and duration in the app before you subscribe.",
+      "After the first free week, the subscription costs €19.99 per month. Review trial eligibility, renewal and cancellation terms on the purchase screen before confirming.",
     priceFeatures: [
       "Search preferences for city, budget, rooms and floor area",
       "New rental listings that fit your criteria",
@@ -286,5 +324,41 @@ export const content = {
     priceDetail: "What you are paying for",
     priceValue:
       "Not another list to scroll through. But following rental listings and identifying the homes that match your search preferences.",
+    amount: "€19.99",
+    period: "/ month",
+    trial: "Your first week is free",
+    offerTitle: "Give your search a head start.",
+    offerIntro:
+      "Discover what Nestd can do for your search for one free week. Then €19.99 per month.",
+    speedLabel: "Built for the moment that matters",
+    speedTitle: "Rental listings don’t wait.<br><span>Why should you?</span>",
+    speedIntro:
+      "A home can appear while you’re studying, working or on the move. Nestd takes care of the repeated checking and brings relevant listings to you.",
+    speedCards: [
+      [
+        "More places. One search.",
+        "Rental listings are spread across platforms and letting agents. Nestd brings multiple sources together, so you don’t have to keep checking the same websites.",
+      ],
+      [
+        "Your needs as a filter.",
+        "Not every new listing deserves your attention. City, budget, rooms and floor area help identify the homes worth a look.",
+      ],
+      [
+        "From an alert to a response.",
+        "Open the home from your alert, check its conditions and continue to the original provider. Fewer detours between spotting a home and responding yourself.",
+      ],
+    ],
+    sourceLabel: "Including listings from",
+    sourceNote:
+      "Listings vary by source and area. Nestd is independent of these providers; some require their own account or payment.",
+    speedNote:
+      "Alert timing depends on the source, processing and your phone connection. Always check current availability with the provider.",
+    reviewLabel: "Experiences with Nestd",
+    reviewTitle: "Your search.<br><span>Your story.</span>",
+    reviewIntro:
+      "Already using Nestd? Tell us what helps and what could be better. Your feedback helps us build an app that makes the rental search easier.",
+    reviewCta: "Share your experience",
+    reviewStore: "Read ratings on the App Store",
+    reviewNote: "We only publish personal experiences with permission.",
   },
 };
