@@ -2,13 +2,15 @@
 
 ## Competitor-informed conversion pass
 
-Read live Stekkies, RentSlam and Rentbird on9September; all quantitative/competitive statements remain attributed assertions, not verified Nestd benchmarks. Full source comparison, implemented changes, seven prioritized app/platform proposals (impact/effort/measurement), and the measurement plan are in [the companion review](competitor-conversion-review-2026-09-09.md).
+Read live Stekkies, RentSlam and Rentbird on9September; all quantitative/competitive statements remain attributed assertions, not verified Nestd benchmarks. Full source comparison, implemented changes, prioritized app/platform proposals (impact/effort/measurement), and the measurement plan are in [the companion review](competitor-conversion-review-2026-09-09.md).
 
 Implemented: a user-controlled, keyboard-accessible illustrative walkthrough replacing repeated static feature/procedure sections; clearer paid-service vs provider responsibilities on Home/Pricing; why-pay, variable-volume and provider-access FAQs; explicit post-download purchase/setup steps; fixed-step interaction analytics that do not claim conversion outcomes. No fake search input, live demo data or backend activity. Full NL/EN About and both persistent themes remain. The new scrolled-state axe regression found/fixed the light mobile sticky CTA's older, higher-specificity dark background rule. A mobile lab run also exposed a0.192 layout shift from late header enhancement; switching the fallback to the existing pre-paint JS signal and reserving appearance-control space removed it. A delayed-script regression verifies stable header geometry.
 
 Fresh evidence in `test-artifacts/landing-conversion-2026-09-09/` covers both themes/locales desktop/mobile, About, pricing/download,320px and all walkthrough stages. Isolated walkthrough/clarity section crops omit the fixed mobile CTA to keep the entire section readable; a separate real viewport capture includes it. Prior third-pass screenshots remain available for comparison. All examples remain clearly labelled illustrations.
 
 New tests cover all walkthrough states in both themes, keyboard arrows/Home/End, noJS full-step fallback, contrast, typed-input/form absence, intent-only event fields, clear download steps and delayed-script header geometry. Fresh final mobile Lighthouse local lab:97 Performance/100 Accessibility/100 Best Practices/100 SEO, LCP2.6s,TBT10ms,CLS0 (third-party analytics blocked; not production or delivery performance). Final full-suite results and exact-head preview verification appear in the PR/closeout. No app/platform proposals were implemented or advertised as shipped. No price question repeated, no invented amount/trial, no merge/production/protection changes.
+
+The independent parent competitor report was subsequently read in full and reconciled in the companion review: existing PR175 search/permission/deeplink code is distinguished from released behavior, with additional first-alert and duplicate/stale-alert acceptance criteria and a comparable-speed/experiment methodology. This follow-up changes documentation only; the conversion screenshots remain representative.
 
 ## Third quality revision — first-class light/dark and a full About destination
 
