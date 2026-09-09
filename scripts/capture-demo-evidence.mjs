@@ -1,4 +1,5 @@
 import { chromium } from "@playwright/test";
+const dir = process.argv[2] || "test-artifacts/landing-conversion-2026-09-09";
 const b = await chromium.launch({ channel: "chrome" });
 for (const [lang, theme, width] of [
   ["nl", "light", 1440],
@@ -16,17 +17,17 @@ for (const [lang, theme, width] of [
     await p.getByRole("tab").nth(i).click();
     await p.locator(".product-demo").screenshot({
       style: ".mobile-sticky { visibility: hidden !important; }",
-      path: `test-artifacts/landing-conversion-2026-09-09/demo-${lang}-${theme}-${width}-step${i + 1}.png`,
+      path: `${dir}/demo-${lang}-${theme}-${width}-step${i + 1}.png`,
     });
   }
   await p.locator(".clarity-section").screenshot({
     style: ".mobile-sticky { visibility: hidden !important; }",
-    path: `test-artifacts/landing-conversion-2026-09-09/clarity-${lang}-${theme}-${width}.png`,
+    path: `${dir}/clarity-${lang}-${theme}-${width}.png`,
   });
   if (width < 760) {
     await p.getByRole("tab").nth(1).click();
     await p.screenshot({
-      path: `test-artifacts/landing-conversion-2026-09-09/demo-${lang}-${theme}-${width}-viewport.png`,
+      path: `${dir}/demo-${lang}-${theme}-${width}-viewport.png`,
     });
   }
   await c.close();

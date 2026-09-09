@@ -7,10 +7,10 @@ export const publicProof = {
 };
 export const storefront = {
   nl: {
-    badge: "WONINGZOEKEN, OP JOUW VOORWAARDEN",
-    hero: "Je volgende thuis.<br><em>Blijf klaar om<br>te reageren.</em>",
+    badge: "VOOR HUURWONINGZOEKERS IN NEDERLAND",
+    hero: "Stop met refreshen.<br><em>Vind je volgende<br>huurwoning.</em>",
     intro:
-      "Jouw woonwensen. Relevant huuraanbod. Een melding om in actie te komen. Nestd brengt je zoektocht samen in één app.",
+      "Steeds dezelfde woningwebsites openen, scrollen en nét te laat zijn. Nestd brengt huurwoningen rond jouw zoekfilters en meldingen samen, zodat jij kunt kijken en reageren bij de aanbieder.",
     screen: [
       "Jouw zoektocht",
       "Nieuwste woningen",
@@ -75,10 +75,10 @@ export const storefront = {
     storeLink: "Naar de App Store",
   },
   en: {
-    badge: "YOUR RENTAL SEARCH, YOUR WAY",
-    hero: "Your next home.<br><em>Stay ready for<br>your next move.</em>",
+    badge: "FOR RENTAL SEEKERS IN THE NETHERLANDS",
+    hero: "Stop refreshing.<br><em>Find your next<br>rental home.</em>",
     intro:
-      "Your housing needs. Relevant rentals. An alert to take the next step. Nestd brings your search together in one app.",
+      "Checking the same rental websites, scrolling again and spotting a home too late. Nestd brings rentals around your filters and housing alerts together, so you can review a listing and respond with the provider.",
     screen: [
       "Your search",
       "Latest homes",

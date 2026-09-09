@@ -7,9 +7,9 @@ export const copy = {
     skip: "Ga naar inhoud",
     menu: "Menu",
     close: "Sluiten",
-    title: "Nestd — Woningmeldingen. Klaar om te reageren.",
+    title: "Nestd — Stop met refreshen. Vind je volgende huurwoning.",
     description:
-      "Minder woningwebsites refreshen. Ontdek huurwoningen die bij je zoekfilters passen en zet de volgende stap bij de aanbieder. Nestd is een betaalde dienst.",
+      "Huurwoning zoeken in Nederland? Stel stad, budget, kamers en oppervlakte in. Ontdek aanbod met woningmeldingen en reageer bij de aanbieder. Betaald abonnement.",
     eyebrow: "VOOR JE VOLGENDE THUIS",
     hero: "Minder refreshen.<br>Meer <em>reageren.</em>",
     intro:
@@ -79,7 +79,7 @@ export const copy = {
     includes: [
       "Zoekfilters voor jouw woonwensen",
       "Huurwoningaanbod op één plek",
-      "Woningmeldingen via beschikbare appkanalen",
+      "Meldingen bij relevant huuraanbod",
       "Door naar de oorspronkelijke aanbieder",
     ],
     priceTerms:
@@ -87,7 +87,7 @@ export const copy = {
     noGuarantee:
       "Je betaalt voor de dienst, niet voor een woning. Nestd is geen makelaar en garandeert geen bezichtiging of huurcontract.",
     priceLink: "Alles over het abonnement",
-    faqTitle: "Nog even <em>dit.</em>",
+    faqTitle: "Vragen voordat je<br><em>de app opent?</em>",
     faqLabel: "GOED OM TE WETEN",
     faqs: [
       [
@@ -100,7 +100,7 @@ export const copy = {
       ],
       [
         "Welke woningen zie ik in Nestd?",
-        "Je zoekfilters bepalen welk aanbod relevant is. Stel je locatie, budget en woonwensen in en bekijk de details van een woning voordat je reageert.",
+        "Je stelt onder meer stad, budget, minimaal aantal kamers en minimale oppervlakte in. Nestd gebruikt je zoekfilters om het aanbod te richten. Bekijk de woningdetails en controleer de actuele beschikbaarheid en verhuurvoorwaarden bij de aanbieder.",
       ],
       [
         "Waar reageer ik op een woning?",
@@ -144,9 +144,9 @@ export const copy = {
     skip: "Skip to content",
     menu: "Menu",
     close: "Close",
-    title: "Nestd — Rental alerts. Ready to react.",
+    title: "Nestd — Stop refreshing. Find your next rental home.",
     description:
-      "Spend less time refreshing rental websites. Discover homes that fit your search filters and take the next step with the provider. Nestd is a paid service.",
+      "Looking for a rental in the Netherlands? Set your city, budget, rooms and floor area. Discover listings with rental alerts and respond with the provider. Paid subscription.",
     eyebrow: "FOR YOUR NEXT CHAPTER",
     hero: "Less refreshing.<br>More <em>responding.</em>",
     intro:
@@ -215,7 +215,7 @@ export const copy = {
     includes: [
       "Search filters for your housing needs",
       "Rental listings in one place",
-      "Rental alerts through available app channels",
+      "Alerts for relevant rental listings",
       "Continue to the original provider",
     ],
     priceTerms:
@@ -223,7 +223,7 @@ export const copy = {
     noGuarantee:
       "You pay for the service, not a home. Nestd is not an estate agent and does not guarantee a viewing or tenancy.",
     priceLink: "About the subscription",
-    faqTitle: "A few <em>good questions.</em>",
+    faqTitle: "Questions before<br><em>you open the app?</em>",
     faqLabel: "BEFORE YOU GET STARTED",
     faqs: [
       [
@@ -236,7 +236,7 @@ export const copy = {
       ],
       [
         "Which homes will I see in Nestd?",
-        "Your search filters determine which listings are relevant. Set your location, budget and housing needs, then review the details before responding.",
+        "Set your city, budget, minimum number of rooms and minimum floor area. Nestd uses your filters to focus the listings you see. Review the details and check current availability and rental conditions with the provider.",
       ],
       [
         "Where do I respond to a listing?",

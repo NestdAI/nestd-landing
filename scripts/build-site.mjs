@@ -5,6 +5,7 @@ import { aboutCopy } from "../content/about.mjs";
 import { storefront } from "../content/storefront.mjs";
 import { conversion } from "../content/conversion.mjs";
 import { demo, clarity, nextSteps } from "./conversion.mjs";
+import { searchNarrative, alertNarrative } from "./search-story.mjs";
 import { phones, trust, icon } from "./storefront.mjs";
 const privacy = JSON.parse(
   fs.readFileSync(new URL("../content/privacy.json", import.meta.url)),
@@ -41,7 +42,7 @@ function download(t, full = false) {
 }
 function home(t, lang) {
   const s = storefront[lang];
-  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow hero-badge">${icon("home")}${s.badge}</p><h1>${s.hero}</h1><p class="hero-intro">${s.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${conversion[lang].demoLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p><div class="hero-trust">${s.trustStrip.map((v, i) => `<span>${icon(["home", "shield", "mail"][i])}${v}</span>`).join("")}</div></div>${phones(t, lang)}</section>${demo(lang)}${clarity(lang)}<section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${trust(t, lang)}${faq(t, lang)}${download(t)}`;
+  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow hero-badge">${icon("home")}${s.badge}</p><h1>${s.hero}</h1><p class="hero-intro">${s.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${conversion[lang].demoLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p><div class="hero-trust">${s.trustStrip.map((v, i) => `<span>${icon(["home", "shield", "mail"][i])}${v}</span>`).join("")}</div></div>${phones(t, lang)}</section>${searchNarrative(lang)}${alertNarrative(lang)}${demo(lang)}${clarity(lang)}<section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${trust(t, lang)}${faq(t, lang)}${download(t)}`;
 }
 function pricing(t, lang) {
   return `<section class="section pricing-section page-intro" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h1>${t.pricingTitle}</h1><p class="section-intro">${t.pricingIntro}</p><p class="terms-copy">${t.priceTerms}</p><p class="fine-print">${t.noGuarantee}</p></div>${priceCard(t, "pricing_page")}</section>${clarity(lang)}${faq(t, lang)}${download(t)}`;

@@ -2,15 +2,15 @@
 export const conversion = {
   nl: {
     demoLabel: "BEKIJK DE ZOEKERVARING",
-    demoTitle: "Van jouw woonwensen<br>naar je volgende stap.",
+    demoTitle: "Vertel wat je zoekt.<br>Bekijk wat er nieuw is.",
     demoIntro:
-      "Zo passen zoeken, meldingen en reageren op elkaar aan. Bekijk de drie stappen.",
+      "Stel je criteria in, bekijk een nieuwe woningmelding en open de oorspronkelijke advertentie om zelf te reageren. Zo werkt de zoektocht in drie stappen.",
     demoNav: "Stappen van de zoekervaring",
     demoTabs: ["Je zoekwensen", "De woningmelding", "Zelf reageren"],
     demo: [
       [
         "Begin met wat voor jou telt.",
-        "Je locatie, budget en woonwensen geven richting aan je zoektocht. Houd je filters passend bij wat je echt zoekt.",
+        "In welke stad wil je wonen? Wat kun je aan huur betalen? Hoeveel kamers en oppervlakte heb je nodig? Begin met die concrete eisen.",
         "Je zoekprofiel is je vertrekpunt. Je beslist zelf welke woning interessant is.",
       ],
       [
@@ -26,8 +26,13 @@ export const conversion = {
     ],
     demoCaption:
       "Interactieve productillustratie · geen live zoekopdracht of app-screenshot",
-    fieldLabels: ["Locatie", "Budget", "Woonwensen"],
-    fieldValues: ["Waar je wilt wonen", "Wat bij je past", "Jouw voorkeuren"],
+    fieldLabels: ["Stad", "Budget", "Kamers", "Oppervlakte"],
+    fieldValues: [
+      "Waar je wilt wonen",
+      "Je maximale huur",
+      "Je minimum",
+      "Je minimale woonruimte",
+    ],
     alertTitle: "Een woning om te bekijken",
     alertBody: "Aanbod dat aansluit bij je zoekfilters.",
     example: "VOORBEELD",
@@ -96,15 +101,15 @@ export const conversion = {
   },
   en: {
     demoLabel: "EXPLORE THE SEARCH EXPERIENCE",
-    demoTitle: "From your housing needs<br>to your next move.",
+    demoTitle: "Set what you need.<br>See what’s new.",
     demoIntro:
-      "See how searching, alerts and responding connect. Explore the three steps.",
+      "Set your criteria, review a new rental alert and open the original listing to respond yourself. Explore the three steps.",
     demoNav: "Steps of the search experience",
     demoTabs: ["Your search", "The rental alert", "Your response"],
     demo: [
       [
         "Start with what matters to you.",
-        "Your location, budget and housing needs give your search direction. Keep your filters aligned with what you actually need.",
+        "Which city do you want to live in? What rent can you afford? How many rooms and how much space do you need? Start with those concrete requirements.",
         "Your search profile is a starting point. You decide which homes interest you.",
       ],
       [
@@ -120,11 +125,12 @@ export const conversion = {
     ],
     demoCaption:
       "Interactive product illustration · not a live search or app screenshot",
-    fieldLabels: ["Location", "Budget", "Housing needs"],
+    fieldLabels: ["City", "Budget", "Rooms", "Floor area"],
     fieldValues: [
       "Where you want to live",
-      "What works for you",
-      "Your preferences",
+      "Your maximum rent",
+      "Your minimum",
+      "The space you need",
     ],
     alertTitle: "A home worth a look",
     alertBody: "A listing that fits your search filters.",

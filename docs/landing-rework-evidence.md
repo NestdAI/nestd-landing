@@ -1,5 +1,24 @@
 # Paid rental-alert landing rework — 9 September 2026
 
+## Live Nestd content alignment — latest revision
+
+**Source, not competitor imitation:** independently fetched [current Home](https://www.nestd.nl/) and [current About](https://www.nestd.nl/about.html) on9September2026 at09:44UTC; both HTTP200. Continued from25efd60 on the same PR22 (6011250 is an earlier theme/About checkpoint, not a reset target). Hicham asked for content closer to the current site, so this is a content-led implementation, not another cosmetic redesign.
+
+| Live content | Implemented NL/EN adaptation | Deliberate boundary |
+| --- | --- | --- |
+| “Stop met refreshen. Nestd vindt je volgende huurwoning.” | Home hero “Stop met refreshen. Vind je volgende huurwoning.” / “Stop refreshing. Find your next rental home.”; Dutch-rental-specific introduction and metadata | Aspirational user action, not a promise Nestd will allocate a home; paid disclosure remains next to CTA |
+| Hard requirements: stad, budget, kamers, oppervlakte | Distinct full search section with four explained criteria, useful requirements narrative and fewer separate sites; all four also appear in walkthrough and FAQ | Existing `app/lib/searchProfiles.ts` read-only source check confirms budget_max/min_oppervlakte/min_kamers and location input; code support is not new release proof. No style inference, AI explanation or percentage score |
+| “Als snelheid telt, komt Nestd naar jou.” / fewer manual app checks | Separate substantial alerts section in both locales: relevant filters→new rental alert→photos/details→original provider and own response; preference/settings explanation | No WhatsApp/Telegram claim, guaranteed timing, benchmark or promise of zero noise. Notification artwork visibly labelled as an illustration |
+| Concrete how-it-works story | Retained real user-controlled three-step illustrative walkthrough, now with concrete questions about city/rent/rooms/space | No live query, data collection, automated response or profile-transfer promise |
+| About “Gebouwd uit frustratie”; own search experience, repeated forms and late discoveries | Restored direct headline and first-person origin paragraph in full NL/EN About; linked from the new alert story as well as existing prominent navigation | No invented team/history, named personas, crisis statistics or claim that Nestd fills forms |
+| “Vragen voordat je de app opent?” | Restored approachable FAQ framing, detailed criteria answer, retained payment/volume/provider/response/cancellation explanations | No free plan, old price, competitor price accusation or unsupported refund promise |
+
+The original live site's AI/free/duo/WhatsApp claims and wrong Apple ID are intentionally not restored. The verified iPhone destination remains6761392857. System/light/dark, full About, original legal body/date, Apple purchase guidance, QR/attribution and Vercel public-only dist packaging remain. No app/backend writes or production changes.
+
+Fresh screenshots: `test-artifacts/landing-live-content-2026-09-09/` — NL/EN light/dark desktop/mobile Home/About/Pricing/Download,320px, search/alert section detail and walkthrough states. Prior `landing-conversion-2026-09-09/` artifacts are the before comparison. Section crops omit fixed sticky CTA and unfocused offscreen skip link to avoid full-element capture artifacts; separate actual mobile viewport images preserve live controls. The skip link remains keyboard-visible and tested. Visual inspection covered desktop/light and desktop/dark narratives, mobile and320px, both languages and themes. No new large image/font dependency is added.
+
+Validation: build:vercel,7 existing content/contract tests and60 browser checks passed locally; final exact-head CI/Vercel readback is in the PR/closeout. Existing checks cover all routes/themes/locales, axe, links, keyboard, noJS,320px/reduced motion, theme persistence/prepaint, About and walkthrough. Final English FAQ text was captured after its update; remote CI validates the final generated files. Prior Lighthouse results are historical to25efd60, not a fresh performance run for this longer page. Preview remains login-required unless a new anonymous check proves otherwise. Price/period, app/store parity, legal and protected Linear access remain existing owner gates.
+
 ## Competitor-informed conversion pass
 
 Read live Stekkies, RentSlam and Rentbird on9September; all quantitative/competitive statements remain attributed assertions, not verified Nestd benchmarks. Full source comparison, implemented changes, prioritized app/platform proposals (impact/effort/measurement), and the measurement plan are in [the companion review](competitor-conversion-review-2026-09-09.md).

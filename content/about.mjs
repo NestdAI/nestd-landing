@@ -9,9 +9,9 @@ export const aboutCopy = {
     photo: "Een lichte woonkamer met planten en ruimte om thuis te komen",
     photoCaption: "Ruimte voor een nieuw hoofdstuk.",
     storyLabel: "WAAROM NESTD",
-    storyTitle: "Gebouwd vanuit een herkenbare frustratie.",
+    storyTitle: "Gebouwd uit frustratie.",
     story: [
-      "Steeds dezelfde woningwebsites openen. Eindeloos scrollen. Een interessante woning zien en merken dat je te laat bent. Die ervaring met de Nederlandse woningmarkt vormde het vertrekpunt voor Nestd.",
+      "Nestd is ontstaan uit eigen ervaring met de Nederlandse woningmarkt. Eindeloos scrollen op woningplatformen, dezelfde formulieren invullen en te laat reageren omdat je de woning miste. Die frustratie was ons vertrekpunt.",
       "Onze focus is de stap die je wél kunt beïnvloeden: weten welk aanbod bij je zoekwensen past, de details bekijken en klaarstaan om te reageren. Daarom brengen we huurwoningaanbod en woningmeldingen samen rond jouw zoekfilters.",
       "We lossen het woningtekort niet op en kiezen geen huurder voor een verhuurder. We willen je helpen om met meer overzicht en aandacht je eigen volgende stap te zetten.",
     ],
@@ -62,9 +62,9 @@ export const aboutCopy = {
     photo: "A bright living room with plants and space to feel at home",
     photoCaption: "Room for a new chapter.",
     storyLabel: "WHY NESTD",
-    storyTitle: "Built from a familiar frustration.",
+    storyTitle: "Built out of frustration.",
     story: [
-      "Opening the same rental websites again. Scrolling through listings. Finding an interesting home, only to realise you are too late. That experience of the Dutch housing market was the starting point for Nestd.",
+      "Nestd grew out of our own experience of the Dutch rental market: endless scrolling, filling in the same forms and responding too late because we had missed a listing. That frustration was our starting point.",
       "Our focus is the step you can influence: knowing which listings fit your search, reviewing the details and being ready to respond. That is why we bring rentals and housing alerts together around your search filters.",
       "We cannot solve the housing shortage or choose a tenant for a landlord. We want to help you take your own next step with more clarity and attention.",
     ],
