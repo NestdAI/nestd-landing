@@ -912,11 +912,11 @@ details p {
   .js .site-header nav:not(.open) {
     display: none;
   }
-  body:not(.js-ready) .site-header {
+  html:not(.js) body .site-header {
     height: auto;
     min-height: 78px;
   }
-  body:not(.js-ready) .site-header nav {
+  html:not(.js) body .site-header nav {
     position: static;
     flex-wrap: wrap;
     padding: 0;

@@ -159,3 +159,30 @@ for (const colorScheme of ["light", "dark"]) {
     }
   });
 }
+
+test("mobile header keeps its geometry while deferred handlers load", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let release;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/script.js", async (route) => {
+    await gate;
+    await route.continue();
+  });
+  await page.goto("/", { waitUntil: "commit" });
+  await expect(page.locator("#main")).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  const before = await page
+    .locator("#main")
+    .evaluate((el) => el.getBoundingClientRect().top);
+  release();
+  await page.waitForLoadState("domcontentloaded");
+  await expect(page.getByLabel("Weergave")).toBeVisible();
+  const after = await page
+    .locator("#main")
+    .evaluate((el) => el.getBoundingClientRect().top);
+  expect(after).toBe(before);
+});

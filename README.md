@@ -25,3 +25,7 @@ Vercel preview builds use `npm run build:vercel` and the explicit `dist` output 
 - `themes.css` owns semantic light/dark tokens, including phone illustrations, cards, purchase panels, nav and legal shell. CSS media queries follow system changes without JavaScript. Theme controls remain hidden when JavaScript is disabled; links and full content work normally.
 - `content/about.mjs` contains the complete NL/EN story, mission, principles and company/contact content. The original site's search-frustration story is retained; unsupported market figures/personas and former product claims are not.
 - `node scripts/capture-theme-evidence.mjs` captures both themes/locales at desktop/mobile, plus320px. Start `npm run preview` first.
+
+### Conversion walkthrough
+
+`content/conversion.mjs` and `scripts/conversion.mjs` own the localized demonstration and objection handling. `demo.js` progressively enhances readable static steps into accessible tabs; it makes no search/backend request. Interaction analytics contain only fixed step number and click/keyboard method. Product/platform recommendations are explicitly separate in `docs/competitor-conversion-review-2026-09-09.md`.

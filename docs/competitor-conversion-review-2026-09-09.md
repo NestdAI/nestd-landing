@@ -1,0 +1,53 @@
+# Competitor-informed conversion review and product proposals
+
+9 September 2026 · Nestd landing PR22 · read-only competitor review; landing implementation only.
+
+## Executive assessment
+
+The useful lesson is not to match the largest number or loudest speed claim. These funnels quickly make the mechanism, paid value, user effort and purchase path understandable. Nestd's previous revision looked more like an app storefront but repeated static product visuals and left practical objections too implicit. The implemented pass makes the process explorable, brings payment scope forward and gives the download a clear next-step sequence. Dark/light themes and the full About destination remain intact.
+
+**Competitor claims below are their marketing assertions, not independently established benchmarks.** No competitor pricing, ratings, testimonials, counts, deadlines or guarantees are transferred into Nestd claims. No competitor customer names/photos/quotes are reused.
+
+## Live sources and observed patterns
+
+| Source, read 9 September | What was actually observed | Useful pattern for Nestd | Do not copy as fact |
+| --- | --- | --- | --- |
+| [Stekkies NL](https://www.stekkies.com/nl/) · HTTP200, readable live FAQ at09:18UTC | Explains the pain of late reactions, why the service costs money, expected match volume, eligibility constraints, optional paid-source inclusion and original-provider requirements | Handle objections before checkout; distinguish alerts from allocation; explain provider conditions and uncertain volume | Its 1000+ sources, minute cadence, first10–20 responses, seven-week outcomes, rating and refund promise are not Nestd evidence or verified comparative results |
+| [RentSlam](https://rentslam.com/) · HTTP200 plus rendered browser read | Three-step search-profile→notification→response narrative; visible subscription choices, FAQ about service vs other costs, app/platform demonstration and repeated next-step CTA | Show the mechanism, what customers pay for and where they respond; keep the action consistent | Its 1000+ sources,30seconds, rented-home counts, six-week result, comparative superlatives, AI claims and advertised guarantees are not independently verified |
+| [Rentbird NL](https://rentbird.nl/nl) · HTTP200, rendered browser read (readable fetch incomplete) | City-led starting action, sequential benefits, comparison narrative, visible reviews, founder story, separate premium brokerage offer, About/support/cancellation links | Make the next action tangible, retain prominent About and support, separate different service responsibilities | Its1400+ sources,30seconds from publication, ratings/review counts, outcome stories and brokerage success claims are competitor assertions, not Nestd's functionality or proof |
+
+No fourth competitor was added merely to lengthen the list: these three directly cover the requested category and the conversion decisions implemented here. This is a public-page audit, not a paid signup, device-delivery measurement or independent review of their outcomes. No forms were submitted, subscriptions purchased or competitor accounts created. Parent performs an independent companion audit; any additional findings must retain their own source/provenance.
+
+## Implemented in the website (not proposals)
+
+1. **Mechanism before persuasion.** Homepage secondary CTA leads to a three-step user-controlled walkthrough: search preferences, example rental alert, original-provider response. It replaces the prior static feature/procedure duplication. Keyboard tabs support arrows/Home/End and clear focus; noJS shows every step in order. Visible illustration disclosure; no live query, fake generated listings, saved search, hidden form or backend call.
+2. **Clear paid scope.** New two-column section on Home/Pricing explains what the subscription is for and what remains with the user/provider. It does not promise a home, reservation, all-source access or a response on the user's behalf.
+3. **Practical objection handling.** NL/EN FAQs now address why pay, variable listing/alert volume and possible original-provider registration conditions/charges, alongside timing, availability, provider response and cancellation. No invented fixed volume, trial, refund guarantee, amount or billing period.
+4. **A concrete download path.** Download page explains App Store installation, review of in-app price/period/terms before confirmation, then search-filter/notification setup. One verified iPhone destination throughout. No pretend website search/profile collection when the app cannot reliably receive that handoff.
+5. **Conversion measurement without outcome inflation.** `demo_step_viewed` records only the fixed step number and click/keyboard interaction; initial display is not counted as an interaction. Existing `cta_clicked` remains outbound intent, not a download/purchase. Existing section observers measure service-scope and download-next-step exposure. No user-entered personal data is collected by the demo.
+6. **Preserved foundations.** System/light/dark, accessible persistent appearance, full NL/EN About, original legal body/date, support/company links, QR, mobile CTA, source proof gates and Vercel public-only `dist` packaging remain.
+
+## App/platform roadmap — proposals only, not implemented or promised on the landing
+
+Impact/effort are relative engineering judgments, not validated conversion lifts or delivery commitments. The app/backend owner should first check existing behavior and backlog, then scope the gap.
+
+| Priority | Proposal / owner | Expected impact | Effort | Acceptance and measurement plan |
+| --- | --- | --- | --- | --- |
+| P0 | Align the actual paid offer, app capabilities and store metadata with the landing · product/app owner | High: avoids misleading acquisition and purchase surprise | Small–medium, depends on release | Signed release/offer contract: amount, currency, billing period, renewal, cancellation, entitled features. Walk App Store→install→purchase sheet on a physical device. Track onboarding and purchase-confirmation abandonment using real app events, not outbound clicks |
+| P0 | Measure the alert path and repair delivery/revalidation reliability · backend/app owner | High: core paid value and truthful future performance proof | Large | Separate source publication (when known), first discovery, DB write, match, provider acceptance and device receipt/open. Define samples/windows, failure denominator and p50/p95. No end-to-end SLA until correlated receipts exist; stale/unavailable listings must not generate new alerts |
+| P1 | Search expectation feedback grounded in current inventory · product/backend | High: better-fit subscriptions and fewer empty-search surprises | Medium–large | Explain likely constraints using audited inventory coverage and freshness, not invented future matches. Version/time-window any estimate; show uncertainty. Measure empty-search rate, filter edits, activation and early cancellation across cohorts; do not imply availability guarantees |
+| P1 | Clear source/provider requirements and duplicate handling · backend/app | High: fewer paywall surprises and duplicate reactions | Medium | Reliable per-source access/registration metadata, original URL and availability status. If multiple source links describe the same home, display provenance and verified accessible alternatives. Measure duplicate-alert rate, provider-link failures, paywall complaints and meaningful provider opens |
+| P1 | Fast but user-controlled response handoff · app | Medium–high: improves action after discovery | Medium | Listing details→original provider with clear availability and requirements; preserve reading context on return. Consider optional user-owned preparation checklist, not automatic messages. Measure alert-open→detail→provider-open drop-off and errors; provider open is not proof a response was submitted |
+| P2 | Consent-backed proof and customer feedback collection · product/support | Medium: legitimate trust evidence | Small–medium | Ask actual customers for feedback at appropriate milestones, permission before publishing identifiable quotes. Link public review provenance/date; no synthesized ratings or incentivized-positive-only sample. Track response rate, support themes and permission status before adding website proof |
+| P2 | Reliable acquisition-intent handoff and experimentation · app/marketing | Medium: less setup repetition and better attribution | Medium | Only add website city/profile collection once universal-link/deferred handoff is reliable, optional and consent-aware. Measure handoff completion, data loss and setup abandonment; avoid collecting housing preferences merely to display a fake instant result |
+
+## Measurement plan for the implemented funnel
+
+- **Observable now (once legitimately enabled in production):** page/section exposure, walkthrough interaction and verified App Store outbound intent, split by locale/device. A useful qualified-intent proxy is an outbound click after viewing paid-scope/pricing information; it is still **not** a verified download, qualified customer or subscriber.
+- **Needs app/release instrumentation:** installs, completed onboarding, confirmed subscription, first meaningful listing view/provider open, subsequent retention/cancellation and actual delivery receipts. Link cohorts only with a reviewed attribution/privacy design. Do not infer these from website clicks.
+- **Evaluate after release approval:** compare a predeclared baseline with the new funnel using consistent traffic segments and a chosen sample-size/power plan. Primary outcome should reflect honest informed adoption; guardrails include early cancellation, support confusion, accessibility failures and page performance. No conversion improvement is claimed before measurement.
+- **Remaining limits:** exact new price/period is still pending the existing owner question; public store/product parity and legal review remain gates. Vercel preview access is protected unless independently proven otherwise. No production merge/deploy/protection changes are part of this task.
+
+## Review evidence
+
+Fresh light/dark NL/EN desktop/mobile pages and walkthrough states are committed under `test-artifacts/landing-conversion-2026-09-09/`. Isolated section crops omit the fixed mobile CTA for legibility, with a separate actual viewport screenshot showing it. The walkthrough tests uncovered and fixed a light-mode scrolled CTA contrast issue; a performance trace uncovered late mobile-header enhancement shift, fixed and regression-tested. Final mobile lab:97/100/100/100,LCP2.6s,TBT10ms,CLS0,analyticsblocked. These are lab quality checks, not evidence of increased subscriptions or faster alerts.

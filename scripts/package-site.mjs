@@ -25,6 +25,7 @@ const files = [
   "styles.css",
   "themes.css",
   "theme.js",
+  "demo.js",
   "pages.css",
   "script.js",
   "i18n.js",

@@ -3,7 +3,9 @@ import { copy, APP_STORE } from "../content/marketing.mjs";
 import QRCode from "qrcode";
 import { aboutCopy } from "../content/about.mjs";
 import { storefront } from "../content/storefront.mjs";
-import { phones, features, trust, icon } from "./storefront.mjs";
+import { conversion } from "../content/conversion.mjs";
+import { demo, clarity, nextSteps } from "./conversion.mjs";
+import { phones, trust, icon } from "./storefront.mjs";
 const privacy = JSON.parse(
   fs.readFileSync(new URL("../content/privacy.json", import.meta.url)),
 );
@@ -24,8 +26,6 @@ const paths = {
   privacy: "privacy.html",
 };
 const pathFor = (lang, page) => `${lang === "en" ? "/en/" : "/"}${paths[page]}`;
-const bell =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>';
 const arrow = '<span aria-hidden="true">↗</span>';
 function cta(t, placement, secondary = false) {
   return `<a class="button ${secondary ? "button-light" : ""}" href="${APP_STORE}" data-cta-placement="${placement}">${t.download} ${arrow}</a>`;
@@ -33,18 +33,18 @@ function cta(t, placement, secondary = false) {
 function priceCard(t, placement) {
   return `<div class="plan-card"><div class="plan-top"><span class="wordmark">${t.planName}<span class="brand-dot">.</span></span><span class="pill">${t.pricingLabel}</span></div><h3 class="price">${t.price}</h3><p class="period">${t.period}</p><ul class="included">${t.includes.map((v) => `<li><span aria-hidden="true">✓</span>${v}</li>`).join("")}</ul>${cta(t, placement)}<p class="fine-print">${t.priceNote}</p></div>`;
 }
-function faq(t) {
-  return `<section class="section faq" id="faq" data-section="faq"><div class="section-heading"><p class="eyebrow">${t.faqLabel}</p><h2>${t.faqTitle}</h2></div><div class="faq-list">${t.faqs.map(([q, a]) => `<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join("")}</div></section>`;
+function faq(t, lang) {
+  return `<section class="section faq" id="faq" data-section="faq"><div class="section-heading"><p class="eyebrow">${t.faqLabel}</p><h2>${t.faqTitle}</h2></div><div class="faq-list">${[...t.faqs.slice(0, 2), ...conversion[lang].extraFaqs, ...t.faqs.slice(2)].map(([q, a]) => `<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join("")}</div></section>`;
 }
 function download(t, full = false) {
   return `<section class="download-band ${full ? "full-download" : ""}" id="download" data-section="download"><div class="download-copy"><p class="eyebrow">NESTD / IPHONE</p><${full ? "h1" : "h2"}>${t.downloadTitle}</${full ? "h1" : "h2"}><p>${t.downloadIntro}</p>${cta(t, "download")}<p class="paid-note">${t.paid}</p></div><div class="handoff"><img src="/images/download-qr.svg" alt="${t.scan}" width="156" height="156"><h3>${t.handoff}</h3><p>${t.scan}</p><a href="${APP_STORE}" data-cta-placement="qr_link">App Store ${arrow}</a></div></section>`;
 }
 function home(t, lang) {
   const s = storefront[lang];
-  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow hero-badge">${icon("home")}${s.badge}</p><h1>${s.hero}</h1><p class="hero-intro">${s.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${t.howLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p><div class="hero-trust">${s.trustStrip.map((v, i) => `<span>${icon(["home", "shield", "mail"][i])}${v}</span>`).join("")}</div></div>${phones(t, lang)}</section>${features(t, lang)}<section class="section process-section" id="how-it-works" data-section="how_it_works"><div><p class="eyebrow">${s.flowLabel}</p><h2>${s.flowTitle}</h2><p class="section-intro">${t.howIntro}</p><div class="channel-note">${bell}<div><h3>${t.channelsTitle}</h3><p>${t.channelsBody}</p></div></div></div><ol class="steps">${t.steps.map(([title, body], i) => `<li><span>0${i + 1}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join("")}</ol></section>${trust(t, lang)}<section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${faq(t)}${download(t)}`;
+  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow hero-badge">${icon("home")}${s.badge}</p><h1>${s.hero}</h1><p class="hero-intro">${s.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${conversion[lang].demoLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p><div class="hero-trust">${s.trustStrip.map((v, i) => `<span>${icon(["home", "shield", "mail"][i])}${v}</span>`).join("")}</div></div>${phones(t, lang)}</section>${demo(lang)}${clarity(lang)}<section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${trust(t, lang)}${faq(t, lang)}${download(t)}`;
 }
-function pricing(t) {
-  return `<section class="section pricing-section page-intro" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h1>${t.pricingTitle}</h1><p class="section-intro">${t.pricingIntro}</p><p class="terms-copy">${t.priceTerms}</p><p class="fine-print">${t.noGuarantee}</p></div>${priceCard(t, "pricing_page")}</section>${faq(t)}${download(t)}`;
+function pricing(t, lang) {
+  return `<section class="section pricing-section page-intro" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h1>${t.pricingTitle}</h1><p class="section-intro">${t.pricingIntro}</p><p class="terms-copy">${t.priceTerms}</p><p class="fine-print">${t.noGuarantee}</p></div>${priceCard(t, "pricing_page")}</section>${clarity(lang)}${faq(t, lang)}${download(t)}`;
 }
 function about(t, lang) {
   const a = aboutCopy[lang];
@@ -90,11 +90,11 @@ for (const [lang, t] of Object.entries(copy))
       page === "home"
         ? home(t, lang)
         : page === "pricing"
-          ? pricing(t)
+          ? pricing(t, lang)
           : page === "about"
             ? about(t, lang)
             : page === "download"
-              ? download(t, true)
+              ? download(t, true) + nextSteps(lang)
               : privacyContent(t, lang);
     const html = `<!doctype html>
 <html lang="${lang}">
@@ -106,7 +106,7 @@ for (const [lang, t] of Object.entries(copy))
 <meta property="og:type" content="website"><meta property="og:site_name" content="Nestd"><meta property="og:locale" content="${lang === "nl" ? "nl_NL" : "en_GB"}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="https://www.nestd.nl${path}"><meta property="og:image" content="https://www.nestd.nl/images/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${lang === "nl" ? "Nestd. Je volgende thuis. Blijf klaar om te reageren." : "Nestd. Your next home. Stay ready for your next move."}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css">
-<script src="/theme.js"></script><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/themes.css"><script src="/i18n.js"></script><script src="/script.js" defer></script>
+<script src="/theme.js"></script><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/themes.css"><script src="/i18n.js"></script><script src="/script.js" defer></script>${page === "home" ? '<script src="/demo.js" defer></script>' : ""}
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Nestd", url: "https://www.nestd.nl/", inLanguage: lang, description: t.description, publisher: { "@type": "Organization", name: "Muba B.V.", brand: { "@type": "Brand", name: "Nestd" }, url: "https://www.nestd.nl/", logo: "https://www.nestd.nl/logo.png" } })}</script>
 </head><body>
 <a class="skip-link" href="#main">${t.skip}</a>

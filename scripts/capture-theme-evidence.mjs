@@ -1,6 +1,6 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
-const dir = "test-artifacts/landing-themes-about-2026-09-09";
+const dir = process.argv[3] || "test-artifacts/landing-themes-about-2026-09-09";
 fs.mkdirSync(dir, { recursive: true });
 const onlyPage = process.argv[2];
 const browser = await chromium.launch({ channel: "chrome" });
