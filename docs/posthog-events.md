@@ -1,3 +1,24 @@
+# Current landing analytics — 9 September 2026
+
+The landing funnel is **marketing page → verified App Store visit → in-app subscription decision**. There is no website checkout, trial, free plan, waitlist or lead form. A store click is intent, not proof of download or payment.
+
+| Event | Meaning |
+| --- | --- |
+| `page_view` | Marketing page loaded; first/current-touch attribution preserved |
+| `cta_clicked` | Verified iPhone store link clicked; `placement`, `store=apple`, sanitized destination |
+| `navigation_clicked` | Navigation/footer link clicked |
+| `hero_section_viewed`, `value_section_viewed`, `how_it_works_section_viewed`, `pricing_section_viewed`, `faq_section_viewed`, `download_section_viewed` | Section seen once per page view |
+| `faq_opened` | FAQ expanded; question index only |
+| `app_deeplink_viewed`, `app_deeplink_attempted`, `app_deeplink_opened` | App fallback and user-initiated open; opened is only a best-effort visibility signal |
+
+Existing PostHog project and Meta Pixel configuration are retained. Store CTA maps to Meta `ViewContent`, never `Lead`, `Subscribe` or `Purchase`. Session recording and autocapture remain disabled. Existing first/current-touch attribution persists across locale and navigation changes. Listing pages load neither tracker; Meta remains blocked on unknown-query and listing-referrer contexts. The unsafe unconditional noscript pixel has been removed. Both locales and the new download page use the same public-route allowlist.
+
+---
+
+## Historical tracking plan (superseded for landing)
+
+The following retains prior product/event context. AI, duo, free-tier and waitlist sections are historical; they are not the current landing contract.
+
 # Nestd Tracking Events — Website vs App
 
 Goal: keep PostHog as the source of truth for funnel/product analysis, and use Meta Pixel only for paid Meta ads optimization and retargeting.

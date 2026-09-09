@@ -1,3 +1,5 @@
+> **Historical plan — superseded 9 September 2026.** Nestd’s authorized direction is paid-only rental alerts and qualified app downloads, with no free plan, AI features, partner swiping or WhatsApp marketing. Old offers, channels, pricing and app-availability statements below are historical, not current instructions. See `landing-rework-evidence.md`.
+
 # Nestd Week 1 Approval-Only Content Set
 
 Goal: build a small creative backlog for TikTok/Instagram/Meta/community posts while publishing stays approval-only.
