@@ -1,24 +1,562 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Nestd — English landing</title>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var lang = (params.get('lang') || '').toLowerCase();
-      if (lang !== 'en' && lang !== 'nl') params.set('lang', 'en');
-      var next = '/' + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
-      window.location.replace(next);
-    })();
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=/?lang=en">
-  </noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Nestd — Stop refreshing. Start living.</title>
+<meta name="description" content="Your next home is not hiding behind another refresh. Set your preferences. Nestd follows rental websites and brings relevant listings to your phone. Open a home and respond through the provider.">
+<meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
+<link rel="canonical" href="https://www.nestd.nl/en/">
+<link rel="alternate" hreflang="nl" href="https://www.nestd.nl/">
+<link rel="alternate" hreflang="en" href="https://www.nestd.nl/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.nestd.nl/">
+<meta property="og:title" content="Nestd — Stop refreshing. Start living.">
+<meta property="og:description" content="Your next home is not hiding behind another refresh. Set your preferences. Nestd follows rental websites and brings relevant listings to your phone. Open a home and respond through the provider.">
+<meta property="og:image" content="https://www.nestd.nl/assets/amsterdam.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.nestd.nl/en/">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/manrope.ttf" as="font" type="font/ttf" crossorigin>
+<script>try{var t=localStorage.getItem('nestd-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer>
+</script>
+<script src="/assets/analytics.js" defer>
+</script>
 </head>
 <body>
-  <p>Redirecting to <a href="/?lang=en">the English Nestd landing page</a>…</p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-inner">
+<a class="brand" href="/en/" aria-label="Nestd Home">
+<img src="/logo.png" width="43" height="43" alt="">
+<span>nestd<span class="brand-dot">.</span>
+</span>
+</a>
+<nav class="desktop-nav" aria-label="Menu">
+<a href="/en/#how">How it works</a>
+<a href="/en/about.html" >About Nestd</a>
+<a href="/en/pricing.html" >Subscription</a>
+</nav>
+<div class="header-actions">
+<a class="language" data-language href="/" aria-label="Lees in het Nederlands">NL</a>
+<fieldset class="theme-switch" hidden>
+<legend class="sr-only">Appearance</legend>
+<label title="System">
+<input class="sr-only" type="radio" name="theme" value="system" aria-label="System">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="4" width="18" height="13" rx="2"/>
+<path d="M8 21h8m-4-4v4"/>
+</svg>
+</span>
+</label>
+<label title="Light">
+<input class="sr-only" type="radio" name="theme" value="light" aria-label="Light">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+</span>
+</label>
+<label title="Dark">
+<input class="sr-only" type="radio" name="theme" value="dark" aria-label="Dark">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>
+</svg>
+</span>
+</label>
+</fieldset>
+<noscript>
+<span class="theme-fallback">System</span>
+</noscript>
+<a class="nav-download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="nav" target="_blank" rel="noopener">Get the app <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+</div>
+</div>
+<nav class="mobile-nav wrap" aria-label="Menu">
+<a href="/en/#how">How it works</a>
+<a href="/en/about.html">About Nestd</a>
+<a href="/en/pricing.html">Subscription</a>
+</nav>
+</header>
+<main id="main">
+<section class="wrap hero">
+<div class="hero-copy">
+<p class="eyebrow">Your next rental starts here</p>
+<h1>Stop<br>refreshing.<br>
+<span>Start living.</span>
+</h1>
+<p class="lead">Your next home is not hiding behind another refresh. Set your preferences. Nestd follows rental websites and brings relevant listings to your phone. Open a home and respond through the provider.</p>
+<div class="hero-cta">
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="hero" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download on the App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<small>For iPhone · First week free, then €19.99/month</small>
+</div>
+<a class="text-link" href="#how">See how Nestd helps <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 4v16m-7-7 7 7 7-7"/>
+</svg>
+</a>
+</div>
+<figure class="hero-art device-showcase">
+<div class="device-halo" aria-hidden="true">
+</div>
+<div class="device-stage">
+<div class="device device-back" aria-hidden="true">
+<div class="device-screen lock-screen">
+<img class="lock-wallpaper" src="/assets/amsterdam.jpg" width="1400" height="933" alt="" fetchpriority="high">
+<div class="island">
+</div>
+<div class="lock-time">
+<span>Your next chapter</span>
+<strong>09:41</strong>
+</div>
+<div class="lock-alert">
+<img src="/logo.png" width="32" height="32" alt="">
+<div>
+<span>NESTD</span>
+<strong>A home worth opening.</strong>
+<p>New rental matching your search.</p>
+</div>
+</div>
+<span class="home-indicator">
+</span>
+</div>
+</div>
+<div class="device device-front">
+<div class="device-screen">
+<img src="/assets/app-source-selection.png" width="942" height="2048" alt="Nestd app preview: choose rental websites including Vesteda, Pararius and Funda. Dutch interface." fetchpriority="high">
+</div>
+</div>
+<div class="device-chip" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>Your search. Always within reach.</div>
+</div>
+<figcaption>Source selection: screenshot of the new app preview. Alert: illustration.</figcaption>
+<button class="motion-control" type="button" aria-pressed="false" hidden data-pause-label="Pause animation" data-play-label="Play animation">Pause animation</button>
+</figure>
+</section>
+<div class="criteria-strip">
+<div class="wrap">
+<span>Your city</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Your budget</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Your space</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Your next step</span>
+</div>
+</div>
+<section class="wrap journey section" id="how">
+<div class="section-heading">
+<p class="eyebrow">From searching to responding</p>
+<h2>Less searching.<br>More <span>possibility.</span>
+</h2>
+<p class="lead">From your first search profile to a home worth viewing: three clear steps, right on your phone.</p>
+</div>
+<ol class="steps">
+<li>
+<span class="step-number">01</span>
+<div>
+<h3>Tell us what you need.</h3>
+<p>Set your city, budget, number of rooms and minimum floor area. Your needs are the starting point.</p>
+</div>
+</li>
+<li>
+<span class="step-number">02</span>
+<div>
+<h3>Let Nestd follow the listings.</h3>
+<p>A new rental fits your search? Get an alert, without having to keep checking yourself.</p>
+</div>
+</li>
+<li>
+<span class="step-number">03</span>
+<div>
+<h3>Like it? Respond.</h3>
+<p>View the rental, check the conditions and continue to the provider. You choose which homes to respond to.</p>
+</div>
+</li>
+</ol>
+</section>
+<section class="focus-section">
+<div class="wrap focus-inner">
+<div class="search-illustration">
+<div class="drawing-title">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/>
+</svg> My next place</div>
+<dl>
+<div>
+<dt>City</dt>
+<dd>Utrecht<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/>
+<circle cx="12" cy="10" r="2"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Monthly rent</dt>
+<dd>Up to € 1,500<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Rooms</dt>
+<dd>2 or more<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Floor area</dt>
+<dd>From 50 m²<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+</dl>
+<p>Example preferences · set up in the app</p>
+</div>
+<div class="focus-copy">
+<p class="eyebrow">Not just any home. Your home.</p>
+<h2>A match starts<br>with what <span>you need.</span>
+</h2>
+<p class="lead">A neighbourhood you like. Rent that fits your budget. Enough space for you and your plans. Start with the things that matter most.</p>
+<p class="focus-note">Plans change? Update your search criteria in Nestd.</p>
+</div>
+</div>
+</section>
+<section class="wrap section reach" id="speed">
+<div class="section-heading">
+<p class="eyebrow">Built for the moment that matters</p>
+<h2>Rental listings don’t wait.<br>
+<span>Why should you?</span>
+</h2>
+<p class="lead">A home can appear while you’re studying, working or on the move. Nestd takes care of the repeated checking and brings relevant listings to you.</p>
+</div>
+<div class="reach-cards">
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10.5" cy="10.5" r="6.5"/>
+<path d="m16 16 5 5"/>
+</svg>
+</span>
+<h3>More places. One search.</h3>
+<p>Rental listings are spread across platforms and letting agents. Nestd brings multiple sources together, so you don’t have to keep checking the same websites.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/>
+<circle cx="12" cy="10" r="2"/>
+</svg>
+</span>
+<h3>Your needs as a filter.</h3>
+<p>Not every new listing deserves your attention. City, budget, rooms and floor area help identify the homes worth a look.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+</svg>
+</span>
+<h3>From an alert to a response.</h3>
+<p>Open the home from your alert, check its conditions and continue to the original provider. Fewer detours between spotting a home and responding yourself.</p>
+</article>
+</div>
+<div class="source-band">
+<p class="eyebrow">Including listings from</p>
+<ul aria-label="Including listings from">
+<li>Funda</li>
+<li>Pararius</li>
+<li>Kamernet</li>
+<li>Vesteda</li>
+<li>123Wonen</li>
+<li>Rotsvast</li>
+</ul>
+<p class="caption">Listings vary by source and area. Nestd is independent of these providers; some require their own account or payment.</p>
+</div>
+<p class="caption speed-note">Alert timing depends on the source, processing and your phone connection. Always check current availability with the provider.</p>
+</section>
+<section class="wrap story-teaser section">
+<p class="eyebrow">Why Nestd exists</p>
+<div class="story-teaser-inner">
+<h2>A student. A young professional.<br>
+<span>The same search.</span>
+</h2>
+<div>
+<p class="lead">We built Nestd around something we know first-hand: how difficult it is to find a rental home. One of us is studying, the other is working. You want to move forward, but your attention keeps returning to the same listings. There had to be an easier way.</p>
+<a class="text-link" href="/en/about.html">Read our story <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<section class="wrap section proof-preview" data-proof-preview aria-label="Design placeholders">
+    <p class="proof-notice">DESIGN PREVIEW · All figures, timings and reviews below are fictional. Replace with verified data before publication.</p>
+    <div class="proof-metrics">
+<article>
+<span class="proof-label">FICTIONAL PLACEHOLDER</span>
+<h2>A search shared by many.</h2>
+<strong class="proof-number">1.250</strong>
+<p>active users — example figure, not a current count</p>
+</article>
+    <article class="timing-card">
+<span class="proof-label">FICTIONAL PLACEHOLDER</span>
+<h2>From listing to notification.</h2>
+<p>One shared timeline. Example timings to design the comparison, not measured results.</p>
+<dl class="proof-timings">
+<div>
+<dt>Nestd</dt>
+<dd>30 sec<small>fictional</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:4%">
+</span>
+</span>
+</div>
+<div>
+<dt>Platform A</dt>
+<dd>5 min<small>fictional</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:33.33333333333333%">
+</span>
+</span>
+</div>
+<div>
+<dt>Platform B</dt>
+<dd>15 min<small>fictional</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:100%">
+</span>
+</span>
+</div>
+</dl>
+<p class="timing-method">To add: source publication → device receipt · same listings · median and 95th percentile · dates and sample size.</p>
+</article>
+</div>
+    <div class="review-heading">
+<div>
+<p class="eyebrow">Experiences with Nestd</p>
+<h2 id="review-heading">A new home. A personal story.</h2>
+<p>Example stories — replace these cards with approved customer reviews and portraits.</p>
+</div>
+</div>
+    <div class="review-carousel" data-review-carousel role="region" aria-roledescription="carousel" aria-labelledby="review-heading">
+      <div class="proof-reviews" id="review-track" tabindex="0" aria-label="Example reviews, scroll to explore">
+<figure data-review-slide role="group" aria-roledescription="slide" aria-label="1 of 3">
+<span class="proof-label">FICTIONAL PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portrait placeholder 1">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Photo 01</span>
+</div>
+<figcaption>
+<strong>Reviewer name 01</strong>
+<span>City · search context</span>
+</figcaption>
+</div>
+<blockquote>“I no longer have to keep checking every website. An alert lets me take a look straight away.”</blockquote>
+<p class="portrait-brief">Portrait to add · square · min. 600 × 600 px</p>
+<p class="caption">Example copy — not a real customer review.</p>
+</figure>
+<figure data-review-slide role="group" aria-roledescription="slide" aria-label="2 of 3">
+<span class="proof-label">FICTIONAL PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portrait placeholder 2">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Photo 02</span>
+</div>
+<figcaption>
+<strong>Reviewer name 02</strong>
+<span>City · search context</span>
+</figcaption>
+</div>
+<blockquote>“My preferences are set, so I can focus on homes that suit my search.”</blockquote>
+<p class="portrait-brief">Portrait to add · square · min. 600 × 600 px</p>
+<p class="caption">Example copy — not a real customer review.</p>
+</figure>
+<figure data-review-slide role="group" aria-roledescription="slide" aria-label="3 of 3">
+<span class="proof-label">FICTIONAL PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portrait placeholder 3">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Photo 03</span>
+</div>
+<figcaption>
+<strong>Reviewer name 03</strong>
+<span>City · search context</span>
+</figcaption>
+</div>
+<blockquote>“It is helpful to see new listings in one place and then respond myself.”</blockquote>
+<p class="portrait-brief">Portrait to add · square · min. 600 × 600 px</p>
+<p class="caption">Example copy — not a real customer review.</p>
+</figure>
+</div>
+      <div class="review-controls" hidden>
+<div class="review-buttons">
+<button type="button" data-review-prev aria-controls="review-track" aria-label="Previous review">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m14 6-6 6 6 6"/>
+</svg>
+</button>
+<button type="button" data-review-next aria-controls="review-track" aria-label="Next review">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m10 6 6 6-6 6"/>
+</svg>
+</button>
+</div>
+<span data-review-status aria-live="polite" aria-atomic="true">1 / 3</span>
+<div class="review-dots">
+<button type="button" data-review-index="0" aria-label="Go to example review 1" aria-controls="review-track" aria-current="true">
+<span>
+</span>
+</button>
+<button type="button" data-review-index="1" aria-label="Go to example review 2" aria-controls="review-track" >
+<span>
+</span>
+</button>
+<button type="button" data-review-index="2" aria-label="Go to example review 3" aria-controls="review-track" >
+<span>
+</span>
+</button>
+</div>
+</div>
+    </div>
+  </section>
+<section class="wrap home-offer">
+<div>
+<p class="eyebrow">The Nestd subscription</p>
+<h2>Give your search a head start.</h2>
+<p class="lead">Discover what Nestd can do for your search for one free week. Then €19.99 per month.</p>
+</div>
+<div>
+<div class="offer-summary">
+<span class="trial-pill">Your first week is free</span>
+<p>
+<strong>€19.99</strong> <span>/ month</span>
+</p>
+</div>
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="home-offer" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download on the App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<p class="caption">After the first free week, the subscription costs €19.99 per month. Review trial eligibility, renewal and cancellation terms on the purchase screen before confirming.</p>
+</div>
+</section>
+<section class="wrap faq" id="faq">
+<div>
+<p class="eyebrow">Good to know</p>
+<h2>A few answers.</h2>
+</div>
+<div class="faq-items">
+<details>
+<summary>What exactly does Nestd do?<span aria-hidden="true">+</span>
+</summary>
+<p>Nestd follows rental listings and tells you when a home matches your search preferences. View the home in the app and respond through the provider. Nestd does not rent out properties itself.</p>
+</details>
+<details>
+<summary>What does Nestd cost after the free week?<span aria-hidden="true">+</span>
+</summary>
+<p>Your first week is free. After that, Nestd costs €19.99 per month. It is a paid subscription, not a permanently free plan. Check the trial, renewal and cancellation terms in the app before confirming.</p>
+</details>
+<details>
+<summary>What can I search for?<span aria-hidden="true">+</span>
+</summary>
+<p>Set your city, budget, number of rooms and minimum floor area. The homes you receive depend on your preferences and the available listings.</p>
+</details>
+<details>
+<summary>Can I use Nestd on my phone?<span aria-hidden="true">+</span>
+</summary>
+<p>Nestd is available for iPhone in the App Store. Download the app, set your search preferences and choose your subscription.</p>
+</details>
+<details>
+<summary>Am I guaranteed to find a home?<span aria-hidden="true">+</span>
+</summary>
+<p>We cannot promise you a rental. Nestd helps you discover relevant listings and respond to them. Availability and tenant selection are up to the landlord or agent.</p>
+</details>
+</div>
+</section>
+<section class="closing">
+<div class="wrap closing-inner">
+<div>
+<p class="eyebrow">Leave the endless refreshing behind</p>
+<h2>More living.<br>
+<span>Less searching.</span>
+</h2>
+</div>
+<div class="closing-action">
+<p>Set your preferences. Let Nestd keep an eye out.</p>
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="closing" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download on the App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<small>For iPhone · First week free, then €19.99/month</small>
+</div>
+</div>
+</section>
+</main>
+<footer class="wrap site-footer">
+<div class="footer-top">
+<a class="brand" href="/en/">
+<img src="/logo.png" width="43" height="43" alt="">
+<span>nestd.</span>
+</a>
+<p>A little closer to home.</p>
+<nav aria-label="Footer">
+<a href="/en/about.html">About Nestd</a>
+<a href="mailto:hello@nestd.nl">Contact <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<a href="/en/privacy.html">Privacy</a>
+</nav>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Nestd. Nestd is a service by Muba B.V.</span>
+<span>Made for finding home.</span>
+</div>
+</footer>
 </body>
 </html>

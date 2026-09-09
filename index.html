@@ -1,393 +1,562 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Nestd — Jouw AI Woonassistent</title>
-  <meta name="description" content="Nestd vindt je droomhuurwoning met AI. WhatsApp alerts, Duo Zoeken en een persoonlijke woonassistent.">
-  <meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" sizes="32x32">
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="pages.css">
-  <style>.i18n-loading *{visibility:hidden}.i18n-loading{opacity:0}</style>
-  <script>(function(){try{var p=new URLSearchParams(location.search);var q=(p.get("lang")||"").toLowerCase();var u=(q==="en"||q==="nl")?q:(/^\/en(?:\/|$)/.test(location.pathname)?"en":localStorage.getItem("nestd-lang"));if(u&&u!=="nl")document.documentElement.classList.add("i18n-loading")}catch(e){}})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Nestd — Stop met refreshen. Begin met leven.</title>
+<meta name="description" content="Je volgende huurwoning vind je niet door nóg een keer te refreshen. Stel je wensen in. Nestd volgt woningwebsites en brengt passend aanbod naar je telefoon. Open de woning en reageer bij de aanbieder.">
+<meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
+<link rel="canonical" href="https://www.nestd.nl/">
+<link rel="alternate" hreflang="nl" href="https://www.nestd.nl/">
+<link rel="alternate" hreflang="en" href="https://www.nestd.nl/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.nestd.nl/">
+<meta property="og:title" content="Nestd — Stop met refreshen. Begin met leven.">
+<meta property="og:description" content="Je volgende huurwoning vind je niet door nóg een keer te refreshen. Stel je wensen in. Nestd volgt woningwebsites en brengt passend aanbod naar je telefoon. Open de woning en reageer bij de aanbieder.">
+<meta property="og:image" content="https://www.nestd.nl/assets/amsterdam.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.nestd.nl/">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/manrope.ttf" as="font" type="font/ttf" crossorigin>
+<script>try{var t=localStorage.getItem('nestd-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer>
+</script>
+<script src="/assets/analytics.js" defer>
+</script>
 </head>
 <body>
-  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1435983921187208&ev=PageView&noscript=1"></noscript>
-  <script>(function(){var t=localStorage.getItem("nestd-theme");if(t==="light"||(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches))document.body.classList.add("light")})()</script>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-home navbar-transparent">
-    <div class="navbar-inner">
-      <a href="/" class="navbar-brand">
-        <img src="logo.png" alt="Nestd">
-      </a>
-      <div class="navbar-links">
-        <a href="/" class="active" data-i18n="nav_home">Home</a>
-        <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
-        <a href="/about.html" data-i18n="nav_about">Over ons</a>
-      </div>
-      <div class="navbar-right">
-        <a href="https://apps.apple.com/app/nestd/id6740091498" class="navbar-cta" data-cta-placement="nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
-        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Toggle language">🇬🇧</button>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode">☀️</button>
-        <button class="navbar-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+<a class="skip" href="#main">Naar de inhoud</a>
+<header class="site-header">
+<div class="wrap header-inner">
+<a class="brand" href="/" aria-label="Nestd Home">
+<img src="/logo.png" width="43" height="43" alt="">
+<span>nestd<span class="brand-dot">.</span>
+</span>
+</a>
+<nav class="desktop-nav" aria-label="Menu">
+<a href="/#how">Hoe het werkt</a>
+<a href="/about.html" >Over Nestd</a>
+<a href="/pricing.html" >Abonnement</a>
+</nav>
+<div class="header-actions">
+<a class="language" data-language href="/en/" aria-label="Read in English">EN</a>
+<fieldset class="theme-switch" hidden>
+<legend class="sr-only">Weergave</legend>
+<label title="Systeem">
+<input class="sr-only" type="radio" name="theme" value="system" aria-label="Systeem">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="4" width="18" height="13" rx="2"/>
+<path d="M8 21h8m-4-4v4"/>
+</svg>
+</span>
+</label>
+<label title="Licht">
+<input class="sr-only" type="radio" name="theme" value="light" aria-label="Licht">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+</svg>
+</span>
+</label>
+<label title="Donker">
+<input class="sr-only" type="radio" name="theme" value="dark" aria-label="Donker">
+<span aria-hidden="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>
+</svg>
+</span>
+</label>
+</fieldset>
+<noscript>
+<span class="theme-fallback">Systeem</span>
+</noscript>
+<a class="nav-download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="nav" target="_blank" rel="noopener">Download de app <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+</div>
+</div>
+<nav class="mobile-nav wrap" aria-label="Menu">
+<a href="/#how">Hoe het werkt</a>
+<a href="/about.html">Over Nestd</a>
+<a href="/pricing.html">Abonnement</a>
+</nav>
+</header>
+<main id="main">
+<section class="wrap hero">
+<div class="hero-copy">
+<p class="eyebrow">Jouw volgende huurwoning begint hier</p>
+<h1>Stop met<br>refreshen.<br>
+<span>Begin met leven.</span>
+</h1>
+<p class="lead">Je volgende huurwoning vind je niet door nóg een keer te refreshen. Stel je wensen in. Nestd volgt woningwebsites en brengt passend aanbod naar je telefoon. Open de woning en reageer bij de aanbieder.</p>
+<div class="hero-cta">
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="hero" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download in de App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<small>Voor iPhone · Eerste week gratis, daarna €19,99/maand</small>
+</div>
+<a class="text-link" href="#how">Zo helpt Nestd je zoeken <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 4v16m-7-7 7 7 7-7"/>
+</svg>
+</a>
+</div>
+<figure class="hero-art device-showcase">
+<div class="device-halo" aria-hidden="true">
+</div>
+<div class="device-stage">
+<div class="device device-back" aria-hidden="true">
+<div class="device-screen lock-screen">
+<img class="lock-wallpaper" src="/assets/amsterdam.jpg" width="1400" height="933" alt="" fetchpriority="high">
+<div class="island">
+</div>
+<div class="lock-time">
+<span>Jouw volgende hoofdstuk</span>
+<strong>09:41</strong>
+</div>
+<div class="lock-alert">
+<img src="/logo.png" width="32" height="32" alt="">
+<div>
+<span>NESTD</span>
+<strong>Een woning om te openen.</strong>
+<p>Nieuw aanbod dat past bij jouw wensen.</p>
+</div>
+</div>
+<span class="home-indicator">
+</span>
+</div>
+</div>
+<div class="device device-front">
+<div class="device-screen">
+<img src="/assets/app-source-selection.png" width="942" height="2048" alt="Nestd app-preview: kies woningwebsites zoals Vesteda, Pararius en Funda." fetchpriority="high">
+</div>
+</div>
+<div class="device-chip" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>Jouw zoektocht. Altijd bij de hand.</div>
+</div>
+<figcaption>Bronselectie: screenshot van de nieuwe app-preview. Melding: illustratie.</figcaption>
+<button class="motion-control" type="button" aria-pressed="false" hidden data-pause-label="Animatie pauzeren" data-play-label="Animatie afspelen">Animatie pauzeren</button>
+</figure>
+</section>
+<div class="criteria-strip">
+<div class="wrap">
+<span>Jouw stad</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Jouw budget</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Jouw ruimte</span>
+<b class="criteria-divider" aria-hidden="true">
+</b>
+<span>Jouw volgende stap</span>
+</div>
+</div>
+<section class="wrap journey section" id="how">
+<div class="section-heading">
+<p class="eyebrow">Van zoeken naar reageren</p>
+<h2>Minder zoekwerk.<br>Meer <span>vooruitzicht.</span>
+</h2>
+<p class="lead">Van je eerste zoekprofiel tot een woning die je wilt bekijken: drie heldere stappen, op je eigen telefoon.</p>
+</div>
+<ol class="steps">
+<li>
+<span class="step-number">01</span>
+<div>
+<h3>Vertel wat je zoekt.</h3>
+<p>Kies je stad, budget, aantal kamers en minimale oppervlakte. Jouw wensen zijn het vertrekpunt.</p>
+</div>
+</li>
+<li>
+<span class="step-number">02</span>
+<div>
+<h3>Laat Nestd het aanbod volgen.</h3>
+<p>Nieuw aanbod dat bij je zoekwensen past? Je krijgt een melding, zodat je niet steeds zelf hoeft te kijken.</p>
+</div>
+</li>
+<li>
+<span class="step-number">03</span>
+<div>
+<h3>Interessant? Reageer.</h3>
+<p>Bekijk de woning, controleer de voorwaarden en ga door naar de aanbieder. Jij beslist waar je op reageert.</p>
+</div>
+</li>
+</ol>
+</section>
+<section class="focus-section">
+<div class="wrap focus-inner">
+<div class="search-illustration">
+<div class="drawing-title">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/>
+</svg> Mijn volgende plek</div>
+<dl>
+<div>
+<dt>Stad</dt>
+<dd>Utrecht<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/>
+<circle cx="12" cy="10" r="2"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Huur per maand</dt>
+<dd>Tot € 1.500<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Kamers</dt>
+<dd>2 of meer<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+<div>
+<dt>Oppervlakte</dt>
+<dd>Vanaf 50 m²<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m5 12 4 4L19 6"/>
+</svg>
+</dd>
+</div>
+</dl>
+<p>Voorbeeld van zoekwensen · ingesteld in de app</p>
+</div>
+<div class="focus-copy">
+<p class="eyebrow">Niet zomaar een woning. Jouw woning.</p>
+<h2>Een match begint<br>bij wat <span>jij nodig hebt.</span>
+</h2>
+<p class="lead">Een fijne buurt. Huur die past bij je budget. Genoeg plek voor jou en je plannen. Begin met de dingen waar je niet op wilt inleveren.</p>
+<p class="focus-note">Jouw wensen veranderen? Pas je zoekcriteria aan in Nestd.</p>
+</div>
+</div>
+</section>
+<section class="wrap section reach" id="speed">
+<div class="section-heading">
+<p class="eyebrow">Gebouwd voor het moment dat telt</p>
+<h2>Het aanbod wacht niet.<br>
+<span>Waarom zou jij?</span>
+</h2>
+<p class="lead">Een woning kan verschijnen terwijl jij college volgt, werkt of onderweg bent. Nestd neemt het terugkerende controleren over en brengt relevant aanbod naar je toe.</p>
+</div>
+<div class="reach-cards">
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10.5" cy="10.5" r="6.5"/>
+<path d="m16 16 5 5"/>
+</svg>
+</span>
+<h3>Meer plekken, één zoektocht.</h3>
+<p>Aanbod is verspreid over huurplatforms en makelaars. Nestd brengt meerdere bronnen samen, zodat je niet steeds dezelfde websites hoeft af te gaan.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/>
+<circle cx="12" cy="10" r="2"/>
+</svg>
+</span>
+<h3>Jouw wensen als filter.</h3>
+<p>Niet elke nieuwe advertentie verdient je aandacht. Stad, budget, kamers en oppervlakte helpen het aanbod te vinden dat voor jou interessant is.</p>
+</article>
+<article>
+<span class="reach-icon" aria-hidden="true">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+</svg>
+</span>
+<h3>Van melding naar reactie.</h3>
+<p>Open de woning vanuit je melding, bekijk de voorwaarden en ga door naar de oorspronkelijke aanbieder. Minder omwegen tussen iets zien en zelf reageren.</p>
+</article>
+</div>
+<div class="source-band">
+<p class="eyebrow">Onder andere aanbod van</p>
+<ul aria-label="Onder andere aanbod van">
+<li>Funda</li>
+<li>Pararius</li>
+<li>Kamernet</li>
+<li>Vesteda</li>
+<li>123Wonen</li>
+<li>Rotsvast</li>
+</ul>
+<p class="caption">Het aanbod verschilt per bron en regio. Nestd is onafhankelijk van deze aanbieders; sommige aanbieders vragen een eigen account of betaling.</p>
+</div>
+<p class="caption speed-note">De tijd tot een melding hangt af van de bron, verwerking en je telefoonverbinding. Bekijk altijd de actuele beschikbaarheid bij de aanbieder.</p>
+</section>
+<section class="wrap story-teaser section">
+<p class="eyebrow">Waarom Nestd bestaat</p>
+<div class="story-teaser-inner">
+<h2>Een student. Een young professional.<br>
+<span>Dezelfde zoektocht.</span>
+</h2>
+<div>
+<p class="lead">We bouwden Nestd vanuit iets wat we zelf kennen: hoe moeilijk het is om een huurwoning te vinden. De één zoekt naast een studie, de ander naast het werk. Je wilt vooruit, maar je aandacht gaat steeds weer naar dezelfde advertenties. Dat moest makkelijker kunnen.</p>
+<a class="text-link" href="/about.html">Lees ons verhaal <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<section class="wrap section proof-preview" data-proof-preview aria-label="Ontwerp-placeholders">
+    <p class="proof-notice">ONTWERPPREVIEW · Alle onderstaande cijfers, tijden en reviews zijn fictief. Vervang ze vóór publicatie door geverifieerde gegevens.</p>
+    <div class="proof-metrics">
+<article>
+<span class="proof-label">FICTIEVE PLACEHOLDER</span>
+<h2>Samen op zoek naar thuis.</h2>
+<strong class="proof-number">1.250</strong>
+<p>actieve gebruikers — voorbeeldcijfer, geen actueel aantal</p>
+</article>
+    <article class="timing-card">
+<span class="proof-label">FICTIEVE PLACEHOLDER</span>
+<h2>Van aanbod naar melding.</h2>
+<p>Eén gezamenlijke tijdlijn. Voorbeeldtijden voor de vormgeving, geen gemeten resultaten.</p>
+<dl class="proof-timings">
+<div>
+<dt>Nestd</dt>
+<dd>30 sec<small>fictief</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:4%">
+</span>
+</span>
+</div>
+<div>
+<dt>Platform A</dt>
+<dd>5 min<small>fictief</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:33.33333333333333%">
+</span>
+</span>
+</div>
+<div>
+<dt>Platform B</dt>
+<dd>15 min<small>fictief</small>
+</dd>
+<span class="timing-track" aria-hidden="true">
+<span style="width:100%">
+</span>
+</span>
+</div>
+</dl>
+<p class="timing-method">Nog invullen: bronpublicatie → ontvangst op toestel · dezelfde woningen · mediaan en 95e percentiel · meetperiode en steekproef.</p>
+</article>
+</div>
+    <div class="review-heading">
+<div>
+<p class="eyebrow">Ervaringen met Nestd</p>
+<h2 id="review-heading">Een nieuwe plek. Een eigen verhaal.</h2>
+<p>Voorbeeldverhalen — vervang deze kaarten door goedgekeurde klantreviews en portretten.</p>
+</div>
+</div>
+    <div class="review-carousel" data-review-carousel role="region" aria-roledescription="carrousel" aria-labelledby="review-heading">
+      <div class="proof-reviews" id="review-track" tabindex="0" aria-label="Voorbeeldreviews, scroll om te bladeren">
+<figure data-review-slide role="group" aria-roledescription="dia" aria-label="1 van 3">
+<span class="proof-label">FICTIEVE PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portret-placeholder 1">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Foto 01</span>
+</div>
+<figcaption>
+<strong>Naam reviewer 01</strong>
+<span>Stad · zoeksituatie</span>
+</figcaption>
+</div>
+<blockquote>“Ik hoef niet meer steeds alle websites af te gaan. Een melding en ik kan meteen kijken.”</blockquote>
+<p class="portrait-brief">Portret toevoegen · vierkant · min. 600 × 600 px</p>
+<p class="caption">Voorbeeldtekst — geen echte gebruikersreview.</p>
+</figure>
+<figure data-review-slide role="group" aria-roledescription="dia" aria-label="2 van 3">
+<span class="proof-label">FICTIEVE PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portret-placeholder 2">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Foto 02</span>
+</div>
+<figcaption>
+<strong>Naam reviewer 02</strong>
+<span>Stad · zoeksituatie</span>
+</figcaption>
+</div>
+<blockquote>“Mijn zoekwensen staan klaar. Daardoor kan ik me richten op de woningen die bij mij passen.”</blockquote>
+<p class="portrait-brief">Portret toevoegen · vierkant · min. 600 × 600 px</p>
+<p class="caption">Voorbeeldtekst — geen echte gebruikersreview.</p>
+</figure>
+<figure data-review-slide role="group" aria-roledescription="dia" aria-label="3 van 3">
+<span class="proof-label">FICTIEVE PLACEHOLDER</span>
+<div class="review-person">
+<div class="portrait-placeholder" role="img" aria-label="Portret-placeholder 3">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 22v-2a8 8 0 0 1 16 0v2"/>
+</svg>
+<span>Foto 03</span>
+</div>
+<figcaption>
+<strong>Naam reviewer 03</strong>
+<span>Stad · zoeksituatie</span>
+</figcaption>
+</div>
+<blockquote>“Fijn om nieuw aanbod op één plek te zien en daarna zelf te reageren.”</blockquote>
+<p class="portrait-brief">Portret toevoegen · vierkant · min. 600 × 600 px</p>
+<p class="caption">Voorbeeldtekst — geen echte gebruikersreview.</p>
+</figure>
+</div>
+      <div class="review-controls" hidden>
+<div class="review-buttons">
+<button type="button" data-review-prev aria-controls="review-track" aria-label="Vorige review">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m14 6-6 6 6 6"/>
+</svg>
+</button>
+<button type="button" data-review-next aria-controls="review-track" aria-label="Volgende review">
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m10 6 6 6-6 6"/>
+</svg>
+</button>
+</div>
+<span data-review-status aria-live="polite" aria-atomic="true">1 / 3</span>
+<div class="review-dots">
+<button type="button" data-review-index="0" aria-label="Ga naar voorbeeldreview 1" aria-controls="review-track" aria-current="true">
+<span>
+</span>
+</button>
+<button type="button" data-review-index="1" aria-label="Ga naar voorbeeldreview 2" aria-controls="review-track" >
+<span>
+</span>
+</button>
+<button type="button" data-review-index="2" aria-label="Ga naar voorbeeldreview 3" aria-controls="review-track" >
+<span>
+</span>
+</button>
+</div>
+</div>
     </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="navbar-mobile" id="mobile-menu" aria-hidden="true">
-    <a href="/" class="active">Home</a>
-    <a href="/pricing.html" data-i18n="nav_pricing">Prijzen</a>
-    <a href="/about.html" data-i18n="nav_about">Over ons</a>
-    <a href="https://apps.apple.com/app/nestd/id6740091498" data-cta-placement="mobile_nav" data-i18n="cta" target="_blank" rel="noopener">Download de app →</a>
-  </div>
-
-  <a href="https://apps.apple.com/app/nestd/id6740091498" class="mobile-sticky-cta" data-cta-placement="mobile_sticky" data-i18n="stickyCta" target="_blank" rel="noopener">Download in de App Store</a>
-
-  <main>
-    <!-- Premium hero -->
-    <section class="hero premium-hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="premium-glow premium-glow-one"></div>
-        <div class="premium-glow premium-glow-two"></div>
-      </div>
-      <div class="container hero-premium-grid">
-        <div class="hero-copy fade-in">
-          <div class="hero-eyebrow" data-i18n="premiumHeroEyebrow">Nu beschikbaar voor Nederlandse huurzoekers</div>
-          <h1 class="hero-title" data-i18n-html="heroTitle">Stop met refreshen.<br><em>Nestd vindt je volgende huurwoning.</em></h1>
-          <p class="hero-sub" data-i18n="heroSub">Een rustige AI-woonassistent die het aanbod volgt, je beste matches uitlegt en je alleen een WhatsApp stuurt als het echt relevant is.</p>
-
-          <div class="hero-download-card premium-download-card fade-in">
-            <div class="hero-download-copy">
-              <p class="hero-download-kicker" data-i18n="heroDownloadKicker">Nestd staat live</p>
-              <p class="hero-offer-pill" data-i18n="heroDownloadOffer">Download gratis voor iPhone</p>
-            </div>
-            <div class="hero-download-actions">
-              <a href="https://apps.apple.com/app/nestd/id6740091498" class="hero-download-button" data-cta-placement="hero" data-i18n="heroDownloadButton" target="_blank" rel="noopener">Open de App Store</a>
-              <a href="https://apps.apple.com/app/nestd/id6740091498" class="app-store-badge-link" data-cta-placement="hero_badge" target="_blank" rel="noopener" aria-label="Download Nestd in de App Store">
-                <img src="images/app-store-badge.svg" alt="Download in de App Store">
-              </a>
-            </div>
-            <p class="hero-download-note" data-i18n="heroDownloadNote">Installeer Nestd en start direct met rustig zoeken, matchuitleg en alerts die je zelf controleert.</p>
-          </div>
-
-          <div class="hero-proof-row" aria-label="Nestd trust points">
-            <span data-i18n="heroProof1">Gemaakt voor de NL huurmarkt</span>
-            <span data-i18n="heroProof2">WhatsApp alerts</span>
-            <span data-i18n="heroProof3">Jij houdt controle</span>
-          </div>
-        </div>
-
-        <div class="hero-product fade-in-right" aria-label="Nestd product preview">
-          <div class="premium-phone-shell">
-            <div class="premium-phone-notch"></div>
-            <div class="premium-phone-screen">
-              <div class="app-topbar">
-                <img src="logo.png" alt="" aria-hidden="true">
-                <span>Nestd</span>
-                <b>Live</b>
-              </div>
-              <div class="match-spotlight">
-                <img src="images/apartment-1.jpg" alt="Appartement in de Jordaan" width="800" height="595" loading="eager" fetchpriority="high" decoding="async">
-                <div class="match-spotlight-badge">92% match</div>
-              </div>
-              <div class="match-card-premium active">
-                <div>
-                  <strong data-i18n="heroMockTitle">Jordaan appartement</strong>
-                  <span data-i18n="heroMockMeta">€1.450/mnd · 2 kamers · 65m²</span>
-                </div>
-                <small data-i18n="heroMockReason">Past bij je stijlprofiel en budget</small>
-              </div>
-              <div class="assistant-note">
-                <span>Nestd</span>
-                <p data-i18n="heroMockNote">Nieuwe sterke match gevonden. Wil je reageren of eerst vergelijken?</p>
-              </div>
-            </div>
-          </div>
-          <div class="floating-product-card floating-card-top">
-            <span data-i18n="heroFloat1Label">Woningradar</span>
-            <strong data-i18n="heroFloat1Value">24/7 actief</strong>
-          </div>
-          <div class="floating-product-card floating-card-bottom">
-            <span data-i18n="heroFloat2Label">Volgende stap</span>
-            <strong data-i18n="heroFloat2Value">WhatsApp alert klaar</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trust-rail" aria-label="Waarom Nestd rustiger zoeken maakt">
-      <div class="container trust-rail-grid">
-        <div>
-          <strong data-i18n="trustRail1Title">Alleen relevante matches</strong>
-          <span data-i18n="trustRail1Text">Geen eindeloze feed, wel duidelijke keuzes.</span>
-        </div>
-        <div>
-          <strong data-i18n="trustRail2Title">Uitleg bij elke match</strong>
-          <span data-i18n="trustRail2Text">Waarom past deze woning bij jou?</span>
-        </div>
-        <div>
-          <strong data-i18n="trustRail3Title">Rustige notificaties</strong>
-          <span data-i18n="trustRail3Text">Geen spam. Alleen belangrijke updates.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section premium-section" id="matching">
-      <div class="container feature-detail premium-feature-detail">
-        <div class="fade-in-left">
-          <div class="feature-detail-label" data-i18n="premiumMatchLabel">AI Matching</div>
-          <h2 class="feature-detail-title" data-i18n="premiumMatchTitle">Een short-list die voelt alsof iemand je echt kent.</h2>
-          <p class="feature-detail-desc" data-i18n="premiumMatchDesc">Nestd combineert harde eisen zoals budget en locatie met stijl, sfeer en leefvoorkeuren. Je krijgt minder ruis en meer context: wat klopt, wat twijfelt, en waarom.</p>
-          <ul class="feature-detail-list premium-list">
-            <li><span class="check">✓</span><span data-i18n="premiumMatchLi1">Filtert eerst op must-haves: stad, budget, kamers en oppervlakte.</span></li>
-            <li><span class="check">✓</span><span data-i18n="premiumMatchLi2">Begrijpt voorkeuren die normale filters missen: licht, stijl, buurtgevoel.</span></li>
-            <li><span class="check">✓</span><span data-i18n="premiumMatchLi3">Geeft een korte Nederlandse uitleg per match.</span></li>
-          </ul>
-        </div>
-        <div class="premium-match-panel fade-in-right">
-          <div class="panel-header"><span data-i18n="premiumMatchPanelTitle">Vandaag voor jou</span><b>3 matches</b></div>
-          <div class="premium-listing-card featured">
-            <img src="images/listing-depijp.jpg" alt="Appartement De Pijp" loading="lazy">
-            <div><strong>De Pijp, Amsterdam</strong><span>€1.650 · 3 kamers · balkon</span></div>
-            <em>94%</em>
-          </div>
-          <div class="premium-listing-card">
-            <img src="images/listing-jordaan.jpg" alt="Appartement Jordaan" loading="lazy">
-            <div><strong>Jordaan</strong><span>€1.450 · 2 kamers · licht</span></div>
-            <em>92%</em>
-          </div>
-          <div class="panel-insight">
-            <span data-i18n="premiumInsightLabel">AI uitleg</span>
-            <p data-i18n="premiumInsightText">Veel daglicht, rustige straat en binnen budget. Minpunt: werkplek is compact.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section premium-section premium-section-alt" id="whatsapp">
-      <div class="container feature-detail reverse premium-feature-detail">
-        <div class="fade-in-right">
-          <div class="feature-detail-label" data-i18n="premiumWaLabel">WhatsApp Alerts</div>
-          <h2 class="feature-detail-title" data-i18n="premiumWaTitle">Als snelheid telt, komt Nestd naar jou.</h2>
-          <p class="feature-detail-desc" data-i18n="premiumWaDesc">Goede huurwoningen verdwijnen snel. Nestd stuurt een compacte WhatsApp-alert met de reden waarom de woning interessant is, zodat je direct kunt beslissen.</p>
-          <div class="mini-grid premium-mini-grid">
-            <div class="mini-card"><h4 data-i18n="premiumWaMini1Title">Geen extra app-checks</h4><p data-i18n="premiumWaMini1Text">Je ziet de belangrijkste match meteen op je telefoon.</p></div>
-            <div class="mini-card"><h4 data-i18n="premiumWaMini2Title">Instelbaar en rustig</h4><p data-i18n="premiumWaMini2Text">Alleen alerts die bij je voorkeuren passen.</p></div>
-          </div>
-        </div>
-        <div class="premium-whatsapp-panel wa-mock fade-in-left">
-          <div class="wa-header premium-wa-header">
-            <img src="logo.png" alt="Nestd">
-            <div>
-              <div class="wa-header-name">Nestd</div>
-              <div class="wa-header-status wa-typing-status"><span data-i18n="premiumWaStatus">nieuwe match</span><span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>
-            </div>
-          </div>
-          <div class="wa-body premium-wa-body">
-            <div class="wa-msg incoming wa-animate" style="--delay:0s">
-              <strong data-i18n="premiumWaMsgTitle">Sterke match gevonden</strong>
-              <p data-i18n-html="premiumWaMsgBody">Jordaan · €1.450/mnd · 92% match<br>Past bij je budget, lichtvoorkeur en gewenste buurt.</p>
-              <p class="wa-msg-match" data-i18n="premiumWaMsgMatch">92% match</p>
-              <div class="wa-msg-time">14:32</div>
-            </div>
-            <div class="wa-msg incoming wa-animate" style="--delay:0.3s">
-              <strong data-i18n="premiumWaDuoTitle">Duo Match! 💕</strong>
-              <p data-i18n="premiumWaDuoBody">Oud-West appartement — jullie hebben allebei geliked.</p>
-              <div class="wa-msg-time">15:07</div>
-            </div>
-            <div class="wa-msg outgoing wa-animate" style="--delay:0.6s">
-              <p data-i18n="premiumWaReply">Stuur details</p>
-              <div class="wa-msg-time">15:08 ✓✓</div>
-            </div>
-            <div class="wa-msg incoming wa-animate" style="--delay:0.9s">
-              <p data-i18n="premiumWaAnswer">Zeker. Ik zet de plus- en minpunten overzichtelijk voor je klaar.</p>
-              <div class="wa-msg-time">15:08</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section premium-section duo-section" id="duo-zoeken">
-      <div class="container feature-detail premium-feature-detail">
-        <div class="fade-in-left">
-          <div class="feature-detail-label" data-i18n="premiumDuoLabel">Samen zoeken</div>
-          <h2 class="feature-detail-title" data-i18n="premiumDuoTitle">Voor stellen en huisgenoten zonder groepschat-chaos.</h2>
-          <p class="feature-detail-desc" data-i18n="premiumDuoDesc">Zoek apart, vergelijk slim en krijg pas een signaal als een woning voor jullie allebei interessant is. Minder discussie, betere shortlist.</p>
-        </div>
-        <div class="swipe-demo premium-swipe-demo fade-in-right" id="swipe-demo">
-          <div class="swipe-phone premium-swipe-phone">
-            <div class="swipe-stack" id="swipe-stack">
-              <!-- Cards injected by JS -->
-            </div>
-            <div class="swipe-actions">
-              <div class="swipe-action-btn swipe-nope">✕</div>
-              <div class="swipe-action-btn swipe-like">♥</div>
-            </div>
-            <div class="duo-match-overlay" id="duo-match-overlay">
-              <div class="duo-match-content">
-                <div class="duo-match-emoji">💕</div>
-                <div class="duo-match-text">Duo Match!</div>
-              </div>
-              <div class="confetti-container" id="confetti-container"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="how-it-works premium-how">
-      <div class="container">
-        <div class="section-label fade-in" data-i18n="howLabel">Hoe het werkt</div>
-        <h2 class="section-title fade-in" data-i18n-html="premiumHowTitle">Van zoekstress naar<br><em>een heldere shortlist.</em></h2>
-        <div class="premium-steps-grid">
-          <div class="premium-step fade-in"><span>01</span><h3 data-i18n="premiumStep1Title">Vertel wat je zoekt</h3><p data-i18n="premiumStep1Text">Budget, stad, must-haves en sfeer. Gewoon in normale taal.</p></div>
-          <div class="premium-step fade-in"><span>02</span><h3 data-i18n="premiumStep2Title">Nestd kijkt mee</h3><p data-i18n="premiumStep2Text">De woningradar volgt nieuw aanbod en haalt ruis uit je feed.</p></div>
-          <div class="premium-step fade-in"><span>03</span><h3 data-i18n="premiumStep3Title">Je krijgt uitleg</h3><p data-i18n="premiumStep3Text">Niet alleen een score, maar ook waarom een woning past.</p></div>
-          <div class="premium-step fade-in"><span>04</span><h3 data-i18n="premiumStep4Title">Reageer sneller</h3><p data-i18n="premiumStep4Text">Bij een sterke match krijg je een compacte WhatsApp-alert.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trust-section premium-section">
-      <div class="container trust-grid">
-        <div class="trust-copy fade-in-left">
-          <div class="feature-detail-label" data-i18n="premiumTrustLabel">Vertrouwen</div>
-          <h2 class="feature-detail-title" data-i18n="premiumTrustTitle">Premium hoeft niet schreeuwerig te zijn. Het moet betrouwbaar voelen.</h2>
-          <p class="feature-detail-desc" data-i18n="premiumTrustDesc">Daarom kiest Nestd voor heldere keuzes, privacybewuste analytics en notificaties waar jij controle over houdt.</p>
-        </div>
-        <div class="trust-cards fade-in-right">
-          <div><strong data-i18n="premiumTrustCard1Title">Privacy-first</strong><span data-i18n="premiumTrustCard1Text">Geen e-mailadres in analytics-events en geen onnodige trackingruis.</span></div>
-          <div><strong data-i18n="premiumTrustCard2Title">Nederlandse context</strong><span data-i18n="premiumTrustCard2Text">Copy, alerts en matchuitleg zijn gemaakt voor de Nederlandse huurmarkt.</span></div>
-          <div><strong data-i18n="premiumTrustCard3Title">Jij bepaalt de ruis</strong><span data-i18n="premiumTrustCard3Text">Je kiest zelf wanneer Nestd je iets stuurt en welke alerts belangrijk genoeg zijn.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pricing-section premium-pricing" id="pricing-preview">
-      <div class="container">
-        <div class="section-label fade-in" data-i18n="premiumPricingLabel">Prijzen</div>
-        <h2 class="section-title fade-in" data-i18n-html="premiumPricingTitle">Start rustig.<br><em>Upgrade als snelheid telt.</em></h2>
-        <p class="pricing-intro fade-in" data-i18n="premiumPricingSub">Download Nestd gratis en upgrade wanneer WhatsApp alerts, Duo Zoeken en extra AI-uitleg voor jou waarde toevoegen.</p>
-        <div class="premium-pricing-grid">
-          <div class="premium-price-card fade-in">
-            <span data-i18n="price_free_name">Gratis</span>
-            <strong>€0</strong>
-            <p data-i18n="premiumFreeDesc">Voor rustig browsen en slimme basis-matches.</p>
-            <ul><li data-i18n="price_free_f1">AI-matching</li><li data-i18n="price_free_f3">Woningen browsen & opslaan</li><li data-i18n="price_free_f4">Push notificaties</li></ul>
-          </div>
-          <div class="premium-price-card featured fade-in">
-            <div class="pricing-badge" data-i18n="price_pro_badge">Meest gekozen</div>
-            <span data-i18n="price_pro_name">Pro</span>
-            <strong>€19,95</strong>
-            <p data-i18n="premiumProDesc">Voor woningzoekers die sneller willen reageren met WhatsApp en AI-uitleg.</p>
-            <ul><li data-i18n="price_pro_f_wa">WhatsApp alerts</li><li data-i18n-html="price_pro_f2"><strong>AI agent</strong> — ook bestuurbaar via WhatsApp</li><li data-i18n-html="price_pro_f3"><strong>Duo Zoeken</strong> — zoek samen met je partner</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq-section premium-faq" id="faq">
-      <div class="container">
-        <div class="section-label fade-in" data-i18n="premiumFaqLabel">FAQ</div>
-        <h2 class="section-title fade-in" data-i18n-html="premiumFaqTitle">Vragen voordat je<br><em>de app opent?</em></h2>
-        <div class="premium-faq-list">
-          <details class="fade-in"><summary data-i18n="premiumFaq1Q">Is Nestd al live?</summary><p data-i18n="premiumFaq1A">Ja. Nestd is beschikbaar in de App Store voor iPhone.</p></details>
-          <details class="fade-in"><summary data-i18n="premiumFaq2Q">Krijg ik veel WhatsApp-berichten?</summary><p data-i18n="premiumFaq2A">Nee. De bedoeling is juist minder ruis: alleen compacte alerts voor matches die bij je profiel passen.</p></details>
-          <details class="fade-in"><summary data-i18n="premiumFaq3Q">Kan ik gratis starten?</summary><p data-i18n="premiumFaq3A">Ja. Je kunt Nestd gratis downloaden en rustig beginnen met zoeken. Pro is er voor extra snelheid en slimme alerts.</p></details>
-          <details class="fade-in"><summary data-i18n="premiumFaq4Q">Kan ik samen zoeken?</summary><p data-i18n="premiumFaq4A">Ja. Duo Zoeken is gemaakt voor partners, vrienden of huisgenoten die samen een woning zoeken.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section class="download-bottom premium-final-cta" id="download-bottom">
-      <div class="container">
-        <div class="section-label fade-in" data-i18n="downloadLabel">Download</div>
-        <h2 class="section-title fade-in" data-i18n-html="downloadTitle"><em>Open Nestd in de App Store.</em></h2>
-        <p class="download-sub fade-in" data-i18n="downloadSub">Begin vandaag met een rustigere shortlist voor je volgende huurwoning.</p>
-        <a href="https://apps.apple.com/app/nestd/id6740091498" class="final-store-badge fade-in" data-cta-placement="bottom" target="_blank" rel="noopener" aria-label="Download Nestd in de App Store">
-          <img src="images/app-store-badge.svg" alt="Download in de App Store">
-        </a>
-        <p class="download-note fade-in" data-i18n="downloadNote">Beschikbaar voor iPhone.</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="page-footer">
-    <div class="page-footer-inner">
-      <div class="page-footer-grid">
-        <div class="page-footer-brand">
-          <a href="/" class="navbar-brand" style="display:inline-flex;margin-bottom:0">
-            <img src="logo.png" alt="Nestd">
-            <span>Nestd</span>
-          </a>
-          <p data-i18n="footer_desc">Jouw persoonlijke AI-woonassistent. Vindt woningen en stuurt matches via WhatsApp.</p>
-        </div>
-        <div>
-          <h5 data-i18n="footer_product">Product</h5>
-          <ul>
-            <li><a href="/pricing.html" data-i18n="footer_pricing">Prijzen</a></li>
-            <li><a href="/about.html" data-i18n="footer_about_nestd">Over Nestd</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 data-i18n="footer_support">Support</h5>
-          <ul>
-            <li><a href="/about.html#contact" data-i18n="footer_contact">Contact</a></li>
-            <li><a href="/pricing.html#faq" data-i18n="footer_faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 data-i18n="footer_legal">Juridisch</h5>
-          <ul>
-            <li><a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a></li>
-            <li><a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a></li>
-            <li><a href="#" data-i18n="footer_cookies">Cookiebeleid</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="page-footer-bottom">
-        <span>&copy; 2026 Nestd. Amsterdam.</span>
-        <div class="page-footer-bottom-links">
-          <a href="/privacy.html" data-i18n="footer_privacy">Privacybeleid</a>
-          <a href="#" data-i18n="footer_terms">Algemene Voorwaarden</a>
-          <a href="#" data-i18n="footer_cookies">Cookiebeleid</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="i18n.js"></script>
-  <script src="script.js"></script>
-  <script>
-    // Hamburger toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    function setMobileMenuOpen(isOpen) {
-      hamburger.classList.toggle('open', isOpen);
-      mobileMenu.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-    }
-    hamburger.addEventListener('click', () => {
-      setMobileMenuOpen(!mobileMenu.classList.contains('open'));
-    });
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => setMobileMenuOpen(false));
-    });
-  </script>
+  </section>
+<section class="wrap home-offer">
+<div>
+<p class="eyebrow">Het Nestd-abonnement</p>
+<h2>Geef je zoektocht een voorsprong.</h2>
+<p class="lead">Ontdek een week lang wat Nestd voor jouw zoektocht kan doen. Daarna €19,99 per maand.</p>
+</div>
+<div>
+<div class="offer-summary">
+<span class="trial-pill">Je eerste week is gratis</span>
+<p>
+<strong>€19,99</strong> <span>/ maand</span>
+</p>
+</div>
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="home-offer" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download in de App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<p class="caption">Na de eerste gratis week wordt het abonnement €19,99 per maand. Bekijk de proefperiode, verlenging en opzegvoorwaarden in het aankoopscherm vóór je bevestigt.</p>
+</div>
+</section>
+<section class="wrap faq" id="faq">
+<div>
+<p class="eyebrow">Goed om te weten</p>
+<h2>Nog even dit.</h2>
+</div>
+<div class="faq-items">
+<details>
+<summary>Wat doet Nestd precies?<span aria-hidden="true">+</span>
+</summary>
+<p>Nestd volgt het huuraanbod en laat je weten wanneer een woning bij je ingestelde zoekwensen past. Je bekijkt de woning in de app en reageert via de aanbieder. Nestd verhuurt zelf geen woningen.</p>
+</details>
+<details>
+<summary>Wat kost Nestd na de gratis week?<span aria-hidden="true">+</span>
+</summary>
+<p>Je eerste week is gratis. Daarna kost Nestd €19,99 per maand. Het is een betaald abonnement, geen blijvend gratis versie. Controleer de voorwaarden voor de proefperiode, verlenging en opzegging in de app voordat je bevestigt.</p>
+</details>
+<details>
+<summary>Waarop kan ik zoeken?<span aria-hidden="true">+</span>
+</summary>
+<p>Stel je stad, budget, aantal kamers en minimale oppervlakte in. Welke woningen je ontvangt, hangt af van je zoekwensen en het beschikbare aanbod.</p>
+</details>
+<details>
+<summary>Kan ik Nestd op mijn telefoon gebruiken?<span aria-hidden="true">+</span>
+</summary>
+<p>Nestd is beschikbaar voor iPhone via de App Store. Download de app, stel je zoekwensen in en kies je abonnement.</p>
+</details>
+<details>
+<summary>Vind ik gegarandeerd een woning?<span aria-hidden="true">+</span>
+</summary>
+<p>Een huurwoning kunnen we je niet beloven. Nestd helpt je relevant aanbod te vinden en erop te reageren. De beschikbaarheid en selectie liggen bij de verhuurder of makelaar.</p>
+</details>
+</div>
+</section>
+<section class="closing">
+<div class="wrap closing-inner">
+<div>
+<p class="eyebrow">Laat het eindeloze refreshen achter je</p>
+<h2>Meer leven.<br>
+<span>Minder zoeken.</span>
+</h2>
+</div>
+<div class="closing-action">
+<p>Stel je wensen in. Laat Nestd met je meekijken.</p>
+<a class="download" href="https://apps.apple.com/nl/app/nestd/id6761392857" data-cta-placement="closing" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor" d="M17.1 12.4c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-3-1.6-1.3-.1-2.5.8-3.2.8-.6 0-1.6-.8-2.7-.8-1.4 0-2.7.8-3.4 2-1.5 2.5-.4 6.3 1 8.3.7 1 1.4 2 2.5 1.9 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.4-1.9.8-1.1 1.1-2.2 1.1-2.3-.1 0-1.8-.7-1.8-3.3ZM15 6.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.6-1.2Z"/>
+</svg>
+<span>Download in de App Store</span>
+<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<small>Voor iPhone · Eerste week gratis, daarna €19,99/maand</small>
+</div>
+</div>
+</section>
+</main>
+<footer class="wrap site-footer">
+<div class="footer-top">
+<a class="brand" href="/">
+<img src="/logo.png" width="43" height="43" alt="">
+<span>nestd.</span>
+</a>
+<p>Een seintje dichter bij thuis.</p>
+<nav aria-label="Footer">
+<a href="/about.html">Over Nestd</a>
+<a href="mailto:hello@nestd.nl">Contact <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 19 19 5M5 5h14v14"/>
+</svg>
+</a>
+<a href="/privacy.html">Privacy</a>
+</nav>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Nestd. Nestd is een dienst van Muba B.V.</span>
+<span>Made for finding home.</span>
+</div>
+</footer>
 </body>
 </html>

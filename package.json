@@ -1,0 +1,17 @@
+{
+  "name": "nestd-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node tests/static-landing-copy-smoke.mjs && node tests/i18n-language-url-smoke.mjs && node tests/waitlist-attribution-smoke.mjs",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "@playwright/test": "1.58.2"
+  }
+}

@@ -1,0 +1,147 @@
+// Existing policy text retained; this redesign does not change legal commitments.
+export const privacyContent = {
+  nl: {
+    privacyLink: "Privacybeleid",
+    privacyBack: "← Terug naar home",
+    privacyTitle: "Privacy<em>beleid</em>",
+    privacyDate: "Laatst bijgewerkt: 11 maart 2026",
+    privacyIntro:
+      'Nestd ("wij", "ons") is een dienst van Muba B.V., gevestigd in Nederland. Wij respecteren je privacy en verwerken persoonsgegevens in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG/GDPR). Dit beleid legt uit welke gegevens wij verzamelen, waarom, en wat je rechten zijn.',
+    privacyS1Title: "1. Welke gegevens verzamelen wij?",
+    privacyS1Intro: "Wij verzamelen de volgende persoonsgegevens:",
+    privacyS1a:
+      "<strong>E-mailadres</strong> — wanneer je je aanmeldt voor de waitlist of een account aanmaakt.",
+    privacyS1b:
+      "<strong>Telefoonnummer</strong> — voor verificatie via WhatsApp (OTP) en het versturen van notificaties.",
+    privacyS1c:
+      "<strong>Woonvoorkeuren</strong> — stad, budget, gewenste oppervlakte, aantal kamers en andere zoekcriteria.",
+    privacyS2Title: "2. Waarom verwerken wij deze gegevens?",
+    privacyS2a:
+      "<strong>Dienstverlening</strong> — om huurwoningen te matchen aan je voorkeuren.",
+    privacyS2b:
+      "<strong>Notificaties</strong> — om je via WhatsApp op de hoogte te houden van nieuwe matches.",
+    privacyS2c:
+      "<strong>Waitlist</strong> — om je te informeren wanneer Nestd beschikbaar is.",
+    privacyS2d:
+      "<strong>Verbetering</strong> — om onze dienst en AI-matching te verbeteren.",
+    privacyS2Legal:
+      "De wettelijke grondslag voor verwerking is je <strong>toestemming</strong> (aanmelding) en ons <strong>gerechtvaardigd belang</strong> (verbetering van de dienst).",
+    privacyS3Title: "3. Delen met derden",
+    privacyS3Text:
+      "Wij delen je gegevens alleen met dienstverleners die nodig zijn voor de werking van Nestd:",
+    privacyS3a: "<strong>Supabase</strong> (EU) — database en authenticatie.",
+    privacyS3b:
+      "<strong>Meta (WhatsApp Cloud API)</strong> — voor het versturen van WhatsApp-berichten.",
+    privacyS3c:
+      "<strong>PostHog</strong> (EU) — privacybewuste analytics voor pagina's, campagnes en productgebruik.",
+    privacyS3d:
+      "<strong>Meta Pixel</strong> — alleen op publieke marketingpagina's voor advertentiemeting en optimalisatie.",
+    privacyS3Extra: "Wij verkopen je gegevens nooit aan derden.",
+    privacyS4Title: "4. Woninggegevens",
+    privacyS4Text:
+      "Nestd verzamelt publiek beschikbare huurwoningadvertenties van diverse woningplatformen. Dit betreft geen persoonsgegevens maar openbare woninginformatie.",
+    privacyS5Title: "5. Bewaartermijn",
+    privacyS5Text:
+      "Wij bewaren je persoonsgegevens zolang je een actief account hebt of op de waitlist staat. Wanneer je je uitschrijft of je account verwijdert, verwijderen wij je gegevens binnen 30 dagen, tenzij wettelijk anders vereist.",
+    privacyS6Title: "6. Beveiliging",
+    privacyS6Text:
+      "Wij nemen passende technische en organisatorische maatregelen om je gegevens te beschermen, waaronder versleutelde verbindingen (TLS), beveiligde databases en beperkte toegang tot persoonsgegevens.",
+    privacyS7Title: "7. Jouw rechten",
+    privacyS7Intro: "Onder de AVG heb je de volgende rechten:",
+    privacyS7a:
+      "<strong>Inzage</strong> — je mag opvragen welke gegevens wij van je hebben.",
+    privacyS7b:
+      "<strong>Rectificatie</strong> — je kunt onjuiste gegevens laten corrigeren.",
+    privacyS7c:
+      "<strong>Verwijdering</strong> — je kunt vragen om verwijdering van je gegevens.",
+    privacyS7d:
+      "<strong>Beperking</strong> — je kunt de verwerking laten beperken.",
+    privacyS7e:
+      "<strong>Overdraagbaarheid</strong> — je kunt je gegevens in een gangbaar formaat ontvangen.",
+    privacyS7f:
+      "<strong>Bezwaar</strong> — je kunt bezwaar maken tegen verwerking op basis van gerechtvaardigd belang.",
+    privacyS7Contact:
+      'Neem voor het uitoefenen van je rechten contact op via <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>.',
+    privacyS8Title: "8. Cookies",
+    privacyS8Text:
+      "Nestd gebruikt functionele opslag (localStorage) voor taalvoorkeur en thema. Daarnaast gebruiken wij PostHog analytics met EU-hosting om te begrijpen welke pagina's en campagnes werken, en Meta Pixel alleen op publieke marketingpagina's om Meta-campagnes te meten en optimaliseren. We hebben automatische PostHog click-capture en sessie-opnames uitgeschakeld, sturen geen e-mailadressen of gevoelige woningvoorkeuren mee in analytics-events, strippen onbekende query parameters uit analytics-URL's en verkopen geen data.",
+    privacyS9Title: "9. Klachten",
+    privacyS9Text:
+      'Heb je een klacht over hoe wij met je gegevens omgaan? Neem dan contact met ons op via <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>. Je hebt ook het recht een klacht in te dienen bij de <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener">Autoriteit Persoonsgegevens</a>.',
+    privacyS10Title: "10. Contact",
+    privacyS10Text:
+      'Muba B.V.<br>E-mail: <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a><br>Website: <a href="https://nestd.nl">nestd.nl</a>',
+  },
+  en: {
+    privacyLink: "Privacy Policy",
+    privacyBack: "← Back to home",
+    privacyTitle: "Privacy <em>Policy</em>",
+    privacyDate: "Last updated: 11 March 2026",
+    privacyIntro:
+      'Nestd ("we", "us") is a service of Muba B.V., based in the Netherlands. We respect your privacy and process personal data in accordance with the General Data Protection Regulation (GDPR). This policy explains what data we collect, why, and what your rights are.',
+    privacyS1Title: "1. What data do we collect?",
+    privacyS1Intro: "We collect the following personal data:",
+    privacyS1a:
+      "<strong>Email address</strong> — when you sign up for the waitlist or create an account.",
+    privacyS1b:
+      "<strong>Phone number</strong> — for verification via WhatsApp (OTP) and sending notifications.",
+    privacyS1c:
+      "<strong>Housing preferences</strong> — city, budget, desired surface area, number of rooms and other search criteria.",
+    privacyS2Title: "2. Why do we process this data?",
+    privacyS2a:
+      "<strong>Service delivery</strong> — to match rental properties to your preferences.",
+    privacyS2b:
+      "<strong>Notifications</strong> — to keep you informed of new matches via WhatsApp.",
+    privacyS2c:
+      "<strong>Waitlist</strong> — to inform you when Nestd becomes available.",
+    privacyS2d:
+      "<strong>Improvement</strong> — to improve our service and AI matching.",
+    privacyS2Legal:
+      "The legal basis for processing is your <strong>consent</strong> (sign-up) and our <strong>legitimate interest</strong> (service improvement).",
+    privacyS3Title: "3. Sharing with third parties",
+    privacyS3Text:
+      "We only share your data with service providers necessary for Nestd to function:",
+    privacyS3a: "<strong>Supabase</strong> (EU) — database and authentication.",
+    privacyS3b:
+      "<strong>Meta (WhatsApp Cloud API)</strong> — for sending WhatsApp messages.",
+    privacyS3c:
+      "<strong>PostHog</strong> (EU) — privacy-conscious analytics for pages, campaigns and product usage.",
+    privacyS3d:
+      "<strong>Meta Pixel</strong> — only on public marketing pages for ads measurement and optimization.",
+    privacyS3Extra: "We never sell your data to third parties.",
+    privacyS4Title: "4. Property data",
+    privacyS4Text:
+      "Nestd collects publicly available rental property listings from various housing platforms. This concerns no personal data but public property information.",
+    privacyS5Title: "5. Retention period",
+    privacyS5Text:
+      "We retain your personal data as long as you have an active account or are on the waitlist. When you unsubscribe or delete your account, we delete your data within 30 days, unless legally required otherwise.",
+    privacyS6Title: "6. Security",
+    privacyS6Text:
+      "We take appropriate technical and organisational measures to protect your data, including encrypted connections (TLS), secured databases and restricted access to personal data.",
+    privacyS7Title: "7. Your rights",
+    privacyS7Intro: "Under the GDPR you have the following rights:",
+    privacyS7a:
+      "<strong>Access</strong> — you may request what data we hold about you.",
+    privacyS7b:
+      "<strong>Rectification</strong> — you can have incorrect data corrected.",
+    privacyS7c:
+      "<strong>Erasure</strong> — you can request deletion of your data.",
+    privacyS7d:
+      "<strong>Restriction</strong> — you can have processing restricted.",
+    privacyS7e:
+      "<strong>Portability</strong> — you can receive your data in a common format.",
+    privacyS7f:
+      "<strong>Objection</strong> — you can object to processing based on legitimate interest.",
+    privacyS7Contact:
+      'To exercise your rights, contact us at <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>.',
+    privacyS8Title: "8. Cookies",
+    privacyS8Text:
+      "Nestd uses functional storage (localStorage) for language preference and theme. We also use PostHog analytics with EU hosting to understand which pages and campaigns work, and Meta Pixel only on public marketing pages to measure and optimize Meta campaigns. We disable automatic PostHog click capture and session recordings, do not send email addresses or sensitive housing preferences in analytics events, strip unknown query parameters from analytics URLs and do not sell data.",
+    privacyS9Title: "9. Complaints",
+    privacyS9Text:
+      'Have a complaint about how we handle your data? Contact us at <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a>. You also have the right to file a complaint with the <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener">Dutch Data Protection Authority</a>.',
+    privacyS10Title: "10. Contact",
+    privacyS10Text:
+      'Muba B.V.<br>Email: <a href="mailto:privacy@nestd.nl">privacy@nestd.nl</a><br>Website: <a href="https://nestd.nl">nestd.nl</a>',
+  },
+};

@@ -592,7 +592,7 @@ if (waMock) {
 
 // Track marketing CTA and navigation clicks
 (function initMarketingClickTracking() {
-  const APP_STORE_URL = 'https://apps.apple.com/app/nestd/id6740091498';
+  const APP_STORE_URL = 'https://apps.apple.com/nl/app/nestd/id6761392857';
 
   function appStoreUrlForLink(link) {
     const rawHref = link.getAttribute('href') || '';
