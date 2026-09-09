@@ -227,10 +227,34 @@ try {
   assert.equal(await disclosure.getAttribute('open'), null, 'rapid reversal settles closed');
   assert.equal(await mp.locator('[data-proof-preview] .proof-reviews figure').count(), 3);
   assert.match(await mp.locator('[data-proof-preview]').innerText(), /FICTIEVE PLACEHOLDER/);
+  const reviews = mp.locator('.proof-reviews');
+  await reviews.scrollIntoViewIfNeeded();
+  assert.equal(await mp.locator('.portrait-placeholder').count(), 3);
+  await mp.locator('[data-review-next]').click();
+  await mp.waitForTimeout(650);
+  assert.equal(await mp.locator('[data-review-status]').innerText(), '2 / 3');
+  await reviews.focus();
+  await mp.keyboard.press('End');
+  await mp.waitForTimeout(650);
+  assert.equal(await mp.locator('[data-review-status]').innerText(), '3 / 3');
+  await mp.keyboard.press('Home');
+  await mp.waitForTimeout(650);
+  assert.equal(await mp.locator('[data-review-prev]').isDisabled(), true);
+  // A touch-like horizontal scroll updates controls without hijacking vertical gestures.
+  await reviews.evaluate(el => el.scrollTo({left: el.scrollWidth, behavior: 'instant'}));
+  await mp.waitForTimeout(250);
+  assert.equal(await mp.locator('[data-review-next]').isDisabled(), true);
+  await mp.locator('[data-review-index="0"]').click();
+  await mp.waitForTimeout(650);
   await mp.locator('[data-proof-preview]').scrollIntoViewIfNeeded();
   await mp.screenshot({path: '/tmp/nestd-placeholders-mobile.png'});
   await mp.setViewportSize({width: 1440, height: 1000});
   await mp.screenshot({path: '/tmp/nestd-placeholders-desktop.png'});
+  await mp.locator('[data-review-index="2"]').click();
+  await mp.waitForTimeout(650);
+  await mp.locator('[data-review-prev]').click();
+  await mp.waitForTimeout(650);
+  assert.equal(await mp.locator('[data-review-status]').innerText(), '2 / 3', 'desktop carousel can return from last slide');
   await mp.emulateMedia({ reducedMotion: "reduce" });
   assert.equal(
     await mp.evaluate(
