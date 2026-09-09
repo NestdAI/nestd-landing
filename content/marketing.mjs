@@ -63,7 +63,7 @@ export const copy = {
     ],
     channelsTitle: "Meldingen die bij je passen.",
     channelsBody:
-      "Bekijk in de app welke meldingskanalen je kunt inschakelen. De beschikbaarheid verschilt per appversie. Telegram wordt nog niet aangeboden op deze website.",
+      "Stel je meldingsvoorkeuren in de app in en controleer of meldingen op je telefoon aanstaan.",
     channelsNote:
       "Ontvangst hangt ook af van je verbinding, telefooninstellingen en de beschikbaarheid van de bron. We beloven geen vaste bezorgtijd.",
     pricingLabel: "EEN BETAALDE DIENST",
@@ -99,12 +99,12 @@ export const copy = {
         "Nestd richt zich op snel ontdekken en reageren. De timing hangt af van de bron, verwerking, je verbinding en je instellingen. Er geldt geen gegarandeerde bezorgtijd.",
       ],
       [
-        "Kan ik meldingen via Telegram ontvangen?",
-        "Telegram wordt nog niet aangeboden op deze website. Bekijk in de app welke meldingsopties jouw versie ondersteunt.",
+        "Welke woningen zie ik in Nestd?",
+        "Je zoekfilters bepalen welk aanbod relevant is. Stel je locatie, budget en woonwensen in en bekijk de details van een woning voordat je reageert.",
       ],
       [
-        "Is Nestd beschikbaar voor Android?",
-        "Op dit moment verwijzen we alleen naar de geverifieerde iPhone-app. Er is hier nog geen publieke Android-download beschikbaar.",
+        "Waar reageer ik op een woning?",
+        "Vanuit de woning ga je naar de oorspronkelijke aanbieder. Daar lees je de voorwaarden en dien je zelf je reactie in.",
       ],
       [
         "Kan Nestd een woning voor mij regelen?",
@@ -120,7 +120,6 @@ export const copy = {
       "Begin met je zoekwensen. Bekijk het abonnement in de app en beslis of Nestd bij jouw zoektocht past.",
     handoff: "Verder op je iPhone",
     scan: "Scan om Nestd in de App Store te bekijken.",
-    android: "Android: nog geen publieke download beschikbaar.",
     aboutTitle: "Een zoektocht met<br><em>meer richting.</em>",
     aboutIntro:
       "Een huurwoning zoeken kan je dag overnemen. Wij willen dat je minder tijd kwijt bent aan steeds opnieuw kijken — en meer aandacht hebt voor de woningen die je echt wilt bekijken.",
@@ -138,8 +137,6 @@ export const copy = {
     pricingPage: "Prijzen",
     aboutPage: "Over Nestd",
     downloadPage: "Download",
-    privacyNotice:
-      "Dit is het bestaande privacybeleid, laatst bijgewerkt op 11 maart 2026. Het beschrijft ook eerdere functionaliteit. Raadpleeg bij vragen over actuele gegevensverwerking privacy@nestd.nl.",
   },
   en: {
     nav: ["How it works", "Pricing", "About Nestd"],
@@ -203,7 +200,7 @@ export const copy = {
     ],
     channelsTitle: "Alerts that work for you.",
     channelsBody:
-      "Check the app for the notification channels you can enable. Availability varies by app version. Telegram is not offered on this website yet.",
+      "Set your notification preferences in the app and check that notifications are enabled on your phone.",
     channelsNote:
       "Receipt also depends on your connection, phone settings and source availability. We do not promise a fixed delivery time.",
     pricingLabel: "A PAID SERVICE",
@@ -238,12 +235,12 @@ export const copy = {
         "Nestd focuses on helping you discover listings and respond quickly. Timing depends on the source, processing, your connection and settings. There is no guaranteed delivery time.",
       ],
       [
-        "Can I receive alerts on Telegram?",
-        "Telegram is not offered on this website yet. Check the app for the notification options supported by your version.",
+        "Which homes will I see in Nestd?",
+        "Your search filters determine which listings are relevant. Set your location, budget and housing needs, then review the details before responding.",
       ],
       [
-        "Is Nestd available for Android?",
-        "For now, we only link to the verified iPhone app. A public Android download is not available here yet.",
+        "Where do I respond to a listing?",
+        "Continue from the listing to the original provider. Read their conditions and submit your response directly with them.",
       ],
       [
         "Can Nestd secure a home for me?",
@@ -259,7 +256,6 @@ export const copy = {
       "Start with what you need. Review the subscription in the app and decide whether Nestd is right for your search.",
     handoff: "Continue on your iPhone",
     scan: "Scan to view Nestd in the App Store.",
-    android: "Android: no public download available yet.",
     aboutTitle: "A search with<br><em>more direction.</em>",
     aboutIntro:
       "Finding a rental can take over your day. We want you to spend less time checking again — and more time on the homes you actually want to explore.",
@@ -277,7 +273,5 @@ export const copy = {
     pricingPage: "Pricing",
     aboutPage: "About Nestd",
     downloadPage: "Download",
-    privacyNotice:
-      "This is the existing privacy policy, last updated on 11 March 2026. It also describes earlier functionality. Contact privacy@nestd.nl with questions about current data processing.",
   },
 };

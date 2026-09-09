@@ -19,7 +19,7 @@
 | Android | https://play.google.com/store/apps/details?id=nl.nestd.app&hl=en&gl=NL returns 404 | No Google Play badge, fabricated link or availability promise |
 | Pricing conflict | NL App Store lists “Nestd Pro €19.99”; old landing and app locale copy say €19.95/month. Public store text does not establish the new paid-only billing contract | No invented exact price/period/trial. The pricing page explicitly states a paid subscription, with the current price, billing period and terms disclosed in the in-app App Store purchase screen. Confirm the new contract before replacing this copy with an amount |
 | Purchase conditions | App source uses RevenueCat; store listing identifies in-app purchases and links the Apple standard EULA | Existing Apple EULA linked; subscription management refers to the Apple account. No invented refund, cancellation deadline, trial, guarantee or annual/monthly offer |
-| Notification channels | Current source and the last audit do not establish a publicly released Telegram rental-alert path or proven device-delivery SLA | No Telegram CTA, connection promise, WhatsApp promotion, delivery timer or “fastest” claim. The app exposes available notification options; the FAQ honestly withholds a Telegram offer |
+| Notification channels | Current source and the last audit do not establish a publicly released Telegram rental-alert path or proven device-delivery SLA | No Telegram CTA, connection promise, WhatsApp promotion, delivery timer or “fastest” claim. The app exposes available notification options; uncertain channel/platform availability is kept out of the product flow and recorded here only |
 | Product/store parity | Public App Store description still advertises AI and WhatsApp/Pro. Parent owns independent product/release audit | Draft remains subject to product/release alignment. This website does not imply the app/backend was changed |
 | Social proof | No verified testimonials, user counts, conversion results or comparative delivery benchmark | None fabricated or displayed |
 | Visual | Optimized derivatives of existing `images/apartment-1.jpg` and logo, code-native notification illustration | No fake live inventory, match score or app screenshot. Explicit “example alert” and illustration caption |
@@ -39,8 +39,8 @@ The exact new price/billing contract and release/channel state were escalated ea
 | `/`, `/en/` | Fully rendered localized hero, illustrative rental alert, value proposition, procedure, paid subscription, FAQs and download funnel |
 | `/pricing.html`, `/en/pricing.html` | Paid-only offer, honest checkout-disclosed price/period, conditions, no free comparison table |
 | `/about.html`, `/en/about.html` | Rental-search positioning, company/contact information, no contact form |
-| `/download.html`, `/en/download.html` | Verified iPhone CTA, desktop QR handoff, clear paid requirement, honest Android status |
-| `/privacy.html`, `/en/privacy.html` | New accessible shared shell. All original legal disclosures and original update date retained; a dated-policy notice makes their legacy status explicit |
+| `/download.html`, `/en/download.html` | Verified iPhone CTA, desktop QR handoff, clear paid requirement; no unverified platform-status copy |
+| `/privacy.html`, `/en/privacy.html` | New accessible shared shell. All original legal disclosures and original update date retained. Legal-review open points remain in this report/PR, not in the product flow |
 | `/features.html` | Legacy route redirects to the procedure section while preserving campaign query and language handling |
 | `?lang=en`, `?lang=nl` | Old campaign links map to fully rendered locale routes while preserving UTM values and anchors |
 | `/app`, `/app/*` | Explicit user-initiated app opening; no same-URL redirect loop; verified store fallback; no AI copy |
@@ -99,3 +99,7 @@ All files above are in `test-artifacts/landing-2026-09-09/`.
 - Automatic Vercel preview failed: https://vercel.com/hichamsadikes-projects/nestd-landing/5JZ7Q5JSMuvqd5NNsxrHDiqKWbWe . This is **not a working preview**. Exact logs are inaccessible in this session: CLI has no existing credentials; managed browser requires login; existing-session attach is unavailable. The parent was asked to retrieve the exact build error. No speculative Vercel setting change or production redeploy was performed.
 - Verified local interactive preview: `http://127.0.0.1:4173/`, with English at `/en/`. Committed screenshots and Lighthouse reports remain independently reviewable.
 - Supplementary verification-route checks exposed duplicate noindex metadata in the old utility pages; deduplicated without changing authentication behavior. A transient host ENOSPC interrupted one extra test launch; the retry result is recorded in closeout. No unrelated app/build data was deleted.
+
+### Parent copy clarification applied
+
+Unverified channel/platform explanations were removed from the product flow (including Telegram/Android FAQs and the Android availability note). The procedure and FAQs use channel-neutral housing-search language. The legal-review notice was removed from the privacy-page shell; the original legal body and date are unchanged. Exact new pricing and billing period are still pending; visitors are explicitly told to review the current in-app price, billing period and terms before confirming payment. No additional price question or credential fallback was attempted. Linear remains pending protected access. No merge/deploy.

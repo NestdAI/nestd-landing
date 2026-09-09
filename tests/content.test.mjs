@@ -14,7 +14,7 @@ test("marketing claims and every store destination reflect the paid-only verifie
       );
       assert.doesNotMatch(
         html,
-        /AI[ -](?:matching|assistant|agent|woonassistent)|WhatsApp|duo|swip|19[,.]95|id6740091498|92%|testimonial|fastest|snelste|gratis downloaden|download gratis|start free/i,
+        /AI[ -](?:matching|assistant|agent|woonassistent)|WhatsApp|Telegram|Android|unconfirmed public|duo|swip|19[,.]95|id6740091498|92%|testimonial|fastest|snelste|gratis downloaden|download gratis|start free/i,
       );
       assert.ok(html.includes(copy[lang].paid));
       assert.ok(html.includes(APP_STORE));
