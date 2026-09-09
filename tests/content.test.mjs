@@ -86,6 +86,8 @@ test("Vercel packages the public website and preserves all verification rewrites
     "pricing.html",
     "download.html",
     "fonts/fonts.css",
+    "theme.js",
+    "themes.css",
     "images/download-qr.svg",
     "app/index.html",
     "listing/index.html",

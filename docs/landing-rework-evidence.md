@@ -1,5 +1,38 @@
 # Paid rental-alert landing rework — 9 September 2026
 
+## Third quality revision — first-class light/dark and a full About destination
+
+**Scope:** Hicham explicitly requested both themes and a material About/quality pass on the same PR22. No app/backend/Sazzad changes. The earlier About route was present, but its short generic content did not make its importance clear. The previous dark-only design was incomplete for the brand. These issues are addressed in implementation, not only noted.
+
+### Candid visual review → implemented fixes
+
+| Finding in the second revision | Third-pass change |
+| --- | --- |
+| No light theme; surface colors hardcoded and phone visuals always light | Semantic light/dark surfaces, text, borders, accent contrast and product-illustration tokens. System default plus visible appearance selector with an appearance icon |
+| About felt like a shorter product page | Dedicated NL/EN mission headline, original search-frustration story, mission panel, principles, audience context and company/contact details; original `#contact` remains |
+| About easy to overlook behind the mobile menu | Always-visible mobile About link, in addition to desktop navigation, menu, footer and homepage company links |
+| Some supporting copy too small | Increased feature, FAQ, pricing, conditions, legal-shell, support and trust text; maintained hierarchy and responsive spacing |
+| Oversized mobile hierarchy and heavily rotated phones | Moderated mobile heading scale and phone rotations; restrained shadows and balanced type |
+| Initial third-pass About image stretched beyond its800px source | Desktop split caption/photo composition keeps the source near native resolution; mobile uses a legible contained photo with caption |
+| Pricing/download and legal pages needed equal theme treatment | Shared theme and typographic styles apply to all ten marketing/legal routes; utility app/listing fallbacks also inherit the saved appearance without adding listing analytics |
+
+### About provenance
+
+Reviewed original `about.html` at base `f09f8ea`. Its published origin story describes frustration with repeatedly opening housing websites, scrolling and missing listings. This narrow first-party narrative is preserved, not expanded into invented founder biographies, founding dates, team members or achievements. Its unverified housing-crisis figures, age/persona examples, affordability/comparative claims and old AI/free/partner/WhatsApp promises are not restored. Muba B.V. provider identity, existing support contact and verified App Store link are retained. Original legal disclosure strings/date remain unchanged. About metadata now uses its own mission introduction.
+
+### Theme contract and verification
+
+- Native, labelled **System / Light / Dark** selector on every marketing page. Choice stored under existing `nestd-theme`; System removes override. Works across routes/locales/reload and storage events. Storage denial leaves the current-page control usable.
+- Blocking head `theme.js` applies a valid saved choice before stylesheet/body paint; no deferred class flip. A browser regression observes the saved theme at stylesheet insertion.
+- CSS-only system preference (including live system changes) with noJS fallback. No nonfunctional theme control is shown without JavaScript; navigation, About and legal text remain available.
+- Light mode uses accessible darker coral for text while retaining the original coral action color; dark mode uses brighter coral text, intentional dark card/phone surfaces and contrast-safe secondary text. This is not a background-only inversion.
+- `npm run build:vercel` and7 content/contract tests pass; Vercel `dist` packaging explicitly includes `theme.js` and `themes.css`, existing rewrites/associations preserved.
+- **55 browser checks pass**:40 route ×theme ×viewport checks with axe WCAG A/AA and link/layout verification, plus existing funnel checks and dedicated system/manual/persistence, pre-paint, storage-denial/keyboard, noJS both themes, prominent About, full content,320px and reduced-motion checks.
+- Fresh screenshots: `test-artifacts/landing-themes-about-2026-09-09/` — home/About/pricing/download ×NL/EN ×light/dark ×desktop/mobile, hero crops and320px. Prior screenshots retained under `test-artifacts/landing-app-storefront-2026-09-09/` for before/after review. Both themes/locales and About compositions visually inspected.
+- Fresh local mobile Lighthouse: **97 Performance /100 Accessibility /100 Best Practices /100 SEO**, LCP2.5s, TBT10ms, CLS0; third-party analytics blocked, simulated mobile local lab, not a production guarantee. Exact-head remote CI/preview verification is recorded in the final PR/closeout. Old scores below belong to earlier revisions.
+
+All previous launch gates still apply: exact price/billing contract, app/store parity, legal review, protected Linear access and Vercel anonymous sharing. No invented proof, no public operational placeholders, no repeated price question, no merge/production/protection changes.
+
 ## Second visual revision — premium app storefront
 
 Hicham requested a substantial second redesign on the same PR #22, not a copy-only update. This revision replaces the editorial/arched-photo composition with bold sans-serif hierarchy, layered native-inspired phone illustrations, light visual feature cards, a contained three-step product flow, company/purchase/support trust cards, and a verified App Store information link. Coral/black/logo branding, paid-only positioning, native FAQs, mobile CTA and desktop QR handoff remain. Home and About now use the new phone presentation; pricing, download, privacy shell and localized social cards share the revised design system.

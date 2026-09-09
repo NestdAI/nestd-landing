@@ -18,54 +18,61 @@ test.beforeEach(async ({ page }) => {
     r.abort(),
   );
 });
-for (const width of [390, 1440])
-  for (const path of paths)
-    test(`${width}px ${path}: routes, layout, accessibility`, async ({
-      page,
-      request,
-    }) => {
-      await page.setViewportSize({ width, height: 900 });
-      const errors = [];
-      page.on("pageerror", (e) => errors.push(e.message));
-      const response = await page.goto(path);
-      expect(response.status()).toBe(200);
-      await expect(page.locator("h1")).toHaveCount(1);
-      expect(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-      ).toBeTruthy();
-      const expectedLang = path.startsWith("/en/") ? "en" : "nl";
-      await expect(page.locator("html")).toHaveAttribute("lang", expectedLang);
-      const links = await page
-        .locator("a[href]")
-        .evaluateAll((els) => els.map((el) => el.getAttribute("href")));
-      for (const href of new Set(links)) {
-        expect(href).not.toBe("#");
-        if (href.startsWith("/") && !href.startsWith("//")) {
-          const url = new URL(href, "http://127.0.0.1:4173");
-          expect((await request.get(url.pathname)).status(), href).toBe(200);
-          if (url.hash) {
-            const resp = await request.get(url.pathname);
-            expect(await resp.text(), href).toContain(
-              'id="' + url.hash.slice(1) + '"',
-            );
+for (const colorScheme of ["light", "dark"])
+  for (const width of [390, 1440])
+    for (const path of paths)
+      test(`${colorScheme} ${width}px ${path}: routes, layout, accessibility`, async ({
+        page,
+        request,
+      }) => {
+        await page.setViewportSize({ width, height: 900 });
+        await page.emulateMedia({ colorScheme });
+        const errors = [];
+        page.on("pageerror", (e) => errors.push(e.message));
+        const response = await page.goto(path);
+        expect(response.status()).toBe(200);
+        await expect(page.locator("h1")).toHaveCount(1);
+        expect(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        ).toBeTruthy();
+        const expectedLang = path.startsWith("/en/") ? "en" : "nl";
+        await expect(page.locator("html")).toHaveAttribute(
+          "lang",
+          expectedLang,
+        );
+        const links = await page
+          .locator("a[href]")
+          .evaluateAll((els) => els.map((el) => el.getAttribute("href")));
+        for (const href of new Set(links)) {
+          expect(href).not.toBe("#");
+          if (href.startsWith("/") && !href.startsWith("//")) {
+            const url = new URL(href, "http://127.0.0.1:4173");
+            expect((await request.get(url.pathname)).status(), href).toBe(200);
+            if (url.hash) {
+              const resp = await request.get(url.pathname);
+              expect(await resp.text(), href).toContain(
+                'id="' + url.hash.slice(1) + '"',
+              );
+            }
           }
+          if (href.includes("apps.apple.com"))
+            expect(href).toBe(
+              "https://apps.apple.com/nl/app/nestd/id6761392857",
+            );
         }
-        if (href.includes("apps.apple.com"))
-          expect(href).toBe("https://apps.apple.com/nl/app/nestd/id6761392857");
-      }
-      const axe = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-        .analyze();
-      expect(
-        axe.violations.map((v) => ({
-          id: v.id,
-          nodes: v.nodes.map((n) => n.target),
-        })),
-      ).toEqual([]);
-      expect(errors).toEqual([]);
-    });
+        const axe = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+          .analyze();
+        expect(
+          axe.violations.map((v) => ({
+            id: v.id,
+            nodes: v.nodes.map((n) => n.target),
+          })),
+        ).toEqual([]);
+        expect(errors).toEqual([]);
+      });
 test("keyboard menu, Escape, skip link and native FAQ", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");

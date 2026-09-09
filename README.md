@@ -17,3 +17,11 @@ Edit marketing copy in `content/marketing.mjs`, templates in `scripts/build-site
 See [implementation evidence and release gates](docs/landing-rework-evidence.md). No app/backend changes or production deployment are part of this landing rework.
 
 Vercel preview builds use `npm run build:vercel` and the explicit `dist` output directory in `vercel.json`. The packaging step excludes source, dependencies and test artifacts while preserving all public routes.
+
+
+### Appearance and About
+
+- `theme.js` runs synchronously in the document head so saved `nestd-theme` choices apply before paint. Missing/invalid values use the system preference; storage failure does not prevent changing the current page. The native labelled selector offers System, Light and Dark. Choosing System removes the override.
+- `themes.css` owns semantic light/dark tokens, including phone illustrations, cards, purchase panels, nav and legal shell. CSS media queries follow system changes without JavaScript. Theme controls remain hidden when JavaScript is disabled; links and full content work normally.
+- `content/about.mjs` contains the complete NL/EN story, mission, principles and company/contact content. The original site's search-frustration story is retained; unsupported market figures/personas and former product claims are not.
+- `node scripts/capture-theme-evidence.mjs` captures both themes/locales at desktop/mobile, plus320px. Start `npm run preview` first.

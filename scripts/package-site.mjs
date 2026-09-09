@@ -23,6 +23,8 @@ const files = [
   "features.html",
   "admin.html",
   "styles.css",
+  "themes.css",
+  "theme.js",
   "pages.css",
   "script.js",
   "i18n.js",
