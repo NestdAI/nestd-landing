@@ -71,7 +71,7 @@ The old policy describes prior waitlist, AI and WhatsApp data processing. Removi
 
 - Deterministic static build succeeds.
 - Content/attribution tests: **5 passed**, including preserved first/current-touch attribution, paid-only claims, legal parity, unchanged verification infrastructure and private listing fallback.
-- Browser suite: **26 passed**, including all ten marketing/legal routes at 390px and 1440px; internal links and anchors; consistent store destinations; no page JavaScript errors; axe WCAG A/AA scans; keyboard skip/menu/Escape/FAQ; no-JavaScript usability; language campaign preservation; 320/375/768/1024px and 200%-zoom-equivalent layout; reduced motion; sticky CTA visibility; intent-only conversion tracking.
+- Browser coverage: **27 passed** (26-test main suite plus the additional legacy-route test), including all ten marketing/legal routes at 390px and 1440px; internal links and anchors; consistent store destinations; feature/verification/AASA routes; no page JavaScript errors; axe WCAG A/AA scans; keyboard skip/menu/Escape/FAQ; no-JavaScript usability; language campaign preservation; 320/375/768/1024px and 200%-zoom-equivalent layout; reduced motion; sticky CTA visibility; intent-only conversion tracking.
 - First browser pass caught mobile decorative-ring overflow. Fixed by clipping only the illustration stage; subsequent checks pass without hiding document overflow.
 - Final mobile Lighthouse lab run (local preview, third-party analytics blocked): **Performance 97, Accessibility 100, Best Practices 100, SEO 100**; LCP 2.6s. Original brand fonts are self-hosted under their OFL licenses, responsive WebP imagery replaces the 93KB hero JPEG on served pages, and the navigation icon is 9.6KB instead of 192KB.
 - Lighthouse reports and final responsive captures are stored under `test-artifacts/landing-2026-09-09/`. Local lab measurements are not production guarantees.
@@ -90,3 +90,12 @@ All files above are in `test-artifacts/landing-2026-09-09/`.
 
 - Linear read attempted through the gateway environment; returned `LINEAR_AUTH_UNAVAILABLE`. The protected store has no entries. No credential was requested or exposed. Applicable English ticket update is pending the parent authenticated session; no unrelated ticket was changed.
 - Before production: product owner reviews positioning and the actual in-app paid contract; resolves store-description/product parity and legal disclosures; reconciles overlapping #20/#21; approves this draft. No merge or deployment is performed by this task.
+
+### Remote delivery checkpoint
+
+- Draft PR: https://github.com/NestdAI/nestd-landing/pull/22
+- Initial pushed implementation: `686c698f0b42c08652a50fef0b3b0dc9c7749403`.
+- GitHub Actions validation passed on Linux Chromium: https://github.com/NestdAI/nestd-landing/actions/runs/34328748218 (build, deterministic output, content and browser tests).
+- Automatic Vercel preview failed: https://vercel.com/hichamsadikes-projects/nestd-landing/5JZ7Q5JSMuvqd5NNsxrHDiqKWbWe . This is **not a working preview**. Exact logs are inaccessible in this session: CLI has no existing credentials; managed browser requires login; existing-session attach is unavailable. The parent was asked to retrieve the exact build error. No speculative Vercel setting change or production redeploy was performed.
+- Verified local interactive preview: `http://127.0.0.1:4173/`, with English at `/en/`. Committed screenshots and Lighthouse reports remain independently reviewable.
+- Supplementary verification-route checks exposed duplicate noindex metadata in the old utility pages; deduplicated without changing authentication behavior. A transient host ENOSPC interrupted one extra test launch; the retry result is recorded in closeout. No unrelated app/build data was deleted.

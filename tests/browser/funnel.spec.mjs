@@ -185,3 +185,31 @@ test("store click emits intent once, never purchase; listing routes do not load 
   await page.goto("/app");
   await expect(page.locator("#open-app")).toHaveAttribute("href", "nestd://");
 });
+
+test("legacy feature and verification routes preserve their destinations without backend calls", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/features.html?lang=en&utm_source=legacy");
+  await expect(page).toHaveURL(/\/en\/\?utm_source=legacy#how-it-works/);
+  for (const [path, heading] of [
+    ["/verified", "E-mail bevestigd"],
+    ["/verify-error", "Verificatie mislukt"],
+  ]) {
+    const response = await page.goto(path);
+    expect(response.status()).toBe(200);
+    await expect(page.locator("h1")).toHaveText(heading);
+    expect(await page.locator('a[href="nestd://"]').count()).toBe(1);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      "noindex",
+    );
+  }
+  const association = await request.get(
+    "/.well-known/apple-app-site-association",
+  );
+  expect(association.status()).toBe(200);
+  expect((await association.json()).applinks.details[0].paths).toContain(
+    "/listing/*",
+  );
+});
