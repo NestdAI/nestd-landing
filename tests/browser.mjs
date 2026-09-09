@@ -192,6 +192,18 @@ try {
   await motionContext.route(/posthog|facebook/, (r) => r.abort());
   const mp = await motionContext.newPage();
   await mp.goto(origin + "/");
+  const deviceControl = mp.locator(".motion-control");
+  await deviceControl.click();
+  assert.equal(await deviceControl.getAttribute("aria-pressed"), "true");
+  assert.equal(
+    await mp
+      .locator(".device-showcase")
+      .evaluate((el) => el.getAnimations({ subtree: true }).length),
+    0,
+    "pause cancels device choreography",
+  );
+  await deviceControl.click();
+  assert.equal(await deviceControl.getAttribute("aria-pressed"), "false");
   await mp.locator("#speed").scrollIntoViewIfNeeded();
   await mp.waitForTimeout(850);
   assert.ok(await mp.locator(".reach-cards article").first().isVisible());
@@ -205,6 +217,7 @@ try {
     0,
     "reduced motion cancels running animation",
   );
+  await deviceControl.waitFor({ state: "hidden" });
   await mp.goto(origin + "/pricing.html");
   assert.match(await mp.locator(".offer-summary").innerText(), /19,99/);
   assert.match(await mp.locator(".subscription").innerText(), /eerste.*week/i);

@@ -1747,3 +1747,464 @@ details > p {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* Premium app stage: real screenshot in a CSS-built titanium device, no heavy 3D runtime. */
+.hero {
+  grid-template-columns: 1fr 1.08fr;
+  gap: 32px;
+  padding-block: 68px 72px;
+}
+.hero h1 {
+  font-size: clamp(56px, 5.7vw, 82px);
+  font-weight: 650;
+  letter-spacing: -0.065em;
+}
+.hero .lead {
+  font-size: 17px;
+  line-height: 1.85;
+}
+.device-showcase {
+  padding: 0 0 55px;
+  margin: 0;
+  isolation: isolate;
+}
+.device-halo {
+  position: absolute;
+  inset: 8% -2% 6%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, var(--soft), transparent 70%);
+  z-index: -1;
+}
+.device-stage {
+  position: relative;
+  height: 610px;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+.device {
+  position: absolute;
+  width: 258px;
+  padding: 7px;
+  border-radius: 43px;
+  background: linear-gradient(
+    115deg,
+    #f3f0ec 0%,
+    #666762 12%,
+    #242526 45%,
+    #c8c7c4 80%,
+    #585956
+  );
+  border: 1px solid #81817f;
+  box-shadow:
+    inset 0 0 0 2px #a6a5a3,
+    12px 25px 35px #0003,
+    1px 2px 0 2px #27282a;
+}
+.device:before,
+.device:after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 3px;
+  background: #767674;
+  border-radius: 3px 0 0 3px;
+}
+.device:before {
+  top: 95px;
+  height: 22px;
+}
+.device:after {
+  top: 136px;
+  height: 52px;
+}
+.device-screen {
+  overflow: hidden;
+  border-radius: 36px;
+  background: #fff;
+  position: relative;
+  aspect-ratio: 942 / 2048;
+}
+.device-screen > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.device-front {
+  right: 18px;
+  top: 32px;
+  transform: rotateY(-13deg) rotateZ(7deg);
+  z-index: 2;
+}
+.device-back {
+  left: 14px;
+  top: 4px;
+  transform: translateZ(-70px) rotateY(13deg) rotateZ(-12deg);
+}
+.lock-screen {
+  color: white;
+  background: #242424;
+}
+.lock-wallpaper {
+  opacity: 0.82;
+}
+.lock-screen:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#0004, transparent 60%, #0003);
+  pointer-events: none;
+}
+.island {
+  position: absolute;
+  top: 9px;
+  left: 32%;
+  width: 36%;
+  height: 22px;
+  background: #070707;
+  border-radius: 50px;
+  z-index: 2;
+}
+.lock-time {
+  position: absolute;
+  top: 64px;
+  inset-inline: 10px;
+  text-align: center;
+  z-index: 1;
+}
+.lock-time span {
+  font-size: 11px;
+  font-weight: 650;
+}
+.lock-time strong {
+  display: block;
+  font-size: 58px;
+  letter-spacing: -0.055em;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.lock-alert {
+  position: absolute;
+  top: 240px;
+  left: 12px;
+  right: 12px;
+  background: #fffef8f5;
+  color: #252624;
+  border: 1px solid #ffffffa1;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 10px;
+  z-index: 1;
+  box-shadow: 0 10px 20px #0002;
+}
+.lock-alert > img {
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+}
+.lock-alert span {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #575954;
+}
+.lock-alert strong {
+  display: block;
+  font-size: 10px;
+  margin-block: 3px;
+}
+.lock-alert p {
+  font-size: 9px;
+  line-height: 1.5;
+}
+.home-indicator {
+  position: absolute;
+  bottom: 9px;
+  left: 32%;
+  width: 36%;
+  height: 4px;
+  border-radius: 10px;
+  background: white;
+  z-index: 2;
+}
+.device-chip {
+  position: absolute;
+  bottom: 8px;
+  left: 22px;
+  z-index: 3;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 13px 19px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px #0001;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.device-chip > span {
+  background: var(--soft);
+  color: var(--accent);
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+}
+.device-showcase figcaption {
+  position: static;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.65;
+  margin: 21px auto 0;
+  max-width: 390px;
+  padding-inline: 15px;
+}
+.motion-control {
+  display: block;
+  margin: 10px auto 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  min-height: 30px;
+}
+.motion-control[hidden] {
+  display: none;
+}
+.motion-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.reach-cards article {
+  box-shadow: 0 7px 24px #00000005;
+}
+.home-offer {
+  margin-block: 30px;
+  padding: 54px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--paper);
+}
+.download {
+  border-radius: 100px;
+  padding-inline: 24px;
+  box-shadow: 0 7px 16px #00000010;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .device-front {
+    animation: device-arrive-front 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .device-back {
+    animation: device-arrive-back 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .lock-alert {
+    animation: alert-arrive 0.8s 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .device-chip {
+    animation: nestd-enter 0.8s 0.6s both;
+  }
+  .device {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .device-stage:hover .device-front {
+    transform: translateY(-9px) rotateY(-6deg) rotateZ(3deg);
+  }
+  .device-stage:hover .device-back {
+    transform: translateZ(-70px) translateX(-8px) rotateY(8deg) rotateZ(-8deg);
+  }
+  .steps li {
+    transition: padding-left 0.25s ease;
+  }
+  .steps li:hover {
+    padding-left: 10px;
+  }
+  .reach-cards article {
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+  }
+  .reach-cards article:hover {
+    transform: translateY(-5px);
+  }
+  @keyframes device-arrive-front {
+    from {
+      opacity: 0;
+      transform: translateY(35px) rotateY(-25deg) rotateZ(12deg);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes device-arrive-back {
+    from {
+      opacity: 0;
+      transform: translateY(20px) rotateZ(-4deg);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes alert-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(-18px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+.motion-paused .device,
+.motion-paused .lock-alert,
+.motion-paused .device-chip {
+  animation: none !important;
+  transition: none !important;
+}
+.motion-paused .device-stage:hover .device-front {
+  transform: rotateY(-13deg) rotateZ(7deg);
+}
+.motion-paused .device-stage:hover .device-back {
+  transform: translateZ(-70px) rotateY(13deg) rotateZ(-12deg);
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .device {
+    width: 218px;
+    border-radius: 37px;
+  }
+  .device-screen {
+    border-radius: 30px;
+  }
+  .device-stage {
+    height: 540px;
+  }
+  .device-back {
+    left: 0;
+  }
+  .device-front {
+    right: 0;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    padding-block: 40px 25px;
+  }
+  .hero h1 {
+    font-size: clamp(46px, 9.8vw, 65px);
+  }
+  .hero .lead {
+    font-size: 15px;
+  }
+  .device-showcase {
+    width: 100%;
+    max-width: 470px;
+    padding-bottom: 10px;
+  }
+  .device-stage {
+    height: 500px;
+  }
+  .device {
+    width: 210px;
+    border-radius: 36px;
+    padding: 6px;
+  }
+  .device-screen {
+    border-radius: 30px;
+  }
+  .device-back {
+    left: 5px;
+    top: 2px;
+  }
+  .device-front {
+    right: 8px;
+    top: 30px;
+  }
+  .device-chip {
+    left: 10px;
+    bottom: 0;
+    font-size: 10px;
+    padding: 9px 14px;
+  }
+  .device-showcase figcaption {
+    font-size: 10px;
+    margin-top: 16px;
+  }
+  .lock-time strong {
+    font-size: 50px;
+  }
+  .lock-time span {
+    font-size: 9px;
+  }
+  .lock-alert {
+    top: 218px;
+    left: 8px;
+    right: 8px;
+    padding: 10px 8px;
+  }
+  .home-offer {
+    padding: 26px;
+    border-radius: 20px;
+    gap: 15px;
+  }
+  .home-offer h2 {
+    font-size: 33px;
+  }
+}
+@media (max-width: 360px) {
+  .device {
+    width: 178px;
+    border-radius: 31px;
+    padding: 5px;
+  }
+  .device-screen {
+    border-radius: 26px;
+  }
+  .device-stage {
+    height: 430px;
+  }
+  .device-back {
+    left: 2px;
+  }
+  .device-front {
+    right: 2px;
+  }
+  .lock-alert {
+    top: 190px;
+  }
+  .lock-time strong {
+    font-size: 43px;
+  }
+  .lock-alert strong {
+    font-size: 9px;
+  }
+  .lock-alert p {
+    font-size: 8px;
+  }
+}
+/* Keep device edges inside narrow screens instead of clipping the illustration. */
+@media (max-width: 760px) {
+  .device-back {
+    left: 24px;
+  }
+  .device-front {
+    right: 24px;
+  }
+}
+@media (max-width: 360px) {
+  .device-back {
+    left: 23px;
+  }
+  .device-front {
+    right: 23px;
+  }
+}

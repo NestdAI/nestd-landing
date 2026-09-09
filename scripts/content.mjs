@@ -17,7 +17,7 @@ export const content = {
     eyebrow: "Jouw volgende huurwoning begint hier",
     hero: "Stop met<br>refreshen.<br><span>Begin met leven.</span>",
     intro:
-      "Je zoekt een huis. Geen tweede baan. Nestd volgt het huuraanbod en geeft je een seintje als er iets past. Jij hoeft alleen nog te kijken en te reageren.",
+      "Je volgende huurwoning vind je niet door nóg een keer te refreshen. Stel je wensen in. Nestd volgt woningwebsites en brengt passend aanbod naar je telefoon. Open de woning en reageer bij de aanbieder.",
     heroLink: "Zo helpt Nestd je zoeken",
     photoCaption: "Een plek in de stad. Ruimte in je hoofd.",
     alertTitle: "Er is iets voor jou",
@@ -27,7 +27,7 @@ export const content = {
     journeyLabel: "Van zoeken naar reageren",
     journeyTitle: "Minder zoekwerk.<br>Meer <span>vooruitzicht.</span>",
     journeyIntro:
-      "Niet de hele dag dezelfde websites af. Wel weten wanneer er iets interessants voorbijkomt.",
+      "Van je eerste zoekprofiel tot een woning die je wilt bekijken: drie heldere stappen, op je eigen telefoon.",
     steps: [
       [
         "Vertel wat je zoekt.",
@@ -178,7 +178,7 @@ export const content = {
       "Gebruik je Nestd al? Vertel wat je helpt en wat beter kan. Zo bouwen we verder aan een app die woningzoeken echt makkelijker maakt.",
     reviewCta: "Deel je ervaring",
     reviewStore: "Bekijk beoordelingen in de App Store",
-    reviewNote: "We plaatsen persoonlijke ervaringen alleen met toestemming.",
+    reviewNote: "Lees ervaringen in de App Store of deel jouw verhaal met ons.",
   },
   en: {
     home: "Home",
@@ -198,7 +198,7 @@ export const content = {
     eyebrow: "Your next rental starts here",
     hero: "Stop<br>refreshing.<br><span>Start living.</span>",
     intro:
-      "You need a home. Not a second job. Nestd follows rental listings and lets you know when something fits. All you need to do is take a look and respond.",
+      "Your next home is not hiding behind another refresh. Set your preferences. Nestd follows rental websites and brings relevant listings to your phone. Open a home and respond through the provider.",
     heroLink: "See how Nestd helps",
     photoCaption: "A place in the city. Space to breathe.",
     alertTitle: "Something for you",
@@ -208,7 +208,7 @@ export const content = {
     journeyLabel: "From searching to responding",
     journeyTitle: "Less searching.<br>More <span>possibility.</span>",
     journeyIntro:
-      "No more checking the same websites all day. Just knowing when something worth a look comes along.",
+      "From your first search profile to a home worth viewing: three clear steps, right on your phone.",
     steps: [
       [
         "Tell us what you need.",
@@ -359,6 +359,7 @@ export const content = {
       "Already using Nestd? Tell us what helps and what could be better. Your feedback helps us build an app that makes the rental search easier.",
     reviewCta: "Share your experience",
     reviewStore: "Read ratings on the App Store",
-    reviewNote: "We only publish personal experiences with permission.",
+    reviewNote:
+      "Read experiences on the App Store or share your story with us.",
   },
 };

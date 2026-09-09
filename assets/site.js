@@ -66,6 +66,23 @@
       animations.clear();
     });
   }
+  const motionControl = document.querySelector(".motion-control");
+  if (motionControl) {
+    motionControl.hidden = motion.matches;
+    motionControl.addEventListener("click", () => {
+      const paused = motionControl.getAttribute("aria-pressed") !== "true";
+      motionControl.setAttribute("aria-pressed", String(paused));
+      motionControl.textContent = paused
+        ? motionControl.dataset.playLabel
+        : motionControl.dataset.pauseLabel;
+      motionControl
+        .closest(".device-showcase")
+        .classList.toggle("motion-paused", paused);
+    });
+    motion.addEventListener("change", () => {
+      motionControl.hidden = motion.matches;
+    });
+  }
   const current = new URL(location.href),
     queryLanguage = current.searchParams.get("lang");
   // Explicit query links remain supported; language paths work even without JavaScript.
