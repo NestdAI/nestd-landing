@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import { copy, APP_STORE } from "../content/marketing.mjs";
 import QRCode from "qrcode";
+import { storefront } from "../content/storefront.mjs";
+import { phones, features, trust, icon } from "./storefront.mjs";
 const privacy = JSON.parse(
   fs.readFileSync(new URL("../content/privacy.json", import.meta.url)),
 );
@@ -27,9 +29,6 @@ const arrow = '<span aria-hidden="true">↗</span>';
 function cta(t, placement, secondary = false) {
   return `<a class="button ${secondary ? "button-light" : ""}" href="${APP_STORE}" data-cta-placement="${placement}">${t.download} ${arrow}</a>`;
 }
-function visual(t, small = false) {
-  return `<figure class="search-visual ${small ? "small-visual" : ""}"><div class="visual-stage"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="photo-window"><img src="/images/search-home.webp" srcset="/images/search-home-480.webp 480w, /images/search-home.webp 800w" sizes="(max-width: 760px) 80vw, 500px" alt="" width="800" height="595" ${small ? 'loading="lazy"' : 'fetchpriority="high"'}><div class="photo-caption"><span>NESTD / ${t.eyebrow}</span><p>${t.exampleHome}</p></div></div><div class="alert-card"><div class="alert-icon">${bell}</div><div><div class="alert-label">NESTD <span>${t.example}</span></div><strong>${t.notification}</strong><p>${t.notificationBody}</p></div></div><div class="source-tag"><span aria-hidden="true">↗</span> ${t.exampleMeta}</div></div><figcaption>${t.illustration}</figcaption></figure>`;
-}
 function priceCard(t, placement) {
   return `<div class="plan-card"><div class="plan-top"><span class="wordmark">${t.planName}<span class="brand-dot">.</span></span><span class="pill">${t.pricingLabel}</span></div><h3 class="price">${t.price}</h3><p class="period">${t.period}</p><ul class="included">${t.includes.map((v) => `<li><span aria-hidden="true">✓</span>${v}</li>`).join("")}</ul>${cta(t, placement)}<p class="fine-print">${t.priceNote}</p></div>`;
 }
@@ -40,13 +39,14 @@ function download(t, full = false) {
   return `<section class="download-band ${full ? "full-download" : ""}" id="download" data-section="download"><div class="download-copy"><p class="eyebrow">NESTD / IPHONE</p><${full ? "h1" : "h2"}>${t.downloadTitle}</${full ? "h1" : "h2"}><p>${t.downloadIntro}</p>${cta(t, "download")}<p class="paid-note">${t.paid}</p></div><div class="handoff"><img src="/images/download-qr.svg" alt="${t.scan}" width="156" height="156"><h3>${t.handoff}</h3><p>${t.scan}</p><a href="${APP_STORE}" data-cta-placement="qr_link">App Store ${arrow}</a></div></section>`;
 }
 function home(t, lang) {
-  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow"><span class="small-line"></span>${t.eyebrow}</p><h1>${t.hero}</h1><p class="hero-intro">${t.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${t.howLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p></div>${visual(t)}</section><div class="signal-strip">${t.signal.map((s, i) => `<span><b>0${i + 1}</b>${s}</span>${i < 2 ? '<span class="signal-arrow" aria-hidden="true">→</span>' : ""}`).join("")}</div><section class="section" data-section="value"><div class="section-heading split-heading"><div><p class="eyebrow">${t.valueLabel}</p><h2>${t.valueTitle}</h2></div><p>${t.valueIntro}</p></div><div class="value-grid">${t.values.map(([n, title, body]) => `<article class="value-card"><span class="index">${n}</span><h3>${title}</h3><p>${body}</p></article>`).join("")}</div></section><section class="section process-section" id="how-it-works" data-section="how_it_works"><div><p class="eyebrow">${t.nav[0]}</p><h2>${t.howTitle}</h2><p class="section-intro">${t.howIntro}</p><div class="channel-note">${bell}<div><h3>${t.channelsTitle}</h3><p>${t.channelsBody}</p></div></div></div><ol class="steps">${t.steps.map(([title, body], i) => `<li><span>0${i + 1}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join("")}</ol></section><section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${faq(t)}${download(t)}`;
+  const s = storefront[lang];
+  return `<section class="hero" data-section="hero"><div class="hero-copy"><p class="eyebrow hero-badge">${icon("home")}${s.badge}</p><h1>${s.hero}</h1><p class="hero-intro">${s.intro}</p><div class="hero-actions">${cta(t, "hero")}<a class="text-link" href="#how-it-works">${t.howLink} <span aria-hidden="true">↓</span></a></div><p class="paid-note">${t.paid}</p><div class="hero-trust">${s.trustStrip.map((v, i) => `<span>${icon(["home", "shield", "mail"][i])}${v}</span>`).join("")}</div></div>${phones(t, lang)}</section>${features(t, lang)}<section class="section process-section" id="how-it-works" data-section="how_it_works"><div><p class="eyebrow">${s.flowLabel}</p><h2>${s.flowTitle}</h2><p class="section-intro">${t.howIntro}</p><div class="channel-note">${bell}<div><h3>${t.channelsTitle}</h3><p>${t.channelsBody}</p></div></div></div><ol class="steps">${t.steps.map(([title, body], i) => `<li><span>0${i + 1}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join("")}</ol></section>${trust(t, lang)}<section class="section pricing-section" id="pricing" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h2>${t.pricingTitle}</h2><p class="section-intro">${t.pricingIntro}</p><p class="fine-print">${t.noGuarantee}</p><a class="text-link" href="${pathFor(lang, "pricing")}">${t.priceLink} ${arrow}</a></div>${priceCard(t, "home_pricing")}</section>${faq(t)}${download(t)}`;
 }
 function pricing(t) {
   return `<section class="section pricing-section page-intro" data-section="pricing"><div><p class="eyebrow">${t.pricingLabel}</p><h1>${t.pricingTitle}</h1><p class="section-intro">${t.pricingIntro}</p><p class="terms-copy">${t.priceTerms}</p><p class="fine-print">${t.noGuarantee}</p></div>${priceCard(t, "pricing_page")}</section>${faq(t)}${download(t)}`;
 }
-function about(t) {
-  return `<section class="hero about-hero"><div><p class="eyebrow">${t.aboutPage}</p><h1>${t.aboutTitle}</h1><p class="hero-intro">${t.aboutIntro}</p><p class="section-intro">${t.aboutBody}</p></div>${visual(t, true)}</section><section class="section about-principle"><p class="eyebrow">NESTD</p><h2>${t.aboutPrinciple}</h2><p>${t.aboutPrincipleBody}</p></section><section class="section contact" id="contact"><div><p class="eyebrow">${t.contact}</p><h2>${t.contactBody}</h2><a class="contact-email" href="mailto:hello@nestd.nl">hello@nestd.nl ${arrow}</a></div><p>${t.company}</p></section>${download(t)}`;
+function about(t, lang) {
+  return `<section class="hero about-hero"><div><p class="eyebrow">${t.aboutPage}</p><h1>${t.aboutTitle}</h1><p class="hero-intro">${t.aboutIntro}</p><p class="section-intro">${t.aboutBody}</p></div>${phones(t, lang, true)}</section><section class="section about-principle"><p class="eyebrow">NESTD</p><h2>${t.aboutPrinciple}</h2><p>${t.aboutPrincipleBody}</p></section><section class="section contact" id="contact"><div><p class="eyebrow">${t.contact}</p><h2>${t.contactBody}</h2><a class="contact-email" href="mailto:hello@nestd.nl">hello@nestd.nl ${arrow}</a></div><p>${t.company}</p></section>${download(t)}`;
 }
 function privacyContent(t, lang) {
   const p = privacy[lang];
@@ -88,7 +88,7 @@ for (const [lang, t] of Object.entries(copy))
         : page === "pricing"
           ? pricing(t)
           : page === "about"
-            ? about(t)
+            ? about(t, lang)
             : page === "download"
               ? download(t, true)
               : privacyContent(t, lang);
@@ -99,9 +99,9 @@ for (const [lang, t] of Object.entries(copy))
 <title>${title}</title><meta name="description" content="${escape(description)}">
 <meta name="posthog-key" content="phc_uardbxGnhavwrDMNskL74udz6Z5NjCMrXsWYgGDK9VuS">
 <link rel="canonical" href="https://www.nestd.nl${path}"><link rel="alternate" hreflang="nl" href="https://www.nestd.nl${pathFor("nl", page)}"><link rel="alternate" hreflang="en" href="https://www.nestd.nl${pathFor("en", page)}"><link rel="alternate" hreflang="x-default" href="https://www.nestd.nl${pathFor("nl", page)}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Nestd"><meta property="og:locale" content="${lang === "nl" ? "nl_NL" : "en_GB"}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="https://www.nestd.nl${path}"><meta property="og:image" content="https://www.nestd.nl/images/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${lang === "nl" ? "Nestd. Minder refreshen. Meer reageren." : "Nestd. Less refreshing. More responding."}"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Nestd"><meta property="og:locale" content="${lang === "nl" ? "nl_NL" : "en_GB"}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="https://www.nestd.nl${path}"><meta property="og:image" content="https://www.nestd.nl/images/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${lang === "nl" ? "Nestd. Je volgende thuis. Blijf klaar om te reageren." : "Nestd. Your next home. Stay ready for your next move."}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/fonts/playfair-normal-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/styles.css"><script src="/i18n.js"></script><script src="/script.js" defer></script>
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "Nestd", url: "https://www.nestd.nl/", inLanguage: lang, description: t.description, publisher: { "@type": "Organization", name: "Muba B.V.", brand: { "@type": "Brand", name: "Nestd" }, url: "https://www.nestd.nl/", logo: "https://www.nestd.nl/logo.png" } })}</script>
 </head><body>

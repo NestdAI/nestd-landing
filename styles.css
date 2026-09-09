@@ -1298,3 +1298,859 @@ details p {
   overflow: clip;
   overflow-clip-margin: 8px;
 }
+
+/* App storefront: light native-inspired product UI, set against Nestd black/coral. */
+:root {
+  --display: var(--body);
+}
+h1,
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+}
+em {
+  font-style: normal;
+  font-weight: inherit;
+}
+h1 {
+  font-size: clamp(2.8rem, 4.8vw, 4.6rem);
+}
+h2 {
+  font-size: clamp(2rem, 3.25vw, 3.1rem);
+}
+.site-header {
+  height: 84px;
+}
+.nav-download {
+  background: #242024;
+  border-color: #51434a;
+}
+.hero {
+  grid-template-columns: 1.05fr 1fr;
+  min-height: 750px;
+  gap: 32px;
+  padding: 65px 0 55px;
+}
+.hero-badge {
+  color: #ffd4dd;
+  letter-spacing: 0.1em;
+  font-size: 10px;
+}
+.hero-badge svg {
+  width: 18px;
+  height: 18px;
+}
+.hero-intro {
+  font-size: 16px;
+  max-width: 450px;
+  line-height: 1.8;
+}
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 34px;
+}
+.hero-trust span {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #bdb8ba;
+  font-size: 10px;
+}
+.hero-trust svg {
+  width: 14px;
+  height: 14px;
+  color: #ff829a;
+}
+.button {
+  border-radius: 13px;
+  min-height: 56px;
+}
+.paid-note {
+  font-size: 11px;
+}
+.app-showcase {
+  min-width: 0;
+  width: 100%;
+}
+.phone-stage {
+  position: relative;
+  height: 570px;
+  width: 100%;
+  isolation: isolate;
+}
+.phone-halo {
+  position: absolute;
+  inset: 60px -5px 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    #ff385c25,
+    #ff385c08 55%,
+    transparent 70%
+  );
+  z-index: -1;
+}
+.phone {
+  color: #161a21;
+  background: #f6f7f9;
+  border: 7px solid #26252a;
+  border-radius: 43px;
+  box-shadow:
+    0 0 0 1px #6b6066,
+    12px 30px 50px #0008;
+  position: absolute;
+  width: 256px;
+  height: 510px;
+  overflow: hidden;
+}
+.phone-island {
+  width: 78px;
+  height: 19px;
+  border-radius: 20px;
+  background: #141418;
+  margin: 9px auto 12px;
+}
+.phone-front {
+  right: 4px;
+  top: 32px;
+  transform: rotate(5deg);
+  z-index: 2;
+}
+.phone-back {
+  left: 10px;
+  top: 0;
+  transform: rotate(-8deg);
+  width: 241px;
+  height: 480px;
+}
+.phone-content {
+  padding: 8px 14px;
+}
+.mock-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+.mock-header img {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+}
+.mock-header > svg {
+  width: 18px;
+  margin-left: auto;
+  color: #292d35;
+}
+.phone h3 {
+  font-size: 18px;
+  letter-spacing: -0.04em;
+}
+.phone p.mock-subtitle {
+  color: #666a72;
+  font-size: 10px;
+  margin: 5px 0 15px;
+}
+.mock-listing {
+  border-radius: 17px;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e6e7ec;
+}
+.mock-photo {
+  width: 100%;
+  height: 156px;
+  object-fit: cover;
+}
+.mock-listing-copy {
+  padding: 13px;
+}
+.mock-listing-copy > span {
+  font-size: 8px;
+  color: #9d2441;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+.mock-listing-copy strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 6px 0;
+}
+.mock-listing-copy p {
+  font-size: 9px;
+  color: #62666e;
+}
+.mock-action {
+  margin-top: 12px;
+  background: #ff385c;
+  color: #151015;
+  font-size: 9px;
+  padding: 9px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mock-action svg {
+  height: 14px;
+  width: 14px;
+}
+.mock-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px -5px 0;
+  border-top: 1px solid #e5e5e9;
+  padding-top: 12px;
+}
+.mock-nav span {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  font-size: 7px;
+  color: #62666e;
+}
+.mock-nav svg {
+  width: 16px;
+  height: 16px;
+}
+.mock-nav span:first-child {
+  color: #a3213e;
+}
+.mock-filters {
+  display: grid;
+  gap: 12px;
+}
+.mock-filters > div {
+  background: #fff;
+  border: 1px solid #e3e4e9;
+  border-radius: 12px;
+  padding: 12px;
+}
+.mock-filters > div > span {
+  font-size: 9px;
+  color: #61656d;
+  display: block;
+  margin-bottom: 8px;
+}
+.mock-filters strong {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #171b23;
+}
+.mock-filters strong span {
+  color: #9d2441;
+}
+.mock-saved {
+  margin-top: 16px;
+  padding: 11px;
+  background: #ffe5ec;
+  border-radius: 12px;
+  color: #99253f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+}
+.mock-saved svg {
+  width: 16px;
+  height: 16px;
+}
+.showcase-notice {
+  position: absolute;
+  left: -12px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 3;
+  transform: rotate(-3deg);
+}
+.mock-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #fff;
+  background: #fcfafb;
+  color: #161a21;
+  border-radius: 20px;
+  box-shadow: 0 14px 30px #0003;
+}
+.mock-notice img {
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  flex: none;
+}
+.mock-notice > div {
+  min-width: 0;
+}
+.mock-notice span {
+  color: #68616a;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
+.mock-notice strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.mock-notice p {
+  color: #62616a;
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.app-showcase figcaption {
+  font-size: 10px;
+  margin: 12px auto 0;
+  line-height: 1.6;
+  max-width: 380px;
+  color: #bdb8ba;
+}
+.section {
+  padding: 90px 0;
+}
+.storefront-features {
+  padding-top: 60px;
+}
+.storefront-features .section-heading {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 42px;
+}
+.feature-bento {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.feature-tile {
+  border: 1px solid #343036;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #171619;
+}
+.feature-art {
+  height: 240px;
+  padding: 30px;
+  background: #eeeef2;
+  position: relative;
+  overflow: hidden;
+  color: #171a22;
+  display: grid;
+  align-content: center;
+}
+.art-0 {
+  background: #f0ecee;
+}
+.art-0 .mock-filters {
+  width: 100%;
+  max-width: 240px;
+  margin: auto;
+  transform: rotate(-4deg);
+}
+.art-0 .mock-filters > div {
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px #28202a08;
+}
+.art-1 {
+  background: #ffe1e8;
+  gap: 18px;
+  padding: 22px;
+}
+.art-1 .mock-notice {
+  padding: 14px;
+  gap: 9px;
+  transform: rotate(3deg);
+}
+.art-1 .mock-notice strong {
+  font-size: 11px;
+}
+.notification-orbit {
+  width: 65px;
+  height: 65px;
+  display: grid;
+  place-items: center;
+  margin: auto;
+  background: #ff385c;
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 10px #ff385c10,
+    0 0 0 22px #ff385c08;
+}
+.notification-orbit svg {
+  width: 28px;
+  height: 28px;
+}
+.art-2 {
+  background: #e9ece7;
+}
+.provider-preview {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  transform: rotate(-3deg);
+  box-shadow: 0 6px 20px #2222;
+}
+.provider-preview .mock-photo {
+  height: 144px;
+}
+.provider-preview > span {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #20232a;
+  font-size: 11px;
+  font-weight: 600;
+}
+.provider-preview svg {
+  width: 17px;
+}
+.feature-description {
+  padding: 28px;
+}
+.feature-number {
+  color: #ff829a;
+  font-size: 10px;
+  font-weight: 600;
+}
+.feature-description h3 {
+  margin: 14px 0 12px;
+  font-size: 20px;
+  letter-spacing: -0.035em;
+}
+.feature-description p {
+  font-size: 13px;
+}
+.art-caption {
+  font-size: 10px;
+  text-align: center;
+  margin-top: 16px;
+}
+.process-section {
+  gap: 70px;
+}
+.steps {
+  border: 1px solid #343036;
+  border-radius: 24px;
+  padding: 14px 30px;
+  background: #141316;
+}
+.steps li {
+  gap: 20px;
+}
+.steps li > span {
+  border: 1px solid #64333f;
+  background: #ff385c10;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  margin-top: 0;
+  color: #ff829a;
+}
+.steps h3 {
+  font-size: 18px;
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.trust-grid article {
+  padding-top: 26px;
+  border-top: 1px solid #42383d;
+}
+.trust-grid svg {
+  color: #ff829a;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 22px;
+}
+.trust-grid h3 {
+  font-size: 19px;
+  margin-bottom: 14px;
+}
+.trust-grid p {
+  font-size: 13px;
+}
+.trust-grid a {
+  display: inline-flex;
+  gap: 18px;
+  font-size: 12px;
+  margin-top: 24px;
+  color: #ffd5df;
+}
+.store-proof {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 26px 30px;
+  border-radius: 20px;
+  border: 1px solid #343036;
+  background: #161417;
+  margin-top: 45px;
+}
+.store-proof > img {
+  border-radius: 16px;
+  width: 54px;
+  height: 54px;
+}
+.store-proof h3 {
+  font-size: 16px;
+}
+.store-proof p {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.store-proof .text-link {
+  margin-left: auto;
+  flex: none;
+  color: #ffd5df;
+}
+.pricing-section {
+  gap: 70px;
+}
+.plan-card {
+  border-radius: 24px;
+  border-color: #774050;
+  background:
+    radial-gradient(ellipse at top right, #ff385c15, transparent 65%), #191619;
+}
+.download-band {
+  background: #ffe8ed;
+  border-radius: 28px;
+}
+.download-band h2 {
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+}
+.download-band .eyebrow {
+  color: #754653;
+}
+.download-copy > p:not(.eyebrow) {
+  color: #5a454c;
+}
+.about-hero h1 {
+  font-size: clamp(2.8rem, 4.8vw, 4.6rem);
+}
+@media (min-width: 1500px) {
+  .phone-front {
+    right: 24px;
+  }
+  .phone-back {
+    left: 26px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .container {
+    width: calc(100% - 64px);
+  }
+  .hero {
+    gap: 22px;
+  }
+  .hero h1 {
+    font-size: 3.1rem;
+  }
+  .phone-stage {
+    height: 505px;
+  }
+  .phone {
+    width: 222px;
+    height: 464px;
+  }
+  .phone-back {
+    width: 208px;
+    height: 440px;
+    left: 0;
+  }
+  .phone-front {
+    right: 0;
+  }
+  .phone-content {
+    padding: 6px 10px;
+  }
+  .mock-photo {
+    height: 125px;
+  }
+  .mock-header {
+    margin-bottom: 14px;
+  }
+  .showcase-notice {
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  .phone h3 {
+    font-size: 16px;
+  }
+  .mock-nav {
+    margin-top: 12px;
+  }
+  .feature-art {
+    padding: 22px;
+  }
+  .art-1 {
+    padding: 14px;
+  }
+  .feature-description {
+    padding: 22px;
+  }
+  .store-proof {
+    flex-wrap: wrap;
+  }
+  .store-proof .text-link {
+    margin-left: 76px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    height: auto;
+    min-height: 76px;
+  }
+  .nav-inner {
+    min-height: 76px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 42px 0 45px;
+    min-height: 0;
+  }
+  .hero h1 {
+    font-size: clamp(2.55rem, 9.3vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+  .hero-badge {
+    font-size: 8px;
+    letter-spacing: 0.07em;
+    margin-bottom: 20px;
+  }
+  .hero-intro {
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 500px;
+  }
+  .hero-actions {
+    margin-top: 24px;
+    gap: 20px;
+  }
+  .hero-trust {
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .hero-trust span {
+    font-size: 9px;
+  }
+  .hero-trust svg {
+    width: 12px;
+    height: 12px;
+  }
+  .app-showcase {
+    max-width: 460px;
+    margin: auto;
+  }
+  .phone-stage {
+    height: 515px;
+    width: 100%;
+  }
+  .phone-front {
+    width: 232px;
+    height: 475px;
+    right: 4px;
+    top: 20px;
+    transform: rotate(4deg);
+  }
+  .phone-back {
+    width: 214px;
+    height: 449px;
+    left: 5px;
+    transform: rotate(-7deg);
+  }
+  .phone-content {
+    padding: 6px 10px;
+  }
+  .mock-header {
+    margin-bottom: 15px;
+  }
+  .phone h3 {
+    font-size: 16px;
+  }
+  .mock-photo {
+    height: 138px;
+  }
+  .mock-nav {
+    margin-top: 14px;
+  }
+  .showcase-notice {
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .mock-notice {
+    padding: 15px;
+  }
+  .app-showcase figcaption {
+    font-size: 9px;
+    margin-top: 16px;
+  }
+  .section {
+    padding: 58px 0;
+  }
+  .storefront-features {
+    padding-top: 25px;
+  }
+  .storefront-features .section-heading {
+    text-align: left;
+  }
+  h2 {
+    font-size: clamp(1.9rem, 6.5vw, 2.8rem);
+  }
+  .feature-bento,
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .feature-art {
+    height: 240px;
+    padding: 32px;
+  }
+  .feature-description {
+    padding: 26px;
+  }
+  .feature-description h3 {
+    font-size: 21px;
+  }
+  .feature-description p {
+    font-size: 14px;
+  }
+  .feature-art .mock-notice {
+    max-width: 310px;
+    width: 100%;
+    margin: auto;
+  }
+  .provider-preview {
+    max-width: 260px;
+    width: 100%;
+    margin: auto;
+  }
+  .process-section,
+  .pricing-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .steps {
+    padding: 8px 22px;
+  }
+  .steps h3 {
+    font-size: 18px;
+  }
+  .steps li {
+    padding: 26px 0;
+  }
+  .trust-grid {
+    gap: 32px;
+  }
+  .trust-grid svg {
+    margin-bottom: 16px;
+  }
+  .store-proof {
+    padding: 22px;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .store-proof > div {
+    flex: 1;
+    min-width: 160px;
+  }
+  .store-proof .text-link {
+    margin: 4px 0 0;
+  }
+  .download-band {
+    padding: 32px 26px;
+    margin: 58px 0;
+  }
+  .about-hero h1 {
+    font-size: 2.7rem;
+  }
+}
+@media (max-width: 360px) {
+  .hero-trust {
+    gap: 9px;
+  }
+  .hero-trust span {
+    font-size: 8px;
+  }
+  .phone-stage {
+    height: 470px;
+  }
+  .phone-front {
+    width: 211px;
+    height: 439px;
+    right: 0;
+  }
+  .phone-back {
+    width: 188px;
+    height: 414px;
+    left: 3px;
+  }
+  .phone-content {
+    padding: 5px 9px;
+  }
+  .phone h3 {
+    font-size: 14px;
+  }
+  .mock-header {
+    margin-bottom: 12px;
+  }
+  .mock-photo {
+    height: 113px;
+  }
+  .mock-nav {
+    margin-top: 10px;
+  }
+  .mock-listing-copy {
+    padding: 10px;
+  }
+  .mock-notice {
+    padding: 12px;
+    gap: 8px;
+  }
+  .mock-notice strong {
+    font-size: 11px;
+  }
+  .mock-notice p {
+    font-size: 9px;
+  }
+  .phone .mock-filters > div {
+    padding: 10px;
+  }
+  .phone .mock-filters {
+    gap: 9px;
+  }
+  .showcase-notice {
+    left: 0;
+    right: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

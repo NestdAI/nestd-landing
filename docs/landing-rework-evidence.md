@@ -1,5 +1,31 @@
 # Paid rental-alert landing rework — 9 September 2026
 
+## Second visual revision — premium app storefront
+
+Hicham requested a substantial second redesign on the same PR #22, not a copy-only update. This revision replaces the editorial/arched-photo composition with bold sans-serif hierarchy, layered native-inspired phone illustrations, light visual feature cards, a contained three-step product flow, company/purchase/support trust cards, and a verified App Store information link. Coral/black/logo branding, paid-only positioning, native FAQs, mobile CTA and desktop QR handoff remain. Home and About now use the new phone presentation; pricing, download, privacy shell and localized social cards share the revised design system.
+
+### Visual provenance and customer-proof gates
+
+- Read-only inspection: `pr175-product-pivot/test-artifacts/pr-175-product-pivot-2026-09-06/dashboard-after.png` and `sources-onboarding-after.png`. Native light cards, coral controls, listing images, clear filters and sans typography informed the illustrations.
+- These screenshots contain a test user's name, historical inventory numbers, and unmerged app UI. They were **not copied into the website**. No app/backend file was changed. New HTML/CSS illustrations have visible NL/EN disclosures: **not app screenshots or live listings**. Example notification labels and example-home labels are visible; no invented real addresses, prices or personal data. Illustrative controls are noninteractive and excluded from the accessibility tree; surrounding explanatory content remains accessible.
+- Review provenance: fresh read on 9 September of https://itunes.apple.com/nl/rss/customerreviews/id=6761392857/sortBy=mostRecent/json returned HTTP 200 and **zero customer review entries** (feed updated `2026-09-09T01:57:43-07:00`). This is specific to the NL feed, not proof that no reviews exist anywhere. No independently verified publishable reviews were available for this revision. No legacy testimonial image, rating, quote or avatar was reused.
+- No verified active-user count. Listing inventory, new homes and notification rows are **not users**.
+- Earlier September operational audit: 160 samples, DB-to-`notified_at` median 1.08s/p95 3.73s. This is an internal processing timestamp interval, **not source publication to device receipt**. No provider/device delivery receipts or defensible customer end-to-end benchmark were available. It is **not published as a speed claim**. No stopwatch, random counter or fake live activity.
+- `content/storefront.mjs` records publication gates (`activeUsers: null`, `deliveryBenchmark: null`, `reviews: []`); no empty “pending” sections are rendered. Future proof needs a documented definition/window, provenance and permission for public use, including sample/date/median/p95 for timing.
+- Public trust cues are factual: Muba B.V. provider identity, support contact, verified iPhone App Store destination, Apple purchase/management explanation. These are not implied endorsements, third-party certifications or customer reviews.
+
+### Revision checks and visual evidence
+
+- `npm run build:vercel`: passed, explicit `dist` packaging fix preserved; production verification rewrites unchanged.
+- `npm test`: **7 passed**, including legal preservation, associations/rewrites, attribution and customer-proof/illustration regression.
+- `npm run test:browser`: **28 passed**, including all ten NL/EN routes at desktop/mobile, axe WCAG A/AA, links, keyboard/Escape/skip link, native FAQs, no-JS, 320/375/768/1024px, zoom-equivalent width, reduced motion, sticky CTA and intent-only analytics. Additional illustration/trust smoke includes axe at320px.
+- Fresh captures: `test-artifacts/landing-app-storefront-2026-09-09/` — NL/EN desktop/mobile home and hero, pricing/about/download desktop/mobile, menu/FAQ, feature/trust crops and320px. Visually inspected NL desktop/mobile, EN desktop/mobile, NL features/trust,320px and updated OG composition.
+- Fresh local mobile Lighthouse: **98 Performance / 100 Accessibility / 100 Best Practices / 100 SEO**; LCP **2.3s**, TBT **0ms**, CLS **0**. Third-party analytics blocked, simulated mobile local lab; not a production guarantee or notification benchmark. HTML/JSON reports committed beside captures.
+- Exact new price/billing period remains unresolved; paid requirement and review-before-payment explanation retained. No repeat question and no guessed amount. Store/release parity and legal review remain launch gates. Linear remains pending protected access, with no credential fallback.
+- No merge, production deployment, protection change, subscription purchase or notification send. Existing authenticated-only preview is **not** a public-share URL; exact new deployment result is recorded in PR/closeout after push.
+
+The previous implementation/validation sections below are historical where this revision supersedes them.
+
 ## Scope and branch
 
 - Repository: `NestdAI/nestd-landing` only. No Nestd app, backend, scraper or database edits.

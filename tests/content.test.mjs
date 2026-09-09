@@ -104,3 +104,23 @@ test("Vercel packages the public website and preserves all verification rewrites
   ])
     assert.ok(!fs.existsSync("dist/" + excluded));
 });
+
+test("unavailable customer proof is gated and illustrations are disclosed, not fake app screenshots", async () => {
+  const { publicProof, storefront } = await import("../content/storefront.mjs");
+  assert.equal(publicProof.activeUsers, null);
+  assert.equal(publicProof.deliveryBenchmark, null);
+  assert.deepEqual(publicProof.reviews, []);
+  for (const lang of ["nl", "en"]) {
+    const html = fs.readFileSync(
+      `${lang === "en" ? "en/" : ""}index.html`,
+      "utf8",
+    );
+    assert.ok(html.includes(storefront[lang].caption));
+    assert.doesNotMatch(
+      html,
+      /Hamid|13[,.]?531|4[,.]9\s*\/\s*5|aggregateRating|reviewCount|1[,.]08\s*s|3[,.]73\s*s/,
+    );
+    assert.ok(html.includes("mailto:hello@nestd.nl"));
+    assert.ok(html.includes("Muba B.V."));
+  }
+});

@@ -213,3 +213,27 @@ test("legacy feature and verification routes preserve their destinations without
     "/listing/*",
   );
 });
+
+test("product illustrations are visibly labelled and never masquerade as interactive app controls", async ({
+  page,
+}) => {
+  for (const path of ["/", "/en/"]) {
+    await page.setViewportSize({ width: 320, height: 900 });
+    await page.goto(path);
+    await expect(page.locator(".app-showcase figcaption")).toBeVisible();
+    await expect(page.locator(".art-caption")).toBeVisible();
+    expect(
+      await page
+        .locator(
+          ".phone-stage button, .phone-stage a, .phone-stage input, .feature-art button, .feature-art a",
+        )
+        .count(),
+    ).toBe(0);
+    await expect(page.locator(".trust-section")).toBeVisible();
+    expect(await page.locator(".trust-grid a").count()).toBe(3);
+    const axe = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+      .analyze();
+    expect(axe.violations.map((v) => v.id)).toEqual([]);
+  }
+});
