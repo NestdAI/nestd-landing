@@ -1,3 +1,5 @@
+> **Historical plan — superseded 9 September 2026.** Nestd’s authorized direction is paid-only rental alerts and qualified app downloads, with no free plan, AI features, partner swiping or WhatsApp marketing. Old offers, channels, pricing and app-availability statements below are historical, not current instructions. See `landing-rework-evidence.md`.
+
 # Nestd Week 0–2 Growth Execution Plan
 
 > Working plan for pre-launch Nestd marketing. App stores are not live yet, so the primary goal is measurable pre-launch demand: signups/waitlist, CTA clicks, WhatsApp opt-ins, and return visits.

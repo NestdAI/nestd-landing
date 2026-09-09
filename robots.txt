@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /listing/
+Disallow: /app/
+Sitemap: https://www.nestd.nl/sitemap.xml

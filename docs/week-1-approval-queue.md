@@ -1,3 +1,5 @@
+> **Historical plan — superseded 9 September 2026.** Nestd’s authorized direction is paid-only rental alerts and qualified app downloads, with no free plan, AI features, partner swiping or WhatsApp marketing. Old offers, channels, pricing and app-availability statements below are historical, not current instructions. See `landing-rework-evidence.md`.
+
 # Nestd Week 1 Approval Queue — Draft v1
 
 > Purpose: first approval-ready content backlog for pre-launch Nestd. Nothing here should be published automatically. Hicham approval required per concept.
