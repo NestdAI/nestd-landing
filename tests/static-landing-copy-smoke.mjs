@@ -28,6 +28,40 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
   );
   assert.match(copy, /€15 per maand/, `${page}: Dutch monthly Pro price`);
   assert.match(copy, /€15 per month/, `${page}: English monthly Pro price`);
+  if (page === "index.html") {
+    const placeholders = [
+      ...html.matchAll(
+        /<li\b[^>]*data-review-placeholder="true"[^>]*>[\s\S]*?<\/li>/g,
+      ),
+    ];
+    assert.ok(
+      html.includes('id="ervaringen"'),
+      "Review layout remains present",
+    );
+    for (const [item] of placeholders) {
+      assert.match(item, /data-nl="Placeholder"\s+data-en="Placeholder"/);
+      assert.match(item, /data-nl="\[Naam\]"\s+data-en="\[Name\]"/);
+      assert.doesNotMatch(
+        item,
+        /[★⭐]|ratingValue|aggregateRating|reviewRating/,
+      );
+    }
+    assert.doesNotMatch(
+      html,
+      /"(?:aggregateRating|reviewRating)"/,
+      "Placeholder reviews must not become search-engine ratings",
+    );
+    const replay = html.match(/<button\b[^>]*data-alert-replay[^>]*>/)?.[0];
+    assert.ok(replay, "Product demonstration has an accessible replay control");
+    assert.match(
+      replay,
+      /\bhidden\b/,
+      "No broken replay when JavaScript is unavailable",
+    );
+    assert.match(replay, /data-aria-nl="Speel melding af"/);
+    assert.match(replay, /data-aria-en="Replay alert"/);
+    assert.match(html, /src="\/product-motion.js" defer/);
+  }
   assert.doesNotMatch(
     html,
     /user-scalable=no|maximum-scale=1|facebook\.com\/tr/i,

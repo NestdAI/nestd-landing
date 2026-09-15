@@ -1,3 +1,5 @@
+> Voor de latere inkorting, meldingsdemo en reviewplaceholders: [design-refinement-2026-09-15.md](design-refinement-2026-09-15.md).
+
 # Content en merkpalet — 8 september 2026
 
 Deze revisie volgt op de goedkeuring van de drie techontwerpen. De gebruiker vroeg de relevante productiecontent te herstellen en de merkkleuren op de app te baseren.

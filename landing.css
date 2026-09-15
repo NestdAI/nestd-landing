@@ -342,7 +342,6 @@ h1 > span {
   background: #fff;
   box-shadow: 0 18px 42px -12px rgb(89 8 30 / 27%);
   transform: rotate(2deg);
-  animation: notification-arrives 0.7s 0.16s both;
 }
 .alert-top {
   display: flex;
@@ -715,16 +714,7 @@ details p {
   padding-block: 13px;
   font-size: 15px;
 }
-@keyframes notification-arrives {
-  from {
-    opacity: 1;
-    transform: translateY(16px) rotate(2deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(2deg);
-  }
-}
+
 @media (max-width: 1100px) {
   .wrap {
     width: calc(100% - 64px);

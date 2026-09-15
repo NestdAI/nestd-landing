@@ -48,6 +48,7 @@
     />
     <link rel="stylesheet" href="/landing.css" />
     <link rel="stylesheet" href="/content.css" />
+    <link rel="stylesheet" href="/product-motion.css" />
   </head>
   <body>
     <a
@@ -115,7 +116,7 @@
       </nav>
     </header>
     <main id="main">
-      <section class="hero" data-section="hero">
+      <section data-alert-demo class="hero" data-section="hero">
         <div class="hero-copy wrap">
           <h1>
             <span data-nl="Nieuw te huur." data-en="New rental."
@@ -126,11 +127,11 @@
           </h1>
           <p
             class="hero-intro"
-            data-nl="Nestd volgt nieuw huuraanbod binnen jouw zoekfilters. Je krijgt snel een melding, zodat jij kunt reageren."
-            data-en="Nestd watches for new rentals within your search filters. You get a quick alert, so you can respond."
+            data-nl="Nieuw huuraanbod binnen je filters. Snel een melding via push en WhatsApp."
+            data-en="New rentals within your filters. Prompt alerts by push and WhatsApp."
           >
-            Nestd volgt nieuw huuraanbod binnen jouw zoekfilters. Je krijgt snel
-            een melding, zodat jij kunt reageren.
+            Nieuw huuraanbod binnen je filters. Snel een melding via push en
+            WhatsApp.
           </p>
           <a
             class="download"
@@ -238,25 +239,32 @@
               </div>
             </div>
           </div>
-          <div class="rental-alert">
+          <div data-alert-visual class="rental-alert">
             <div class="alert-top">
               <img src="/logo.png" width="48" height="48" alt="" /><span
                 >Nestd</span
-              ><svg
-                viewBox="0 0 24 24"
-                width="19"
-                height="19"
-                aria-hidden="true"
               >
-                <path
-                  d="M5 16h14l-2-3V9a5 5 0 0 0-10 0v4l-2 3Zm5 4h4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              <span class="alert-demo-controls"
+                ><button
+                  type="button"
+                  data-alert-replay
+                  hidden
+                  aria-label="Speel melding af"
+                  data-aria-nl="Speel melding af"
+                  data-aria-en="Replay alert"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 10a8 8 0 1 1 1.4 7M4 4v6h6" />
+                  </svg></button
+              ></span>
             </div>
             <div class="alert-body">
               <img
@@ -389,11 +397,11 @@
               Snel is pas handig als het ook past.
             </h2>
             <p
-              data-nl="Geen nieuwe zoektocht bij iedere melding. Stel je eisen één keer in. Nestd volgt het nieuwe aanbod dat erdoorheen komt."
-              data-en="No need to start over with every alert. Set your requirements once. Nestd watches for new listings that pass them."
+              data-nl="Stel je eisen één keer in. Alleen nieuw aanbod dat eraan voldoet komt door."
+              data-en="Set your requirements once. Only new listings that meet them make it through."
             >
-              Geen nieuwe zoektocht bij iedere melding. Stel je eisen één keer
-              in. Nestd volgt het nieuwe aanbod dat erdoorheen komt.
+              Stel je eisen één keer in. Alleen nieuw aanbod dat eraan voldoet
+              komt door.
             </p>
             <a
               class="requirements-link"
@@ -485,6 +493,94 @@
         </div>
       </section>
 
+      <!--
+  Review placeholders for the three landing variants.
+  Replace each topic and name only with a genuine review supplied with permission.
+  Update both data-nl and data-en, plus the default Dutch text. Remove the visible
+  Placeholder label and data-review-placeholder only after replacing that item.
+  Remove the section's placeholder note only when every displayed review is real.
+  No rating, stars or aggregate review data are supplied by this fragment.
+-->
+      <section
+        class="reviews-overview"
+        id="ervaringen"
+        aria-labelledby="reviews-title"
+      >
+        <div class="content-width">
+          <div class="reviews-heading">
+            <h2
+              id="reviews-title"
+              data-nl="Ervaringen met Nestd."
+              data-en="Experiences with Nestd."
+            >
+              Ervaringen met Nestd.
+            </h2>
+            <p
+              data-nl="Hier komen echte ervaringen van Nestd-gebruikers."
+              data-en="Real experiences from Nestd users will appear here."
+            >
+              Hier komen echte ervaringen van Nestd-gebruikers.
+            </p>
+          </div>
+          <ul class="reviews-list">
+            <li class="review-placeholder" data-review-placeholder="true">
+              <span
+                class="review-status"
+                data-nl="Placeholder"
+                data-en="Placeholder"
+                >Placeholder</span
+              >
+              <p
+                class="review-topic"
+                data-nl="[Ervaring met de meldingen]"
+                data-en="[Experience with the alerts]"
+              >
+                [Ervaring met de meldingen]
+              </p>
+              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
+                [Naam]
+              </p>
+            </li>
+            <li class="review-placeholder" data-review-placeholder="true">
+              <span
+                class="review-status"
+                data-nl="Placeholder"
+                data-en="Placeholder"
+                >Placeholder</span
+              >
+              <p
+                class="review-topic"
+                data-nl="[Ervaring met het zoeken]"
+                data-en="[Experience with the search]"
+              >
+                [Ervaring met het zoeken]
+              </p>
+              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
+                [Naam]
+              </p>
+            </li>
+            <li class="review-placeholder" data-review-placeholder="true">
+              <span
+                class="review-status"
+                data-nl="Placeholder"
+                data-en="Placeholder"
+                >Placeholder</span
+              >
+              <p
+                class="review-topic"
+                data-nl="[Ervaring met de app]"
+                data-en="[Experience with the app]"
+              >
+                [Ervaring met de app]
+              </p>
+              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
+                [Naam]
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section
         class="pricing-overview content-width"
         id="prijzen"
@@ -499,13 +595,6 @@
           >
             Eén abonnement. Alles inbegrepen.
           </h2>
-          <p
-            data-nl="Nieuw huuraanbod, jouw zoekfilters en snelle meldingen. Met Nestd Pro heb je alles voor je zoektocht bij elkaar."
-            data-en="New rental listings, your search filters and fast alerts. Nestd Pro brings everything for your search together."
-          >
-            Nieuw huuraanbod, jouw zoekfilters en snelle meldingen. Met Nestd
-            Pro heb je alles voor je zoektocht bij elkaar.
-          </p>
         </div>
         <article class="pro-overview-plan" aria-labelledby="pro-title">
           <div>
@@ -559,11 +648,10 @@
             >Bekijk Nestd Pro en praktische vragen</a
           >
           <p
-            data-nl="Je sluit Pro af in de app. Bekijk de abonnementsvoorwaarden voordat je bevestigt."
-            data-en="Subscribe to Pro in the app. Review the subscription terms before confirming."
+            data-nl="Je sluit Pro af in de app."
+            data-en="Subscribe to Pro in the app."
           >
-            Je sluit Pro af in de app. Bekijk de abonnementsvoorwaarden voordat
-            je bevestigt.
+            Je sluit Pro af in de app.
           </p>
         </div>
       </section>
@@ -573,55 +661,33 @@
             <h2
               id="story-title"
               data-nl="Gebouwd uit eigen zoekfrustratie."
-              data-en="Built from our own rental search frustration."
+              data-en="Built from our own search frustration."
             >
               Gebouwd uit eigen zoekfrustratie.
             </h2>
             <a
               href="/about.html"
-              data-nl="Lees het verhaal van Nestd"
-              data-en="Read the Nestd story"
-              >Lees het verhaal van Nestd</a
+              data-nl="Het verhaal van Nestd"
+              data-en="The story behind Nestd"
+              >Het verhaal van Nestd</a
             >
           </div>
           <div>
             <p
-              data-nl="Steeds dezelfde websites openen. Advertenties missen. Te laat reageren. We kennen de frustratie van een huurwoning zoeken in Nederland. Daarom bouwen we Nestd."
-              data-en="Checking the same websites. Missing listings. Responding too late. We know how frustrating it can be to find a rental home in the Netherlands. That is why we are building Nestd."
+              data-nl="We kennen het eindeloze refreshen uit eigen ervaring. Vanuit Amsterdam bouwen we Nestd voor studenten, starters en expats die een huurwoning zoeken."
+              data-en="We know the endless refreshing first-hand. From Amsterdam, we’re building Nestd for students, young professionals and expats looking for a rental home."
             >
-              Steeds dezelfde websites openen. Advertenties missen. Te laat
-              reageren. We kennen de frustratie van een huurwoning zoeken in
-              Nederland. Daarom bouwen we Nestd.
+              We kennen het eindeloze refreshen uit eigen ervaring. Vanuit
+              Amsterdam bouwen we Nestd voor studenten, starters en expats die
+              een huurwoning zoeken.
             </p>
-            <p
-              data-nl="Vanuit Amsterdam werken we aan een toegankelijkere, betaalbare zoektocht voor studenten, starters en expats. Jij stelt je eisen in. Nestd volgt het nieuwe aanbod."
-              data-en="From Amsterdam, we are making the search more accessible and affordable for students, young professionals and expats. You set your requirements. Nestd follows new listings."
+            <a
+              class="story-privacy-link"
+              href="/privacy.html"
+              data-nl="Zo gaan we om met jouw privacy"
+              data-en="How we protect your privacy"
+              >Zo gaan we om met jouw privacy</a
             >
-              Vanuit Amsterdam werken we aan een toegankelijkere, betaalbare
-              zoektocht voor studenten, starters en expats. Jij stelt je eisen
-              in. Nestd volgt het nieuwe aanbod.
-            </p>
-            <div class="privacy-note">
-              <h3
-                data-nl="Jouw zoektocht blijft van jou."
-                data-en="Your search stays yours."
-              >
-                Jouw zoektocht blijft van jou.
-              </h3>
-              <p
-                data-nl="Je beslist zelf op welke woning je reageert. Je e-mailadres en zoekvoorkeuren komen niet in onze analytics-events."
-                data-en="You decide which homes to respond to. Your email address and search preferences stay out of our analytics events."
-              >
-                Je beslist zelf op welke woning je reageert. Je e-mailadres en
-                zoekvoorkeuren komen niet in onze analytics-events.
-              </p>
-              <a
-                href="/privacy.html"
-                data-nl="Lees ons privacybeleid"
-                data-en="Read our privacy policy"
-                >Lees ons privacybeleid</a
-              >
-            </div>
           </div>
         </div>
       </section>
@@ -648,11 +714,10 @@
               Kan ik Nestd meteen gebruiken?
             </summary>
             <p
-              data-nl="Ja. Nestd is beschikbaar voor iPhone. Download de app via de App Store en stel je zoekfilters in."
-              data-en="Yes. Nestd is available for iPhone. Download it from the App Store and set your search filters."
+              data-nl="Ja, voor iPhone. Download Nestd en sluit Pro af in de app."
+              data-en="Yes, for iPhone. Download Nestd and subscribe to Pro in the app."
             >
-              Ja. Nestd is beschikbaar voor iPhone. Download de app via de App
-              Store en stel je zoekfilters in.
+              Ja, voor iPhone. Download Nestd en sluit Pro af in de app.
             </p>
           </details>
           <details>
@@ -663,12 +728,11 @@
               Welke woningen krijg ik te zien?
             </summary>
             <p
-              data-nl="Nieuw aanbod dat door je ingestelde filters komt, zoals stad, budget, kamers en oppervlakte. Een woning moet aan al je harde eisen voldoen."
-              data-en="New listings that pass your chosen filters, such as city, budget, rooms and floor area. A rental must meet all your requirements."
+              data-nl="Nieuwe huurwoningen die aan al je zoekfilters voldoen: stad, budget, kamers en oppervlakte."
+              data-en="New rentals that meet all your filters: city, budget, rooms and floor area."
             >
-              Nieuw aanbod dat door je ingestelde filters komt, zoals stad,
-              budget, kamers en oppervlakte. Een woning moet aan al je harde
-              eisen voldoen.
+              Nieuwe huurwoningen die aan al je zoekfilters voldoen: stad,
+              budget, kamers en oppervlakte.
             </p>
           </details>
           <details>
@@ -679,11 +743,10 @@
               Hoe reageer ik op een woning?
             </summary>
             <p
-              data-nl="Open de woning die je interessant vindt en neem zelf contact op met de aanbieder. Jij bepaalt op welk aanbod je reageert."
-              data-en="Open a rental you are interested in and contact the advertiser yourself. You decide which listings to respond to."
+              data-nl="Open de woning en neem zelf contact op met de aanbieder."
+              data-en="Open the listing and contact the advertiser yourself."
             >
-              Open de woning die je interessant vindt en neem zelf contact op
-              met de aanbieder. Jij bepaalt op welk aanbod je reageert.
+              Open de woning en neem zelf contact op met de aanbieder.
             </p>
           </details>
           <details>
@@ -694,12 +757,11 @@
               Wat kost Nestd?
             </summary>
             <p
-              data-nl="Nestd Pro kost €15 per maand. Alle functies zijn inbegrepen: zoekfilters, woningen bekijken en opslaan, pushmeldingen en WhatsApp-meldingen."
-              data-en="Nestd Pro costs €15 per month. All features are included: search filters, browsing and saving homes, push alerts and WhatsApp alerts."
+              data-nl="Nestd Pro kost €15 per maand. Alle functies zijn inbegrepen, ook push- en WhatsApp-meldingen."
+              data-en="Nestd Pro costs €15 per month. All features are included, with push and WhatsApp alerts."
             >
-              Nestd Pro kost €15 per maand. Alle functies zijn inbegrepen:
-              zoekfilters, woningen bekijken en opslaan, pushmeldingen en
-              WhatsApp-meldingen.
+              Nestd Pro kost €15 per maand. Alle functies zijn inbegrepen, ook
+              push- en WhatsApp-meldingen.
             </p>
           </details>
         </div>
@@ -781,6 +843,7 @@
       >
     </div>
     <script src="/landing.js"></script>
+    <script src="/product-motion.js" defer></script>
     <script src="/script.js"></script>
   </body>
 </html>
