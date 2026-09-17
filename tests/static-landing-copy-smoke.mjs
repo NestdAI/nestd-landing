@@ -26,6 +26,12 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     /\bgratis\b|\bfree\b|€\s?0\b|€\s?19[,.](?:95|99)|free-title|plan-columns|class="plans"/i,
     `${page}: superseded free tier or old subscription price`,
   );
+  assert.doesNotMatch(
+    copy,
+    /WhatsApp|wa\.me/i,
+    `${page}: superseded alert channel`,
+  );
+  assert.match(copy, /Telegram/, `${page}: current alert channel`);
   assert.match(copy, /€14,99 per maand/, `${page}: Dutch monthly Pro price`);
   assert.doesNotMatch(
     copy,
@@ -177,7 +183,7 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
       /data-plan-price="pro"\s+data-nl="€14,99"\s+data-en="€14\.99"/,
       `${page}: localized Pro amount`,
     );
-    assert.match(copy, /WhatsApp/, `${page}: concrete Pro channel`);
+    assert.match(copy, /Telegram/, `${page}: concrete Pro channel`);
     assert.match(copy, /[Pp]ush/, `${page}: included push channel`);
   }
 }
@@ -193,4 +199,11 @@ for (const page of [
     `${page}: stale download fallback`,
   );
 }
+const privacy = fs.readFileSync(path.join(root, "privacy.html"), "utf8");
+assert.match(privacy, /Notificaties — om je via push en Telegram/);
+assert.match(privacy, /Notifications — to inform you by push and Telegram/);
+assert.doesNotMatch(
+  privacy,
+  /via WhatsApp op de hoogte|via WhatsApp about new homes/,
+);
 console.log("Static alerts landing contract passed");

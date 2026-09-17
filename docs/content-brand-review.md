@@ -45,3 +45,9 @@ Na de expliciete prijscorrectie zijn 30 browsercombinaties opnieuw gecontroleerd
 ## Prijscorrectie — 17 september 2026
 
 De gebruiker heeft het bedrag aangepast naar €14,99 per maand. Nederlandse tekst gebruikt €14,99; Engels gebruikt €14.99. Homepages, prijzen, Over Nestd, downloadteksten en metadata zijn bijgewerkt. De eerdere verificaties hierboven beschrijven de toenmalige prijs. Het blijft één Pro-abonnement met alle functies inbegrepen. Deze wijziging betreft uitsluitend de landingspagina’s.
+
+## Meldingen via Telegram — 17 september 2026
+
+De gebruiker vervangt WhatsApp-meldingen door Telegram-meldingen. Actuele marketing in NL/EN (hero, metadata, Pro, Over Nestd en FAQ) noemt push en Telegram. Nestd Pro blijft €14,99 per maand, alles inbegrepen. De bestaande interne analytics-eventnaam whatsapp_alerts_section_viewed blijft behouden voor historische meetcontinuïteit; deze naam wordt niet in de interface getoond. Ongebruikte i18n.js bevat historische productcopy en wordt niet geladen. De appintegratie is niet gewijzigd door deze websitecorrectie.
+
+De privacytekst maakt onderscheid tussen Telegram-woningmeldingen en WhatsApp-inlogverificatie. De laatste is nog zichtbaar in de appbron. Er zijn geen onbevestigde Telegram-opslagvelden of bewaartermijnen toegevoegd.
