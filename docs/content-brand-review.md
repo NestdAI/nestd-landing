@@ -8,7 +8,7 @@ Deze revisie volgt op de goedkeuring van de drie techontwerpen. De gebruiker vro
 
 - Live productie: https://www.nestd.nl/, /pricing.html, /about.html en /privacy.html, gecontroleerd op 8 september 2026. Repositorybasis blijft origin/main f09f8ea; main is ongewijzigd.
 - Prijzen en Over Nestd zijn terug in de hoofd- en mobiele navigatie, op de homepage en als volledige ondersteunende pagina's.
-- Definitieve prijskeuze van de gebruiker: **één abonnement, Nestd Pro voor €15 per maand; alle functies inbegrepen**. Deze expliciete correctie vervangt de eerdere websiteprijzen en de eerder afgeleide Gratis/Pro-verdeling uit de appbron. Er is geen gratis productlaag.
+- Definitieve prijskeuze van de gebruiker: **één abonnement, Nestd Pro voor €14,99 per maand; alle functies inbegrepen** (prijscorrectie van 17 september 2026). Deze expliciete correctie vervangt de eerdere websiteprijzen en de eerder afgeleide Gratis/Pro-verdeling uit de appbron. Er is geen gratis productlaag.
 - Alle drie homepages, Over Nestd, de volledige prijspagina, FAQ en downloadteksten communiceren dit in NL en EN. Inbegrepen: woningen bekijken en opslaan, zoekfilters op stad/budget/kamers/oppervlakte, pushmeldingen en WhatsApp-meldingen. Geen proefperiode of onbevestigde voorwaarden toegevoegd. Deze wijziging betreft de website; billing in de app is niet gewijzigd.
 - Over Nestd: eigen zoekfrustratie, toegankelijk/betaalbaar zoeken, studenten/starters/expats, Amsterdam en hello@nestd.nl. Geen verzonnen gebruikersverhalen of ongeverifieerde woningmarktstatistieken.
 - Contactformulier: bestaand JSON-contract naar de bestaande contact-form Edge Function, naam/e-mail/bericht. HEAD/OPTIONS en CORS gecontroleerd; geen echt bericht verstuurd. Gebruikersinvoer wordt alleen bij succes gewist, niet bij fouten. Geen formulierdata in analytics, browseropslag, logs of URL's.
@@ -41,3 +41,7 @@ De browsercontrole van deze revisie omvat 48 combinaties: de drie homepages en d
 ## Prijscorrectie: alleen Pro
 
 Na de expliciete prijscorrectie zijn 30 browsercombinaties opnieuw gecontroleerd: drie homepages, Prijzen en Over Nestd in NL/EN op 320×568, 390×844 en 1440×900. Alle tonen €15 per maand, zonder oude gratisclaims, vertaalverschillen of horizontale overflow. Alle primaire hero-downloadknoppen passen binnen deze viewports. Het enkele prijspaneel is visueel bekeken op desktop en mobiel; 27 gedragstests per variant en de aangescherpte statische prijs-/contentcontrole slagen. Code-review bevestigt behoud van het volledige verhaal en contactformulier. Alleen lokale preview; geen push/deployment.
+
+## Prijscorrectie — 17 september 2026
+
+De gebruiker heeft het bedrag aangepast naar €14,99 per maand. Nederlandse tekst gebruikt €14,99; Engels gebruikt €14.99. Homepages, prijzen, Over Nestd, downloadteksten en metadata zijn bijgewerkt. De eerdere verificaties hierboven beschrijven de toenmalige prijs. Het blijft één Pro-abonnement met alle functies inbegrepen. Deze wijziging betreft uitsluitend de landingspagina’s.

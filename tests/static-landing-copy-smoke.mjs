@@ -26,8 +26,13 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     /\bgratis\b|\bfree\b|€\s?0\b|€\s?19[,.](?:95|99)|free-title|plan-columns|class="plans"/i,
     `${page}: superseded free tier or old subscription price`,
   );
-  assert.match(copy, /€15 per maand/, `${page}: Dutch monthly Pro price`);
-  assert.match(copy, /€15 per month/, `${page}: English monthly Pro price`);
+  assert.match(copy, /€14,99 per maand/, `${page}: Dutch monthly Pro price`);
+  assert.doesNotMatch(
+    copy,
+    /€\s?15\b/,
+    `${page}: superseded monthly Pro price`,
+  );
+  assert.match(copy, /€14\.99 per month/, `${page}: English monthly Pro price`);
   if (page === "index.html") {
     const placeholders = [
       ...html.matchAll(
@@ -159,13 +164,18 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
   );
   if (page === "index.html" || page === "pricing.html") {
     const plans = [
-      ...html.matchAll(/data-plan-price="pro"[^>]*>\s*€15\s*<\/span\s*>/g),
+      ...html.matchAll(/data-plan-price="pro"[^>]*>\s*€14,99\s*<\/span\s*>/g),
     ];
-    assert.equal(plans.length, 1, `${page}: exactly one Pro plan at €15`);
+    assert.equal(plans.length, 1, `${page}: exactly one Pro plan at €14,99`);
     assert.match(
       copy,
       /(?:Alle|alle) (?:genoemde )?functies zijn inbegrepen|Alle functies in één abonnement/,
       `${page}: all features included`,
+    );
+    assert.match(
+      html,
+      /data-plan-price="pro"\s+data-nl="€14,99"\s+data-en="€14\.99"/,
+      `${page}: localized Pro amount`,
     );
     assert.match(copy, /WhatsApp/, `${page}: concrete Pro channel`);
     assert.match(copy, /[Pp]ush/, `${page}: included push channel`);

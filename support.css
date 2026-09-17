@@ -411,8 +411,9 @@ svg {
 }
 .plan-price {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 13px;
+  gap: 4px 13px;
   font-size: 83px;
   font-weight: 700;
   letter-spacing: -0.065em;
@@ -1072,7 +1073,7 @@ textarea.contact-field {
     padding-inline: 24px;
   }
   .subscription .plan-price {
-    font-size: 70px;
+    font-size: 60px;
   }
   .subscription .plan-price .price-period {
     font-size: 13px;
