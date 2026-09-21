@@ -1,0 +1,57 @@
+.alert-demo-controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+[data-alert-replay] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--brand-action, #c80d36);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+[data-alert-replay] svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+[data-alert-replay]:hover {
+  background: #fff1f3;
+}
+
+[data-alert-replay]:active {
+  background: #ffe4e9;
+}
+
+[data-alert-replay]:focus-visible {
+  outline: 3px solid #c80d36;
+  outline-offset: 4px;
+}
+
+[data-alert-replay][hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-alert-replay] {
+    display: none;
+  }
+}

@@ -1,161 +1,74 @@
-# Nestd Tracking Events — Website vs App
+# Nestd website analytics
 
-Goal: keep PostHog as the source of truth for funnel/product analysis, and use Meta Pixel only for paid Meta ads optimization and retargeting.
+The live website sends visitors directly to the Nestd iPhone app. A click indicates App Store intent, not an installation, account, lead or subscription. The website does not collect email addresses or search preferences. This contract covers the website only; it does not change the native app's instrumentation.
 
-## Config
+## Configuration
 
-### Website / landing
+`script.js` reads the public PostHog project key from `window.NESTD_POSTHOG_KEY` or `<meta name="posthog-key">`. Events go to `https://eu.i.posthog.com`. Personal API keys never belong in client code.
 
-`script.js` reads the PostHog key from either:
+Meta uses public pixel ID `1435983921187208`, overridable through `window.NESTD_META_PIXEL_ID` or `<meta name="facebook-pixel-id">`. An explicit empty window configuration disables that integration. Automatic Meta configuration is disabled before initialization. There is no unconditional `<noscript>` tracking pixel because it would bypass the URL/referrer privacy checks.
 
-```html
-<meta name="posthog-key" content="[REDACTED]">
-```
+Both providers are limited to the homepage, `/en/`, about, pricing, privacy, and the public `/app` fallback. Product/listing/verification paths do not initialize either SDK or send events. Blocked storage, unavailable SDKs, or failed analytics never prevent a download link from working.
 
-or:
+## Events
 
-```html
-<script>window.NESTD_POSTHOG_KEY = '[REDACTED]'</script>
-```
+| Visitor action | PostHog | Meta | Allowed event-specific fields |
+| --- | --- | --- | --- |
+| Public page loads | `page_view` | `PageView` | Attribution and language |
+| App Store anchor clicked | `cta_clicked` | `ViewContent` | `content_name=app_store_cta`, `content_category=app_download`, fixed App Store `href`, enumerated `placement` |
+| How it works enters view | `how_it_works_section_viewed` | `ViewContent` | Meta `content_name=how_it_works`, `content_category=landing_section` |
+| Alerts enters view | `whatsapp_alerts_section_viewed` | `ViewContent` | Meta `content_name=alerts`, `content_category=landing_section` |
+| Filters enters view | `filters_section_viewed` | `ViewContent` | Meta `content_name=filters`, `content_category=landing_section` |
+| FAQ enters view | `faq_section_viewed` | `ViewContent` | Meta `content_name=faq`, `content_category=landing_section` |
+| Final download enters view | `download_section_viewed` | `ViewContent` | Meta `content_name=download`, `content_category=landing_section` |
+| Known navigation link clicked | `navigation_clicked` | — | Enumerated `destination` and `location` |
+| Legacy legal-page theme changed | `theme_toggled` | — | `theme=light|dark` |
+| Public app fallback loads | `app_deeplink_viewed` | — | Attribution and language |
+| App fallback timeout | `app_deeplink_fallback_shown` | — | Attribution and language |
+| Page hides after an app-opening attempt | `app_deeplink_opened` | — | Attribution and language; best-effort signal only |
 
-The PostHog project API key is configured as a client-side public project key. Never commit the PostHog personal API key.
+The historic `whatsapp_alerts_section_viewed` name is retained for continuity and denotes the alerts section. Each section is counted once per page load. An App Store click is counted once and does not also count as navigation. The native anchor destination is `https://apps.apple.com/nl/app/nestd/id6761392857`.
 
-Meta Pixel is initialized centrally in `script.js` with Pixel ID `1435983921187208`. It only loads in safe public marketing/deeplink contexts (`/`, `/about.html`, `/pricing.html`, `/privacy.html`, `/app`) and is intentionally disabled on listing/product routes such as `/listing/*`, when unknown query parameters are present, or when the same-origin referrer is a listing route, because the browser can implicitly expose URL/referrer context to Meta even when event properties are sanitized. It can be overridden per deployment with:
+`placement` is one of `hero`, `nav`, `mid_page`, `bottom`, `mobile_sticky`. Navigation uses stable `home`, `how_it_works`, `faq`, `about`, `pricing`, `privacy`, `contact` destinations and `nav`, `mobile_nav`, `footer` locations. No visible label, email address, arbitrary href or form contents are read into analytics. `Lead`, `Purchase`, `Subscribe`, unknown custom events and pre-launch form events are not sent by this website.
 
-```html
-<meta name="facebook-pixel-id" content="<pixel-id>">
-```
+## Attribution and language
 
-or:
+Existing storage keys and first/current-touch semantics are preserved:
 
-```html
-<script>window.NESTD_META_PIXEL_ID = '<pixel-id>'</script>
-```
+- First touch: `localStorage.nestd_attribution_first_touch_v1`; the first visit survives subsequent campaigns.
+- Current touch: `sessionStorage.nestd_attribution_current_touch_v1`; a valid explicit campaign refreshes it, while untagged navigation and language switching retain it.
+- Supported identifiers: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`.
+- Payloads contain top-level current attribution, compatibility fields `first_touch_*` and `current_touch_*`, and sanitized nested `first_touch` and `current_touch` objects.
+- Context fields are `landing_page`, `referrer`, `captured_at`; campaign values must be identifier strings of at most 200 ASCII letters, digits, dots, hyphens or underscores. Use campaign IDs, never people, email addresses, search preferences or JSON. Invalid values are omitted, including when restored from older storage.
+- Landing URLs retain a known public pathname only. Query strings and hashes are removed. External referrers and unknown/product paths are reduced to their origin, so arbitrary external path segments are never captured.
+- Storage access and malformed JSON are guarded; an in-memory snapshot supports browsers that block storage.
 
-A `<noscript>` PageView fallback is present only on public marketing/deeplink HTML pages for visitors without JavaScript. It is intentionally omitted from `/listing/*`.
+Language priority is valid `?lang=nl|en`, then the `/en/` path, then valid `nestd-lang`, then Dutch. `landing.js` updates visible text, metadata, alt text and accessible names. Switching retains the current campaign query and fragment. Same-origin links retain the selected language; App Store anchors are unchanged. A queued click retains its event-time language.
 
-### Language-specific ad URLs
-
-Paid/social campaigns can force the landing language with a safe `lang` query parameter while preserving UTM/click attribution:
-
-```text
-https://www.nestd.nl/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>
-https://www.nestd.nl/?lang=nl&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>
-```
-
-Language priority on page load is: valid `lang=en|nl` query param, then stored `nestd-lang`, then Dutch. `/en/` redirects to the homepage with `lang=en` while preserving existing query parameters, but the query-param URL is the preferred ad destination because it is explicit and works cleanly with UTMs. `lang` is allow-listed for Meta Pixel safety checks and is not stored as attribution; analytics still capture the resolved page `language`.
-
-### App
-
-The Expo app uses `posthog-react-native` from `app/lib/posthog.ts` with host:
+Example campaign URL:
 
 ```text
-https://eu.i.posthog.com
+https://www.nestd.nl/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=rental_alerts_v1&utm_content=creative_01
 ```
 
-Native app events are PostHog-only for now. Do **not** install Meta Pixel in the native app; Meta app attribution later needs Meta SDK / MMP / Conversions API, not the website pixel.
+## Privacy at the transport boundary
 
-## Website funnel events
+The public `nestdAnalytics.track` API accepts only named events and enumerated properties. It cannot forward arbitrary strings or nested objects. Attribution is assembled internally rather than accepted from callers.
 
-Website pages are marketing/content pages. The current public funnel is the waitlist/early-access form; app-store download CTAs are intentionally hidden until the apps are actually downloadable. There is no website WhatsApp/contact conversion and no website subscription flow.
+PostHog autocapture, automatic page views/leaves, session recordings, exception/performance capture, surveys, feature flags and person profiles are disabled. The `before_send` hook rebuilds each event's properties **after SDK enrichment**: it removes automatic current/initial URL and referrer fields, super-properties, `$set`/`$set_once`, arbitrary nested properties, and any identified user data. It retains validated anonymous SDK IDs, the public project token, the safe event contract and sanitized attribution. Anonymous identity and session analysis remain possible without copying browser URLs or form values. Critical clicks use `sendBeacon` with immediate sending; delivery still depends on the browser/network, and navigation is never delayed.
 
-| Funnel step | PostHog event | Meta event | When | Key properties | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Page visit | `page_view` | `PageView` | Landing/public page loads | PostHog: `path`, sanitized `url`, UTM/click IDs, first/current-touch attribution, `language` | Meta `PageView` fires regardless of PostHog key. |
-| Section/content view | `whatsapp_alerts_section_viewed`, `ai_matching_section_viewed`, `duo_search_section_viewed`, `how_it_works_section_viewed`, `pricing_section_viewed`, `waitlist_section_viewed` | `ViewContent` | Key sections enter viewport once per page load | PostHog attribution props; Meta: `content_name`, `content_category=landing_section` | This is the website `ViewContent` mapping. |
-| Waitlist CTA click | `cta_clicked` | `ViewContent` | Visitor clicks a prominent waitlist/early-access CTA | PostHog: `content_name=waitlist_cta`, `content_category=website_lead`, `label`, sanitized `href`, `placement`, attribution props; Meta: `content_name=waitlist_cta`, `content_category=website_lead`, `placement` | Not `Lead`; only successful waitlist signup is a lead. |
-| Waitlist signup started | `waitlist_signup_started` | — | Visitor submits the waitlist form | `placement`, attribution props | Do not send the submitted email to analytics. |
-| Waitlist signup completed | `waitlist_signup_completed` | `Lead` | Waitlist API returns success | PostHog: `placement`, attribution props; Meta: `content_name=waitlist_signup`, `content_category=website_lead`, `placement` | Fire only after backend success. No email/name/phone. |
-| Waitlist duplicate | `waitlist_signup_duplicate` | — | Waitlist API returns duplicate/already exists, including 409 or duplicate/already_exists response body | `placement`, attribution props | Not a new Meta `Lead`, to avoid double-counting. |
-| Waitlist signup failed | `waitlist_signup_failed` | — | Waitlist API fails | stable `reason`, `placement`, attribution props | Reason code only: `invalid_email`, `duplicate`, `rate_limited`, `network_error`, `server_error`, `unknown_error`. No raw error messages. |
-| Navigation click | `navigation_clicked` | — | Nav/footer link clicked | `label`, `href`, `location` | PostHog-only. |
-| Theme change | `theme_toggled` | — | Visitor toggles theme | `theme` | PostHog-only utility event. |
-| Deeplink page view | `app_deeplink_viewed` | `PageView` | `/app` deeplink page loads | attribution props | Public website/deeplink page, not native app event. |
-| Listing deeplink page view | — | — | `/listing/*` deeplink page loads | — | No Meta/PostHog event: avoid leaking raw listing identifiers via browser URL/referrer context. |
-| Deeplink fallback | `app_deeplink_fallback_shown` | — | App did not open within timeout | attribution props | PostHog-only. |
-| Deeplink opened signal | `app_deeplink_opened` | — | Page becomes hidden after deeplink attempt | attribution props | Best-effort signal only. |
+Meta has no equivalent local payload hook for all browser-derived context. It is therefore suppressed when the current URL or referrer contains an unknown query parameter, an invalid campaign value, a non-public same-origin path, an arbitrary external referrer path, a sensitive fragment or an email-shaped value. Only known section fragments are allowed. This deliberately trades some Meta coverage for privacy. Meta receives only `PageView`/`ViewContent` and enumerated content names/categories/placements; PostHog remains the attribution source of truth.
 
-### Website events explicitly not used
+Implementation references: [PostHog JavaScript configuration](https://posthog.com/docs/libraries/js/config), [event redaction and immediate navigation events](https://posthog.com/docs/libraries/js/usage).
 
-| Meta event | Status | Why |
-| --- | --- | --- |
-| `Contact` | Not used | There is no WhatsApp/contact click conversion on the website. |
-| `Lead` | Used for successful waitlist signup only | Fire only after the waitlist backend returns success. Never include email, name, phone, raw URL, referrer, or preferences. |
-| `Subscribe` / `Purchase` | Not used on website | Subscription/purchase happens in the app via stores/RevenueCat. |
+## Verification
 
-## App funnel events
+No test initializes a live network SDK or sends a real analytics request. Node VM tests execute the production scripts with storage failures, multiple campaign visits, native link clicks and a transport-boundary SDK enrichment fixture containing hostile URL, person-property and nested-preference fields.
 
-The app is the product funnel. PostHog is already installed in the native app.
-
-| Funnel step | Existing PostHog event | Meta event | When | Key properties | Status |
-| --- | --- | --- | --- | --- | --- |
-| App opened | `app_opened` | — | App starts | `source=app`, `platform` | Implemented. |
-| Screen viewed | `screen_viewed` | — | Route changes | normalized `screen`, `platform` | Implemented. |
-| Signup started | `signup_started` | Later: `CompleteRegistration` only if Meta app attribution is added | Email/OAuth signup starts | `method`, `source=app` | Implemented in app. |
-| Signup failed | `signup_failed` | — | Signup error | `method`, `source=app`, stable `reason` | Implemented; keep raw errors out. |
-| Signup completed | `signup_completed` | Later: `CompleteRegistration` only if Meta app attribution is added | Account created | `method`, `source=app`, `locale` | Implemented in app. |
-| Onboarding step completed | `onboarding_step_completed` | — | User advances onboarding step | `step`, `source=app` | Implemented. |
-| Onboarding completed | `onboarding_completed` | Later: `Lead`/`CompleteRegistration` only via app attribution | Preferences saved and onboarding marked complete | `city_count`, budget bucket, type count, area bucket, rooms | Implemented; preference values are bucketed/counts. |
-
-### Recommended app additions
-
-| Funnel step | PostHog event to add | Meta event later | When | Notes |
-| --- | --- | --- | --- | --- |
-| Paywall viewed | `paywall_viewed` | — | `/paywall` shown | Add placement/source if known. |
-| Paywall dismissed | `paywall_dismissed` | — | Paywall closed without purchase | No raw RevenueCat payload. |
-| Subscription started | `subscription_started` | Later: `Subscribe` through app attribution | User starts Pro subscription flow / entitlement begins | Capture plan/product category and subscription tier only. |
-| Purchase completed | `purchase_completed` | Later: `Purchase` through app attribution | RevenueCat purchase success | Capture plan/product category, not raw payloads/receipts. |
-| Purchase failed | `purchase_failed` | — | RevenueCat purchase fails or is cancelled | Stable `reason` code only; no raw error messages. |
-| Restore completed | `restore_completed` | — | RevenueCat restore success | Boolean active entitlement only. |
-| Listing viewed | `listing_viewed` | — | Listing detail opened | Avoid raw listing IDs; use coarse listing/source category only if approved. |
-| Listing saved | `listing_saved` | — | User saves listing | No raw listing IDs, addresses, or source-platform names. |
-| Listing reacted | `listing_reacted` | — | User likes/rejects/reacts | Use action/type only; no source-platform names. |
-| Application started | `application_started` | — | User starts applying/responding to listing | No raw listing IDs, addresses, or source-platform names. |
-| Chat opened | `chat_opened` | — | User opens AI chat | Context only: source/screen/subscription tier. |
-| Chat message sent | `chat_message_sent` | — | User sends message | Do not capture message text. |
-| Chat limit reached | `chat_limit_reached` | — | Free user hits chat limit | Context only: source/screen/subscription tier. |
-| Paywall triggered from chat | `paywall_triggered_from_chat` | — | Chat limit/paywall placement shown from chat | Context only; no message text. |
-| Profile preferences updated | `profile_preferences_updated` | — | User updates profile/preferences | Bucket budget/surface; city count only unless approved. |
-| Search preferences saved | `search_preferences_saved` | — | User saves search preferences | Bucket budget/surface; city count only; no full preference dumps. |
-| Platform connect started | `platform_connect_started` | — | User starts integration/connect flow | Avoid public/source platform names if against guardrails. |
-| Platform connect completed | `platform_connect_completed` | — | Connect flow succeeds | No tokens/secrets. |
-| Platform connect failed | `platform_connect_failed` | — | Connect flow fails | Stable `reason` code only; no raw errors/tokens. |
-
-## Privacy behavior
-
-- PostHog script only loads when a key is provided via deploy config.
-- Meta Pixel loads from the public pixel ID only in safe public marketing/deeplink contexts and tracks only standard website events listed above.
-- Automatic PostHog click autocapture and session recordings are disabled.
-- Event payloads include allow-listed UTM parameters/click IDs in PostHog only: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`.
-- First-touch attribution is stored in `localStorage`; current-touch attribution is stored in `sessionStorage` and survives same-session navigation/language changes. Payloads include top-level current attribution, compatibility fields (`first_touch_*`, `current_touch_*`), and nested `first_touch` / `current_touch` objects for UTM/click IDs, `landing_page`, `referrer`, and `captured_at`.
-- Waitlist API submissions include the same sanitized attribution fields and nested touch objects plus `source=landing`; the submitted email is sent only to the backend and is stripped from analytics payloads.
-- `url`, `landing_page`, and `referrer` are stripped to origin + path before PostHog capture or waitlist submission; listing/product deeplink routes, unknown query strings, and listing referrers are not sent to Meta.
-- Meta event parameters are allow-listed and do not include email, phone, raw URLs, raw referrers, full preferences, listing IDs, or message content; Meta is not initialized on `/listing/*` or after same-origin listing referrers.
-- Events fired before the PostHog bundle loads are queued and flushed after initialization.
-
-## UTM convention
-
-Use:
-
-```text
-utm_source=meta|instagram|tiktok|student-community|seo
-utm_medium=paid|paid_social|organic|community|seo
-utm_campaign=<audience>_<pain_or_angle>
-utm_content=<creative_or_hook_id>
-utm_term=<optional keyword/audience>
+```bash
+node --test tests/marketing-behavior.test.mjs
+node tests/i18n-language-url-smoke.mjs
+node tests/marketing-attribution-smoke.mjs
 ```
 
-Example:
-
-```text
-https://nestd.nl/?utm_source=meta&utm_medium=paid_social&utm_campaign=meta_nl_traffic_waitlist_v1&utm_content=ugc_olivia_endcard_v1&utm_term=broad_nl_1834
-```
-
-## Guardrails
-
-- Special Ad Category: Housing for Meta campaigns. Do not work around it.
-- Do not launch/scale Meta campaigns until Meta Pixel PageView/ViewContent and PostHog events are verified in production.
-- Never mention source/data platform names publicly.
-- No Reddit/LinkedIn for now.
-- First week is approval-only for publishing.
-- Paid spend cap: €20/day total across channels unless Hicham says otherwise.
+The former `waitlist-attribution-smoke.mjs` is replaced by the marketing attribution entry point above. Visual browser QA additionally checks language, menu, native CTA destinations and responsive behavior.
