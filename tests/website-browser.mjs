@@ -32,9 +32,9 @@ try {
   if(width<851){await p.locator('#menu-toggle').click();assert.equal(await p.locator('#menu-toggle').getAttribute('aria-expanded'),'true');await p.keyboard.press('Escape');assert.equal(await p.locator('#menu-toggle').getAttribute('aria-expanded'),'false');assert.equal(await p.locator('#menu-toggle').evaluate(n=>document.activeElement===n),true);}
   if(!route){
    await p.locator('#hoe-het-werkt').evaluate(n=>n.scrollIntoView({block:'start',behavior:'instant'}));
-   if(width<768) {await p.waitForTimeout(50);assert.equal(await p.locator('[data-sticky-cta]').isVisible(),true);}
+   if(width<768) {await p.locator('[data-sticky-cta]').waitFor({state:'visible'});}
    const q=p.locator('details').first();await q.locator('summary').click();assert.equal(await q.getAttribute('open'),'');
-   await p.locator('#download').scrollIntoViewIfNeeded();await p.waitForTimeout(50);assert.equal(await p.locator('[data-sticky-cta]').isVisible(),false);
+   await p.locator('#download').scrollIntoViewIfNeeded();await p.locator('[data-sticky-cta]').waitFor({state:'hidden'});
   }
   assert.deepEqual(errors,[]);
   if([390,1440].includes(width)){await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:path.join(out,`${locale}-${route||'home'}-${width}.png`),fullPage:true});}
