@@ -30,3 +30,7 @@ Scope: existing `codex/landing-alerts-direct` / PR #24. Preserve the variant A i
 ## Maintenance
 
 Edit bilingual root HTML, then run `npm run build`. Commit generated `en/` pages. CI checks generation drift, behavior, public packaging and browser interactions. No build-time secrets or external transcription/image APIs are needed.
+
+## Owner-requested release follow-up
+
+Removed the public hello email address and contact form in Dutch and English, including obsolete navigation links, form submission JavaScript and its obsolete tests. Kept the separate privacy contact and account deletion instructions. Privacy copy now describes contact generally rather than a removed form. The current browser suite checks all public pages for removal instead of submitting the former form. Owner explicitly authorized merging this website branch to main.

@@ -58,45 +58,7 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     /user-scalable=no|maximum-scale=1|facebook\.com\/tr/i,
     `${page}: privacy/accessibility regression`,
   );
-  if (page === "about.html") {
-    const forms = [...html.matchAll(/<form\b[^>]*>/g)];
-    assert.equal(forms.length, 1, "Only the existing contact form is allowed");
-    assert.match(forms[0][0], /id="contact-form"/);
-    assert.match(forms[0][0], /method="post"/);
-    assert.match(
-      forms[0][0],
-      /\bhidden\b/,
-      "No native submission without the contact script",
-    );
-    assert.match(
-      html,
-      /src="\/contact.js"/,
-      "Contact form enhancement is loaded",
-    );
-    assert.match(
-      html,
-      /mailto:hello@nestd.nl/,
-      "Email fallback remains available",
-    );
-    const fields = [
-      ...html.matchAll(/<(?:input|textarea)\b[^>]*\bname="([^"]+)"[^>]*>/g),
-    ];
-    assert.deepEqual(fields.map(([, name]) => name).sort(), [
-      "email",
-      "message",
-      "name",
-    ]);
-    for (const [field] of fields) {
-      assert.match(field, /\brequired\b/);
-      assert.match(field, /\bmaxlength="\d+"/);
-    }
-  } else {
-    assert.doesNotMatch(
-      html,
-      /<form\b|<input\b|<textarea\b/i,
-      `${page}: no waitlist or search preference collection`,
-    );
-  }
+  assert.doesNotMatch(html, /<form\b|<input\b|<textarea\b|hello@nestd\.nl|contact\.js|about\.html#contact/i, `${page}: removed contact surface`);
   assert.match(html, /id="lang-toggle"/, `${page}: language control`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(ids.length, new Set(ids).size, `${page}: duplicate IDs`);

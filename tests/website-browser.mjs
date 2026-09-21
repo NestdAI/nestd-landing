@@ -23,6 +23,7 @@ try {
   const overflow=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);assert.equal(overflow,false,`${width}/${locale}/${route} overflow`);
   assert.equal(await p.locator('main h1').count(),1);
   assert.equal(await p.locator('[data-review-placeholder]').count(),0);
+  assert.equal(await p.locator('form, a[href="mailto:hello@nestd.nl"], a[href*="about.html#contact"], script[src="/contact.js"]').count(),0);
   await p.locator('img').evaluateAll(imgs=>Promise.all(imgs.map(i=>{i.loading='eager';return i.decode().catch(()=>{});})));
   assert.deepEqual(await p.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src)),[]);
   await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
@@ -55,10 +56,6 @@ try {
  // Translation keeps campaign and anchor, and navigates to real localized pages.
  {
   const c=await context();const p=await c.newPage();await p.goto(`${base}/?utm_source=qa#hoe-het-werkt`);await p.locator('#lang-toggle').click();assert.equal(new URL(p.url()).searchParams.get('utm_source'),'qa');assert.equal(new URL(p.url()).hash,'#hoe-het-werkt');await p.locator('.site-nav-primary a').filter({hasText:'Pricing'}).click();assert.equal(await p.locator('html').getAttribute('lang'),'en');assert.match(new URL(p.url()).pathname,/\/en\/pricing.html/);await c.close();results.push({languageNavigation:true});
- }
- // Contact flow is intercepted; never send a message to the real endpoint.
- for(const status of [200,500]) {
-  const c=await context();let requests=0;await c.route('**/functions/v1/contact-form',r=>{requests++;return r.fulfill({status,contentType:'application/json',body:'{}'});});const p=await c.newPage();await p.goto(`${base}/about.html?lang=en#contact`);await p.locator('#contact-name').fill('Website QA');await p.locator('#contact-email').fill('qa@example.com');await p.locator('#contact-message').fill('Intercepted local test only.');await p.locator('#contact-submit').click();await p.locator(`[data-contact-status="${status===200?'success':'error'}"]`).waitFor({state:'visible'});assert.equal(requests,1);assert.equal(await p.locator('#contact-message').inputValue(),status===200?'':'Intercepted local test only.');await c.close();results.push({contactStatus:status,intercepted:true});
  }
  fs.writeFileSync(path.join(out,'browser-report.json'),JSON.stringify(results,null,2));console.log(`${results.length} browser scenarios passed; screenshots and report in test-results.`);
 } finally {await browser.close();}
