@@ -32,12 +32,12 @@
       data-en="Your search filters. New rentals. A quick alert."
       content="Jouw zoekfilters. Nieuw huuraanbod. Snel een melding."
     />
-    <meta property="og:image" content="https://www.nestd.nl/logo.png" />
+    <meta property="og:image" content="https://www.nestd.nl/images/social-card.png" />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="https://www.nestd.nl/" />
-    <link rel="alternate" hreflang="nl" href="https://www.nestd.nl/" />
-    <link rel="alternate" hreflang="en" href="https://www.nestd.nl/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.nestd.nl/" />
+
+
+
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,8 +48,14 @@
     />
     <link rel="stylesheet" href="/landing.css" />
     <link rel="stylesheet" href="/content.css" />
+<link rel="stylesheet" href="/navigation.css" />
     <link rel="stylesheet" href="/product-motion.css" />
-  </head>
+  <meta name="theme-color" content="#ffffff" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="alternate" hreflang="nl" href="https://www.nestd.nl/" />
+<link rel="alternate" hreflang="en" href="https://www.nestd.nl/en/" />
+<link rel="alternate" hreflang="x-default" href="https://www.nestd.nl/" />
+</head>
   <body>
     <a
       class="skip-link"
@@ -84,6 +90,7 @@
       </nav>
       <button
         id="menu-toggle"
+        hidden
         type="button"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -91,14 +98,7 @@
         data-en="Menu"
       >
         Menu</button
-      ><button
-        id="lang-toggle"
-        class="language-button"
-        type="button"
-        aria-label="Switch to English"
-      >
-        EN
-      </button>
+      ><a id="lang-toggle" class="language-button" href="/en/" lang="en" aria-label="Switch to English">EN</a>
       <nav
         class="site-nav-mobile"
         id="mobile-menu"
@@ -156,6 +156,7 @@
           >
             Nestd Pro · €14,99 per maand
           </p>
+<a class="hero-how" href="#hoe-het-werkt" data-nl="Zo werkt het ↓" data-en="See how it works ↓">Zo werkt het ↓</a>
         </div>
         <figure class="product-stage wrap">
           <div class="home-photo">
@@ -327,7 +328,7 @@
         data-section="how_it_works"
       >
         <h2
-          class="visually-hidden"
+          class="process-title"
           data-nl="Zo werkt Nestd"
           data-en="How Nestd works"
         >
@@ -493,91 +494,33 @@
         </div>
       </section>
 
-      <!--
-  Review placeholders for the three landing variants.
-  Replace each topic and name only with a genuine review supplied with permission.
-  Update both data-nl and data-en, plus the default Dutch text. Remove the visible
-  Placeholder label and data-review-placeholder only after replacing that item.
-  Remove the section's placeholder note only when every displayed review is real.
-  No rating, stars or aggregate review data are supplied by this fragment.
--->
-      <section
-        class="reviews-overview"
-        id="ervaringen"
-        aria-labelledby="reviews-title"
-      >
-        <div class="content-width">
-          <div class="reviews-heading">
-            <h2
-              id="reviews-title"
-              data-nl="Ervaringen met Nestd."
-              data-en="Experiences with Nestd."
-            >
-              Ervaringen met Nestd.
-            </h2>
-            <p
-              data-nl="Hier komen echte ervaringen van Nestd-gebruikers."
-              data-en="Real experiences from Nestd users will appear here."
-            >
-              Hier komen echte ervaringen van Nestd-gebruikers.
-            </p>
+      <section class="alert-story" id="meldingen" data-section="alerts" aria-labelledby="alerts-title">
+        <div class="content-width alert-story-grid">
+          <div class="alert-story-copy">
+            <p class="eyebrow" data-nl="Minder refreshen. Meer verdergaan." data-en="Less refreshing. More living.">Minder refreshen. Meer verdergaan.</p>
+            <h2 id="alerts-title" data-nl="Een seintje. En jij bent aan zet." data-en="A heads-up. Then it’s your move.">Een seintje. En jij bent aan zet.</h2>
+            <p  data-nl="Nieuw aanbod binnen je filters? Je krijgt een melding via push en Telegram. Bekijk de details in Nestd en ga door naar de oorspronkelijke aanbieder om zelf te reageren." data-en="A new listing within your filters? Get an alert by push and Telegram. View the details in Nestd, then go to the original advertiser to respond yourself.">Nieuw aanbod binnen je filters? Je krijgt een melding via push en Telegram. Bekijk de details in Nestd en ga door naar de oorspronkelijke aanbieder om zelf te reageren.</p>
+            <ul class="alert-story-points">
+              <li><span  data-nl="Je zoekfilters bepalen wat je ziet." data-en="Your filters determine what you see.">Je zoekfilters bepalen wat je ziet.</span></li>
+              <li><span  data-nl="Bewaar woningen die je wilt terugkijken." data-en="Save homes you want to revisit.">Bewaar woningen die je wilt terugkijken.</span></li>
+              <li><span  data-nl="Jij kiest wanneer en op welke woning je reageert." data-en="You decide when and which homes to respond to.">Jij kiest wanneer en op welke woning je reageert.</span></li>
+            </ul>
           </div>
-          <ul class="reviews-list">
-            <li class="review-placeholder" data-review-placeholder="true">
-              <span
-                class="review-status"
-                data-nl="Placeholder"
-                data-en="Placeholder"
-                >Placeholder</span
-              >
-              <p
-                class="review-topic"
-                data-nl="[Ervaring met de meldingen]"
-                data-en="[Experience with the alerts]"
-              >
-                [Ervaring met de meldingen]
-              </p>
-              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
-                [Naam]
-              </p>
-            </li>
-            <li class="review-placeholder" data-review-placeholder="true">
-              <span
-                class="review-status"
-                data-nl="Placeholder"
-                data-en="Placeholder"
-                >Placeholder</span
-              >
-              <p
-                class="review-topic"
-                data-nl="[Ervaring met het zoeken]"
-                data-en="[Experience with the search]"
-              >
-                [Ervaring met het zoeken]
-              </p>
-              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
-                [Naam]
-              </p>
-            </li>
-            <li class="review-placeholder" data-review-placeholder="true">
-              <span
-                class="review-status"
-                data-nl="Placeholder"
-                data-en="Placeholder"
-                >Placeholder</span
-              >
-              <p
-                class="review-topic"
-                data-nl="[Ervaring met de app]"
-                data-en="[Experience with the app]"
-              >
-                [Ervaring met de app]
-              </p>
-              <p class="review-author" data-nl="[Naam]" data-en="[Name]">
-                [Naam]
-              </p>
-            </li>
-          </ul>
+          <figure class="alert-example">
+            <div class="telegram-example">
+              <div class="telegram-header"><span class="telegram-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="m21 4-3 16-6-5-3 3v-5l9-7-11 6-5-2z"/></svg></span><div><strong>Nestd</strong><span  data-nl="Meldingen via Telegram" data-en="Alerts on Telegram">Meldingen via Telegram</span></div></div>
+              <div class="telegram-message">
+                <img src="/images/apartment-2.jpg" alt="" width="800" height="600" loading="lazy" />
+                <div class="telegram-message-copy">
+                  <p class="message-kicker" data-nl="Nieuw binnen jouw zoekfilters" data-en="New within your search filters">Nieuw binnen jouw zoekfilters</p>
+                  <h3  data-nl="Een nieuwe plek in Utrecht" data-en="A new place in Utrecht">Een nieuwe plek in Utrecht</h3>
+                  <p  data-nl="€ 1.400 per maand · 2 kamers · 60 m²" data-en="€ 1,400 per month · 2 rooms · 60 m²">€ 1.400 per maand · 2 kamers · 60 m²</p>
+                  <span class="message-action" data-nl="Bekijk de woning in Nestd ↗" data-en="View the home in Nestd ↗">Bekijk de woning in Nestd ↗</span>
+                </div>
+              </div>
+            </div>
+            <figcaption  data-nl="Illustratie van een melding. Geen live woning." data-en="Illustration of an alert. Not a live listing.">Illustratie van een melding. Geen live woning.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -765,6 +708,8 @@
               ook push- en Telegram-meldingen.
             </p>
           </details>
+          <details><summary  data-nl="Vind ik gegarandeerd een woning?" data-en="Am I guaranteed to find a home?">Vind ik gegarandeerd een woning?</summary><p  data-nl="Nee. Nestd helpt je nieuw aanbod te volgen en zelf te reageren. De aanbieder bepaalt de voorwaarden en aan wie een woning wordt verhuurd. Het aantal meldingen hangt af van je zoekfilters en het beschikbare aanbod." data-en="No. Nestd helps you follow new listings and respond yourself. Advertisers set their own requirements and decide who rents a home. The number of alerts depends on your filters and available listings.">Nee. Nestd helpt je nieuw aanbod te volgen en zelf te reageren. De aanbieder bepaalt de voorwaarden en aan wie een woning wordt verhuurd. Het aantal meldingen hangt af van je zoekfilters en het beschikbare aanbod.</p></details>
+          <details><summary  data-nl="Hoe zeg ik mijn abonnement op?" data-en="How do I cancel my subscription?">Hoe zeg ik mijn abonnement op?</summary><p  data-nl="Open Instellingen op je iPhone, tik op je naam en kies Abonnementen → Nestd. Daar beheer je de verlenging. Alleen de app verwijderen zegt je abonnement niet op." data-en="Open Settings on your iPhone, tap your name and choose Subscriptions → Nestd. Manage renewal there. Deleting the app alone does not cancel your subscription.">Open Instellingen op je iPhone, tik op je naam en kies Abonnementen → Nestd. Daar beheer je de verlenging. Alleen de app verwijderen zegt je abonnement niet op.</p></details>
         </div>
       </section>
       <section class="final-download" id="download" data-section="download">
@@ -792,6 +737,10 @@
           >
             Nestd Pro · €14,99 per maand
           </p>
+          <div class="desktop-download">
+            <a href="https://apps.apple.com/nl/app/nestd/id6761392857" target="_blank" rel="noopener" aria-label="Open Nestd in de App Store" data-aria-nl="Open Nestd in de App Store" data-aria-en="Open Nestd in the App Store"><img src="/images/download-qr.svg" width="112" height="112" alt="QR-code voor Nestd in de App Store" data-alt-nl="QR-code voor Nestd in de App Store" data-alt-en="QR code for Nestd in the App Store" loading="lazy" /></a>
+            <div><strong  data-nl="Op je laptop aan het kijken?" data-en="Browsing on your laptop?">Op je laptop aan het kijken?</strong><p  data-nl="Scan met je iPhone-camera en open Nestd in de App Store." data-en="Scan with your iPhone camera to open Nestd in the App Store.">Scan met je iPhone-camera en open Nestd in de App Store.</p></div>
+          </div>
         </div>
       </section>
     </main>

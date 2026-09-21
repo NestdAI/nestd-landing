@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /verify
+Disallow: /verified
+Disallow: /verify-error
+Sitemap: https://www.nestd.nl/sitemap.xml

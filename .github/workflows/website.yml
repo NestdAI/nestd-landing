@@ -1,0 +1,32 @@
+name: Website checks
+on:
+  pull_request:
+  push:
+    branches: [main, codex/landing-alerts-direct]
+permissions:
+  contents: read
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: git diff --exit-code -- en
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - name: Check packaged pages in the browser
+        run: |
+          python3 -m http.server 4187 --bind 127.0.0.1 --directory dist > /tmp/site.log 2>&1 &
+          npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: website-browser-review
+          path: test-results/
+          retention-days: 7

@@ -1,5 +1,6 @@
 // Complete Dutch HTML remains usable when JavaScript or browser storage is unavailable.
 (function initLanding() {
+  document.documentElement.classList?.add?.('js');
   const validLanguage = value => value === 'nl' || value === 'en';
   let storedLanguage;
   try { storedLanguage = window.localStorage.getItem('nestd-lang'); } catch { /* Optional preference. */ }
@@ -22,6 +23,9 @@
       });
     }
     if (languageToggle) {
+      const target = new URL(window.location.href);
+      target.searchParams.set('lang', language === 'nl' ? 'en' : 'nl');
+      languageToggle.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
       languageToggle.textContent = language === 'nl' ? 'EN' : 'NL';
       languageToggle.setAttribute('aria-label', language === 'nl' ? 'Switch to English' : 'Wissel naar Nederlands');
       languageToggle.setAttribute('lang', language === 'nl' ? 'en' : 'nl');
@@ -29,10 +33,16 @@
     try { window.localStorage.setItem('nestd-lang', language); } catch { /* Navigation still preserves language. */ }
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (!href || href.startsWith('#')) return;
+      if (!href || href.startsWith('#') || link === languageToggle) return;
       try {
         const destination = new URL(href, window.location.href);
         if (destination.origin !== window.location.origin || !/^https?:$/.test(destination.protocol)) return;
+        const basePath = destination.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+        if (['/', '/index.html', '/about.html', '/pricing.html', '/privacy.html'].includes(basePath)) {
+          destination.pathname = language === 'en'
+            ? (basePath === '/' || basePath === '/index.html' ? '/en/' : '/en' + basePath)
+            : basePath;
+        }
         destination.searchParams.set('lang', language);
         link.setAttribute('href', `${destination.pathname}${destination.search}${destination.hash}`);
       } catch { /* Leave non-URL links alone. */ }
@@ -40,7 +50,8 @@
   }
 
   applyLanguage();
-  languageToggle?.addEventListener('click', () => {
+  languageToggle?.addEventListener('click', event => {
+    event.preventDefault?.();
     language = language === 'nl' ? 'en' : 'nl';
     applyLanguage();
     const url = new URL(window.location.href);
@@ -51,6 +62,7 @@
   const menuToggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   if (menuToggle && menu) {
+    menuToggle.hidden = false;
     function closeMenu(returnFocus = false) {
       menu.hidden = true;
       menuToggle.setAttribute('aria-expanded', 'false');
@@ -67,7 +79,7 @@
       if (menu.hidden || menuToggle.contains(event.target)) return;
       if (!menu.contains(event.target) || event.target.closest?.('a')) closeMenu();
     });
-    window.matchMedia?.('(min-width: 768px)').addEventListener?.('change', event => {
+    window.matchMedia?.('(min-width: 851px)').addEventListener?.('change', event => {
       if (event.matches) closeMenu();
     });
   }

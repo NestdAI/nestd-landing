@@ -40,28 +40,8 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
   );
   assert.match(copy, /€14\.99 per month/, `${page}: English monthly Pro price`);
   if (page === "index.html") {
-    const placeholders = [
-      ...html.matchAll(
-        /<li\b[^>]*data-review-placeholder="true"[^>]*>[\s\S]*?<\/li>/g,
-      ),
-    ];
-    assert.ok(
-      html.includes('id="ervaringen"'),
-      "Review layout remains present",
-    );
-    for (const [item] of placeholders) {
-      assert.match(item, /data-nl="Placeholder"\s+data-en="Placeholder"/);
-      assert.match(item, /data-nl="\[Naam\]"\s+data-en="\[Name\]"/);
-      assert.doesNotMatch(
-        item,
-        /[★⭐]|ratingValue|aggregateRating|reviewRating/,
-      );
-    }
-    assert.doesNotMatch(
-      html,
-      /"(?:aggregateRating|reviewRating)"/,
-      "Placeholder reviews must not become search-engine ratings",
-    );
+    assert.doesNotMatch(html, /data-review-placeholder|\[Naam\]|\[Name\]|"(?:aggregateRating|reviewRating)"/, "No placeholder or fabricated reviews");
+    assert.match(html, /id="meldingen"/, "Complete alert explanation");
     const replay = html.match(/<button\b[^>]*data-alert-replay[^>]*>/)?.[0];
     assert.ok(replay, "Product demonstration has an accessible replay control");
     assert.match(
@@ -90,7 +70,7 @@ for (const page of ["index.html", "about.html", "pricing.html"]) {
     );
     assert.match(
       html,
-      /src="contact.js"/,
+      /src="\/contact.js"/,
       "Contact form enhancement is loaded",
     );
     assert.match(

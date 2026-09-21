@@ -6,7 +6,7 @@
   const FIRST_TOUCH_KEY = 'nestd_attribution_first_touch_v1';
   const CURRENT_TOUCH_KEY = 'nestd_attribution_current_touch_v1';
   const CAMPAIGN_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
-  const PUBLIC_PATHS = new Set(['/', '/index.html', '/en', '/en/', '/about.html', '/pricing.html', '/privacy.html', '/app', '/app/', '/app/index.html']);
+  const PUBLIC_PATHS = new Set(['/', '/index.html', '/en', '/en/', '/en/index.html', '/en/about.html', '/en/pricing.html', '/en/privacy.html', '/about.html', '/pricing.html', '/privacy.html', '/app', '/app/', '/app/index.html']);
   const PLACEMENTS = new Set(['hero', 'nav', 'mid_page', 'bottom', 'mobile_sticky']);
   const SECTIONS = {
     how_it_works: 'how_it_works_section_viewed', alerts: 'whatsapp_alerts_section_viewed',
