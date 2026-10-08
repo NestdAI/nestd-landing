@@ -144,8 +144,11 @@ for (const page of [
 const privacy = fs.readFileSync(path.join(root, "privacy.html"), "utf8");
 assert.match(privacy, /Notificaties — om je via push en Telegram/);
 assert.match(privacy, /Notifications — to inform you by push and Telegram/);
-assert.doesNotMatch(
-  privacy,
-  /via WhatsApp op de hoogte|via WhatsApp about new homes/,
-);
+for (const page of ["privacy.html", "en/privacy.html"]) {
+  assert.doesNotMatch(
+    fs.readFileSync(path.join(root, page), "utf8"),
+    /WhatsApp|wa\.me/i,
+    `${page}: superseded WhatsApp channel or OTP processor`,
+  );
+}
 console.log("Static alerts landing contract passed");
